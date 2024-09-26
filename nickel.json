@@ -1,0 +1,15 @@
+{
+  "UniqueName": "rft.DemoMod",
+  "Version": "0.1.0",
+  "Author": "rft50",
+  "Description": "A mod demonstrating the basics of modding Cobalt Core.",
+  "RequiredApiVersion": "1.5.7",
+  "EntryPointAssembly": "DemoMod.dll",
+  "LoadPhase": "AfterDbInit",
+  "Dependencies": [
+    {
+      "UniqueName": "Shockah.Kokoro",
+      "Version": "1.12.1"
+    }
+  ]
+}
