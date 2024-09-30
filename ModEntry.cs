@@ -6,13 +6,21 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using DemoMod.Actions;
+using DemoMod.Cards;
+using DemoMod.External;
+using DemoMod.Features;
 
 namespace DemoMod;
 
 internal class ModEntry : SimpleMod
 {
     internal static ModEntry Instance { get; private set; } = null!;
+    internal Harmony Harmony;
+    internal IKokoroApi KokoroApi;
     internal IDeckEntry DemoDeck;
+    internal IStatusEntry KnowledgeStatus;
+    internal IStatusEntry LessonStatus;
     internal ILocalizationProvider<IReadOnlyList<string>> AnyLocalizations { get; }
     internal ILocaleBoundNonNullLocalizationProvider<IReadOnlyList<string>> Localizations { get; }
 
@@ -22,15 +30,21 @@ internal class ModEntry : SimpleMod
      * In theory only one collection could be used, containing all registerable types, but it is seperated this way for ease of organization.
      */
     private static List<Type> DemoCommonCardTypes = [
+        typeof(LessonPlan),
+        typeof(PatternBlock)
     ];
     private static List<Type> DemoUncommonCardTypes = [
     ];
     private static List<Type> DemoRareCardTypes = [
     ];
+    private static List<Type> DemoSpecialCardTypes = [
+        typeof(Ponder)
+    ];
     private static IEnumerable<Type> DemoCardTypes =
         DemoCommonCardTypes
             .Concat(DemoUncommonCardTypes)
-            .Concat(DemoRareCardTypes);
+            .Concat(DemoRareCardTypes)
+            .Concat(DemoSpecialCardTypes);
 
     private static List<Type> DemoCommonArtifacts = [
     ];
@@ -47,6 +61,14 @@ internal class ModEntry : SimpleMod
     public ModEntry(IPluginPackage<IModManifest> package, IModHelper helper, ILogger logger) : base(package, helper, logger)
     {
         Instance = this;
+        Harmony = new Harmony("rft.DemoMod");
+        
+        /*
+         * Some mods provide an API, which can be requested from the ModRegistry.
+         * The following is an example of a required dependency - the code would have unexpected errors if Kokoro was not present.
+         * Dependencies can (and should) be defined within the nickel.json file, to ensure proper load mod load order.
+         */
+        KokoroApi = helper.ModRegistry.GetApi<IKokoroApi>("Shockah.Kokoro")!;
 
         AnyLocalizations = new JsonLocalizationProvider(
             tokenExtractor: new SimpleLocalizationTokenExtractor(),
@@ -60,7 +82,6 @@ internal class ModEntry : SimpleMod
          * A deck only defines how cards should be grouped, for things such as codex sorting and Second Opinions.
          * A character must be defined with a deck to allow the cards to be obtainable as a character's cards.
          */
-        var border = RegisterSprite(package, "assets/frame_dave.png").Sprite;
         DemoDeck = helper.Content.Decks.RegisterDeck("Demo", new DeckConfiguration
         {
             Definition = new DeckDef
@@ -76,7 +97,7 @@ internal class ModEntry : SimpleMod
             },
 
             DefaultCardArt = StableSpr.cards_colorless,
-            BorderSprite = border,
+            BorderSprite = RegisterSprite(package, "assets/frame_dave.png").Sprite,
             Name = AnyLocalizations.Bind(["character", "name"]).Localize
         });
 
@@ -116,10 +137,12 @@ internal class ModEntry : SimpleMod
         helper.Content.Characters.V2.RegisterPlayableCharacter("Demo", new PlayableCharacterConfigurationV2
         {
             Deck = DemoDeck.Deck,
-            BorderSprite = border,
+            BorderSprite = RegisterSprite(package, "assets/char_frame_dave.png").Sprite,
             Starters = new StarterDeck
             {
                 cards = [
+                    new LessonPlan(),
+                    new PatternBlock()
                 ],
                 /*
                  * Some characters have starting artifacts, in addition to starting cards.
@@ -128,8 +151,51 @@ internal class ModEntry : SimpleMod
                  */
                 artifacts = [
                 ]
-            }
+            },
+            Description = AnyLocalizations.Bind(["character", "desc"]).Localize
         });
+
+        /*
+         * Statuses are used to achieve many mechanics.
+         * However, statuses themselves do not contain any code - they just keep track of how much you have.
+         */
+        KnowledgeStatus = helper.Content.Statuses.RegisterStatus("Knowledge", new StatusConfiguration
+        {
+            Definition = new StatusDef
+            {
+                isGood = true,
+                affectedByTimestop = false,
+                color = new Color("fbb954"),
+                icon = RegisterSprite(package, "assets/knowledge.png").Sprite
+            },
+            Name = AnyLocalizations.Bind(["status", "knowledge", "name"]).Localize,
+            Description = AnyLocalizations.Bind(["status", "knowledge", "desc"]).Localize
+        });
+        LessonStatus = helper.Content.Statuses.RegisterStatus("Lesson", new StatusConfiguration
+        {
+            Definition = new StatusDef
+            {
+                isGood = true,
+                affectedByTimestop = false,
+                color = new Color("c7dcd0"),
+                icon = RegisterSprite(package, "assets/lesson.png").Sprite
+            },
+            Name = AnyLocalizations.Bind(["status", "lesson", "name"]).Localize,
+            Description = AnyLocalizations.Bind(["status", "lesson", "desc"]).Localize
+        });
+
+        /*
+         * Managers are typically made to register themselves when constructed.
+         * _ = makes the compiler not complain about the fact that you are constructing something for seemingly no reason.
+         */
+        _ = new KnowledgeManager();
+
+        /*
+         * Some classes require so little management that a manager may not be worth writing.
+         * In AGainPonder's case, it is simply a need for two sprites and evaluation of an artifact's effect.
+         */
+        AGainPonder.DrawSpr = RegisterSprite(package, "assets/ponder_draw.png").Sprite;
+        AGainPonder.DiscardSpr = RegisterSprite(package, "assets/ponder_discard.png").Sprite;
     }
 
     /*
