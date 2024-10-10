@@ -72,7 +72,7 @@ public class AGainPonder : CardAction
              */
             new GlossaryTooltip($"AGainPonder::{side}")
             {
-                Icon = DrawSpr,
+                Icon = Destination == CardDestination.Deck ? DrawSpr : DiscardSpr,
                 Title = ModEntry.Instance.Localizations.Localize(["action", "AGainPonder", "title"]),
                 TitleColor = Colors.card,
                 Description = ModEntry.Instance.Localizations.Localize(["action", "AGainPonder", side.ToLower()], this)

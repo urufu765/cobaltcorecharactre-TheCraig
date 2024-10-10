@@ -18,7 +18,11 @@
             "title": "Gain Ponder",
             "draw": "Add <c=boldPink>{{Count}}</c> <c=card>Ponder</c>s to your <c=white>draw pile</c>.",
             "discard": "Add <c=boldPink>{{Count}}</c> <c=card>Ponder</c>s to your <c=white>discard pile</c>."
-        } 
+        },
+        "AOverthink": {
+            "title": "Overthink",
+            "desc": "Discard a <c=card>Ponder</c> in hand, or in the draw pile."
+        }
     },
     "card": {
         "LessonPlan": {
@@ -26,6 +30,16 @@
         },
         "PatternBlock": {
             "name": "Pattern Block"
+        },
+        
+        "DeepStudy": {
+            "name": "Deep Study"
+        },
+        
+        "ExtractKnowledge": {
+            "name": "Extract Knowledge",
+            "desc": "<c=attack>Attack {0}</c>. If it kills, gain a <c=cardtrait>non-temp</c> <c=card>Ponder</c>.",
+            "descB": "<c=attack>Attack {0}</c>. If it kills, gain a <c=cardtrait>non-temp</c> <c=card>Ponder B</c>."
         },
         
         "Ponder": {

@@ -34,8 +34,10 @@ internal class ModEntry : SimpleMod
         typeof(PatternBlock)
     ];
     private static List<Type> DemoUncommonCardTypes = [
+        typeof(DeepStudy)
     ];
     private static List<Type> DemoRareCardTypes = [
+        typeof(ExtractKnowledge)
     ];
     private static List<Type> DemoSpecialCardTypes = [
         typeof(Ponder)
@@ -196,6 +198,8 @@ internal class ModEntry : SimpleMod
          */
         AGainPonder.DrawSpr = RegisterSprite(package, "assets/ponder_draw.png").Sprite;
         AGainPonder.DiscardSpr = RegisterSprite(package, "assets/ponder_discard.png").Sprite;
+        
+        AOverthink.Spr = RegisterSprite(package, "assets/overthink.png").Sprite;
     }
 
     /*

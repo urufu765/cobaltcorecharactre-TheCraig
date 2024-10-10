@@ -6,12 +6,21 @@ using Nickel;
 
 namespace DemoMod.Cards;
 
+/*
+ * Cards are a character's bread and butter.
+ * Most characters contain 9 commons, 7 uncommons, and 5 rares, but nothing requires this distribution.
+ * In addition, some cards have additional cards, which aren't offered but can still be obtained.
+ * Ensure that after you create a card, that you add its type to the ModEntry's list of types to register.
+ */
 public class LessonPlan : Card, IRegisterable
 {
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
         helper.Content.Cards.RegisterCard(new CardConfiguration
         {
+            /*
+             * This is a trick to obtain the type housing the current method, to reduce the effort of making a new card.
+             */
             CardType = MethodBase.GetCurrentMethod()!.DeclaringType!,
             Meta = new CardMeta
             {
@@ -24,6 +33,12 @@ public class LessonPlan : Card, IRegisterable
         });
     }
 
+
+    /*
+     * Each card has a list of actions, which decides both what is rendered on the card, and what actually happens on play.
+     * There are many ways to construct the actions a card contains.
+     * The following is a simple approach, good for if the actions on the card only vary in their numbers.
+     */
     public override List<CardAction> GetActions(State s, Combat c)
     {
         return
@@ -40,6 +55,11 @@ public class LessonPlan : Card, IRegisterable
         ];
     }
 
+
+    /*
+     * Each card also has CardData, which is things such as its cost, if it's playable, if it has exhaust, recycle, infinite, etc.
+     * In addition, different arts and art tints can be enforced.
+     */
     public override CardData GetData(State state)
     {
         return new CardData
