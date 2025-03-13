@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using DemoMod.Cards;
+using Craig.Cards;
 using Nickel;
 
-namespace DemoMod.Actions;
+namespace Craig.Actions;
 
 /*
  * There are times where custom activity must be separated away into an action. The reasons to do so include:

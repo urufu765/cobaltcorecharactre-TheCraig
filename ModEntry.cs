@@ -6,21 +6,21 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
-using DemoMod.Actions;
-using DemoMod.Cards;
-using DemoMod.External;
-using DemoMod.Features;
+using Craig.Actions;
+using Craig.Cards;
+using Craig.External;
+//using Craig.Features;
 
-namespace DemoMod;
+namespace Craig;
 
 internal class ModEntry : SimpleMod
 {
     internal static ModEntry Instance { get; private set; } = null!;
+    internal static IPlayableCharacterEntryV2 IlleanaTheSnek { get; private set; } = null!;
     internal Harmony Harmony;
     internal IKokoroApi KokoroApi;
-    internal IDeckEntry DemoDeck;
-    internal IStatusEntry KnowledgeStatus;
-    internal IStatusEntry LessonStatus;
+    internal IDeckEntry IlleanaDeck;
+    internal IStatusEntry TarnishStatus;
     internal ILocalizationProvider<IReadOnlyList<string>> AnyLocalizations { get; }
     internal ILocaleBoundNonNullLocalizationProvider<IReadOnlyList<string>> Localizations { get; }
 
@@ -29,41 +29,64 @@ internal class ModEntry : SimpleMod
      * All cards and artifacts must be registered before they may be used in the game.
      * In theory only one collection could be used, containing all registerable types, but it is seperated this way for ease of organization.
      */
-    private static List<Type> DemoCommonCardTypes = [
-        typeof(LessonPlan),
-        typeof(PatternBlock)
+    private static List<Type> IlleanaCommonCardTypes = [
+        typeof(BuildCure),
+        // typeof(Cleanse),
+        // typeof(Exposure),
+        typeof(UntestedSubstance),
+        typeof(Autotomy),
+        typeof(ScrapPatchkit),
+        typeof(FalseVaccine),
+        typeof(IncompatibleFuel),
+        // typeof(FindCure)
     ];
-    private static List<Type> DemoUncommonCardTypes = [
-        typeof(DeepStudy)
+    private static List<Type> IlleanaUncommonCardTypes = [
+        typeof(GoneJiffy),
+        typeof(MakeshiftHull),
+        typeof(Amputation),
+        typeof(DeadlyAdrenaline),
+        typeof(PartSwap),
+        // typeof(Disinfect),
+        // typeof(AcidicPackage)
     ];
-    private static List<Type> DemoRareCardTypes = [
-        typeof(ExtractKnowledge)
+    private static List<Type> IlleanaRareCardTypes = [
+        typeof(GreatHealing),
+        typeof(ImmunityShot),
+        typeof(Distracted),
+        typeof(LacedYoFood),
+        typeof(WeaponisedPatchkit)
     ];
-    private static List<Type> DemoSpecialCardTypes = [
-        typeof(Ponder)
+    private static List<Type> IlleanaSpecialCardTypes = [
+        typeof(TheCure),
+        typeof(TheFailure),
+        // typeof(TheAccident),
+        typeof(SnekTunezChill),
+        typeof(SnekTunezHype),
+        typeof(SnekTunezSad),
+        typeof(SnekTunezGroovy)
     ];
-    private static IEnumerable<Type> DemoCardTypes =
-        DemoCommonCardTypes
-            .Concat(DemoUncommonCardTypes)
-            .Concat(DemoRareCardTypes)
-            .Concat(DemoSpecialCardTypes);
+    private static IEnumerable<Type> IlleanaCardTypes =
+        IlleanaCommonCardTypes
+            .Concat(IlleanaUncommonCardTypes)
+            .Concat(IlleanaRareCardTypes)
+            .Concat(IlleanaSpecialCardTypes);
 
-    private static List<Type> DemoCommonArtifacts = [
+    private static List<Type> IlleanaCommonArtifacts = [
     ];
-    private static List<Type> DemoBossArtifacts = [
+    private static List<Type> IlleanaBossArtifacts = [
     ];
-    private static IEnumerable<Type> DemoArtifactTypes =
-        DemoCommonArtifacts
-            .Concat(DemoBossArtifacts);
+    private static IEnumerable<Type> IlleanaArtifactTypes =
+        IlleanaCommonArtifacts
+            .Concat(IlleanaBossArtifacts);
 
     private static IEnumerable<Type> AllRegisterableTypes =
-        DemoCardTypes
-            .Concat(DemoArtifactTypes);
+        IlleanaCardTypes
+            .Concat(IlleanaArtifactTypes);
 
     public ModEntry(IPluginPackage<IModManifest> package, IModHelper helper, ILogger logger) : base(package, helper, logger)
     {
         Instance = this;
-        Harmony = new Harmony("rft.DemoMod");
+        Harmony = new Harmony("urufudoggo.Craig");
         
         /*
          * Some mods provide an API, which can be requested from the ModRegistry.
@@ -84,7 +107,7 @@ internal class ModEntry : SimpleMod
          * A deck only defines how cards should be grouped, for things such as codex sorting and Second Opinions.
          * A character must be defined with a deck to allow the cards to be obtainable as a character's cards.
          */
-        DemoDeck = helper.Content.Decks.RegisterDeck("Demo", new DeckConfiguration
+        IlleanaDeck = helper.Content.Decks.RegisterDeck("illeana", new DeckConfiguration
         {
             Definition = new DeckDef
             {
@@ -93,13 +116,13 @@ internal class ModEntry : SimpleMod
                  * TODO On cards, it dictates the sheen on higher rarities, as well as influences the color of the energy cost.
                  * If this deck is given to a playable character, their name will be this color, and their mini will have this color as their border.
                  */
-                color = new Color("999999"),
+                color = new Color("45e2b0"),
 
                 titleColor = new Color("000000")
             },
 
             DefaultCardArt = StableSpr.cards_colorless,
-            BorderSprite = RegisterSprite(package, "assets/frame_dave.png").Sprite,
+            BorderSprite = RegisterSprite(package, "assets/frame_illeana.png").Sprite,
             Name = AnyLocalizations.Bind(["character", "name"]).Localize
         });
 
@@ -117,34 +140,37 @@ internal class ModEntry : SimpleMod
          * The game uses the squint animation for the Extra-Planar Being and High-Pitched Static events, and the gameover animation while you are dying.
          * You may define any other animations, and they will only be used when explicitly referenced (such as dialogue).
          */
-        RegisterAnimation(package, "neutral", "assets/Animation/DaveNeutral", 4);
-        RegisterAnimation(package, "squint", "assets/Animation/DaveSquint", 4);
+        RegisterAnimation(package, "neutral", "assets/Animation/illeana_neutral", 1);
+        RegisterAnimation(package, "squint", "assets/Animation/illeana_squint", 1);
         Instance.Helper.Content.Characters.V2.RegisterCharacterAnimation(new CharacterAnimationConfigurationV2
         {
-            CharacterType = DemoDeck.Deck.Key(),
+            CharacterType = IlleanaDeck.Deck.Key(),
             LoopTag = "gameover",
             Frames = [
-                RegisterSprite(package, "assets/Animation/DaveGameOver.png").Sprite,
+                RegisterSprite(package, "assets/Animation/illeana_gameover_0.png").Sprite,
             ]
         });
         Instance.Helper.Content.Characters.V2.RegisterCharacterAnimation(new CharacterAnimationConfigurationV2
         {
-            CharacterType = DemoDeck.Deck.Key(),
+            CharacterType = IlleanaDeck.Deck.Key(),
             LoopTag = "mini",
             Frames = [
-                RegisterSprite(package, "assets/Animation/DaveMini.png").Sprite,
+                RegisterSprite(package, "assets/Animation/illeana_mini_0.png").Sprite,
             ]
         });
 
-        helper.Content.Characters.V2.RegisterPlayableCharacter("Demo", new PlayableCharacterConfigurationV2
+        IlleanaTheSnek = helper.Content.Characters.V2.RegisterPlayableCharacter("illeana", new PlayableCharacterConfigurationV2
         {
-            Deck = DemoDeck.Deck,
-            BorderSprite = RegisterSprite(package, "assets/char_frame_dave.png").Sprite,
+            Deck = IlleanaDeck.Deck,
+            BorderSprite = RegisterSprite(package, "assets/char_frame_illeana.png").Sprite,
             Starters = new StarterDeck
             {
                 cards = [
-                    new LessonPlan(),
-                    new PatternBlock()
+                    new BuildCure(),
+                    new SnekTunezChill(),
+                    new SnekTunezHype(),
+                    new SnekTunezSad(),
+                    new SnekTunezGroovy()
                 ],
                 /*
                  * Some characters have starting artifacts, in addition to starting cards.
@@ -161,45 +187,32 @@ internal class ModEntry : SimpleMod
          * Statuses are used to achieve many mechanics.
          * However, statuses themselves do not contain any code - they just keep track of how much you have.
          */
-        KnowledgeStatus = helper.Content.Statuses.RegisterStatus("Knowledge", new StatusConfiguration
+        TarnishStatus = helper.Content.Statuses.RegisterStatus("Tarnish", new StatusConfiguration
         {
             Definition = new StatusDef
             {
                 isGood = true,
                 affectedByTimestop = false,
-                color = new Color("fbb954"),
-                icon = RegisterSprite(package, "assets/knowledge.png").Sprite
+                color = new Color("a43fff"),
+                icon = RegisterSprite(package, "assets/tarnish.png").Sprite
             },
-            Name = AnyLocalizations.Bind(["status", "knowledge", "name"]).Localize,
-            Description = AnyLocalizations.Bind(["status", "knowledge", "desc"]).Localize
-        });
-        LessonStatus = helper.Content.Statuses.RegisterStatus("Lesson", new StatusConfiguration
-        {
-            Definition = new StatusDef
-            {
-                isGood = true,
-                affectedByTimestop = false,
-                color = new Color("c7dcd0"),
-                icon = RegisterSprite(package, "assets/lesson.png").Sprite
-            },
-            Name = AnyLocalizations.Bind(["status", "lesson", "name"]).Localize,
-            Description = AnyLocalizations.Bind(["status", "lesson", "desc"]).Localize
+            Name = AnyLocalizations.Bind(["status", "tarnish", "name"]).Localize,
+            Description = AnyLocalizations.Bind(["status", "tarnish", "desc"]).Localize
         });
 
         /*
          * Managers are typically made to register themselves when constructed.
          * _ = makes the compiler not complain about the fact that you are constructing something for seemingly no reason.
          */
-        _ = new KnowledgeManager();
+        //_ = new KnowledgeManager();
 
         /*
          * Some classes require so little management that a manager may not be worth writing.
          * In AGainPonder's case, it is simply a need for two sprites and evaluation of an artifact's effect.
          */
-        AGainPonder.DrawSpr = RegisterSprite(package, "assets/ponder_draw.png").Sprite;
-        AGainPonder.DiscardSpr = RegisterSprite(package, "assets/ponder_discard.png").Sprite;
-        
-        AOverthink.Spr = RegisterSprite(package, "assets/overthink.png").Sprite;
+        //AGainPonder.DrawSpr = RegisterSprite(package, "assets/ponder_draw.png").Sprite;
+        //AGainPonder.DiscardSpr = RegisterSprite(package, "assets/ponder_discard.png").Sprite;
+        //AOverthink.Spr = RegisterSprite(package, "assets/overthink.png").Sprite;
     }
 
     /*
@@ -222,7 +235,7 @@ internal class ModEntry : SimpleMod
     {
         Instance.Helper.Content.Characters.V2.RegisterCharacterAnimation(new CharacterAnimationConfigurationV2
         {
-            CharacterType = Instance.DemoDeck.Deck.Key(),
+            CharacterType = Instance.IlleanaDeck.Deck.Key(),
             LoopTag = tag,
             Frames = Enumerable.Range(0, frames)
                 .Select(i => RegisterSprite(package, dir + i + ".png").Sprite)

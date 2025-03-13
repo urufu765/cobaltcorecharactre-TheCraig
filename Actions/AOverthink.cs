@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using DemoMod.Cards;
+using Craig.Cards;
 using Nickel;
 
-namespace DemoMod.Actions;
+namespace Craig.Actions;
 
 public class AOverthink : CardAction
 {

@@ -1,49 +1,178 @@
 ﻿{
     "character": {
-        "name": "Professor",
-        "desc": "Your professor. They will teach you how to write your own character, as well as the power of <c=status>POWERDRIVE</c>."
+        "name": "Illeana",
+        "desc": "Your (uncertified and unofficial) medic. Her offerings may be <c=downside>volatile</c>, but she really knows how to push the limits of what's possible in a ship. <c=downside>Oh she also hates other snakes apparently, not that that means anything.</c>"
     },
     "status": {
-        "knowledge": {
-            "name": "Knowledge",
-            "desc": "Base limit of 3. When reaching the limit, spend the required <c=status>KNOWLEDGE</c> to gain 1 <c=status>POWERDRIVE</c> and 1 <c=status>LESSON</c>. Excess <c=status>KNOWLEDGE</c> is not lost."
-        },
-        "lesson": {
-            "name": "Lesson",
-            "desc": "Increase the limit of <c=status>KNOWLEDGE</c> by {0}."
+        "Tarnish": {
+            "name": "Tarnish",
+            "desc": "Take double damage and reduce <c=status>Corrode</status> by 1 per hit. Decrease by 1 at the start of next turn."
         }
     },
     "action": {
-        "AGainPonder": {
-            "title": "Gain Ponder",
-            "draw": "Add <c=boldPink>{{Count}}</c> <c=card>Ponder</c>s to your <c=white>draw pile</c>.",
-            "discard": "Add <c=boldPink>{{Count}}</c> <c=card>Ponder</c>s to your <c=white>discard pile</c>."
+    },
+    "artifact": {
+        "Common": {
+            "ForgedCertificate": {
+                "name": "FORGED CERTIFICATE",
+                "desc": "Every 4th time you take hull damage from <c=status>corrode</c>, <c=healing>heal 1</c>."
+            },
+            "Byproduct Processor": {
+                "name": "BYPRODUCT PROCESSOR",
+                "desc": "If you end your turn with more than 0 <c=energy>ENERGY</c>, reduce <c=status>corrode</c> by 1"
+            },
+            "Tarnished Syringe": {
+                "name": "TARNISHED SYRINGE",
+                "desc": "Apply 1 <c=status>tarnish</c> to both parties whenever an <c=drone>acid missile</c> is destroyed"
+            },
+            "CausticArmor": {
+                "name": "CAUSTIC ARMOR",
+                "desc": "At the start of every turn, gain <c=status>temp shield</c> equal to your <c=status>corrode</c>"
+            },
+            "ExperimentalLubricant": {
+                "name": "EXPERIMENTAL LUBRICANT",
+                "desc": "Gain 1 <c=status>HERMES BOOTS</c> at the start of every turn if <c=status>corrode</c> is present, <c=downside>1 <c=status>ENGINE STALL</c> if not</c>"
+            },
+            "ExternalFoodSource": {
+                "name": "EXTERNAL FUEL SOURCE",
+                "desc": "Gain 1 <c=status>EVADE</c> whenever you add a <c=cardtrait>temporary</c> card to your deck"
+            }
         },
-        "AOverthink": {
-            "title": "Overthink",
-            "desc": "Discard a <c=card>Ponder</c> in hand, or in the draw pile."
+        "Boss": {
+            "ConstantInnovation": {
+                "name": "CONSTANT INNOVATION",
+                "desc": "Randomly gain 3 <c=status>EVADE</c>, 1 <c=status>POWERDRIVE</c>, or 1 <c=status>ENERGY</c> at the start of every turn. <c=downside>Gain 4 <c=status>tarnish</c> upon getting hit</c>"
+            },
+            "Limbless": {
+                "name": "LIMBLESS",
+                "desc": "Your <c=part>wings</c> count as <c=part>empty</c>. <c=downside>Your <c=part>empty</c> parts take 1 damage when a shot passes through</c>",
+                "altDesc": "Your <c=part>wings</c> become <c=part>empty</c>. <c=downside>Your <c=part>empty</c> parts take 1 damage when a shot passes through</c>"
+            },
+            "IlleanasPersonalStereo": {
+                "name": "ILLEANA'S PERSONAL STEREO",
+                "desc": "Every start of combat, add a <c=card>SnekTunez</c> to your hand. SnekTunez is a registered trademark of REDACTED corp and is not responsible for any liabilities if any traks are listened outside working environments.",
+                "iGotDesc": "Every start of combat, add a <c=card>SnekTunez</c> to your hand. The next encounter will play <c=card>{0}</c>!"
+            }
+        },
+        "Duo": {
+            "SuperInjection": {
+                "name": "SUPER INJECTION",
+                "desc": "All <c=drone>acid missiles</c> apply an additional <c=status>corrode</c>."
+            },
+            "DilutedSerums": {
+                "name": "DILUTED SERUMS",
+                "desc": "<c=status>Corrode</c> attacks the shield first."
+            },
+            "SnakeHate": {
+                "name": "COMPETITION",
+                "desc": "Whenever playing an <c=______>Eddie</c> card, the next <c=illeana>Illeana</c> card will play twice."
+            }
         }
     },
     "card": {
-        "LessonPlan": {
-            "name": "Lesson Plan"
+        "Common": {
+            "BuildACure": {
+                "name": "Build-A-Cure",
+                "descB": "Add a <c=card>The Cure B</c> and a <c=card>The Failure B</c> to your draw pile.",
+                "descA": "Add 2 <c=card>The Cure</c> and a <c=card>The Failure A</c> to your draw pile.",
+                "desc": "Add a <c=card>The Cure</c> and a <c=card>The Failure</c> to your draw pile."
+            },
+            "FindACure": {
+                "name": "Find-A-Cure",
+                "descB": "Add a <c=card>The Cure B</c> and a <c=card>The Accident B</c> to your draw pile.",
+                "descA": "Add 2 <c=card>The Cure</c> and a <c=card>The Accident A</c> to your draw pile.",
+                "desc": "Add a <c=card>The Cure</c> and a <c=card>The Accident</c> to your draw pile."
+            },
+            "Cleanse": {
+                "name": "Cleanse"
+            },
+            "Exposure": {
+                "name": "Exposure"
+            },
+            "FalseVaccine": {
+                "name": "False Vaccine"
+            },
+            "UntestedSubstance": {
+                "name": "Untested Substance"
+            },
+            "Autotomy": {
+                "name": "Autotomy"
+            },
+            "ScrapPatchkit": {
+                "name": "Scrap Patchkit"
+            },
+            "IncompatibleFuel": {
+                "name": "Incompatible Fuel"
+            }
         },
-        "PatternBlock": {
-            "name": "Pattern Block"
+        "Uncommon": {
+            "GoneJiffy": {
+                "name": "Gone-In-A-Jiffy"
+            },
+            "MakeshiftHull": {
+                "name": "Makeshift Hull"
+            },
+            "Amputation": {
+                "name": "Amputation",
+                "descB": "X = your missing hull. <c=status>X Powerdrive</c>. <c=healing>Heal X</c>. <c=downside>-3 Max Hull</c>"
+            },
+            "DeadlyAdrenaline": {
+                "name": "Deadly Adrenaline"
+            },
+            "PartSwap": {
+                "name": "Part Swap"
+            },
+            "Disinfect": {
+                "name": "Disinfect"
+            },
+            "AcidicPackage": {
+                "name": "Acidic Package"
+            }
         },
-        
-        "DeepStudy": {
-            "name": "Deep Study"
+        "Rare": {
+            "GreatHealing": {
+                "name": "Great Healing"
+            },
+            "ImmunityShot": {
+                "name": "Immunity Shot"
+            },
+            "Distracted": {
+                "name": "Distracted"
+            },
+            "LacedYoFood": {
+                "name": "Laced Yo Food"
+            },
+            "WeaponisedPatchkit": {
+                "name": "Weaponised Patchkit"
+            }
         },
-        
-        "ExtractKnowledge": {
-            "name": "Extract Knowledge",
-            "desc": "<c=attack>Attack {0}</c>. If it kills, gain a <c=cardtrait>non-temp</c> <c=card>Ponder</c>.",
-            "descB": "<c=attack>Attack {0}</c>. If it kills, gain a <c=cardtrait>non-temp</c> <c=card>Ponder B</c>."
-        },
-        
-        "Ponder": {
-            "name": "Ponder"
+        "Token": {
+            "TheCure": {
+                "name": "The Cure",
+                "altName": "DA CUre"
+            },
+            "TheFailure": {
+                "name": "The Failure",
+                "descB": "<c=downside>+1 <c=status>corrode</c> to self,</c> and enemy on draw. -1 <c=status>corrode</c> when played.",
+                "desc": "<c=downside>+2 <c=status>corrode</c> to self on draw.</c> -1 <c=status>corrode</c> when played."
+            },
+            "TheAccident": {
+                "name": "The Accident",
+                "descB": "<c=downside>+1 <c=status>corrode</c> to self,</c> and enemy on draw. 1 <c=status>tarnish</c> to enemy when played.",
+                "desc": "<c=downside>+1 <c=status>corrode</c> to self on draw.</c> 1 <c=status>tarnish</c> to enemy when played."
+            },
+            "SnekTunezChill": {
+                "name": "Chill SnekTunez"
+            },
+            "SnekTunezHype": {
+                "name": "Hype SnekTunez"
+            },
+            "SnekTunezSad": {
+                "name": "Sad SnekTunez"
+            },
+            "SnekTunezGroovy": {
+                "name": "Groovy SnekTunez"
+            }
         }
     }
 }

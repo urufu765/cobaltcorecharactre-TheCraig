@@ -1,0 +1,106 @@
+using System.Collections.Generic;
+using System.Reflection;
+using Nanoray.PluginManager;
+using Nickel;
+
+namespace Craig.Cards;
+
+/// <summary>
+/// Break off parts to save the rest.
+/// </summary>
+public class Amputation : Card, IRegisterable
+{
+    public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
+    {
+        helper.Content.Cards.RegisterCard(new CardConfiguration
+        {
+            CardType = MethodBase.GetCurrentMethod()!.DeclaringType!,
+            Meta = new CardMeta
+            {
+                deck = ModEntry.Instance.IlleanaDeck.Deck,
+                rarity = Rarity.uncommon,
+                upgradesTo = [Upgrade.A, Upgrade.B]
+            },
+            Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "Uncommon", "Amputation", "name"]).Localize,
+            Art = ModEntry.RegisterSprite(package, "assets/Card/Illeana/2/Amputation.png").Sprite
+        });
+    }
+
+
+    public override List<CardAction> GetActions(State s, Combat c)
+    {
+        int x = s.ship.hullMax - s.ship.hull;
+        return upgrade switch
+        {
+            Upgrade.B => 
+            [
+                new AHeal
+                {
+                    healAmount = x,
+                    targetPlayer = true
+                },
+                new AStatus
+                {
+                    status = Status.powerdrive,
+                    statusAmount = x,
+                    targetPlayer = true
+                },
+                new AHullMax
+                {
+                    amount = -3,
+                    targetPlayer = true
+                }
+            ],
+            Upgrade.A => 
+            [
+                new AHeal
+                {
+                    healAmount = x,
+                    targetPlayer = true
+                },
+                new AHullMax
+                {
+                    amount = -2,
+                    targetPlayer = true
+                }
+            ],
+            _ => 
+            [
+                new AHeal
+                {
+                    healAmount = x,
+                    targetPlayer = true
+                },
+                new AHullMax
+                {
+                    amount = -2,
+                    targetPlayer = true
+                }
+            ],
+        };
+    }
+
+
+    public override CardData GetData(State state)
+    {
+        return upgrade switch
+        {
+            Upgrade.B => new CardData
+            {
+                cost = 0,
+                exhaust = true,
+                description = ModEntry.Instance.Localizations.Localize(["card", "Uncommon", "Amputation", "descB"])
+            },
+            Upgrade.A => new CardData
+            {
+                cost = 0,
+                singleUse = true,
+            },
+            _ => new CardData
+            {
+                cost = 0,
+                exhaust = true,
+            },
+        };
+    }
+}

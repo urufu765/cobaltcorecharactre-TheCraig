@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace DemoMod.External;
+namespace Craig.External;
 
 public partial interface IKokoroApi
 {
