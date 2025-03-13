@@ -147,7 +147,7 @@ internal class ModEntry : SimpleMod
             CharacterType = IlleanaDeck.Deck.Key(),
             LoopTag = "gameover",
             Frames = [
-                RegisterSprite(package, "assets/Animation/illeana_gameover_0.png").Sprite,
+                RegisterSprite(package, "assets/Animation/illeana_gameover0.png").Sprite,
             ]
         });
         Instance.Helper.Content.Characters.V2.RegisterCharacterAnimation(new CharacterAnimationConfigurationV2
@@ -155,7 +155,7 @@ internal class ModEntry : SimpleMod
             CharacterType = IlleanaDeck.Deck.Key(),
             LoopTag = "mini",
             Frames = [
-                RegisterSprite(package, "assets/Animation/illeana_mini_0.png").Sprite,
+                RegisterSprite(package, "assets/Animation/illeana_mini0.png").Sprite,
             ]
         });
 
