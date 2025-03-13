@@ -36,13 +36,19 @@ public class BuildCure : Card, IRegisterable
             [
                 new AAddCard
                 {
-                    card = new TheCure(),
+                    card = new TheCure
+                    {
+                        upgrade = Upgrade.B
+                    },
                     destination = CardDestination.Deck,
                     insertRandomly = true
                 },
                 new AAddCard
                 {
-                    card = new TheFailure(),
+                    card = new TheFailure
+                    {
+                        upgrade = Upgrade.B
+                    },
                     destination = CardDestination.Deck,
                     insertRandomly = true
                 },
@@ -58,7 +64,10 @@ public class BuildCure : Card, IRegisterable
                 },
                 new AAddCard
                 {
-                    card = new TheFailure(),
+                    card = new TheFailure
+                    {
+                        upgrade = Upgrade.A
+                    },
                     destination = CardDestination.Deck,
                     insertRandomly = true
                 },
