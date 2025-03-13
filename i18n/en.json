@@ -102,7 +102,7 @@
                 "name": "Scrap Patchkit"
             },
             "IncompatibleFuel": {
-                "name": "Incompatible Fuel"
+                "name": "Fraudulent Fuel"
             }
         },
         "Uncommon": {
@@ -162,16 +162,16 @@
                 "desc": "<c=downside>+1 <c=status>corrode</c> to self on draw.</c> 1 <c=status>tarnish</c> to enemy when played."
             },
             "SnekTunezChill": {
-                "name": "Chill SnekTunez"
+                "name": "SnekTunez: Chill"
             },
             "SnekTunezHype": {
-                "name": "Hype SnekTunez"
+                "name": "SnekTunez: Hype"
             },
             "SnekTunezSad": {
-                "name": "Sad SnekTunez"
+                "name": "SnekTunez: Sad"
             },
             "SnekTunezGroovy": {
-                "name": "Groovy SnekTunez"
+                "name": "SnekTunez: Groovy"
             }
         }
     }

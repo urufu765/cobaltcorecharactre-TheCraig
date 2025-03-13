@@ -167,10 +167,7 @@ internal class ModEntry : SimpleMod
             {
                 cards = [
                     new BuildCure(),
-                    new SnekTunezChill(),
-                    new SnekTunezHype(),
-                    new SnekTunezSad(),
-                    new SnekTunezGroovy()
+                    new FalseVaccine()
                 ],
                 /*
                  * Some characters have starting artifacts, in addition to starting cards.
