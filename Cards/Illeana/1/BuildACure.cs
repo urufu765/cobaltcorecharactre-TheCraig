@@ -79,7 +79,6 @@ public class BuildCure : Card, IRegisterable
                     card = new TheCure(),
                     destination = CardDestination.Deck,
                     insertRandomly = true,
-                    amount = 2
                 },
                 new AAddCard
                 {
