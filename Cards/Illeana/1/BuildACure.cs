@@ -74,12 +74,19 @@ public class BuildCure : Card, IRegisterable
             ],
             _ => 
             [
-                new AStatus
+                new AAddCard
                 {
-                    targetPlayer = true,
-                    status = Status.corrode,
-                    statusAmount = -1,
-                }
+                    card = new TheCure(),
+                    destination = CardDestination.Deck,
+                    insertRandomly = true,
+                    amount = 2
+                },
+                new AAddCard
+                {
+                    card = new TheFailure(),
+                    destination = CardDestination.Deck,
+                    insertRandomly = true
+                },
             ],
         };
     }
