@@ -62,6 +62,12 @@ public class GoneJiffy : Card, IRegisterable
                 },
                 new AStatus
                 {
+                    targetPlayer = true,
+                    status = Status.evade,
+                    statusAmount = 1,
+                },
+                new AStatus
+                {
                     status = ModEntry.IlleanaTheSnek.MissingStatus.Status,
                     statusAmount = 1,
                     targetPlayer = true
@@ -74,6 +80,12 @@ public class GoneJiffy : Card, IRegisterable
                     status = Status.perfectShield,
                     statusAmount = 1,
                     targetPlayer = true
+                },
+                new AStatus
+                {
+                    targetPlayer = true,
+                    status = Status.evade,
+                    statusAmount = 1,
                 },
                 new AStatus
                 {

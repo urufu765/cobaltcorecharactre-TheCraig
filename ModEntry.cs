@@ -31,7 +31,7 @@ internal class ModEntry : SimpleMod
      */
     private static List<Type> IlleanaCommonCardTypes = [
         typeof(BuildCure),
-        // typeof(Cleanse),
+        typeof(Cleanse),
         // typeof(Exposure),
         typeof(UntestedSubstance),
         typeof(Autotomy),
@@ -46,8 +46,8 @@ internal class ModEntry : SimpleMod
         typeof(Amputation),
         typeof(DeadlyAdrenaline),
         typeof(PartSwap),
-        // typeof(Disinfect),
-        // typeof(AcidicPackage)
+        typeof(Disinfect),
+        typeof(AcidicPackage)
     ];
     private static List<Type> IlleanaRareCardTypes = [
         typeof(GreatHealing),
@@ -170,7 +170,7 @@ internal class ModEntry : SimpleMod
             {
                 cards = [
                     new BuildCure(),
-                    new FalseVaccine()
+                    new Cleanse()
                 ],
                 /*
                  * Some characters have starting artifacts, in addition to starting cards.

@@ -44,6 +44,12 @@ public class UntestedSubstance : Card, IRegisterable
                     status = Status.powerdrive,
                     statusAmount = 1,
                     targetPlayer = true
+                },
+                new AStatus
+                {
+                    targetPlayer = true,
+                    status = Status.evade,
+                    statusAmount = 1,
                 }
             ],
             _ => 
@@ -58,6 +64,12 @@ public class UntestedSubstance : Card, IRegisterable
                 {
                     targetPlayer = true,
                     status = Status.overdrive,
+                    statusAmount = 1,
+                },
+                new AStatus
+                {
+                    targetPlayer = true,
+                    status = Status.evade,
                     statusAmount = 1,
                 }
             ],
