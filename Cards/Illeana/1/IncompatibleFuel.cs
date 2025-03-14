@@ -19,8 +19,7 @@ public class IncompatibleFuel : Card, IRegisterable
             {
                 deck = ModEntry.Instance.IlleanaDeck.Deck,
                 rarity = Rarity.common,
-                //upgradesTo = [Upgrade.A, Upgrade.B]  Once Corrode-cost is implemented, add this
-                upgradesTo = [Upgrade.A]
+                upgradesTo = [Upgrade.A, Upgrade.B]
             },
             Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "Common", "IncompatibleFuel", "name"]).Localize,
             Art = ModEntry.RegisterSprite(package, "assets/Card/Illeana/1/IncompatibleFuel.png").Sprite
@@ -40,7 +39,18 @@ public class IncompatibleFuel : Card, IRegisterable
                     statusAmount = 2,
                     targetPlayer = true
                 },
-                // Cost thing here
+                ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeCostAction(
+                    ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeResourceCost(
+                        ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeStatusResource(Status.corrode),
+                        1
+                    ),
+                    new AStatus
+                    {
+                        status = Status.evade,
+                        statusAmount = 2,
+                        targetPlayer = true
+                    }
+                ).AsCardAction,
                 new AStatus
                 {
                     status = Status.corrode,
