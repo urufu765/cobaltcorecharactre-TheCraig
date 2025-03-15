@@ -32,13 +32,13 @@ internal class ModEntry : SimpleMod
     private static List<Type> IlleanaCommonCardTypes = [
         typeof(BuildCure),
         typeof(Cleanse),
-        // typeof(Exposure),
+        typeof(Exposure),
         typeof(UntestedSubstance),
         typeof(Autotomy),
         typeof(ScrapPatchkit),
         typeof(FalseVaccine),
         typeof(IncompatibleFuel),
-        // typeof(FindCure)
+        typeof(FindCure)
     ];
     private static List<Type> IlleanaUncommonCardTypes = [
         typeof(GoneJiffy),
@@ -59,7 +59,7 @@ internal class ModEntry : SimpleMod
     private static List<Type> IlleanaSpecialCardTypes = [
         typeof(TheCure),
         typeof(TheFailure),
-        // typeof(TheAccident),
+        typeof(TheAccident),
         typeof(SnekTunezChill),
         typeof(SnekTunezHype),
         typeof(SnekTunezSad),
@@ -191,13 +191,13 @@ internal class ModEntry : SimpleMod
         {
             Definition = new StatusDef
             {
-                isGood = true,
-                affectedByTimestop = false,
+                isGood = false,
+                affectedByTimestop = true,
                 color = new Color("a43fff"),
                 icon = RegisterSprite(package, "assets/tarnish.png").Sprite
             },
-            Name = AnyLocalizations.Bind(["status", "tarnish", "name"]).Localize,
-            Description = AnyLocalizations.Bind(["status", "tarnish", "desc"]).Localize
+            Name = AnyLocalizations.Bind(["status", "Tarnish", "name"]).Localize,
+            Description = AnyLocalizations.Bind(["status", "Tarnish", "desc"]).Localize
         });
 
         /*

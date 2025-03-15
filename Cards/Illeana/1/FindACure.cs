@@ -6,9 +6,9 @@ using Nickel;
 namespace Craig.Cards;
 
 /// <summary>
-/// A card that attempts to build a cure, creating The Cure and The Failure cards
+/// A card that attempts to find a cure, creating The Cure and The Accident cards
 /// </summary>
-public class BuildCure : Card, IRegisterable
+public class FindCure : Card, IRegisterable
 {
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
@@ -21,8 +21,8 @@ public class BuildCure : Card, IRegisterable
                 rarity = Rarity.common,
                 upgradesTo = [Upgrade.A, Upgrade.B]
             },
-            Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "Common", "BuildACure", "name"]).Localize,
-            Art = ModEntry.RegisterSprite(package, "assets/Card/Illeana/1/BuildACure.png").Sprite
+            Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "Common", "FindACure", "name"]).Localize,
+            Art = ModEntry.RegisterSprite(package, "assets/Card/Illeana/1/FindACure.png").Sprite
         });
     }
 
@@ -44,7 +44,7 @@ public class BuildCure : Card, IRegisterable
                 },
                 new AAddCard
                 {
-                    card = new TheFailure
+                    card = new TheAccident
                     {
                         upgrade = Upgrade.B
                     },
@@ -63,7 +63,7 @@ public class BuildCure : Card, IRegisterable
                 },
                 new AAddCard
                 {
-                    card = new TheFailure
+                    card = new TheAccident
                     {
                         upgrade = Upgrade.A
                     },
@@ -81,7 +81,7 @@ public class BuildCure : Card, IRegisterable
                 },
                 new AAddCard
                 {
-                    card = new TheFailure(),
+                    card = new TheAccident(),
                     destination = CardDestination.Deck,
                     insertRandomly = true
                 },
