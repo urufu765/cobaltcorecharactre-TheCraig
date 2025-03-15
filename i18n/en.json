@@ -41,7 +41,7 @@
         "Boss": {
             "ConstantInnovation": {
                 "name": "CONSTANT INNOVATION",
-                "desc": "Randomly gain 3 <c=status>EVADE</c>, 1 <c=status>POWERDRIVE</c>, or 1 <c=status>ENERGY</c> at the start of every turn. <c=downside>Gain 4 <c=status>tarnish</c> upon getting hit</c>"
+                "desc": "Immediately choose 1 of 2 artifacts per boss defeated.\nAfter every event, choose 1 of 2 common artifacts"
             },
             "Limbless": {
                 "name": "LIMBLESS",

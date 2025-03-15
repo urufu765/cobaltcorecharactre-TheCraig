@@ -143,8 +143,8 @@ internal class ModEntry : SimpleMod
          * The game uses the squint animation for the Extra-Planar Being and High-Pitched Static events, and the gameover animation while you are dying.
          * You may define any other animations, and they will only be used when explicitly referenced (such as dialogue).
          */
-        RegisterAnimation(package, "neutral", "assets/Animation/illeana_neutral", 1);
-        RegisterAnimation(package, "squint", "assets/Animation/illeana_squint", 1);
+        RegisterAnimation(package, "neutral", "assets/Animation/illeana_neutral", 4);
+        RegisterAnimation(package, "squint", "assets/Animation/illeana_squint", 4);
         Instance.Helper.Content.Characters.V2.RegisterCharacterAnimation(new CharacterAnimationConfigurationV2
         {
             CharacterType = IlleanaDeck.Deck.Key(),
