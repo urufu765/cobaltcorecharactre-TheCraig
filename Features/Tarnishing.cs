@@ -11,38 +11,23 @@ using Nickel;
 
 namespace Craig.Features;
 
-public class Tarnishing : IRegisterable, IKokoroApi.IV2.IStatusLogicApi.IHook
+public class Tarnishing : IKokoroApi.IV2.IStatusLogicApi.IHook
 {
-    internal static IStatusEntry TarnishStatus { get; private set; } = null!;
 
-    public static void Register(IPluginPackage<IModManifest> package, IModHelper h)
+    public Tarnishing()
     {
-        TarnishStatus = ModEntry.Instance.Helper.Content.Statuses.RegisterStatus("Tarnish", new StatusConfiguration
-        {
-            Definition = new StatusDef
-            {
-                isGood = false,
-                affectedByTimestop = true,
-                color = new Color("a43fff"),
-                icon = ModEntry.RegisterSprite(package, "assets/tarnish.png").Sprite
-            },
-            Name = ModEntry.Instance.AnyLocalizations.Bind(["status", "Tarnish", "name"]).Localize,
-            Description = ModEntry.Instance.AnyLocalizations.Bind(["status", "Tarnish", "desc"]).Localize
-        });
+        ModEntry.Instance.KokoroApi.V2.StatusLogic.RegisterHook(this);
 
         ModEntry.Instance.Harmony.Patch(
             original: AccessTools.DeclaredMethod(typeof(Ship), nameof(Ship.ModifyDamageDueToParts)),
-            transpiler: new HarmonyMethod(MethodBase.GetCurrentMethod()!.DeclaringType!, nameof(Ship_MDDTP_butDOUBLE))
+            postfix: new HarmonyMethod(MethodBase.GetCurrentMethod()!.DeclaringType!, nameof(Ship_MDDTP_butDOUBLE))
         );
-
-        var instance = new Tarnishing();
-        ModEntry.Instance.KokoroApi.V2.StatusLogic.RegisterHook(instance);
     }
 
 
     public static void Ship_MDDTP_butDOUBLE(Ship __instance, ref int __result, State s, Combat c, int incomingDamage, Part part, bool piercing = false)
     {
-        if (__instance.Get(TarnishStatus.Status) > 0)
+        if (__instance.Get(ModEntry.Instance.TarnishStatus.Status) > 0)
         {
             if (__instance.Get(Status.corrode) > 0)
             {
@@ -61,7 +46,7 @@ public class Tarnishing : IRegisterable, IKokoroApi.IV2.IStatusLogicApi.IHook
 
     public bool HandleStatusTurnAutoStep(IKokoroApi.IV2.IStatusLogicApi.IHook.IHandleStatusTurnAutoStepArgs args)
     {
-        if (args.Status != TarnishStatus.Status) return false;
+        if (args.Status != ModEntry.Instance.TarnishStatus.Status) return false;
         if (args.Timing != IKokoroApi.IV2.IStatusLogicApi.StatusTurnTriggerTiming.TurnStart) return false;
         if (args.Amount > 0)
         {

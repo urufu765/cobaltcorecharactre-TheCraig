@@ -1,7 +1,7 @@
 ﻿{
     "character": {
         "name": "Illeana",
-        "desc": "Your (uncertified and unofficial) medic. Her offerings may be <c=downside>volatile</c>, but she really knows how to push the limits of what's possible in a ship. <c=downside>Oh she also hates other snakes apparently, not that that means anything.</c>"
+        "desc": "<c=illeana>Illeana</c>\nYour (uncertified and unofficial) medic."
     },
     "status": {
         "Tarnish": {

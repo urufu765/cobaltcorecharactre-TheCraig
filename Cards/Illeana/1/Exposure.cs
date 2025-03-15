@@ -42,7 +42,7 @@ public class Exposure : Card, IRegisterable
                 },
                 new AStatus
                 {
-                    status = Tarnishing.TarnishStatus.Status,
+                    status = ModEntry.Instance.TarnishStatus.Status,
                     targetPlayer = false,
                     statusAmount = 1
                 }
@@ -51,7 +51,7 @@ public class Exposure : Card, IRegisterable
             [
                 new AStatus
                 {
-                    status = Tarnishing.TarnishStatus.Status,
+                    status = ModEntry.Instance.TarnishStatus.Status,
                     targetPlayer = false,
                     statusAmount = 1
                 },
@@ -60,13 +60,13 @@ public class Exposure : Card, IRegisterable
             [
                 new AStatus
                 {
-                    status = Tarnishing.TarnishStatus.Status,
+                    status = ModEntry.Instance.TarnishStatus.Status,
                     targetPlayer = true,
                     statusAmount = 1
                 },
                 new AStatus
                 {
-                    status = Tarnishing.TarnishStatus.Status,
+                    status = ModEntry.Instance.TarnishStatus.Status,
                     targetPlayer = false,
                     statusAmount = 1
                 }
@@ -79,9 +79,14 @@ public class Exposure : Card, IRegisterable
     {
         return upgrade switch
         {
-            Upgrade.A or Upgrade.B => new CardData
+            Upgrade.B => new CardData
             {
-                cost = 0
+                cost = 1,
+                exhaust = true
+            },
+            Upgrade.A => new CardData
+            {
+                cost = 2
             },
             _ => new CardData
             {

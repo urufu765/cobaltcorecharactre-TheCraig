@@ -22,6 +22,8 @@ internal class ModEntry : SimpleMod
     internal Harmony Harmony;
     internal IKokoroApi KokoroApi;
     internal IDeckEntry IlleanaDeck;
+    internal IStatusEntry TarnishStatus { get; private set; } = null!;
+
     internal ILocalizationProvider<IReadOnlyList<string>> AnyLocalizations { get; }
     internal ILocaleBoundNonNullLocalizationProvider<IReadOnlyList<string>> Localizations { get; }
 
@@ -188,12 +190,25 @@ internal class ModEntry : SimpleMod
          * Statuses are used to achieve many mechanics.
          * However, statuses themselves do not contain any code - they just keep track of how much you have.
          */
+        TarnishStatus = helper.Content.Statuses.RegisterStatus("Tarnish", new StatusConfiguration
+        {
+            Definition = new StatusDef
+            {
+                isGood = false,
+                affectedByTimestop = true,
+                color = new Color("a43fff"),
+                icon = ModEntry.RegisterSprite(package, "assets/tarnish.png").Sprite
+            },
+            Name = AnyLocalizations.Bind(["status", "Tarnish", "name"]).Localize,
+            Description = AnyLocalizations.Bind(["status", "Tarnish", "desc"]).Localize
+        });
 
         /*
          * Managers are typically made to register themselves when constructed.
          * _ = makes the compiler not complain about the fact that you are constructing something for seemingly no reason.
          */
         //_ = new KnowledgeManager();
+        _ = new Tarnishing();
 
         /*
          * Some classes require so little management that a manager may not be worth writing.
