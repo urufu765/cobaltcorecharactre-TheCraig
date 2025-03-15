@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Reflection;
+using Craig.Features;
 using Nanoray.PluginManager;
 using Nickel;
 
@@ -41,7 +42,7 @@ public class Exposure : Card, IRegisterable
                 },
                 new AStatus
                 {
-                    status = ModEntry.Instance.TarnishStatus.Status,
+                    status = Tarnishing.TarnishStatus.Status,
                     targetPlayer = false,
                     statusAmount = 1
                 }
@@ -50,7 +51,7 @@ public class Exposure : Card, IRegisterable
             [
                 new AStatus
                 {
-                    status = ModEntry.Instance.TarnishStatus.Status,
+                    status = Tarnishing.TarnishStatus.Status,
                     targetPlayer = false,
                     statusAmount = 1
                 },
@@ -59,13 +60,13 @@ public class Exposure : Card, IRegisterable
             [
                 new AStatus
                 {
-                    status = ModEntry.Instance.TarnishStatus.Status,
+                    status = Tarnishing.TarnishStatus.Status,
                     targetPlayer = true,
                     statusAmount = 1
                 },
                 new AStatus
                 {
-                    status = ModEntry.Instance.TarnishStatus.Status,
+                    status = Tarnishing.TarnishStatus.Status,
                     targetPlayer = false,
                     statusAmount = 1
                 }

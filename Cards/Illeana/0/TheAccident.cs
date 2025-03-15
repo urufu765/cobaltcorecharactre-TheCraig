@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Reflection;
+using Craig.Features;
 using Nanoray.PluginManager;
 using Nickel;
 
@@ -36,7 +37,7 @@ public class TheAccident : Card, IRegisterable
             new AStatus
             {
                 targetPlayer = true,
-                status = ModEntry.Instance.TarnishStatus.Status,
+                status = Tarnishing.TarnishStatus.Status,
                 statusAmount = 1
             }
         ];
