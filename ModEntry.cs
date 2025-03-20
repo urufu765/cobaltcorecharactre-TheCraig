@@ -197,7 +197,6 @@ internal class ModEntry : SimpleMod
                  * This can be safely removed if you have no starting artifacts.
                  */
                 artifacts = [
-                    new PersonalStereo()
                 ]
             },
             Description = AnyLocalizations.Bind(["character", "desc"]).Localize
