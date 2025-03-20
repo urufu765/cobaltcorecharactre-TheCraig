@@ -21,13 +21,13 @@ public enum SnekTunez
 [ArtifactMeta(pools = new[] { ArtifactPool.Boss })]
 public class PersonalStereo : Artifact
 {
-    private SnekTunez _cardState = 0;
+    public SnekTunez SongNumber {get; private set;} = 0;
     public bool Repeat {private get; set;} = true;
 
 
     public override Spr GetSprite()
     {
-        return _cardState switch
+        return SongNumber switch
         {
             SnekTunez.Chill => ModEntry.Instance.SprTunezChill,
             SnekTunez.Hype => ModEntry.Instance.SprTunezHype,
@@ -40,20 +40,21 @@ public class PersonalStereo : Artifact
 
     public override void OnReceiveArtifact(State state)
     {
-        if (_cardState == SnekTunez.Start) _cardState++;
+        if (SongNumber == SnekTunez.Start) SongNumber++;
     }
 
 
     public override void OnCombatStart(State state, Combat combat)
     {
-        switch (_cardState)
+        switch (SongNumber)
         {
             case SnekTunez.Chill:
                 combat.QueueImmediate(new AAddCard
                 {
                     amount = 1,
                     card = new SnekTunezChill(),
-                    destination = CardDestination.Hand
+                    destination = CardDestination.Hand,
+                    artifactPulse = Key()
                 });
                 break;
             case SnekTunez.Hype:
@@ -61,7 +62,8 @@ public class PersonalStereo : Artifact
                 {
                     amount = 1,
                     card = new SnekTunezHype(),
-                    destination = CardDestination.Hand
+                    destination = CardDestination.Hand,
+                    artifactPulse = Key()
                 });
                 break;
             case SnekTunez.Sad:
@@ -69,7 +71,8 @@ public class PersonalStereo : Artifact
                 {
                     amount = 1,
                     card = new SnekTunezSad(),
-                    destination = CardDestination.Hand
+                    destination = CardDestination.Hand,
+                    artifactPulse = Key()
                 });
                 break;
             case SnekTunez.Groovy:
@@ -77,16 +80,17 @@ public class PersonalStereo : Artifact
                 {
                     amount = 1,
                     card = new SnekTunezGroovy(),
-                    destination = CardDestination.Hand
+                    destination = CardDestination.Hand,
+                    artifactPulse = Key()
                 });
                 break;
             default:
                 break;
         }
-        _cardState++;
-        if (_cardState == SnekTunez.End && Repeat)
+        SongNumber++;
+        if (SongNumber == SnekTunez.End && Repeat)
         {
-            _cardState = SnekTunez.Start + 1;
+            SongNumber = SnekTunez.Start + 1;
         }
     }
 
@@ -97,29 +101,29 @@ public class PersonalStereo : Artifact
     /// <returns></returns>
     public override List<Tooltip>? GetExtraTooltips()
     {
-        return _cardState switch
+        return SongNumber switch
         {
-            SnekTunez.Start => base.GetExtraTooltips(),
             SnekTunez.Chill => [ new TTCard
             {
-                card = new SnekTunezHype()
+                card = new SnekTunezChill()
             },
             new TTGlossary("cardtrait.singleUse")],
             SnekTunez.Hype => [ new TTCard
             {
-                card = new SnekTunezSad()
+                card = new SnekTunezHype()
             },
             new TTGlossary("cardtrait.singleUse")],
             SnekTunez.Sad => [ new TTCard
             {
+                card = new SnekTunezSad()
+            },
+            new TTGlossary("cardtrait.singleUse")],
+            SnekTunez.Groovy => [ new TTCard
+            {
                 card = new SnekTunezGroovy()
             },
             new TTGlossary("cardtrait.singleUse")],
-            _ => [ new TTCard
-            {
-                card = new SnekTunezChill()
-            },
-            new TTGlossary("cardtrait.singleUse")]
+            _ => base.GetExtraTooltips()
         };
     }
 
@@ -130,7 +134,7 @@ public class PersonalStereo : Artifact
     /// <returns></returns>
     public override string Description()
     {
-        return ModEntry.Instance.Localizations.Localize(["artifact", "Boss", "IlleanasPersonalStereo", _cardState switch {
+        return ModEntry.Instance.Localizations.Localize(["artifact", "Boss", "IlleanasPersonalStereo", SongNumber switch {
             SnekTunez.Start => "desc",
             SnekTunez.Chill => "descHype",
             SnekTunez.Hype => "descSad",

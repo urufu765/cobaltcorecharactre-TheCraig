@@ -197,6 +197,7 @@ internal class ModEntry : SimpleMod
                  * This can be safely removed if you have no starting artifacts.
                  */
                 artifacts = [
+                    new PersonalStereo()
                 ]
             },
             Description = AnyLocalizations.Bind(["character", "desc"]).Localize
@@ -295,8 +296,8 @@ internal class ModEntry : SimpleMod
                 owner = IlleanaDeck.Deck,
                 pools = [ArtifactPool.Common]
             },
-            Name = AnyLocalizations.Bind(["artifact", "Common", "ExternalFuelSource", "name"]).Localize,
-            Description = AnyLocalizations.Bind(["artifact", "Common", "ExternalFuelSource", "desc"]).Localize,
+            Name = AnyLocalizations.Bind(["artifact", "Common", "ExternalFoodSource", "name"]).Localize,
+            Description = AnyLocalizations.Bind(["artifact", "Common", "ExternalFoodSource", "desc"]).Localize,
             Sprite = RegisterSprite(package, "assets/Artifact/Ext_Fuel_Source.png").Sprite
         });
 
