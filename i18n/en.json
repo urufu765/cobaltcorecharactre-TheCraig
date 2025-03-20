@@ -15,13 +15,13 @@
         "Common": {
             "ForgedCertificate": {
                 "name": "FORGED CERTIFICATE",
-                "desc": "Every 4th time you take hull damage from <c=status>corrode</c>, <c=healing>heal 1</c>."
+                "desc": "Every 4th time you take hull damage, immediately <c=hull>heal 1</c>."
             },
-            "Byproduct Processor": {
+            "ByproductProcessor": {
                 "name": "BYPRODUCT PROCESSOR",
                 "desc": "If you end your turn with more than 0 <c=energy>ENERGY</c>, reduce <c=status>corrode</c> by 1"
             },
-            "Tarnished Syringe": {
+            "TarnishedSyringe": {
                 "name": "TARNISHED SYRINGE",
                 "desc": "Apply 1 <c=status>tarnish</c> to both parties whenever an <c=drone>acid missile</c> is destroyed"
             },
@@ -51,7 +51,11 @@
             "IlleanasPersonalStereo": {
                 "name": "ILLEANA'S PERSONAL STEREO",
                 "desc": "Every start of combat, add a <c=card>SnekTunez</c> to your hand. SnekTunez is a registered trademark of REDACTED corp and is not responsible for any liabilities if any traks are listened outside working environments.",
-                "iGotDesc": "Every start of combat, add a <c=card>SnekTunez</c> to your hand. The next encounter will play <c=card>{0}</c>!"
+                "iGotDesc": "Every start of combat, add a <c=card>SnekTunez</c> to your hand. The next encounter will play <c=card>{0}</c>!",
+                "descChill": "Every start of combat, add a <c=card>SnekTunez</c> to your hand. The next encounter will play <c=card>Chill</c>!",
+                "descHype": "Every start of combat, add a <c=card>SnekTunez</c> to your hand. The next encounter will play <c=card>Hype</c>!",
+                "descSad": "Every start of combat, add a <c=card>SnekTunez</c> to your hand. The next encounter will play <c=card>Sad</c>!",
+                "descGroovy": "Every start of combat, add a <c=card>SnekTunez</c> to your hand. The next encounter will play <c=card>Groovy</c>!"
             }
         },
         "Duo": {
@@ -66,6 +70,12 @@
             "SnakeHate": {
                 "name": "COMPETITION",
                 "desc": "Whenever playing an <c=______>Eddie</c> card, the next <c=illeana>Illeana</c> card will play twice."
+            }
+        },
+        "Extra": {
+            "GooseH8r": {
+                "name": "Goose Hater",
+                "desc": "Every time you play an <c=illeana>Illeana</c> card, the enemy takes 1 damage. <c=downside>Temporary.</c>"
             }
         }
     },

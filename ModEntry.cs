@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
-//using Craig.Actions;
+using Craig.Artifacts;
 using Craig.Cards;
 using Craig.External;
 using Craig.Features;
@@ -75,8 +75,17 @@ internal class ModEntry : SimpleMod
             .Concat(IlleanaSpecialCardTypes);
 
     private static List<Type> IlleanaCommonArtifacts = [
+        typeof(ForgedCertificate),
+        typeof(ByproductProcessor),
+        // typeof(TarnishedSyringe),
+        typeof(CausticArmor),
+        typeof(ExperimentalLubricant),
+        typeof(ExternalFuelSource)
     ];
     private static List<Type> IlleanaBossArtifacts = [
+        // typeof(ConstantInnovation),
+        // typeof(Limbless),
+        typeof(PersonalStereo)
     ];
     private static IEnumerable<Type> IlleanaArtifactTypes =
         IlleanaCommonArtifacts
@@ -85,6 +94,13 @@ internal class ModEntry : SimpleMod
     private static IEnumerable<Type> AllRegisterableTypes =
         IlleanaCardTypes
             .Concat(IlleanaArtifactTypes);
+
+    public Spr SprTunezOff {get; private set;}
+    public Spr SprTunezChill {get; private set;}
+    public Spr SprTunezHype {get; private set;}
+    public Spr SprTunezSad {get; private set;}
+    public Spr SprTunezGroovy {get; private set;}
+
 
     public ModEntry(IPluginPackage<IModManifest> package, IModHelper helper, ILogger logger) : base(package, helper, logger)
     {
@@ -217,6 +233,91 @@ internal class ModEntry : SimpleMod
         //AGainPonder.DrawSpr = RegisterSprite(package, "assets/ponder_draw.png").Sprite;
         //AGainPonder.DiscardSpr = RegisterSprite(package, "assets/ponder_discard.png").Sprite;
         //AOverthink.Spr = RegisterSprite(package, "assets/overthink.png").Sprite;
+
+        // Artifact Section
+        helper.Content.Artifacts.RegisterArtifact("ForgedCertificate", new ArtifactConfiguration
+        {
+            ArtifactType = typeof(ForgedCertificate),
+            Meta = new ArtifactMeta
+            {
+                owner = IlleanaDeck.Deck,
+                pools = [ArtifactPool.Common]
+            },
+            Name = AnyLocalizations.Bind(["artifact", "ForgedCertificate", "name"]).Localize,
+            Description = AnyLocalizations.Bind(["artifact", "Common", "ForgedCertificate", "desc"]).Localize,
+            Sprite = RegisterSprite(package, "assets/Artifact/Forged_Certificate.png").Sprite
+        });
+
+        helper.Content.Artifacts.RegisterArtifact("ByproductProcessor", new ArtifactConfiguration
+        {
+            ArtifactType = typeof(ByproductProcessor),
+            Meta = new ArtifactMeta
+            {
+                owner = IlleanaDeck.Deck,
+                pools = [ArtifactPool.Common]
+            },
+            Name = AnyLocalizations.Bind(["artifact", "ByproductProcessor", "name"]).Localize,
+            Description = AnyLocalizations.Bind(["artifact", "Common", "ByproductProcessor", "desc"]).Localize,
+            Sprite = RegisterSprite(package, "assets/Artifact/Byproduct_Processor.png").Sprite
+        });
+
+        helper.Content.Artifacts.RegisterArtifact("CausticArmor", new ArtifactConfiguration
+        {
+            ArtifactType = typeof(CausticArmor),
+            Meta = new ArtifactMeta
+            {
+                owner = IlleanaDeck.Deck,
+                pools = [ArtifactPool.Common]
+            },
+            Name = AnyLocalizations.Bind(["artifact", "CausticArmor", "name"]).Localize,
+            Description = AnyLocalizations.Bind(["artifact", "Common", "CausticArmor", "desc"]).Localize,
+            Sprite = RegisterSprite(package, "assets/Artifact/Caustic_Armor.png").Sprite
+        });
+
+        helper.Content.Artifacts.RegisterArtifact("ExperimentalLubricant", new ArtifactConfiguration
+        {
+            ArtifactType = typeof(ExperimentalLubricant),
+            Meta = new ArtifactMeta
+            {
+                owner = IlleanaDeck.Deck,
+                pools = [ArtifactPool.Common]
+            },
+            Name = AnyLocalizations.Bind(["artifact", "ExperimentalLubricant", "name"]).Localize,
+            Description = AnyLocalizations.Bind(["artifact", "Common", "ExperimentalLubricant", "desc"]).Localize,
+            Sprite = RegisterSprite(package, "assets/Artifact/Experimental_Lubricant.png").Sprite
+        });
+
+        helper.Content.Artifacts.RegisterArtifact("ExternalFuelSource", new ArtifactConfiguration
+        {
+            ArtifactType = typeof(ExternalFuelSource),
+            Meta = new ArtifactMeta
+            {
+                owner = IlleanaDeck.Deck,
+                pools = [ArtifactPool.Common]
+            },
+            Name = AnyLocalizations.Bind(["artifact", "ExternalFuelSource", "name"]).Localize,
+            Description = AnyLocalizations.Bind(["artifact", "Common", "ExternalFuelSource", "desc"]).Localize,
+            Sprite = RegisterSprite(package, "assets/Artifact/Ext_Fuel_Source.png").Sprite
+        });
+
+        SprTunezOff = RegisterSprite(package, "assets/Artifact/Personal_Stereo.png").Sprite;
+        SprTunezChill = RegisterSprite(package, "assets/Artifact/Personal_Stereo_Chill.png").Sprite;
+        SprTunezHype = RegisterSprite(package, "assets/Artifact/Personal_Stereo_Hype.png").Sprite;
+        SprTunezSad = RegisterSprite(package, "assets/Artifact/Personal_Stereo_Sad.png").Sprite;
+        SprTunezGroovy = RegisterSprite(package, "assets/Artifact/Personal_Stereo_Groovy.png").Sprite;
+        helper.Content.Artifacts.RegisterArtifact("IlleanasPersonalStereo", new ArtifactConfiguration
+        {
+            ArtifactType = typeof(PersonalStereo),
+            Meta = new ArtifactMeta
+            {
+                owner = IlleanaDeck.Deck,
+                pools = [ArtifactPool.Boss]
+            },
+            Name = AnyLocalizations.Bind(["artifact", "IlleanasPersonalStereo", "name"]).Localize,
+            Description = AnyLocalizations.Bind(["artifact", "Boss", "IlleanasPersonalStereo", "desc"]).Localize,
+            Sprite = SprTunezOff
+        });
+
     }
 
     /*
