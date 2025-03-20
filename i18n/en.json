@@ -51,7 +51,7 @@
             "IlleanasPersonalStereo": {
                 "name": "ILLEANA'S PERSONAL STEREO",
                 "desc": "Every start of combat, add a <c=card>SnekTunez</c> to your hand. SnekTunez is a registered trademark of REDACTED corp and is not responsible for any liabilities if any traks are listened outside working environments.",
-                "iGotDesc": "Every start of combat, add a <c=card>SnekTunez</c> to your hand. The next encounter will play <c=card>{0}</c>!",
+                "iGotDesc": "On combat start, add a <c=card>SnekTunez</c> to your hand.",
                 "descChill": "Every start of combat, add a <c=card>SnekTunez</c> to your hand. The next encounter will play <c=card>Chill</c>!",
                 "descHype": "Every start of combat, add a <c=card>SnekTunez</c> to your hand. The next encounter will play <c=card>Hype</c>!",
                 "descSad": "Every start of combat, add a <c=card>SnekTunez</c> to your hand. The next encounter will play <c=card>Sad</c>!",

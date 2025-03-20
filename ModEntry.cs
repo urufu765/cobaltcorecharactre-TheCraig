@@ -243,7 +243,7 @@ internal class ModEntry : SimpleMod
                 owner = IlleanaDeck.Deck,
                 pools = [ArtifactPool.Common]
             },
-            Name = AnyLocalizations.Bind(["artifact", "ForgedCertificate", "name"]).Localize,
+            Name = AnyLocalizations.Bind(["artifact", "Common", "ForgedCertificate", "name"]).Localize,
             Description = AnyLocalizations.Bind(["artifact", "Common", "ForgedCertificate", "desc"]).Localize,
             Sprite = RegisterSprite(package, "assets/Artifact/Forged_Certificate.png").Sprite
         });
@@ -256,7 +256,7 @@ internal class ModEntry : SimpleMod
                 owner = IlleanaDeck.Deck,
                 pools = [ArtifactPool.Common]
             },
-            Name = AnyLocalizations.Bind(["artifact", "ByproductProcessor", "name"]).Localize,
+            Name = AnyLocalizations.Bind(["artifact", "Common", "ByproductProcessor", "name"]).Localize,
             Description = AnyLocalizations.Bind(["artifact", "Common", "ByproductProcessor", "desc"]).Localize,
             Sprite = RegisterSprite(package, "assets/Artifact/Byproduct_Processor.png").Sprite
         });
@@ -269,7 +269,7 @@ internal class ModEntry : SimpleMod
                 owner = IlleanaDeck.Deck,
                 pools = [ArtifactPool.Common]
             },
-            Name = AnyLocalizations.Bind(["artifact", "CausticArmor", "name"]).Localize,
+            Name = AnyLocalizations.Bind(["artifact", "Common", "CausticArmor", "name"]).Localize,
             Description = AnyLocalizations.Bind(["artifact", "Common", "CausticArmor", "desc"]).Localize,
             Sprite = RegisterSprite(package, "assets/Artifact/Caustic_Armor.png").Sprite
         });
@@ -282,7 +282,7 @@ internal class ModEntry : SimpleMod
                 owner = IlleanaDeck.Deck,
                 pools = [ArtifactPool.Common]
             },
-            Name = AnyLocalizations.Bind(["artifact", "ExperimentalLubricant", "name"]).Localize,
+            Name = AnyLocalizations.Bind(["artifact", "Common", "ExperimentalLubricant", "name"]).Localize,
             Description = AnyLocalizations.Bind(["artifact", "Common", "ExperimentalLubricant", "desc"]).Localize,
             Sprite = RegisterSprite(package, "assets/Artifact/Experimental_Lubricant.png").Sprite
         });
@@ -295,7 +295,7 @@ internal class ModEntry : SimpleMod
                 owner = IlleanaDeck.Deck,
                 pools = [ArtifactPool.Common]
             },
-            Name = AnyLocalizations.Bind(["artifact", "ExternalFuelSource", "name"]).Localize,
+            Name = AnyLocalizations.Bind(["artifact", "Common", "ExternalFuelSource", "name"]).Localize,
             Description = AnyLocalizations.Bind(["artifact", "Common", "ExternalFuelSource", "desc"]).Localize,
             Sprite = RegisterSprite(package, "assets/Artifact/Ext_Fuel_Source.png").Sprite
         });
@@ -313,8 +313,8 @@ internal class ModEntry : SimpleMod
                 owner = IlleanaDeck.Deck,
                 pools = [ArtifactPool.Boss]
             },
-            Name = AnyLocalizations.Bind(["artifact", "IlleanasPersonalStereo", "name"]).Localize,
-            Description = AnyLocalizations.Bind(["artifact", "Boss", "IlleanasPersonalStereo", "desc"]).Localize,
+            Name = AnyLocalizations.Bind(["artifact", "Boss", "IlleanasPersonalStereo", "name"]).Localize,
+            Description = AnyLocalizations.Bind(["artifact", "Boss", "IlleanasPersonalStereo", "iGotDesc"]).Localize,
             Sprite = SprTunezOff
         });
 
