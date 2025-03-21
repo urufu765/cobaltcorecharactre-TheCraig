@@ -31,21 +31,6 @@ public class ScrapPatchkit : Card, IRegisterable
     {
         return upgrade switch
         {
-            Upgrade.B => 
-            [
-                new AStatus
-                {
-                    status = Status.corrode,
-                    statusAmount = 1,
-                    targetPlayer = true
-                },
-                new AHeal
-                {
-                    healAmount = 3,
-                    targetPlayer = true
-                },
-                new AEndTurn()
-            ],
             _ => 
             [
                 new AStatus
@@ -68,6 +53,11 @@ public class ScrapPatchkit : Card, IRegisterable
     {
         return upgrade switch
         {
+            Upgrade.B => new CardData
+            {
+                cost = 1,
+                retain = true
+            },
             Upgrade.A => new CardData
             {
                 cost = 0
