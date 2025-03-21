@@ -34,27 +34,33 @@ public class TheCure : Card, IRegisterable
         {
             Upgrade.B => 
             [
-                new AStatus
-                {
-                    status = Status.corrode,
-                    statusAmount = -1,
-                    targetPlayer = true
-                },
-                new AStatus
-                {
-                    status = Status.overdrive,
-                    statusAmount = 1,
-                    targetPlayer = true
-                }
+                ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeCostAction(
+                    ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeResourceCost(
+                        ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeStatusResource(Status.corrode),
+                        1
+                    ),
+                    new AStatus
+                    {
+                        status = Status.autododgeRight,
+                        statusAmount = 1,
+                        targetPlayer = true
+                    }
+                ).AsCardAction
             ],
             Upgrade.A or Upgrade.None or _ => 
             [
-                new AStatus
-                {
-                    targetPlayer = true,
-                    status = Status.corrode,
-                    statusAmount = -1,
-                }
+                ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeCostAction(
+                    ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeResourceCost(
+                        ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeStatusResource(Status.corrode),
+                        1
+                    ),
+                    new AStatus
+                    {
+                        status = Status.evade,
+                        statusAmount = 1,
+                        targetPlayer = true
+                    }
+                ).AsCardAction
             ],
         };
     }
@@ -64,12 +70,6 @@ public class TheCure : Card, IRegisterable
     {
         return upgrade switch
         {
-            Upgrade.B => new CardData
-            {
-                cost = 1,
-                temporary = true,
-                retain = true,
-            },
             Upgrade.A => new CardData
             {
                 cost = 0,

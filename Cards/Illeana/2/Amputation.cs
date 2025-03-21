@@ -41,8 +41,14 @@ public class Amputation : Card, IRegisterable
                 },
                 new AStatus
                 {
-                    status = Status.powerdrive,
-                    statusAmount = x,
+                    status = Status.ace,
+                    statusAmount = x/2,
+                    targetPlayer = true
+                },
+                new AStatus
+                {
+                    status = Status.corrode,
+                    statusAmount = -x,
                     targetPlayer = true
                 },
                 new AHullMax
@@ -58,9 +64,15 @@ public class Amputation : Card, IRegisterable
                     healAmount = x,
                     targetPlayer = true
                 },
+                new AStatus
+                {
+                    status = Status.corrode,
+                    statusAmount = -x,
+                    targetPlayer = true
+                },
                 new AHullMax
                 {
-                    amount = -2,
+                    amount = -1,
                     targetPlayer = true
                 }
             ],
@@ -69,6 +81,12 @@ public class Amputation : Card, IRegisterable
                 new AHeal
                 {
                     healAmount = x,
+                    targetPlayer = true
+                },
+                new AStatus
+                {
+                    status = Status.corrode,
+                    statusAmount = -x,
                     targetPlayer = true
                 },
                 new AHullMax
@@ -95,11 +113,13 @@ public class Amputation : Card, IRegisterable
             {
                 cost = 0,
                 singleUse = true,
+                description = ModEntry.Instance.Localizations.Localize(["card", "Uncommon", "Amputation", "descA"])
             },
             _ => new CardData
             {
                 cost = 0,
                 exhaust = true,
+                description = ModEntry.Instance.Localizations.Localize(["card", "Uncommon", "Amputation", "desc"])
             },
         };
     }

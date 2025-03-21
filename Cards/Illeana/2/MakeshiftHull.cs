@@ -72,7 +72,8 @@ public class MakeshiftHull : Card, IRegisterable
                 {
                     amount = 1,
                     targetPlayer = true
-                }
+                },
+                new AEndTurn()
             ],
         };
     }
@@ -84,11 +85,11 @@ public class MakeshiftHull : Card, IRegisterable
         {
             Upgrade.B => new CardData
             {
-                cost = 1
+                cost = 2
             },
             Upgrade.A => new CardData
             {
-                cost = 1,
+                cost = 2,
                 singleUse = true
             },
             _ => new CardData

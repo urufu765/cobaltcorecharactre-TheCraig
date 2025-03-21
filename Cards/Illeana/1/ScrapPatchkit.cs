@@ -41,7 +41,7 @@ public class ScrapPatchkit : Card, IRegisterable
                 },
                 new AHeal
                 {
-                    healAmount = 4,
+                    healAmount = 3,
                     targetPlayer = true
                 },
                 new AEndTurn()
@@ -56,7 +56,7 @@ public class ScrapPatchkit : Card, IRegisterable
                 },
                 new AHeal
                 {
-                    healAmount = 2,
+                    healAmount = 1,
                     targetPlayer = true
                 }
             ],

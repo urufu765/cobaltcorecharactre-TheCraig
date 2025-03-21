@@ -40,7 +40,7 @@ public class PartSwap : Card, IRegisterable
                 },
                 new AStatus
                 {
-                    status = Status.overdrive,
+                    status = Status.autododgeRight,
                     statusAmount = x * 2,
                     targetPlayer = true,
                     xHint = new int?(2)
@@ -118,9 +118,13 @@ public class PartSwap : Card, IRegisterable
     {
         return upgrade switch
         {
-            _ => new CardData
+            Upgrade.A => new CardData
             {
                 cost = 2
+            },
+            _ => new CardData
+            {
+                cost = 1
             },
         };
     }

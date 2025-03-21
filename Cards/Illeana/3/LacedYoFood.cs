@@ -36,7 +36,7 @@ public class LacedYoFood : Card, IRegisterable
                 new AStatus
                 {
                     status = Status.corrode,
-                    statusAmount = 2,
+                    statusAmount = 1,
                     targetPlayer = true
                 },
                 new AStatus
@@ -76,15 +76,17 @@ public class LacedYoFood : Card, IRegisterable
     {
         return upgrade switch
         {
+            Upgrade.B => new CardData
+            {
+                cost = 3,
+            },
             Upgrade.A => new CardData
             {
                 cost = 1,
-                exhaust = true
             },
             _ => new CardData
             {
                 cost = 2,
-                exhaust = true
             },
         };
     }

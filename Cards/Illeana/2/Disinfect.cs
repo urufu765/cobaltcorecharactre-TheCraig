@@ -38,10 +38,9 @@ public class Disinfect : Card, IRegisterable
                         ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeStatusResource(Status.corrode),
                         1
                     ),
-                    new AStatus
+                    new AHeal
                     {
-                        status = Status.overdrive,
-                        statusAmount = 1,
+                        healAmount = 1,
                         targetPlayer = true
                     }
                 ).AsCardAction,
@@ -65,10 +64,9 @@ public class Disinfect : Card, IRegisterable
                         ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeStatusResource(Status.corrode),
                         1
                     ),
-                    new AStatus
+                    new AHeal
                     {
-                        status = Status.overdrive,
-                        statusAmount = 1,
+                        healAmount = 1,
                         targetPlayer = true
                     }
                 ).AsCardAction,

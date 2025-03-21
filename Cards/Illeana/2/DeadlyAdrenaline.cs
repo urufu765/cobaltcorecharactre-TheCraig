@@ -35,14 +35,14 @@ public class DeadlyAdrenaline : Card, IRegisterable
             [
                 new AStatus
                 {
-                    status = Status.overdrive,
+                    status = Status.autododgeLeft,
                     statusAmount = 4,
                     targetPlayer = true
                 },
                 new AStatus
                 {
-                    status = Status.evade,
-                    statusAmount = 4,
+                    status = Status.ace,
+                    statusAmount = 1,
                     targetPlayer = true
                 },
                 new AStatus
@@ -50,14 +50,15 @@ public class DeadlyAdrenaline : Card, IRegisterable
                     status = Status.corrode,
                     statusAmount = 2,
                     targetPlayer = true
-                }
+                },
+                new AEndTurn()
             ],
             Upgrade.A => 
             [
                 new AStatus
                 {
-                    status = Status.overdrive,
-                    statusAmount = 4,
+                    status = Status.autododgeLeft,
+                    statusAmount = 1,
                     targetPlayer = true
                 },
                 new AStatus
@@ -71,8 +72,8 @@ public class DeadlyAdrenaline : Card, IRegisterable
             [
                 new AStatus
                 {
-                    status = Status.overdrive,
-                    statusAmount = 4,
+                    status = Status.autododgeLeft,
+                    statusAmount = 1,
                     targetPlayer = true
                 },
                 new AStatus

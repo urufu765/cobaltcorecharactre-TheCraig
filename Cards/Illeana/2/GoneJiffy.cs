@@ -41,14 +41,14 @@ public class GoneJiffy : Card, IRegisterable
                 },
                 new AStatus
                 {
-                    status = Status.overdrive,
-                    statusAmount = 2,
+                    status = Status.ace,
+                    statusAmount = 1,
                     targetPlayer = true
                 },
                 new AStatus
                 {
                     status = ModEntry.IlleanaTheSnek.MissingStatus.Status,
-                    statusAmount = 2,
+                    statusAmount = 3,
                     targetPlayer = true
                 }
             ],

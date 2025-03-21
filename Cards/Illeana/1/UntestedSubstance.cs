@@ -41,14 +41,20 @@ public class UntestedSubstance : Card, IRegisterable
                 },
                 new AStatus
                 {
-                    status = Status.powerdrive,
+                    status = ModEntry.Instance.TarnishStatus.Status,
                     statusAmount = 1,
                     targetPlayer = true
                 },
                 new AStatus
                 {
                     targetPlayer = true,
-                    status = Status.evade,
+                    status = Status.autododgeRight,
+                    statusAmount = 1,
+                },
+                new AStatus
+                {
+                    targetPlayer = true,
+                    status = Status.ace,
                     statusAmount = 1,
                 }
             ],
@@ -63,13 +69,13 @@ public class UntestedSubstance : Card, IRegisterable
                 new AStatus
                 {
                     targetPlayer = true,
-                    status = Status.overdrive,
+                    status = ModEntry.Instance.TarnishStatus.Status,
                     statusAmount = 1,
                 },
                 new AStatus
                 {
                     targetPlayer = true,
-                    status = Status.evade,
+                    status = Status.ace,
                     statusAmount = 1,
                 }
             ],
@@ -81,10 +87,6 @@ public class UntestedSubstance : Card, IRegisterable
     {
         return upgrade switch
         {
-            Upgrade.B => new CardData
-            {
-                cost = 3,
-            },
             Upgrade.A => new CardData
             {
                 cost = 0,

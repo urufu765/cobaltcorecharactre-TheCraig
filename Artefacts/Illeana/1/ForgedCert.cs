@@ -6,7 +6,7 @@ namespace Craig.Artifacts;
 [ArtifactMeta(pools = new[] { ArtifactPool.Common })]
 public class ForgedCertificate : Artifact
 {
-    public int TimesHit { get; private set; }
+    public int TimesHit { get; set; }
 
     public override int? GetDisplayNumber(State s)
     {

@@ -94,7 +94,7 @@ public class FindCure : Card, IRegisterable
     {
         return new CardData
         {
-            cost = 1,
+            cost = 0,
             exhaust = true,
             description = ModEntry.Instance.Localizations.Localize(["card", "Common", "BuildACure", upgrade switch { Upgrade.A => "descA", Upgrade.B => "descB", _ => "desc" }]),
         };

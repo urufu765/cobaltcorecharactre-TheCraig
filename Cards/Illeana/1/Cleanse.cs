@@ -37,29 +37,29 @@ public class Cleanse : Card, IRegisterable
                 {
                     status = Status.corrode,
                     targetPlayer = true,
-                    statusAmount = -1
+                    statusAmount = -2
                 },
-                ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeCostAction(
-                    ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeResourceCost(
-                        ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeStatusResource(Status.corrode),
-                        1
-                    ),
-                    new AStatus
-                    {
-                        status = Status.evade,
-                        statusAmount = 1,
-                        targetPlayer = true
-                    }
-                ).AsCardAction,
+                new AStatus
+                {
+                    status = Status.evade,
+                    statusAmount = 1,
+                    targetPlayer = true
+                },
                 new AStatus
                 {
                     status = Status.tempShield,
                     targetPlayer = true,
-                    statusAmount = 2
+                    statusAmount = 1
                 }
             ],
             _ => 
             [
+                new AStatus
+                {
+                    status = Status.evade,
+                    statusAmount = 1,
+                    targetPlayer = true
+                },
                 ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeCostAction(
                     ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeResourceCost(
                         ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeStatusResource(Status.corrode),
@@ -69,18 +69,6 @@ public class Cleanse : Card, IRegisterable
                     {
                         status = Status.tempShield,
                         statusAmount = 3,
-                        targetPlayer = true
-                    }
-                ).AsCardAction,
-                ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeCostAction(
-                    ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeResourceCost(
-                        ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeStatusResource(Status.corrode),
-                        1
-                    ),
-                    new AStatus
-                    {
-                        status = Status.evade,
-                        statusAmount = 1,
                         targetPlayer = true
                     }
                 ).AsCardAction

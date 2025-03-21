@@ -188,7 +188,7 @@ internal class ModEntry : SimpleMod
             Starters = new StarterDeck
             {
                 cards = [
-                    new BuildCure(),
+                    new ScrapPatchkit(),
                     new Cleanse()
                 ],
                 /*

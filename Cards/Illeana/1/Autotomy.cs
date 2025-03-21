@@ -33,6 +33,13 @@ public class Autotomy : Card, IRegisterable
         {
             Upgrade.B => 
             [
+                new AStatus
+                {
+                    status = Status.corrode,
+                    statusAmount = 0,
+                    mode = AStatusMode.Set,
+                    targetPlayer = true
+                },
                 new AHurt
                 {
                     hurtAmount = 1,
@@ -47,15 +54,22 @@ public class Autotomy : Card, IRegisterable
                 new AStatus
                 {
                     status = Status.autododgeRight,
-                    statusAmount = 1,
+                    statusAmount = 2,
                     targetPlayer = true
                 }
             ],
             Upgrade.A => 
             [
+                new AStatus
+                {
+                    status = Status.corrode,
+                    statusAmount = 0,
+                    mode = AStatusMode.Set,
+                    targetPlayer = true
+                },
                 new AHurt
                 {
-                    hurtAmount = 1,
+                    hurtAmount = 2,
                     hurtShieldsFirst = true,
                     targetPlayer = true
                 },
@@ -67,7 +81,14 @@ public class Autotomy : Card, IRegisterable
                 }
             ],
             _ => 
-            [
+            [                
+                new AStatus
+                {
+                    status = Status.corrode,
+                    statusAmount = 0,
+                    mode = AStatusMode.Set,
+                    targetPlayer = true
+                },
                 new AHurt
                 {
                     hurtAmount = 1,

@@ -52,7 +52,7 @@ public class TheFailure : Card, IRegisterable
             {
                 targetPlayer = true,
                 status = Status.corrode,
-                statusAmount = upgrade == Upgrade.B ? 1 : 2
+                statusAmount = upgrade == Upgrade.B ? 0 : 1
             }
         );
         if (upgrade == Upgrade.B)

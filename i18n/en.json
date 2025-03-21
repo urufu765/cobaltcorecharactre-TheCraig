@@ -124,7 +124,9 @@
             },
             "Amputation": {
                 "name": "Amputation",
-                "descB": "X = your missing hull. <c=status>X Powerdrive</c>. <c=healing>Heal X</c>. <c=downside>-3 Max Hull</c>"
+                "desc": "X = your missing hull.\n<c=healing>Heal X</c>.\n<c=status>-X Corrode</c>.\n<c=downside>-3 Max Hull</c>",
+                "descA": "X = your missing hull.\n<c=healing>Heal X</c>.\n<c=status>-X Corrode</c>.\n<c=downside>-3 Max Hull</c>",
+                "descB": "X = your missing hull.\n<c=healing>Heal X</c>.\n<c=status>X/2 Ace</c>.\n<c=status>-X Corrode</c>.\n<c=downside>-3 Max Hull</c>"
             },
             "DeadlyAdrenaline": {
                 "name": "Deadly Adrenaline"

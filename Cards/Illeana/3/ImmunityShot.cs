@@ -67,7 +67,7 @@ public class ImmunityShot : Card, IRegisterable
                 },
                 new AStatus
                 {
-                    status = Status.overdrive,
+                    status = Status.evade,
                     statusAmount = x,
                     targetPlayer = true,
                     xHint = new int?(1)
