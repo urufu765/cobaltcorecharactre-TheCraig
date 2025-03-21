@@ -36,7 +36,7 @@ public class TheAccident : Card, IRegisterable
         [
             new AStatus
             {
-                targetPlayer = true,
+                targetPlayer = false,
                 status = ModEntry.Instance.TarnishStatus.Status,
                 statusAmount = 1
             }
