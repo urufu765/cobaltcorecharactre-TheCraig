@@ -1,7 +1,7 @@
 ﻿{
     "character": {
         "name": "Illeana",
-        "desc": "<c=illeana>Illeana</c>\nYour (uncertified and unofficial) medic."
+        "desc": "<c=illeana>Illeana</c>\nYour corrosion engineer. Her cards are a mix of <c=keyword>heals</c> and <c=keyword>evasion</c>, but with the added risk of <c=downside>corrosion</c>."
     },
     "status": {
         "Tarnish": {
