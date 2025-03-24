@@ -33,7 +33,7 @@ public class PersonalStereo : Artifact
             SnekTunez.Hype => ModEntry.Instance.SprTunezHype,
             SnekTunez.Sad => ModEntry.Instance.SprTunezSad,
             SnekTunez.Groovy => ModEntry.Instance.SprTunezGroovy,
-            _ => ModEntry.Instance.SprTunezOff
+            _ => ModEntry.Instance.SprTunezOn
         };
     }
 

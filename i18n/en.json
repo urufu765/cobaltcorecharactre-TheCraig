@@ -33,7 +33,7 @@
                 "name": "EXPERIMENTAL LUBRICANT",
                 "desc": "Gain 1 <c=status>HERMES BOOTS</c> at the start of every turn if <c=status>corrode</c> is present, <c=downside>1 <c=status>ENGINE STALL</c> if not</c>"
             },
-            "ExternalFoodSource": {
+            "ExternalFuelSource": {
                 "name": "EXTERNAL FUEL SOURCE",
                 "desc": "Gain 1 <c=status>EVADE</c> whenever you add a <c=cardtrait>temporary</c> card to your deck"
             }
@@ -48,7 +48,7 @@
                 "desc": "Your <c=part>wings</c> count as <c=part>empty</c>. <c=downside>Your <c=part>empty</c> parts take 1 damage when a shot passes through</c>",
                 "altDesc": "Your <c=part>wings</c> become <c=part>empty</c>. <c=downside>Your <c=part>empty</c> parts take 1 damage when a shot passes through</c>"
             },
-            "IlleanasPersonalStereo": {
+            "PersonalStereo": {
                 "name": "ILLEANA'S PERSONAL STEREO",
                 "desc": "Every start of combat, add a <c=card>SnekTunez</c> to your hand. SnekTunez is a registered trademark of REDACTED corp and is not responsible for any liabilities if any traks are listened outside working environments.",
                 "iGotDesc": "On combat start, add a <c=card>SnekTunez</c> to your hand.",
