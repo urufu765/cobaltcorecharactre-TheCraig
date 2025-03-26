@@ -31,7 +31,7 @@ public class Tempoboosters : Artifact
             {
                 BoostType = TBoosters.Elite;
             }
-            else if (mb.battleType == BattleType.Boss || mb.battleType == BattleType.Easy)
+            else if (mb.battleType == BattleType.Boss)
             {
                 BoostType = TBoosters.Boss;
             }

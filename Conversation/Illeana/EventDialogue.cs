@@ -17,13 +17,13 @@ internal static class EventDialogue
                 new CustomSay()
                 {
                     who = AmIlleana,
-                    Text = "Ow... I felt that all over my body.",
+                    Text = "Ow... I felt that in my bones.",
                     loopTag = Instance.IlleanaAnim_Squint.Configuration.LoopTag
                 },
                 new CustomSay()
                 {
                     who = Cat,
-                    Text = "Energy readins are back to normal."
+                    Text = "Energy readings are back to normal."
                 }
             }
         };
