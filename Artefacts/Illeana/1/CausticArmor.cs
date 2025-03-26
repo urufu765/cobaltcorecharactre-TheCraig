@@ -15,12 +15,21 @@ public class CausticArmor : Artifact
 {
     public override void OnTurnStart(State state, Combat combat)
     {
-        combat.Queue(new AShielderator());
+        if (state.ship.Get(Status.corrode) > 0)
+        {
+            combat.QueueImmediate(new AStatus
+            {
+                status = Status.tempShield,
+                statusAmount = state.ship.Get(Status.corrode) * 2,
+                targetPlayer = true,
+                artifactPulse = Key()
+            });
+        }
     }
 
     public override List<Tooltip>? GetExtraTooltips()
     {
-        return [new TTGlossary("status.shieldAlt", ["1"]), new TTGlossary("status.corrode", ["1"])];
+        return [new TTGlossary("status.tempShield", ["1"]), new TTGlossary("status.corrode", ["1"])];
     }
 
 }
