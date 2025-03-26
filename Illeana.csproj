@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<RootNamespace>Illeana</RootNamespace>
-		<Version>0.1.2</Version>
+		<Version>0.1.3</Version>
 		<IncludedModProjectPaths>i18n;assets</IncludedModProjectPaths>
 
 		<TargetFramework>net8.0</TargetFramework>
@@ -18,4 +18,10 @@
 		<PackageReference Include="Nickel.ModBuildConfig" Version="2.0.1" />
 		<PackageReference Include="EnumByNameSourceGenerator" Version="1.1.2" />
 	</ItemGroup> 
+	<ItemGroup>
+		<Reference Include="CobaltCoreModding.Definitions">
+			<HintPath>lib\CobaltCoreModding.Definitions.dll</HintPath>
+			<Private>False</Private>
+		</Reference>
+	</ItemGroup>
 </Project>

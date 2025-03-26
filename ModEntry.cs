@@ -29,6 +29,7 @@ internal class ModEntry : SimpleMod
 
     internal ILocalizationProvider<IReadOnlyList<string>> AnyLocalizations { get; }
     internal ILocaleBoundNonNullLocalizationProvider<IReadOnlyList<string>> Localizations { get; }
+    internal IMoreDifficultiesApi? MoreDifficultiesApi {get; private set; } = null!;
 
     /*
      * The following lists contain references to all types that will be registered to the game.
@@ -91,9 +92,13 @@ internal class ModEntry : SimpleMod
         typeof(PersonalStereo),
         typeof(Tempoboosters)
     ];
+    private static List<Type> IlleanaEventArtifacts = [
+        typeof(LightenedLoad)
+    ];
     private static IEnumerable<Type> IlleanaArtifactTypes =
         IlleanaCommonArtifacts
-            .Concat(IlleanaBossArtifacts);
+            .Concat(IlleanaBossArtifacts)
+            .Concat(IlleanaEventArtifacts);
 
     private static IEnumerable<Type> AllRegisterableTypes =
         IlleanaCardTypes
@@ -120,6 +125,7 @@ internal class ModEntry : SimpleMod
          * Dependencies can (and should) be defined within the nickel.json file, to ensure proper load mod load order.
          */
         KokoroApi = helper.ModRegistry.GetApi<IKokoroApi>("Shockah.Kokoro")!;
+        MoreDifficultiesApi = helper.ModRegistry.GetApi<IMoreDifficultiesApi>("TheJazMaster.MoreDifficulties");
 
         AnyLocalizations = new JsonLocalizationProvider(
             tokenExtractor: new SimpleLocalizationTokenExtractor(),
@@ -208,6 +214,18 @@ internal class ModEntry : SimpleMod
                 ]
             },
             Description = AnyLocalizations.Bind(["character", "desc"]).Localize
+        });
+
+        MoreDifficultiesApi?.RegisterAltStarters(IlleanaDeck.Deck, new StarterDeck
+        {
+            cards = [
+                new Exposure(),
+                new FalseVaccine()
+            ],
+            artifacts = 
+            [
+                new LightenedLoad()
+            ]
         });
 
         /*
