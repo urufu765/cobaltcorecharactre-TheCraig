@@ -88,7 +88,8 @@ internal class ModEntry : SimpleMod
     private static List<Type> IlleanaBossArtifacts = [
         // typeof(ConstantInnovation),
         // typeof(Limbless),
-        typeof(PersonalStereo)
+        typeof(PersonalStereo),
+        typeof(Tempoboosters)
     ];
     private static IEnumerable<Type> IlleanaArtifactTypes =
         IlleanaCommonArtifacts
@@ -103,6 +104,9 @@ internal class ModEntry : SimpleMod
     public Spr SprTunezHype {get; private set;}
     public Spr SprTunezSad {get; private set;}
     public Spr SprTunezGroovy {get; private set;}
+    public Spr SprBoostrE {get; private set;}
+    public Spr SprBoostrB {get; private set;}
+    public Spr SprBoostrO {get; private set;}
 
 
     public ModEntry(IPluginPackage<IModManifest> package, IModHelper helper, ILogger logger) : base(package, helper, logger)
@@ -249,6 +253,9 @@ internal class ModEntry : SimpleMod
         SprTunezHype = RegisterSprite(package, "assets/Artifact/Personal_Stereo_Hype.png").Sprite;
         SprTunezSad = RegisterSprite(package, "assets/Artifact/Personal_Stereo_Sad.png").Sprite;
         SprTunezGroovy = RegisterSprite(package, "assets/Artifact/Personal_Stereo_Groovy.png").Sprite;
+        SprBoostrE = RegisterSprite(package, "assets/Artifact/TempoboostersE.png").Sprite;
+        SprBoostrB = RegisterSprite(package, "assets/Artifact/TempoboostersB.png").Sprite;
+        SprBoostrO = RegisterSprite(package, "assets/Artifact/TempoboostersO.png").Sprite;
 
 
         DrawLoadingScreenFixer.Apply(Harmony);

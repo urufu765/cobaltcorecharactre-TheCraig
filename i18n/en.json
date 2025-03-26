@@ -31,7 +31,7 @@
             },
             "ExperimentalLubricant": {
                 "name": "EXPERIMENTAL LUBRICANT",
-                "desc": "Gain 1 <c=status>HERMES BOOTS</c> at the start of every turn if <c=status>corrode</c> is present, <c=downside>1 <c=status>ENGINE STALL</c> if not</c>"
+                "desc": "Once per turn, when you gain <c=status>corrode</c>, gain 1 <c=status>HERMES BOOTS</c>"
             },
             "ExternalFuelSource": {
                 "name": "EXTERNAL FUEL SOURCE",
@@ -57,6 +57,10 @@
                 "descHype": "Every start of combat, add a <c=card>SnekTunez</c> to your hand. The next encounter will play <c=card>Hype</c>!",
                 "descSad": "Every start of combat, add a <c=card>SnekTunez</c> to your hand. The next encounter will play <c=card>Sad</c>!",
                 "descGroovy": "Every start of combat, add a <c=card>SnekTunez</c> to your hand. The next encounter will play <c=card>Groovy</c>!"
+            },
+            "Tempoboosters": {
+                "name": "TEMPOBOOSTERS",
+                "desc": "At the start of <c=keyword>elite</c> combat, gain <c=status>1 ace</c> and <c=status>1 corrode</c>.\nOn <c=keyword>boss</c> encounters gain an additional <c=status>1 ace</c> and <c=status>1 tarnish</c>"
             }
         },
         "Duo": {

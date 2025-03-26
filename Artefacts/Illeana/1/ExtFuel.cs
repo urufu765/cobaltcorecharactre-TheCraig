@@ -5,7 +5,7 @@ namespace Craig.Artifacts;
 /// <summary>
 /// Gives 1 evade per temporary card gained
 /// </summary>
-[ArtifactMeta(pools = new[] { ArtifactPool.Common }, extraGlossary = [ "cardtrait.temporary" ])]
+[ArtifactMeta(pools = new[] { ArtifactPool.Common })]
 public class ExternalFuelSource : Artifact
 {
     public override void OnPlayerRecieveCardMidCombat(State state, Combat combat, Card card)
@@ -26,6 +26,7 @@ public class ExternalFuelSource : Artifact
     {
         return
         [
+            new TTGlossary("cardtrait.temporary"),
             new TTGlossary("status.evade", ["1"])
         ];
     }

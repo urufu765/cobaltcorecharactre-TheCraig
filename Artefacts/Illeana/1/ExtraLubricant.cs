@@ -10,11 +10,32 @@ namespace Craig.Artifacts;
 /// <summary>
 /// Gives boots if corrode is present, stall if not
 /// </summary>
-[ArtifactMeta(pools = new[] { ArtifactPool.Common }, extraGlossary = [ "status.corrode", "status.hermes", "status.engineStall" ], unremovable = true)]
+[ArtifactMeta(pools = new[] { ArtifactPool.Common }, unremovable = true)]
 public class ExperimentalLubricant : Artifact
 {
+    public bool Corroded {get; set;} = false;
     public override void OnTurnStart(State state, Combat combat)
     {
-        combat.Queue(new ABootsOrNoBoots());
+        Corroded = false;
+    }
+
+    public override void AfterPlayerStatusAction(State state, Combat combat, Status status, AStatusMode mode, int statusAmount)
+    {
+        if (!Corroded && status == Status.corrode)
+        {
+            Corroded = true;
+            combat.QueueImmediate(new AStatus
+            {
+                status = Status.hermes,
+                statusAmount = 1,
+                targetPlayer = true,
+                artifactPulse = Key()
+            });
+        }
+    }
+
+    public override List<Tooltip>? GetExtraTooltips()
+    {
+        return [new TTGlossary("status.corrode"), new TTGlossary("status.hermes")];
     }
 }
