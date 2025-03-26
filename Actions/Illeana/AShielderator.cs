@@ -13,7 +13,7 @@ public class AShielderator : CardAction
             c.QueueImmediate(new AStatus
             {
                 status = Status.tempShield,
-                statusAmount = s.ship.Get(Status.corrode),
+                statusAmount = s.ship.Get(Status.corrode) * 2,
                 targetPlayer = true,
                 artifactPulse = Key()
             });

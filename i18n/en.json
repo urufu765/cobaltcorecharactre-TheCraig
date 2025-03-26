@@ -27,7 +27,7 @@
             },
             "CausticArmor": {
                 "name": "CAUSTIC ARMOR",
-                "desc": "At the start of every turn, gain <c=status>TEMP SHIELD</c> equal to your <c=corrode>CORRODE</c>."
+                "desc": "At the start of every turn, gain <c=status>TEMP SHIELD</c> double your <c=corrode>CORRODE</c>."
             },
             "ExperimentalLubricant": {
                 "name": "EXPERIMENTAL LUBRICANT",
