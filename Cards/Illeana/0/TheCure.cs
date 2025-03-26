@@ -3,7 +3,7 @@ using System.Reflection;
 using Nanoray.PluginManager;
 using Nickel;
 
-namespace Craig.Cards;
+namespace Illeana.Cards;
 
 /// <summary>
 /// A card that's obtained from Build-A-Cure or Find-A-Cure, reduces the corrosion stack of player when played

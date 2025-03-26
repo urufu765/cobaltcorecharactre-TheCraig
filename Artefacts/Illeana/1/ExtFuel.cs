@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Craig.Artifacts;
+namespace Illeana.Artifacts;
 
 /// <summary>
 /// Gives 1 evade per temporary card gained

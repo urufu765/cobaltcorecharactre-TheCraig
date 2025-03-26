@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using Craig.Cards;
+using Illeana.Cards;
 
-namespace Craig.Artifacts;
+namespace Illeana.Artifacts;
 
 
 public enum TBoosters

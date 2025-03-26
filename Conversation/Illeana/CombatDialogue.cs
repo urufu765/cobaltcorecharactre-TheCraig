@@ -1,6 +1,6 @@
-using static Craig.Dialogue.CommonDefinitions;
+using static Illeana.Dialogue.CommonDefinitions;
 
-namespace Craig.Dialogue;
+namespace Illeana.Dialogue;
 
 internal static class CombatDialogue
 {

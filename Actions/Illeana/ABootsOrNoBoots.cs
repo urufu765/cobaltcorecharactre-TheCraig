@@ -1,4 +1,4 @@
-namespace Craig.Actions;
+namespace Illeana.Actions;
 
 /// <summary>
 /// An action that gives 1 boots if corrode is present, otherwise no.

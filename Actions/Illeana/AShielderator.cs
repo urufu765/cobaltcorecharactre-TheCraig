@@ -1,4 +1,4 @@
-namespace Craig.Actions;
+namespace Illeana.Actions;
 
 /// <summary>
 /// An action that provides temporary shield based on how much corrode is there

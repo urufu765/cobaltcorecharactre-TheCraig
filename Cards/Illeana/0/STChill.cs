@@ -3,7 +3,7 @@ using System.Reflection;
 using Nanoray.PluginManager;
 using Nickel;
 
-namespace Craig.Cards;
+namespace Illeana.Cards;
 
 /// <summary>
 /// A card that's obtained from the artifact "Illeana's Personal Stereo", gives energy next turn

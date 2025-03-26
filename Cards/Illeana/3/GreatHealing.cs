@@ -3,7 +3,7 @@ using System.Reflection;
 using Nanoray.PluginManager;
 using Nickel;
 
-namespace Craig.Cards;
+namespace Illeana.Cards;
 
 /// <summary>
 /// I need healing

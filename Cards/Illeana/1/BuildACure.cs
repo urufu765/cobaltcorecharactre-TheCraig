@@ -3,7 +3,7 @@ using System.Reflection;
 using Nanoray.PluginManager;
 using Nickel;
 
-namespace Craig.Cards;
+namespace Illeana.Cards;
 
 /// <summary>
 /// A card that attempts to build a cure, creating The Cure and The Failure cards

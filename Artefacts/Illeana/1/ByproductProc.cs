@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Craig.Artifacts;
+namespace Illeana.Artifacts;
 
 /// <summary>
 /// Remove a corrode when ending a turn with more than 1 energy

@@ -1,4 +1,4 @@
-namespace Craig.Dialogue;
+namespace Illeana.Dialogue;
 
 static class CommonDefinitions
 {

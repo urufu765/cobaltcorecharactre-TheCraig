@@ -6,14 +6,14 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
-using Craig.Artifacts;
-using Craig.Cards;
-using Craig.External;
-using Craig.Features;
+using Illeana.Artifacts;
+using Illeana.Cards;
+using Illeana.External;
+using Illeana.Features;
 using System.Reflection;
 //using System.Reflection;
 
-namespace Craig;
+namespace Illeana;
 
 internal class ModEntry : SimpleMod
 {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Craig.External;
+namespace Illeana.External;
 
 public partial interface IKokoroApi
 {

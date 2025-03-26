@@ -4,12 +4,12 @@ using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
 using System.Threading.Tasks;
-using Craig.External;
+using Illeana.External;
 using HarmonyLib;
 using Nanoray.PluginManager;
 using Nickel;
 
-namespace Craig.Features;
+namespace Illeana.Features;
 
 public class Tarnishing : IKokoroApi.IV2.IStatusLogicApi.IHook
 {

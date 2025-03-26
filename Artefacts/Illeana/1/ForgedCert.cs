@@ -1,4 +1,4 @@
-namespace Craig.Artifacts;
+namespace Illeana.Artifacts;
 
 /// <summary>
 /// Heals 1 per 4 hull lost

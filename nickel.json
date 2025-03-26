@@ -1,10 +1,10 @@
 {
-  "UniqueName": "urufudoggo.Craig",
-  "Version": "0.1.1",
+  "UniqueName": "urufudoggo.Illeana",
+  "Version": "0.1.2",
   "Author": "urufudoggo",
   "Description": "Description goes here you pineapple head. Don't you dare forget.",
   "RequiredApiVersion": "1.5.7",
-  "EntryPointAssembly": "Craig.dll",
+  "EntryPointAssembly": "Illeana.dll",
   "LoadPhase": "AfterDbInit",
   "Dependencies": [
     {

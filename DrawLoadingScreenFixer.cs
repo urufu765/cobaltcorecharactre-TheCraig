@@ -1,8 +1,8 @@
-using Craig.Dialogue;
+using Illeana.Dialogue;
 using HarmonyLib;
 using Microsoft.Extensions.Logging;
 
-namespace Craig;
+namespace Illeana;
 internal static class DrawLoadingScreenFixer
 {
     internal static void Apply(Harmony harmony)

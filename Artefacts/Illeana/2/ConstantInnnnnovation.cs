@@ -1,5 +1,5 @@
 
-namespace Craig.Artifacts;
+namespace Illeana.Artifacts;
 
 /// <summary>
 /// Gives the amount of bosses defeated as artifacts, then an artifact per event gone through

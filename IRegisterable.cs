@@ -1,7 +1,7 @@
 ﻿using Nanoray.PluginManager;
 using Nickel;
 
-namespace Craig;
+namespace Illeana;
 
 internal interface IRegisterable
 {

@@ -1,5 +1,5 @@
 
-namespace Craig.Artifacts;
+namespace Illeana.Artifacts;
 
 /// <summary>
 /// Wings count as empty, empty parts take 1 damage when a shot passes through

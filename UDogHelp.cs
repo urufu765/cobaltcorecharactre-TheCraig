@@ -3,7 +3,7 @@ using System.Reflection;
 using Microsoft.Extensions.Logging;
 using Nickel;
 
-namespace Craig;
+namespace Illeana;
 
 /// <summary>
 /// Helps out with menial tasks

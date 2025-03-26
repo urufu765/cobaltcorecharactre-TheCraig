@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using System.Reflection;
-using Craig.Features;
+using Illeana.Features;
 using Nanoray.PluginManager;
 using Nickel;
 
-namespace Craig.Cards;
+namespace Illeana.Cards;
 
 /// <summary>
 /// A card that's obtained from Build-A-Cure, Applies corrode upon draw, removes upon play
