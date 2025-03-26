@@ -22,6 +22,9 @@ internal class ModEntry : SimpleMod
     internal Harmony Harmony;
     internal IKokoroApi KokoroApi;
     internal IDeckEntry IlleanaDeck;
+    internal ICharacterAnimationEntryV2 IlleanaAnim_Neutral;
+    internal ICharacterAnimationEntryV2 IlleanaAnim_Squint;
+    internal ICharacterAnimationEntryV2 IlleanaAnim_Panic;
     internal IStatusEntry TarnishStatus { get; private set; } = null!;
 
     internal ILocalizationProvider<IReadOnlyList<string>> AnyLocalizations { get; }
@@ -162,8 +165,9 @@ internal class ModEntry : SimpleMod
          * The game uses the squint animation for the Extra-Planar Being and High-Pitched Static events, and the gameover animation while you are dying.
          * You may define any other animations, and they will only be used when explicitly referenced (such as dialogue).
          */
-        RegisterAnimation(package, "neutral", "assets/Animation/illeana_neutral", 4);
-        RegisterAnimation(package, "squint", "assets/Animation/illeana_squint", 4);
+        IlleanaAnim_Neutral = RegisterAnimation(package, "neutral", "assets/Animation/illeana_neutral", 4);
+        IlleanaAnim_Squint = RegisterAnimation(package, "squint", "assets/Animation/illeana_squint", 4);
+        IlleanaAnim_Panic = RegisterAnimation(package, "panic", "assets/Animation/illeana_panic", 4);
         Instance.Helper.Content.Characters.V2.RegisterCharacterAnimation(new CharacterAnimationConfigurationV2
         {
             CharacterType = IlleanaDeck.Deck.Key(),
@@ -245,6 +249,9 @@ internal class ModEntry : SimpleMod
         SprTunezHype = RegisterSprite(package, "assets/Artifact/Personal_Stereo_Hype.png").Sprite;
         SprTunezSad = RegisterSprite(package, "assets/Artifact/Personal_Stereo_Sad.png").Sprite;
         SprTunezGroovy = RegisterSprite(package, "assets/Artifact/Personal_Stereo_Groovy.png").Sprite;
+
+
+        DrawLoadingScreenFixer.Apply(Harmony);
     }
 
     /*
@@ -257,15 +264,16 @@ internal class ModEntry : SimpleMod
         return Instance.Helper.Content.Sprites.RegisterSprite(package.PackageRoot.GetRelativeFile(dir));
     }
 
+
     /*
      * Animation frames are typically named very similarly, only differing by the number of the frame itself.
      * This utility method exists to easily register an animation.
      * It expects the animation to start at frame 0, up to frames - 1.
      * TODO It is advised to avoid animations consisting of 2 or 3 frames.
      */
-    public static void RegisterAnimation(IPluginPackage<IModManifest> package, string tag, string dir, int frames)
+    public static ICharacterAnimationEntryV2 RegisterAnimation(IPluginPackage<IModManifest> package, string tag, string dir, int frames)
     {
-        Instance.Helper.Content.Characters.V2.RegisterCharacterAnimation(new CharacterAnimationConfigurationV2
+        return Instance.Helper.Content.Characters.V2.RegisterCharacterAnimation(new CharacterAnimationConfigurationV2
         {
             CharacterType = Instance.IlleanaDeck.Deck.Key(),
             LoopTag = tag,

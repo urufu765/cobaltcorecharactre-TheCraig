@@ -41,7 +41,8 @@
         "Boss": {
             "ConstantInnovation": {
                 "name": "CONSTANT INNOVATION",
-                "desc": "Immediately choose 1 of 2 artifacts per boss defeated.\nAfter every event, choose 1 of 2 common artifacts"
+                "desc": "Once per turn:\nWhen you <c=hull>heal</c>, gain 1 <c=energy>energy</c>.\nWhen you gain <c=status>evade</c>, draw a card.\nWhen you <c=keyword>attack</c>, randomly <c=status>move 1</c>.",
+                "descOld": "Immediately choose 1 of 2 artifacts per boss defeated.\nAfter every event, choose 1 of 2 common artifacts"
             },
             "Limbless": {
                 "name": "LIMBLESS",
