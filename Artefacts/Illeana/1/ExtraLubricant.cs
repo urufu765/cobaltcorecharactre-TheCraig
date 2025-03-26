@@ -21,7 +21,7 @@ public class ExperimentalLubricant : Artifact
 
     public override void AfterPlayerStatusAction(State state, Combat combat, Status status, AStatusMode mode, int statusAmount)
     {
-        if (!Corroded && status == Status.corrode)
+        if (!Corroded && status == Status.corrode && statusAmount > 0)
         {
             Corroded = true;
             combat.QueueImmediate(new AStatus
@@ -36,6 +36,6 @@ public class ExperimentalLubricant : Artifact
 
     public override List<Tooltip>? GetExtraTooltips()
     {
-        return [new TTGlossary("status.corrode"), new TTGlossary("status.hermes")];
+        return [new TTGlossary("status.corrode", ["1"]), new TTGlossary("status.hermes", ["1"])];
     }
 }

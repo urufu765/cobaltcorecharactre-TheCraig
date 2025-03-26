@@ -6,7 +6,7 @@
     "status": {
         "Tarnish": {
             "name": "Tarnish",
-            "desc": "Take double damage and reduce <c=status>Corrode</status> by 1 per hit. Decrease by 1 at the start of next turn."
+            "desc": "Take double damage and reduce <c=status>CORRODE</c> by 1 per hit. <c=downside>Decreases by 1 at start of turn.</c>"
         }
     },
     "action": {
@@ -19,23 +19,23 @@
             },
             "ByproductProcessor": {
                 "name": "BYPRODUCT PROCESSOR",
-                "desc": "If you end your turn with more than 0 <c=energy>ENERGY</c>, reduce <c=status>corrode</c> by 1"
+                "desc": "If you end your turn with more than 0 <c=energy>ENERGY</c> and <c=status>CORRODE</c>, reduce <c=status>CORRODE</c> by 1 and gain 1 <c=status>EVADE</c>."
             },
             "TarnishedSyringe": {
                 "name": "TARNISHED SYRINGE",
-                "desc": "Apply 1 <c=status>tarnish</c> to both parties whenever an <c=drone>acid missile</c> is destroyed"
+                "desc": "Apply 1 <c=status>TARNISH</c> to both parties whenever an <c=drone>acid missile</c> is destroyed."
             },
             "CausticArmor": {
                 "name": "CAUSTIC ARMOR",
-                "desc": "At the start of every turn, gain <c=status>temp shield</c> equal to your <c=status>corrode</c>"
+                "desc": "At the start of every turn, gain <c=status>TEMP SHIELD</c> equal to your <c=corrode>CORRODE</c>."
             },
             "ExperimentalLubricant": {
                 "name": "EXPERIMENTAL LUBRICANT",
-                "desc": "Once per turn, when you gain <c=status>corrode</c>, gain 1 <c=status>HERMES BOOTS</c>"
+                "desc": "Once per turn, when you gain <c=status>CORRODE</c>, gain 1 <c=status>HERMES BOOTS</c>."
             },
             "ExternalFuelSource": {
                 "name": "EXTERNAL FUEL SOURCE",
-                "desc": "Gain 1 <c=status>EVADE</c> whenever you add a <c=cardtrait>temporary</c> card to your deck"
+                "desc": "Gain 1 <c=status>EVADE</c> whenever you add a <c=cardtrait>temporary</c> card to your deck."
             }
         },
         "Boss": {
@@ -60,7 +60,7 @@
             },
             "Tempoboosters": {
                 "name": "TEMPOBOOSTERS",
-                "desc": "At the start of <c=keyword>elite</c> combat, gain <c=status>1 ace</c> and <c=status>1 corrode</c>.\nOn <c=keyword>boss</c> encounters gain an additional <c=status>1 ace</c> and <c=status>1 tarnish</c>"
+                "desc": "At the start of <c=keyword>elite</c> combat, gain 1 <c=status>ACE</c> and 1 <c=status>CORRODE</c>.\nOn <c=keyword>boss</c> encounters gain an additional 1 <c=status>ACE</c> and 1 <c=status>TARNISH</c>"
             }
         },
         "Duo": {

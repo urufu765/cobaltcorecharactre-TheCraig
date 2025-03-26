@@ -21,7 +21,7 @@ public enum SnekTunez
 [ArtifactMeta(pools = new[] { ArtifactPool.Boss })]
 public class PersonalStereo : Artifact
 {
-    public SnekTunez SongNumber {get; set;} = 0;
+    public SnekTunez SongNumber {get; set;}
     public bool Repeat {private get; set;} = true;
 
 

@@ -20,7 +20,7 @@ public class CausticArmor : Artifact
 
     public override List<Tooltip>? GetExtraTooltips()
     {
-        return [new TTGlossary("status.shieldAlt"), new TTGlossary("status.corrode")];
+        return [new TTGlossary("status.shieldAlt", ["1"]), new TTGlossary("status.corrode", ["1"])];
     }
 
 }
