@@ -34,81 +34,78 @@ public class PartSwap : Card, IRegisterable
         {
             Upgrade.B => 
             [
-                new AVariableHint
-                {
-                    status = new Status?(Status.corrode)
-                },
                 new AStatus
                 {
-                    status = Status.autododgeRight,
-                    statusAmount = x * 2,
-                    targetPlayer = true,
-                    xHint = new int?(2)
-                },
-                new AHurt
-                {
-                    hurtAmount = x,
-                    targetPlayer = true,
-                    xHint = new int?(1)
-                },
-                new AStatus
-                {
-                    status = Status.perfectShield,
-                    statusAmount = 1,
+                    status = Status.tempShield,
+                    statusAmount = 23,
                     targetPlayer = true
                 },
-                new AEndTurn()
+                ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeCostAction(
+                    ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeResourceCost(
+                        ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeStatusResource(Status.corrode),
+                        2
+                    ),
+                    new AStatus
+                    {
+                        status = Status.ace,
+                        statusAmount = 1,
+                        targetPlayer = true
+                    }
+                ).AsCardAction
             ],
             Upgrade.A => 
             [
-                new AVariableHint
-                {
-                    status = new Status?(Status.corrode)
-                },
-                new AHurt
-                {
-                    hurtAmount = x,
-                    targetPlayer = true,
-                    hurtShieldsFirst = true,
-                    xHint = new int?(1)
-                },
-                new AStatus
-                {
-                    status = Status.corrode,
-                    statusAmount = -2,
-                    targetPlayer = true
-                },
-                new AStatus
-                {
-                    status = Status.perfectShield,
-                    statusAmount = 1,
-                    targetPlayer = true
-                },
+                ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeCostAction(
+                    ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeResourceCost(
+                        ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeStatusResource(Status.corrode),
+                        1
+                    ),
+                    new AStatus
+                    {
+                        status = Status.perfectShield,
+                        statusAmount = 1,
+                        targetPlayer = true
+                    }
+                ).AsCardAction,
+                ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeCostAction(
+                    ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeResourceCost(
+                        ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeStatusResource(Status.corrode),
+                        1
+                    ),
+                    new AStatus
+                    {
+                        status = Status.ace,
+                        statusAmount = 1,
+                        targetPlayer = true
+                    }
+                ).AsCardAction
             ],
             _ => 
             [
-                new AVariableHint
-                {
-                    status = new Status?(Status.corrode)
-                },
-                new AHurt
-                {
-                    hurtAmount = x,
-                    targetPlayer = true,
-                    xHint = new int?(1)
-                },
-                new AStatus
-                {
-                    status = Status.corrode,
-                    statusAmount = -3,
-                    targetPlayer = true
-                },
-                new AStatus
-                {
-                    status = Status.perfectShield,
-                    statusAmount = 1,
-                    targetPlayer = true
-                },
+                ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeCostAction(
+                    ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeResourceCost(
+                        ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeStatusResource(Status.corrode),
+                        1
+                    ),
+                    new AStatus
+                    {
+                        status = Status.perfectShield,
+                        statusAmount = 1,
+                        targetPlayer = true
+                    }
+                ).AsCardAction,
+                ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeCostAction(
+                    ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeResourceCost(
+                        ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeStatusResource(Status.corrode),
+                        2
+                    ),
+                    new AStatus
+                    {
+                        status = Status.ace,
+                        statusAmount = 1,
+                        targetPlayer = true
+                    }
+                ).AsCardAction
             ],
         };
     }

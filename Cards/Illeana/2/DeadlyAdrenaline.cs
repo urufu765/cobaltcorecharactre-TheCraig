@@ -33,10 +33,48 @@ public class DeadlyAdrenaline : Card, IRegisterable
         {
             Upgrade.B => 
             [
+                new AHullMax
+                {
+                    amount = -1,
+                    targetPlayer = true
+                },
+                new AHurt
+                {
+                    hurtAmount = 1,
+                    hurtShieldsFirst = true,
+                    targetPlayer = true
+                },
                 new AStatus
                 {
-                    status = Status.autododgeLeft,
-                    statusAmount = 4,
+                    status = Status.ace,
+                    statusAmount = 1,
+                    targetPlayer = true
+                },            
+            ],
+            Upgrade.A => 
+            [
+                new AHurt
+                {
+                    hurtAmount = 1,
+                    targetPlayer = true
+                },
+                new AStatus
+                {
+                    status = Status.ace,
+                    statusAmount = 1,
+                    targetPlayer = true
+                },            
+            ],
+            _ => 
+            [
+                new AHullMax
+                {
+                    amount = -1,
+                    targetPlayer = true
+                },
+                new AHurt
+                {
+                    hurtAmount = 1,
                     targetPlayer = true
                 },
                 new AStatus
@@ -45,50 +83,6 @@ public class DeadlyAdrenaline : Card, IRegisterable
                     statusAmount = 1,
                     targetPlayer = true
                 },
-                new AStatus
-                {
-                    status = Status.corrode,
-                    statusAmount = 2,
-                    targetPlayer = true
-                },
-                new AEndTurn()
-            ],
-            Upgrade.A => 
-            [
-                new AStatus
-                {
-                    status = Status.autododgeLeft,
-                    statusAmount = 1,
-                    targetPlayer = true
-                },
-                new AStatus
-                {
-                    status = Status.corrode,
-                    statusAmount = 2,
-                    targetPlayer = true
-                }
-            ],
-            _ => 
-            [
-                new AStatus
-                {
-                    status = Status.autododgeLeft,
-                    statusAmount = 1,
-                    targetPlayer = true
-                },
-                new AStatus
-                {
-                    status = Status.evade,
-                    statusAmount = 4,
-                    targetPlayer = true
-                },
-                new AStatus
-                {
-                    status = Status.corrode,
-                    statusAmount = 3,
-                    targetPlayer = true
-                },
-                new AEndTurn()
             ],
         };
     }
@@ -98,6 +92,11 @@ public class DeadlyAdrenaline : Card, IRegisterable
     {
         return upgrade switch
         {
+            Upgrade.B => new CardData
+            {
+                cost = 2,
+                buoyant = true
+            },
             _ => new CardData
             {
                 cost = 2

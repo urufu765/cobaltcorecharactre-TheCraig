@@ -103,13 +103,13 @@ public class Amputation : Card, IRegisterable
     {
         return upgrade switch
         {
-            Upgrade.B => new CardData
+            Upgrade.A => new CardData
             {
                 cost = 0,
                 exhaust = true,
                 description = ModEntry.Instance.Localizations.Localize(["card", "Uncommon", "Amputation", "descB"])
             },
-            Upgrade.A => new CardData
+            Upgrade.B => new CardData
             {
                 cost = 0,
                 singleUse = true,

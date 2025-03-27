@@ -84,10 +84,6 @@ public class Exposure : Card, IRegisterable
                 cost = 1,
                 exhaust = true
             },
-            Upgrade.A => new CardData
-            {
-                cost = 2
-            },
             _ => new CardData
             {
                 cost = 1

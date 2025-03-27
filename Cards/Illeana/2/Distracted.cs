@@ -6,9 +6,9 @@ using Nickel;
 namespace Illeana.Cards;
 
 /// <summary>
-/// Nothing works as best as homemade spaceship hulls... or was it the other way around?
+/// Illeana got distracted again
 /// </summary>
-public class MakeshiftHull : Card, IRegisterable
+public class Distracted : Card, IRegisterable
 {
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
@@ -21,8 +21,8 @@ public class MakeshiftHull : Card, IRegisterable
                 rarity = Rarity.uncommon,
                 upgradesTo = [Upgrade.A, Upgrade.B]
             },
-            Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "Uncommon", "MakeshiftHull", "name"]).Localize,
-            Art = ModEntry.RegisterSprite(package, "assets/Card/Illeana/2/MakeshiftHull.png").Sprite
+            Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "Uncommon", "Distracted", "name"]).Localize,
+            Art = ModEntry.RegisterSprite(package, "assets/Card/Illeana/3/Distracted.png").Sprite
         });
     }
 
@@ -35,28 +35,14 @@ public class MakeshiftHull : Card, IRegisterable
             [
                 new AStatus
                 {
-                    status = Status.corrode,
-                    statusAmount = 2,
+                    status = Status.evade,
+                    statusAmount = 3,
                     targetPlayer = true
                 },
-                new AHullMax
-                {
-                    amount = 1,
-                    targetPlayer = true
-                },
-                new AEndTurn()
-            ],
-            Upgrade.A => 
-            [
                 new AStatus
                 {
-                    status = Status.corrode,
-                    statusAmount = 2,
-                    targetPlayer = true
-                },
-                new AHullMax
-                {
-                    amount = 3,
+                    status = ModEntry.IlleanaTheSnek.MissingStatus.Status,
+                    statusAmount = 1,
                     targetPlayer = true
                 }
             ],
@@ -64,16 +50,16 @@ public class MakeshiftHull : Card, IRegisterable
             [
                 new AStatus
                 {
-                    status = Status.corrode,
+                    status = Status.evade,
                     statusAmount = 2,
                     targetPlayer = true
                 },
-                new AHullMax
+                new AStatus
                 {
-                    amount = 1,
+                    status = ModEntry.IlleanaTheSnek.MissingStatus.Status,
+                    statusAmount = 1,
                     targetPlayer = true
-                },
-                new AEndTurn()
+                }
             ],
         };
     }
@@ -83,19 +69,13 @@ public class MakeshiftHull : Card, IRegisterable
     {
         return upgrade switch
         {
-            Upgrade.B => new CardData
-            {
-                cost = 2
-            },
             Upgrade.A => new CardData
             {
-                cost = 2,
-                singleUse = true
+                cost = 0,
             },
             _ => new CardData
             {
-                cost = 2,
-                exhaust = true
+                cost = 1,
             },
         };
     }

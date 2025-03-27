@@ -34,6 +34,12 @@ public class GreatHealing : Card, IRegisterable
         {
             Upgrade.B => 
             [
+                new AStatus
+                {
+                    status = Status.corrode,
+                    statusAmount = 1,
+                    targetPlayer = true
+                },
                 new AVariableHint
                 {
                     status = new Status?(Status.corrode)
@@ -44,15 +50,16 @@ public class GreatHealing : Card, IRegisterable
                     targetPlayer = true,
                     xHint = new int?(5)
                 },
-                new AStatus
-                {
-                    status = Status.corrode,
-                    statusAmount = 2,
-                    targetPlayer = true
-                }
+                new AEndTurn()
             ],
             _ => 
             [
+                new AStatus
+                {
+                    status = Status.corrode,
+                    statusAmount = 1,
+                    targetPlayer = true
+                },
                 new AVariableHint
                 {
                     status = new Status?(Status.corrode)
@@ -63,12 +70,7 @@ public class GreatHealing : Card, IRegisterable
                     targetPlayer = true,
                     xHint = new int?(3)
                 },
-                new AStatus
-                {
-                    status = Status.corrode,
-                    statusAmount = 2,
-                    targetPlayer = true
-                }
+                new AEndTurn()
             ],
         };
     }

@@ -53,13 +53,13 @@ internal class ModEntry : SimpleMod
         typeof(Amputation),
         typeof(DeadlyAdrenaline),
         typeof(PartSwap),
+        typeof(Distracted),
         typeof(Disinfect),
         typeof(AcidicPackage)
     ];
     private static List<Type> IlleanaRareCardTypes = [
         typeof(GreatHealing),
         typeof(ImmunityShot),
-        typeof(Distracted),
         typeof(LacedYoFood),
         typeof(WeaponisedPatchkit)
     ];
@@ -118,7 +118,7 @@ internal class ModEntry : SimpleMod
     public ModEntry(IPluginPackage<IModManifest> package, IModHelper helper, ILogger logger) : base(package, helper, logger)
     {
         Instance = this;
-        Harmony = new Harmony("urufudoggo.Craig");
+        Harmony = new Harmony("urufudoggo.Illeana");
         
         /*
          * Some mods provide an API, which can be requested from the ModRegistry.

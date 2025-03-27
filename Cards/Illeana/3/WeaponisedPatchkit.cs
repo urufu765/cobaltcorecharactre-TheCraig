@@ -36,40 +36,26 @@ public class WeaponisedPatchkit : Card, IRegisterable
                 new AStatus
                 {
                     status = Status.corrode,
-                    statusAmount = 3,
+                    statusAmount = 1,
                     targetPlayer = true
                 },
                 new AAttack
                 {
-                    weaken = true,
-                    damage = GetDmg(s, 0)
-                }
-            ],
-            Upgrade.A =>
-            [
-                new AStatus
-                {
-                    status = Status.corrode,
-                    statusAmount = 1,
-                    targetPlayer = false
-                },
-                new AAttack
-                {
-                    armorize = true,
+                    brittle = true,
                     damage = GetDmg(s, 0)
                 }
             ],
             _ => 
             [
-                new AAttack
+                new AStatus
                 {
                     status = Status.corrode,
                     statusAmount = 1,
-                    damage = GetDmg(s, 0)
+                    targetPlayer = true
                 },
                 new AAttack
                 {
-                    armorize = true,
+                    weaken = true,
                     damage = GetDmg(s, 0)
                 }
             ],
@@ -81,9 +67,15 @@ public class WeaponisedPatchkit : Card, IRegisterable
     {
         return upgrade switch
         {
+            Upgrade.A => new CardData
+            {
+                cost = 1,
+                exhaust = true
+            },
             _ => new CardData
             {
                 cost = 2,
+                exhaust = true
             },
         };
     }

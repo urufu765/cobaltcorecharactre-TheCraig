@@ -134,9 +134,6 @@
             "GoneJiffy": {
                 "name": "Gone-In-A-Jiffy"
             },
-            "MakeshiftHull": {
-                "name": "Makeshift Hull"
-            },
             "Amputation": {
                 "name": "Amputation",
                 "desc": "X = your missing hull.\n<c=healing>Heal X</c>.\n<c=status>-X Corrode</c>.\n<c=downside>-3 Max Hull</c>",
@@ -152,19 +149,22 @@
             "Disinfect": {
                 "name": "Disinfect"
             },
+            "Distracted": {
+                "name": "Distracted"
+            },
             "AcidicPackage": {
                 "name": "Acidic Package"
             }
         },
         "Rare": {
+            "MakeshiftHull": {
+                "name": "Makeshift Hull"
+            },
             "GreatHealing": {
-                "name": "Great Healing"
+                "name": "Great Restoration"
             },
             "ImmunityShot": {
                 "name": "Immunity Shot"
-            },
-            "Distracted": {
-                "name": "Distracted"
             },
             "LacedYoFood": {
                 "name": "Laced Yo Food"

@@ -31,7 +31,7 @@ public class Autotomy : Card, IRegisterable
     {
         return upgrade switch
         {
-            Upgrade.B => 
+            Upgrade.A => 
             [
                 new AStatus
                 {
@@ -58,7 +58,7 @@ public class Autotomy : Card, IRegisterable
                     targetPlayer = true
                 }
             ],
-            Upgrade.A => 
+            Upgrade.B => 
             [
                 new AStatus
                 {

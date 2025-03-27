@@ -35,12 +35,6 @@ public class UntestedSubstance : Card, IRegisterable
             [
                 new AStatus
                 {
-                    status = Status.corrode,
-                    statusAmount = 3,
-                    targetPlayer = true
-                },
-                new AStatus
-                {
                     status = ModEntry.Instance.TarnishStatus.Status,
                     statusAmount = 1,
                     targetPlayer = true
@@ -50,12 +44,6 @@ public class UntestedSubstance : Card, IRegisterable
                     targetPlayer = true,
                     status = Status.autododgeRight,
                     statusAmount = 1,
-                },
-                new AStatus
-                {
-                    targetPlayer = true,
-                    status = Status.ace,
-                    statusAmount = 1,
                 }
             ],
             _ => 
@@ -63,19 +51,13 @@ public class UntestedSubstance : Card, IRegisterable
                 new AStatus
                 {
                     targetPlayer = true,
-                    status = Status.corrode,
-                    statusAmount = 1,
+                    status = Status.evade,
+                    statusAmount = 2,
                 },
                 new AStatus
                 {
                     targetPlayer = true,
                     status = ModEntry.Instance.TarnishStatus.Status,
-                    statusAmount = 1,
-                },
-                new AStatus
-                {
-                    targetPlayer = true,
-                    status = Status.ace,
                     statusAmount = 1,
                 }
             ],

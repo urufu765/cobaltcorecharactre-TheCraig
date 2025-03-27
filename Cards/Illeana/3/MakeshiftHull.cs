@@ -6,9 +6,9 @@ using Nickel;
 namespace Illeana.Cards;
 
 /// <summary>
-/// Illeana got distracted again
+/// Nothing works as best as homemade spaceship hulls... or was it the other way around?
 /// </summary>
-public class Distracted : Card, IRegisterable
+public class MakeshiftHull : Card, IRegisterable
 {
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
@@ -21,8 +21,8 @@ public class Distracted : Card, IRegisterable
                 rarity = Rarity.rare,
                 upgradesTo = [Upgrade.A, Upgrade.B]
             },
-            Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "Rare", "Distracted", "name"]).Localize,
-            Art = ModEntry.RegisterSprite(package, "assets/Card/Illeana/3/Distracted.png").Sprite
+            Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "Rare", "MakeshiftHull", "name"]).Localize,
+            Art = ModEntry.RegisterSprite(package, "assets/Card/Illeana/2/MakeshiftHull.png").Sprite
         });
     }
 
@@ -31,18 +31,31 @@ public class Distracted : Card, IRegisterable
     {
         return upgrade switch
         {
-            Upgrade.B => 
+            Upgrade.A => 
             [
                 new AStatus
                 {
-                    status = Status.evade,
-                    statusAmount = 3,
+                    status = Status.corrode,
+                    statusAmount = 1,
                     targetPlayer = true
                 },
-                new AStatus
+                new AHullMax
                 {
-                    status = ModEntry.IlleanaTheSnek.MissingStatus.Status,
-                    statusAmount = 1,
+                    amount = 1,
+                    targetPlayer = true
+                },
+                new AEndTurn()
+            ],
+            Upgrade.B => 
+            [
+                new AHurt
+                {
+                    hurtAmount = 3,
+                    targetPlayer = true
+                },
+                new AHullMax
+                {
+                    amount = 1,
                     targetPlayer = true
                 }
             ],
@@ -50,16 +63,16 @@ public class Distracted : Card, IRegisterable
             [
                 new AStatus
                 {
-                    status = Status.evade,
-                    statusAmount = 2,
-                    targetPlayer = true
-                },
-                new AStatus
-                {
-                    status = ModEntry.IlleanaTheSnek.MissingStatus.Status,
+                    status = Status.corrode,
                     statusAmount = 1,
                     targetPlayer = true
-                }
+                },
+                new AHullMax
+                {
+                    amount = 1,
+                    targetPlayer = true
+                },
+                new AEndTurn()
             ],
         };
     }
@@ -71,11 +84,17 @@ public class Distracted : Card, IRegisterable
         {
             Upgrade.A => new CardData
             {
-                cost = 0,
+                cost = 1,
+                exhaust = true
+            },
+            Upgrade.B => new CardData
+            {
+                cost = 2,
             },
             _ => new CardData
             {
-                cost = 1,
+                cost = 2,
+                exhaust = true
             },
         };
     }

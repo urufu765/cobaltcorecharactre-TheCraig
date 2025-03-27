@@ -73,11 +73,13 @@ public class AcidicPackage : Card, IRegisterable
         {
             Upgrade.A => new CardData
             {
-                cost = 0
+                cost = 0,
+                exhaust = true
             },
             _ => new CardData
             {
-                cost = 1
+                cost = 1,
+                exhaust = true
             }
         };
     }

@@ -58,7 +58,7 @@ public class LacedYoFood : Card, IRegisterable
                 new AStatus
                 {
                     status = Status.corrode,
-                    statusAmount = 2,
+                    statusAmount = 1,
                     targetPlayer = true
                 },
                 new AStatus
