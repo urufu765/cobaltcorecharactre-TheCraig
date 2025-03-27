@@ -67,6 +67,10 @@
             "LightenedLoad": {
                 "name": "LIGHTENED LOAD",
                 "desc": "Whenever you apply <c=status>TARNISH</c> to yourself, gain equal amount of <c=status>AUTODODGE RIGHT</c>"
+            },
+            "ToxicSports": {
+                "name": "TOXIC SPORTS",
+                "desc": "Whenever you apply <c=status>CORRODE</c> to yourself, attack for the same amount of total corrode you have.\n<c=keyword>Sasha's Sporting Event Only.</c>"
             }
         },
         "Duo": {

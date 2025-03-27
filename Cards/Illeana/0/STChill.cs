@@ -34,7 +34,7 @@ public class SnekTunezChill : Card, IRegisterable
         x = c.energy;
         return upgrade switch
         {
-            Upgrade.B => 
+            Upgrade.B => // TODO: Spoofed action
             [
                 ModEntry.Instance.KokoroApi.V2.EnergyAsStatus.MakeVariableHint().AsCardAction,
                 new AStatus
@@ -42,7 +42,7 @@ public class SnekTunezChill : Card, IRegisterable
                     targetPlayer = true,
                     status = Status.energyNextTurn,
                     statusAmount = x,
-                    xHint = new int?(1)
+                    xHint = 1
                 },
                 new AStunShip(),
                 new AStatus
@@ -60,7 +60,7 @@ public class SnekTunezChill : Card, IRegisterable
                     targetPlayer = true,
                     status = Status.energyNextTurn,
                     statusAmount = x,
-                    xHint = new int?(1)
+                    xHint = 1
                 },
                 new AStunShip(),
                 new AStatus

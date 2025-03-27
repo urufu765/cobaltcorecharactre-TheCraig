@@ -42,7 +42,7 @@ public class SnekTunezSad : Card, IRegisterable
                     targetPlayer = true,
                     status = Status.drawNextTurn,
                     statusAmount = x,
-                    xHint = new int?(1)
+                    xHint = 1
                 },
                 new AStunShip(),
                 new AStatus
@@ -60,7 +60,7 @@ public class SnekTunezSad : Card, IRegisterable
                     targetPlayer = true,
                     status = Status.drawNextTurn,
                     statusAmount = x,
-                    xHint = new int?(1)
+                    xHint = 1
                 },
                 new AStunShip(),
                 new AStatus

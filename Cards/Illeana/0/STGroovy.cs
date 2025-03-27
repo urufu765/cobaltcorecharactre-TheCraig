@@ -42,7 +42,7 @@ public class SnekTunezGroovy : Card, IRegisterable
                     targetPlayer = true,
                     status = Status.evade,
                     statusAmount = x,
-                    xHint = new int?(1)
+                    xHint = 1
                 },
                 new AStunShip(),
                 new AStatus
@@ -60,7 +60,7 @@ public class SnekTunezGroovy : Card, IRegisterable
                     targetPlayer = true,
                     status = Status.evade,
                     statusAmount = x,
-                    xHint = new int?(1)
+                    xHint = 1
                 },
                 new AStunShip(),
                 new AStatus

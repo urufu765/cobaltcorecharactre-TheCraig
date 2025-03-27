@@ -93,7 +93,8 @@ internal class ModEntry : SimpleMod
         typeof(Tempoboosters)
     ];
     private static List<Type> IlleanaEventArtifacts = [
-        typeof(LightenedLoad)
+        typeof(LightenedLoad),
+        //typeof(ToxicSports)
     ];
     private static IEnumerable<Type> IlleanaArtifactTypes =
         IlleanaCommonArtifacts
@@ -277,6 +278,7 @@ internal class ModEntry : SimpleMod
 
 
         DrawLoadingScreenFixer.Apply(Harmony);
+        //SashaSportingSession.Apply(Harmony);
     }
 
     /*
