@@ -73,6 +73,10 @@ public class FalseVaccine : Card, IRegisterable
     {
         return upgrade switch
         {
+            Upgrade.B => new CardData
+            {
+                cost = 3
+            },
             Upgrade.A => new CardData
             {
                 cost = 0
