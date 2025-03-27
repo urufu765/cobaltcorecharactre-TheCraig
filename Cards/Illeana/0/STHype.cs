@@ -82,18 +82,21 @@ public class SnekTunezHype : Card, IRegisterable
             Upgrade.B => new CardData
             {
                 cost = 1,
-                singleUse = true
+                singleUse = true,
+                artTint = "ff3838"
             },
             Upgrade.A => new CardData
             {
                 cost = 0,
                 singleUse = true,
-                retain = true
+                retain = true,
+                artTint = "ff3838"
             },
             _ => new CardData
             {
                 cost = 0,
-                singleUse = true
+                singleUse = true,
+                artTint = "ff3838"
             }
         };
     }

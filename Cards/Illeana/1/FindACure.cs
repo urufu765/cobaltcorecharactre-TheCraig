@@ -97,6 +97,7 @@ public class FindCure : Card, IRegisterable
             cost = 0,
             exhaust = true,
             description = ModEntry.Instance.Localizations.Localize(["card", "Common", "FindACure", upgrade switch { Upgrade.A => "descA", Upgrade.B => "descB", _ => "desc" }]),
+            artTint = "a43fff"
         };
     }
 }

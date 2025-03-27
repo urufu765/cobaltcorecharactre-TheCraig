@@ -117,11 +117,13 @@ public class PartSwap : Card, IRegisterable
         {
             Upgrade.A => new CardData
             {
-                cost = 2
+                cost = 2,
+                artTint = "f5e030"
             },
             _ => new CardData
             {
-                cost = 1
+                cost = 1,
+                artTint = "f5e030"
             },
         };
     }

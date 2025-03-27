@@ -82,18 +82,21 @@ public class SnekTunezSad : Card, IRegisterable
             Upgrade.B => new CardData
             {
                 cost = 1,
-                singleUse = true
+                singleUse = true,
+                artTint = "ffffff"
             },
             Upgrade.A => new CardData
             {
                 cost = 0,
                 singleUse = true,
-                retain = true
+                retain = true,
+                artTint = "ffffff"
             },
             _ => new CardData
             {
                 cost = 0,
-                singleUse = true
+                singleUse = true,
+                artTint = "ffffff"
             }
         };
     }

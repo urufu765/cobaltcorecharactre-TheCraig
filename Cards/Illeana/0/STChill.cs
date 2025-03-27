@@ -82,18 +82,21 @@ public class SnekTunezChill : Card, IRegisterable
             Upgrade.B => new CardData
             {
                 cost = 1,
-                singleUse = true
+                singleUse = true,
+                artTint = "204ab7"
             },
             Upgrade.A => new CardData
             {
                 cost = 0,
                 singleUse = true,
-                retain = true
+                retain = true,
+                artTint = "204ab7"
             },
             _ => new CardData
             {
                 cost = 0,
-                singleUse = true
+                singleUse = true,
+                artTint = "204ab7"
             }
         };
     }

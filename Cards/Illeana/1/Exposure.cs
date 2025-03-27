@@ -82,11 +82,13 @@ public class Exposure : Card, IRegisterable
             Upgrade.B => new CardData
             {
                 cost = 1,
-                exhaust = true
+                exhaust = true,
+                artTint = "a43fff"
             },
             _ => new CardData
             {
-                cost = 1
+                cost = 1,
+                artTint = "a43fff"
             }
         };
     }

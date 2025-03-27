@@ -105,11 +105,13 @@ public class GoneJiffy : Card, IRegisterable
             Upgrade.B => new CardData
             {
                 cost = 1,
-                exhaust = true
+                exhaust = true,
+                artTint = "f5e030"
             },
             _ => new CardData
             {
-                cost = 1
+                cost = 1,
+                artTint = "f5e030"
             }
         };
     }

@@ -110,12 +110,14 @@ public class ImmunityShot : Card, IRegisterable
             Upgrade.B => new CardData
             {
                 cost = 3,
-                exhaust = true
+                exhaust = true,
+                artTint = "f5e030"
             },
             _ => new CardData
             {
                 cost = 2,
-                exhaust = true
+                exhaust = true,
+                artTint = "f5e030"
             },
         };
     }

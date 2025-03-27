@@ -72,10 +72,12 @@ public class UntestedSubstance : Card, IRegisterable
             Upgrade.A => new CardData
             {
                 cost = 0,
+                artTint = "a43fff"
             },
             _ => new CardData
             {
                 cost = 1,
+                artTint = "a43fff"
             }
         };
     }
