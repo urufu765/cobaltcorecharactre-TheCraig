@@ -10,6 +10,7 @@ namespace Illeana.Cards;
 /// </summary>
 public class AcidicPackage : Card, IRegisterable
 {
+    private static Spr altSprite;
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
         helper.Content.Cards.RegisterCard(new CardConfiguration
@@ -24,6 +25,7 @@ public class AcidicPackage : Card, IRegisterable
             Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "Uncommon", "AcidicPackage", "name"]).Localize,
             Art = ModEntry.RegisterSprite(package, "assets/Card/Illeana/2/AcidicPackage.png").Sprite
         });
+        altSprite = ModEntry.RegisterSprite(package, "assets/Card/Illeana/2/AcidicPackageAlt.png").Sprite;
     }
 
 
@@ -71,6 +73,12 @@ public class AcidicPackage : Card, IRegisterable
     {
         return upgrade switch
         {
+            Upgrade.B => new CardData
+            {
+                cost = 1,
+                exhaust = true,
+                art = altSprite
+            },
             Upgrade.A => new CardData
             {
                 cost = 0,

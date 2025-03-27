@@ -10,6 +10,8 @@ namespace Illeana.Cards;
 /// </summary>
 public class Disinfect : Card, IRegisterable
 {
+    private static Spr altSprite;
+
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
         helper.Content.Cards.RegisterCard(new CardConfiguration
@@ -24,6 +26,7 @@ public class Disinfect : Card, IRegisterable
             Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "Uncommon", "Disinfect", "name"]).Localize,
             Art = ModEntry.RegisterSprite(package, "assets/Card/Illeana/2/Disinfect.png").Sprite
         });
+        altSprite = ModEntry.RegisterSprite(package, "assets/Card/Illeana/2/DisinfectAlt.png").Sprite;
     }
 
 
@@ -85,6 +88,11 @@ public class Disinfect : Card, IRegisterable
     {
         return upgrade switch
         {
+            Upgrade.B => new CardData
+            {
+                cost = 2,
+                art = altSprite
+            },
             Upgrade.A => new CardData
             {
                 cost = 1

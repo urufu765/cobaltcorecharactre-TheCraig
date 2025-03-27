@@ -10,6 +10,8 @@ namespace Illeana.Cards;
 /// </summary>
 public class PartSwap : Card, IRegisterable
 {
+    private static Spr altSprite;
+
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
         helper.Content.Cards.RegisterCard(new CardConfiguration
@@ -24,6 +26,7 @@ public class PartSwap : Card, IRegisterable
             Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "Uncommon", "PartSwap", "name"]).Localize,
             Art = ModEntry.RegisterSprite(package, "assets/Card/Illeana/2/PartSwap.png").Sprite
         });
+        altSprite = ModEntry.RegisterSprite(package, "assets/Card/Illeana/2/PartSwapAlt.png").Sprite;
     }
 
 
@@ -37,7 +40,7 @@ public class PartSwap : Card, IRegisterable
                 new AStatus
                 {
                     status = Status.tempShield,
-                    statusAmount = 23,
+                    statusAmount = 3,
                     targetPlayer = true
                 },
                 ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeCostAction(
@@ -115,14 +118,15 @@ public class PartSwap : Card, IRegisterable
     {
         return upgrade switch
         {
-            Upgrade.A => new CardData
+            Upgrade.B => new CardData
             {
-                cost = 2,
-                artTint = "f5e030"
+                cost = 1,
+                artTint = "f5e030",
+                art = altSprite
             },
             _ => new CardData
             {
-                cost = 1,
+                cost = 2,
                 artTint = "f5e030"
             },
         };
