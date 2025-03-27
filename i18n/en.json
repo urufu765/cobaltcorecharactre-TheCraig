@@ -180,12 +180,12 @@
             },
             "TheFailure": {
                 "name": "The Failure",
-                "descB": "<c=downside>+1 <c=status>corrode</c> to self,</c> and foe on draw. -1 <c=status>corrode</c> when played.",
+                "descB": "<c=downside>+1 <c=status>corrode</c> to self, and foe on draw.</c> -1 <c=status>corrode</c> when played.",
                 "desc": "<c=downside>+2 <c=status>corrode</c> to self on draw.</c> -1 <c=status>corrode</c> when played."
             },
             "TheAccident": {
                 "name": "The Accident",
-                "descB": "<c=downside>+1 <c=status>corrode</c> to self,</c> and foe on draw. 1 <c=status>tarnish</c> to foe when played.",
+                "descB": "<c=downside>+1 <c=status>corrode</c> to self, and foe on draw.</c> 1 <c=status>tarnish</c> to foe when played.",
                 "desc": "<c=downside>+1 <c=status>corrode</c> to self on draw.</c> 1 <c=status>tarnish</c> to foe when played."
             },
             "SnekTunezChill": {
