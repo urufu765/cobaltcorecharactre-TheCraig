@@ -136,8 +136,8 @@
             },
             "Amputation": {
                 "name": "Amputation",
-                "desc": "X = your missing hull.\n<c=healing>Heal X</c>.\n<c=status>-X Corrode</c>.\n<c=downside>-3 Max Hull</c>",
-                "descA": "X = your missing hull.\n<c=healing>Heal X</c>.\n<c=status>-X Corrode</c>.\n<c=downside>-3 Max Hull</c>",
+                "desc": "X = your missing hull.\n<c=healing>Heal X</c>.\n<c=status>-X Corrode</c>.\n<c=downside>-2 Max Hull</c>",
+                "descA": "X = your missing hull.\n<c=healing>Heal X</c>.\n<c=status>-X Corrode</c>.\n<c=downside>-1 Max Hull</c>",
                 "descB": "X = your missing hull.\n<c=healing>Heal X</c>.\n<c=status>X/2 Ace</c>.\n<c=status>-X Corrode</c>.\n<c=downside>-3 Max Hull</c>"
             },
             "DeadlyAdrenaline": {
@@ -180,13 +180,13 @@
             },
             "TheFailure": {
                 "name": "The Failure",
-                "descB": "<c=downside>+1 <c=status>corrode</c> to self,</c> and enemy on draw. -1 <c=status>corrode</c> when played.",
+                "descB": "<c=downside>+1 <c=status>corrode</c> to self,</c> and foe on draw. -1 <c=status>corrode</c> when played.",
                 "desc": "<c=downside>+2 <c=status>corrode</c> to self on draw.</c> -1 <c=status>corrode</c> when played."
             },
             "TheAccident": {
                 "name": "The Accident",
-                "descB": "<c=downside>+1 <c=status>corrode</c> to self,</c> and enemy on draw. 1 <c=status>tarnish</c> to enemy when played.",
-                "desc": "<c=downside>+1 <c=status>corrode</c> to self on draw.</c> 1 <c=status>tarnish</c> to enemy when played."
+                "descB": "<c=downside>+1 <c=status>corrode</c> to self,</c> and foe on draw. 1 <c=status>tarnish</c> to foe when played.",
+                "desc": "<c=downside>+1 <c=status>corrode</c> to self on draw.</c> 1 <c=status>tarnish</c> to foe when played."
             },
             "SnekTunezChill": {
                 "name": "SnekTunez: Chill"
