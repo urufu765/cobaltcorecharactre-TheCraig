@@ -6,7 +6,7 @@
     "status": {
         "Tarnish": {
             "name": "Tarnish",
-            "desc": "Take double damage and reduce <c=status>CORRODE</c> by 1 per hit. <c=downside>Decreases by 1 at start of turn.</c>"
+            "desc": "Take double normal damage and reduce <c=status>CORRODE</c> by 1 per hit. <c=downside>Decreases by 1 at start of turn.</c>"
         }
     },
     "action": {
@@ -19,7 +19,7 @@
             },
             "ByproductProcessor": {
                 "name": "BYPRODUCT PROCESSOR",
-                "desc": "If you end your turn with more than 0 <c=energy>ENERGY</c> and <c=status>CORRODE</c>, reduce <c=status>CORRODE</c> by 1 and gain 1 <c=status>EVADE</c>."
+                "desc": "If you end your turn with more than 0 <c=energy>ENERGY</c> and <c=status>CORRODE</c>, reduce <c=status>CORRODE</c> by 1 and gain 1 <c=status>EVADE</c>.\n<c=downside><c=status>CORRODE</c> will still proc before removal.</c>"
             },
             "TarnishedSyringe": {
                 "name": "TARNISHED SYRINGE",
@@ -27,7 +27,7 @@
             },
             "CausticArmor": {
                 "name": "CAUSTIC ARMOR",
-                "desc": "At the start of every turn, gain <c=status>TEMP SHIELD</c> double your <c=status>CORRODE</c>."
+                "desc": "At the start of every turn, gain <c=status>TEMP SHIELD</c> equal to double your <c=status>CORRODE</c>."
             },
             "ExperimentalLubricant": {
                 "name": "EXPERIMENTAL LUBRICANT",
