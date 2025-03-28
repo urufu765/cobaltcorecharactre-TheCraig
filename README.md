@@ -8,6 +8,7 @@ A corrosion engineer who works with corrosion to help keep the ship at tip top c
 
 #### a.3: Don't Talk With Your Mouth Full
 
+* **(0.3.2)**: Added alt art for Experimental Lubricant, and made it switch on use
 * **(0.3.1)**: Renamed Illeana's Personal Stereo to Stolen Slitherman
 * **(0.3.0)**: Added more dialogues (corrode replies) + Changelog + More character sprites
 

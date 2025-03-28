@@ -120,6 +120,8 @@ internal class ModEntry : SimpleMod
     public Spr SprBoostrE {get; private set;}
     public Spr SprBoostrB {get; private set;}
     public Spr SprBoostrO {get; private set;}
+    public Spr SprExLubeO {get; private set;}
+    public Spr SprExLubeX {get; private set;}
 
 
     public ModEntry(IPluginPackage<IModManifest> package, IModHelper helper, ILogger logger) : base(package, helper, logger)
@@ -289,7 +291,8 @@ internal class ModEntry : SimpleMod
         SprBoostrE = RegisterSprite(package, "assets/Artifact/TempoboostersE.png").Sprite;
         SprBoostrB = RegisterSprite(package, "assets/Artifact/TempoboostersB.png").Sprite;
         SprBoostrO = RegisterSprite(package, "assets/Artifact/TempoboostersO.png").Sprite;
-
+        SprExLubeO = RegisterSprite(package, "assets/Artifact/ExperimentalLubricantO.png").Sprite;
+        SprExLubeX = RegisterSprite(package, "assets/Artifact/ExperimentalLubricantX.png").Sprite;
 
         DrawLoadingScreenFixer.Apply(Harmony);
         //SashaSportingSession.Apply(Harmony);

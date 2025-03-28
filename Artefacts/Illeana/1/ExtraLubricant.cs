@@ -34,6 +34,16 @@ public class ExperimentalLubricant : Artifact
         }
     }
 
+    public override void OnCombatEnd(State state)
+    {
+        Corroded = false;
+    }
+
+    public override Spr GetSprite()
+    {
+        return Corroded? ModEntry.Instance.SprExLubeX : ModEntry.Instance.SprExLubeO;
+    }
+
     public override List<Tooltip>? GetExtraTooltips()
     {
         return [new TTGlossary("status.corrode", ["1"]), new TTGlossary("status.hermes", ["1"])];
