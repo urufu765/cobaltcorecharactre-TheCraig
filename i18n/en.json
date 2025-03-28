@@ -50,7 +50,7 @@
                 "altDesc": "Your <c=part>wings</c> become <c=part>empty</c>. <c=downside>Your <c=part>empty</c> parts take 1 damage when a shot passes through</c>"
             },
             "PersonalStereo": {
-                "name": "ILLEANA'S PERSONAL STEREO",
+                "name": "STOLEN SLITHERMAN",
                 "iGotDesc": "Every start of combat, add a <c=card>SnekTunez</c> to your hand. SnekTunez is a registered trademark of REDACTED corp and is not responsible for any liabilities if any traks are listened outside working environments.",
                 "desc": "On combat start, add a <c=card>SnekTunez</c> to your hand.",
                 "descChill": "Every start of combat, add a <c=card>SnekTunez</c> to your hand. The next encounter will play <c=card>Chill</c>!",

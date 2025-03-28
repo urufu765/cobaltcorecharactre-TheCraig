@@ -21,7 +21,7 @@ internal static class CombatDialogue
         DB.story.all[$"WeAreCorroded_Multi_2"].lines.Add(new CustomSay()
         {
             who = AmIlleana,
-            Text = "We can totally fix that in middle of a fight.",
+            Text = "We can totally fix that in the middle of a fight.",
             loopTag = Instance.IlleanaAnim_Sly.Configuration.LoopTag
         });
         DB.story.all[$"WeAreCorroded_Multi_3"].lines.Add(new CustomSay()
