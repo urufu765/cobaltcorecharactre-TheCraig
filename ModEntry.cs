@@ -25,6 +25,13 @@ internal class ModEntry : SimpleMod
     internal ICharacterAnimationEntryV2 IlleanaAnim_Neutral;
     internal ICharacterAnimationEntryV2 IlleanaAnim_Squint;
     internal ICharacterAnimationEntryV2 IlleanaAnim_Panic;
+    internal ICharacterAnimationEntryV2 IlleanaAnim_Explain;
+    internal ICharacterAnimationEntryV2 IlleanaAnim_Intense;
+    internal ICharacterAnimationEntryV2 IlleanaAnim_Mad;
+    internal ICharacterAnimationEntryV2 IlleanaAnim_Sly;
+    internal ICharacterAnimationEntryV2 IlleanaAnim_Solemn;
+    internal ICharacterAnimationEntryV2 IlleanaAnim_Tired;
+    internal ICharacterAnimationEntryV2 IlleanaAnim_Unamused;
     internal IStatusEntry TarnishStatus { get; private set; } = null!;
 
     internal ILocalizationProvider<IReadOnlyList<string>> AnyLocalizations { get; }
@@ -179,6 +186,13 @@ internal class ModEntry : SimpleMod
         IlleanaAnim_Neutral = RegisterAnimation(package, "neutral", "assets/Animation/illeana_neutral", 4);
         IlleanaAnim_Squint = RegisterAnimation(package, "squint", "assets/Animation/illeana_squint", 4);
         IlleanaAnim_Panic = RegisterAnimation(package, "panic", "assets/Animation/illeana_panic", 4);
+        IlleanaAnim_Explain = RegisterAnimation(package, "explain", "assets/Animation/illeana_explain", 4);
+        IlleanaAnim_Intense = RegisterAnimation(package, "intense", "assets/Animation/illeana_intense", 4);
+        IlleanaAnim_Mad = RegisterAnimation(package, "mad", "assets/Animation/illeana_mad", 4);
+        IlleanaAnim_Sly = RegisterAnimation(package, "sly", "assets/Animation/illeana_sly", 4);
+        IlleanaAnim_Solemn = RegisterAnimation(package, "solemn", "assets/Animation/illeana_solemn", 4);
+        IlleanaAnim_Tired = RegisterAnimation(package, "tired", "assets/Animation/illeana_tired", 1);
+        IlleanaAnim_Unamused = RegisterAnimation(package, "unamused", "assets/Animation/illeana_unamused", 1);
         Instance.Helper.Content.Characters.V2.RegisterCharacterAnimation(new CharacterAnimationConfigurationV2
         {
             CharacterType = IlleanaDeck.Deck.Key(),
