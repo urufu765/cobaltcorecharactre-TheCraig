@@ -64,8 +64,88 @@ internal static class CombatDialogue
         {
             who = AmIlleana,
             Text = "Did I do that?",
-            loopTag = Instance.IlleanaAnim_Sly.Configuration.LoopTag  // Change to smug
+            loopTag = Instance.IlleanaAnim_Sly.Configuration.LoopTag
         });
+        DB.story.all[$"ThatsALotOfDamageToUs_{AmIlleana}_0"] = new()
+        {
+            type = NodeType.combat,
+            enemyShotJustHit = true,
+            minDamageDealtToPlayerThisTurn = 3,
+            allPresent = [ AmIlleana ],
+            lines = new()
+            {
+                new CustomSay()
+                {
+                    who = AmIlleana,
+                    Text = "Too much damage! Too much damage!",
+                    loopTag = Instance.IlleanaAnim_Panic.Configuration.LoopTag
+                }
+            }
+        };
+        DB.story.all[$"ThatsALotOfDamageToUs_{AmIlleana}_1"] = new()
+        {
+            type = NodeType.combat,
+            enemyShotJustHit = true,
+            minDamageDealtToPlayerThisTurn = 3,
+            allPresent = [ AmIlleana ],
+            lines = new()
+            {
+                new CustomSay()
+                {
+                    who = AmIlleana,
+                    Text = "That's too big of a hole to patch, even for me.",
+                    loopTag = Instance.IlleanaAnim_Panic.Configuration.LoopTag
+                }
+            }
+        };        
+        DB.story.all[$"ThatsALotOfDamageToUs_{AmIlleana}_2"] = new()
+        {
+            type = NodeType.combat,
+            enemyShotJustHit = true,
+            minDamageDealtToPlayerThisTurn = 3,
+            allPresent = [ AmIlleana ],
+            lines = new()
+            {
+                new CustomSay()
+                {
+                    who = AmIlleana,
+                    Text = "I can fix it... I can fix it...",
+                    loopTag = Instance.IlleanaAnim_Panic.Configuration.LoopTag
+                }
+            }
+        };
+        DB.story.all[$"ThatsALotOfDamageToThem_{AmIlleana}_0"] = new()
+        {
+            type = NodeType.combat,
+            playerShotJustHit = true,
+            minDamageDealtToEnemyThisTurn = 10,
+            allPresent = [ AmIlleana ],
+            lines = new()
+            {
+                new CustomSay()
+                {
+                    who = AmIlleana,
+                    Text = "That's a lot of damage!",
+                    loopTag = Instance.IlleanaAnim_Sly.Configuration.LoopTag
+                }
+            }
+        };        
+        DB.story.all[$"ThatsALotOfDamageToThem_{AmIlleana}_1"] = new()
+        {
+            type = NodeType.combat,
+            playerShotJustHit = true,
+            minDamageDealtToEnemyThisTurn = 10,
+            allPresent = [ AmIlleana ],
+            lines = new()
+            {
+                new CustomSay()
+                {
+                    who = AmIlleana,
+                    Text = "Booyah!",
+                    loopTag = Instance.IlleanaAnim_Neutral.Configuration.LoopTag  // Change to Excited/surprised
+                }
+            }
+        };
     }
 }
 

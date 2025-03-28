@@ -67,14 +67,19 @@ public class WeaponisedPatchkit : Card, IRegisterable
     {
         return upgrade switch
         {
+            Upgrade.B => new CardData
+            {
+                cost = 2,
+                exhaust = true
+            },
             Upgrade.A => new CardData
             {
-                cost = 1,
+                cost = 0,
                 exhaust = true
             },
             _ => new CardData
             {
-                cost = 2,
+                cost = 1,
                 exhaust = true
             },
         };

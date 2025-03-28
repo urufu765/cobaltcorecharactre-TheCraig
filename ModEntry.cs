@@ -158,7 +158,7 @@ internal class ModEntry : SimpleMod
                  * TODO On cards, it dictates the sheen on higher rarities, as well as influences the color of the energy cost.
                  * If this deck is given to a playable character, their name will be this color, and their mini will have this color as their border.
                  */
-                color = new Color("45e2b0"),
+                color = new Color("45e260"),
 
                 titleColor = new Color("000000")
             },
