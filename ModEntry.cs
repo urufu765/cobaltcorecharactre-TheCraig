@@ -22,16 +22,6 @@ internal class ModEntry : SimpleMod
     internal Harmony Harmony;
     internal IKokoroApi KokoroApi;
     internal IDeckEntry IlleanaDeck;
-    internal ICharacterAnimationEntryV2 IlleanaAnim_Neutral;
-    internal ICharacterAnimationEntryV2 IlleanaAnim_Squint;
-    internal ICharacterAnimationEntryV2 IlleanaAnim_Panic;
-    internal ICharacterAnimationEntryV2 IlleanaAnim_Explain;
-    internal ICharacterAnimationEntryV2 IlleanaAnim_Intense;
-    internal ICharacterAnimationEntryV2 IlleanaAnim_Mad;
-    internal ICharacterAnimationEntryV2 IlleanaAnim_Sly;
-    internal ICharacterAnimationEntryV2 IlleanaAnim_Solemn;
-    internal ICharacterAnimationEntryV2 IlleanaAnim_Tired;
-    internal ICharacterAnimationEntryV2 IlleanaAnim_Unamused;
     internal IStatusEntry TarnishStatus { get; private set; } = null!;
 
     internal ILocalizationProvider<IReadOnlyList<string>> AnyLocalizations { get; }
@@ -112,6 +102,42 @@ internal class ModEntry : SimpleMod
         IlleanaCardTypes
             .Concat(IlleanaArtifactTypes);
 
+    private static List<string> Illeana1Anims = [
+        //"blink",
+        //"eyebrowraise",
+        "gameover",
+        "mini",
+        //"screamA",
+        //"screamB",
+        //"screamC",
+        "sickofyoshit",
+        //"smile",
+        //"speechless",
+        //"stareatcamera",
+        //"thousandmilestare",
+        "unamused",
+        "placeholder"
+    ];
+    private static List<string> Illeana4Anims = [
+        //"blinkrapid",
+        //"curious",
+        //"desperate",
+        "explain",
+        "intense",
+        "mad",
+        "neutral",
+        "panic",
+        //"shocked",
+        //"silly",
+        "sly",
+        "solemn",
+        "squint",
+        //"tired",
+    ];
+    public readonly static IEnumerable<string> IlleanaAnims =
+        Illeana1Anims
+            .Concat(Illeana4Anims);
+
     public Spr SprTunezOn {get; private set;}
     public Spr SprTunezChill {get; private set;}
     public Spr SprTunezHype {get; private set;}
@@ -185,32 +211,14 @@ internal class ModEntry : SimpleMod
          * The game uses the squint animation for the Extra-Planar Being and High-Pitched Static events, and the gameover animation while you are dying.
          * You may define any other animations, and they will only be used when explicitly referenced (such as dialogue).
          */
-        IlleanaAnim_Neutral = RegisterAnimation(package, "neutral", "assets/Animation/illeana_neutral", 4);
-        IlleanaAnim_Squint = RegisterAnimation(package, "squint", "assets/Animation/illeana_squint", 4);
-        IlleanaAnim_Panic = RegisterAnimation(package, "panic", "assets/Animation/illeana_panic", 4);
-        IlleanaAnim_Explain = RegisterAnimation(package, "explain", "assets/Animation/illeana_explain", 4);
-        IlleanaAnim_Intense = RegisterAnimation(package, "intense", "assets/Animation/illeana_intense", 4);
-        IlleanaAnim_Mad = RegisterAnimation(package, "mad", "assets/Animation/illeana_mad", 4);
-        IlleanaAnim_Sly = RegisterAnimation(package, "sly", "assets/Animation/illeana_sly", 4);
-        IlleanaAnim_Solemn = RegisterAnimation(package, "solemn", "assets/Animation/illeana_solemn", 4);
-        IlleanaAnim_Tired = RegisterAnimation(package, "tired", "assets/Animation/illeana_tired", 1);
-        IlleanaAnim_Unamused = RegisterAnimation(package, "unamused", "assets/Animation/illeana_unamused", 1);
-        Instance.Helper.Content.Characters.V2.RegisterCharacterAnimation(new CharacterAnimationConfigurationV2
+        foreach (string s1 in Illeana1Anims)
         {
-            CharacterType = IlleanaDeck.Deck.Key(),
-            LoopTag = "gameover",
-            Frames = [
-                RegisterSprite(package, "assets/Animation/illeana_gameover0.png").Sprite,
-            ]
-        });
-        Instance.Helper.Content.Characters.V2.RegisterCharacterAnimation(new CharacterAnimationConfigurationV2
+            RegisterAnimation(package, s1, $"assets/Animation/illeana_{s1}", 1);
+        }
+        foreach (string s4 in Illeana4Anims)
         {
-            CharacterType = IlleanaDeck.Deck.Key(),
-            LoopTag = "mini",
-            Frames = [
-                RegisterSprite(package, "assets/Animation/illeana_mini0.png").Sprite,
-            ]
-        });
+            RegisterAnimation(package, s4, $"assets/Animation/illeana_{s4}", 4);
+        }
 
         IlleanaTheSnek = helper.Content.Characters.V2.RegisterPlayableCharacter("illeana", new PlayableCharacterConfigurationV2
         {

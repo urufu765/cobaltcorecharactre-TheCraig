@@ -17,7 +17,7 @@ internal static class StoryDialogue
             {
                 new CustomSay()
                 {
-                    who = Cat,
+                    who = AmCat,
                     Text = "Wakey wakey!"
                 },
                 new CustomSay()
@@ -40,7 +40,7 @@ internal static class StoryDialogue
                 },
                 new CustomSay()
                 {
-                    who = Cat,
+                    who = AmCat,
                     Text = "Who are you?",
                     loopTag = "squint"
                 },
@@ -58,7 +58,7 @@ internal static class StoryDialogue
                 },
                 new CustomSay()
                 {
-                    who = Cat,
+                    who = AmCat,
                     Text = "What! We need those!",
                     loopTag = "worried"
                 },

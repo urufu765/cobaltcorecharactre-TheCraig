@@ -18,11 +18,11 @@ internal static class EventDialogue
                 {
                     who = AmIlleana,
                     Text = "Ow... I felt that in my bones.",
-                    loopTag = Instance.IlleanaAnim_Squint.Configuration.LoopTag
+                    loopTag = "squint".Check()
                 },
                 new CustomSay()
                 {
-                    who = Cat,
+                    who = AmCat,
                     Text = "Energy readings are back to normal."
                 }
             }
