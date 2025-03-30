@@ -22,6 +22,7 @@ internal class ModEntry : SimpleMod
     internal Harmony Harmony;
     internal IKokoroApi KokoroApi;
     internal IDeckEntry IlleanaDeck;
+    internal IDeckEntry DecrepitCraigDeck;
     internal IStatusEntry TarnishStatus { get; private set; } = null!;
 
     internal ILocalizationProvider<IReadOnlyList<string>> AnyLocalizations { get; }
@@ -42,7 +43,8 @@ internal class ModEntry : SimpleMod
         typeof(ScrapPatchkit),
         typeof(FalseVaccine),
         typeof(IncompatibleFuel),
-        typeof(FindCure)
+        typeof(FindCure),
+        typeof(IlleanaExe)
     ];
     private static List<Type> IlleanaUncommonCardTypes = [
         typeof(GoneJiffy),
@@ -67,7 +69,10 @@ internal class ModEntry : SimpleMod
         typeof(SnekTunezChill),
         typeof(SnekTunezHype),
         typeof(SnekTunezSad),
-        typeof(SnekTunezGroovy)
+        typeof(SnekTunezGroovy),
+        typeof(Reminiscent),
+        typeof(Coalescent),
+        typeof(Obmutescent)
     ];
     private static IEnumerable<Type> IlleanaCardTypes =
         IlleanaCommonCardTypes
@@ -191,7 +196,21 @@ internal class ModEntry : SimpleMod
 
             DefaultCardArt = StableSpr.cards_colorless,
             BorderSprite = RegisterSprite(package, "assets/frame_illeana.png").Sprite,
-            Name = AnyLocalizations.Bind(["character", "name"]).Localize
+            Name = AnyLocalizations.Bind(["character", "Illeana", "name"]).Localize
+        });
+        DecrepitCraigDeck = helper.Content.Decks.RegisterDeck("deadcraig", new DeckConfiguration
+        {
+            Definition = new DeckDef
+            {
+                color = new Color("41b5ae"),
+
+                titleColor = new Color("000000")
+            },
+
+            DefaultCardArt = StableSpr.cards_colorless,
+            BorderSprite = RegisterSprite(package, "assets/frame_dead.png").Sprite,
+            OverBordersSprite = RegisterSprite(package, "assets/frame_dead_overlay.png").Sprite,
+            Name = AnyLocalizations.Bind(["character", "DeadCraig", "name"]).Localize
         });
 
         /*
