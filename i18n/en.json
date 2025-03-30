@@ -106,15 +106,15 @@
         "Common": {
             "BuildACure": {
                 "name": "Build-A-Cure",
-                "descB": "Add a <c=card>The Cure B</c> and a <c=card>The Failure B</c> to your draw pile.",
-                "descA": "Add 2 <c=card>The Cure</c> and a <c=card>The Failure A</c> to your draw pile.",
-                "desc": "Add a <c=card>The Cure</c> and a <c=card>The Failure</c> to your draw pile."
+                "descB": "Add an <c=cardtrait>exhaustible</c> <c=card>Cure B</c> and a <c=card>Failure B</c> to your draw pile.",
+                "descA": "Add 2 <c=cardtrait>exhaustible</c> <c=card>Cure</c> and a <c=card>Failure A</c> to your draw pile.",
+                "desc": "Add an <c=cardtrait>exhaustible</c> <c=card>Cure</c> and a <c=card>Failure</c> to your draw pile."
             },
             "FindACure": {
                 "name": "Find-A-Cure",
-                "descB": "Add a <c=card>The Cure B</c> and a <c=card>The Accident B</c> to your draw pile.",
-                "descA": "Add 2 <c=card>The Cure</c> and a <c=card>The Accident A</c> to your draw pile.",
-                "desc": "Add a <c=card>The Cure</c> and a <c=card>The Accident</c> to your draw pile."
+                "descB": "Add a <c=card>Cure B</c> and an <c=card>Accident B</c> to your draw pile.",
+                "descA": "Add 2 <c=card>Cure</c> and an <c=card>Accident A</c> to your draw pile.",
+                "desc": "Add a <c=card>Cure</c> and an <c=card>Accident</c> to your draw pile."
             },
             "Cleanse": {
                 "name": "Cleanse"
@@ -186,18 +186,18 @@
         },
         "Token": {
             "TheCure": {
-                "name": "The Cure",
+                "name": "Cure",
                 "altName": "DA CUre"
             },
             "TheFailure": {
-                "name": "The Failure",
-                "descB": "<c=downside>+1 <c=status>corrode</c> to self, and foe on draw.</c> -1 <c=status>corrode</c> when played.",
-                "desc": "<c=downside>+2 <c=status>corrode</c> to self on draw.</c> -1 <c=status>corrode</c> when played."
+                "name": "Failure",
+                "descB": "<c=downside>+1 <c=status>corrode</c> to self, and foe on draw.</c>\n-1 <c=status>corrode</c> when played.",
+                "desc": "<c=downside>+1 <c=status>corrode</c> to self on draw.</c>\n-1 <c=status>corrode</c> when played."
             },
             "TheAccident": {
-                "name": "The Accident",
-                "descB": "<c=downside>+1 <c=status>corrode</c> to self, and foe on draw.</c> 1 <c=status>tarnish</c> to foe when played.",
-                "desc": "<c=downside>+1 <c=status>corrode</c> to self on draw.</c> 1 <c=status>tarnish</c> to foe when played."
+                "name": "Accident",
+                "descB": "<c=downside>+1 <c=status>corrode</c> to self, and foe on draw.</c>\n1 <c=status>tarnish</c> to foe when played.",
+                "desc": "<c=downside>+1 <c=status>corrode</c> to self on draw.</c>\n1 <c=status>tarnish</c> to foe when played."
             },
             "SnekTunezChill": {
                 "name": "SnekTunez: Chill"

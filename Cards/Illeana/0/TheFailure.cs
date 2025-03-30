@@ -75,6 +75,7 @@ public class TheFailure : Card, IRegisterable
         {
             cost = upgrade == Upgrade.A ? 0 : 1,
             temporary = true,
+            exhaust = true,
             description = ModEntry.Instance.Localizations.Localize(["card", "Token", "TheFailure", upgrade switch { Upgrade.B => "descB", _ => "desc" }])
         };
     }
