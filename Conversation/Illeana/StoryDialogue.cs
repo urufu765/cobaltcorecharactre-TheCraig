@@ -23,20 +23,20 @@ internal static class StoryDialogue
                 new CustomSay()
                 {
                     who = AmIlleana,
-                    Text = "Hey! That's my line...",
-                    loopTag = Instance.IlleanaAnim_Neutral.Configuration.LoopTag
+                    Text = "Hey... That's my line...",
+                    loopTag = "tired".Check()
                 },
                 new CustomSay()
                 {
                     who = AmIlleana,
                     Text = "...",
-                    loopTag = Instance.IlleanaAnim_Neutral.Configuration.LoopTag
+                    loopTag = "neutral".Check()
                 },
                 new CustomSay()
                 {
                     who = AmIlleana,
                     Text = "This isn't my ship.",
-                    loopTag = Instance.IlleanaAnim_Squint.Configuration.LoopTag
+                    loopTag = "squint".Check()
                 },
                 new CustomSay()
                 {
@@ -48,13 +48,13 @@ internal static class StoryDialogue
                 {
                     who = AmIlleana,
                     Text = "Can't say...",
-                    loopTag = Instance.IlleanaAnim_Squint.Configuration.LoopTag
+                    loopTag = "squint".Check()
                 },
                 new CustomSay()
                 {
                     who = AmIlleana,
                     Text = "But! I can make use of the unutilized hull you got.",
-                    loopTag = Instance.IlleanaAnim_Neutral.Configuration.LoopTag
+                    loopTag = "neutral".Check()
                 },
                 new CustomSay()
                 {
@@ -66,7 +66,7 @@ internal static class StoryDialogue
                 {
                     who = AmIlleana,
                     Text = "Don't worry! You won't even notice it's gone.",
-                    loopTag = Instance.IlleanaAnim_Neutral.Configuration.LoopTag
+                    loopTag = "sly".Check()
                 }
             }
         };

@@ -32,7 +32,6 @@ public class PartSwap : Card, IRegisterable
 
     public override List<CardAction> GetActions(State s, Combat c)
     {
-        int x = s.ship.Get(Status.corrode);
         return upgrade switch
         {
             Upgrade.B => 
