@@ -251,7 +251,7 @@ internal static class CombatDialogue
         {
             if (ModEntry.Patch_EnemyPack)
             {
-                DB.story.all[$"EnemyPack_GooseEscape"].lines.Add(
+                DB.story.all["EnemyPack_GooseEscape"].lines.Add(
                     new CustomSay()
                     {
                         who = AmIlleana,
@@ -263,7 +263,7 @@ internal static class CombatDialogue
         }
         catch (Exception err)
         {
-            ModEntry.Instance.Logger.LogError(err, "FUCK");
+            ModEntry.Instance.Logger.LogError(err, "FUCK, couldn't add lines");
         }
     }
 }

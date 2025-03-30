@@ -92,7 +92,8 @@ internal class ModEntry : SimpleMod
         // typeof(ConstantInnovation),
         // typeof(Limbless),
         typeof(PersonalStereo),
-        typeof(Tempoboosters)
+        typeof(Tempoboosters),
+        typeof(WarpPrototype)
     ];
     private static List<Type> IlleanaEventArtifacts = [
         typeof(LightenedLoad),
@@ -333,6 +334,7 @@ internal class ModEntry : SimpleMod
 
         //DrawLoadingScreenFixer.Apply(Harmony);
         //SashaSportingSession.Apply(Harmony);
+        WarpPrototypeHelper.Apply(Harmony);
     }
 
     /*
