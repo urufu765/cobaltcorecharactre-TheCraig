@@ -153,6 +153,7 @@ internal class ModEntry : SimpleMod
     public Spr SprBoostrO {get; private set;}
     public Spr SprExLubeO {get; private set;}
     public Spr SprExLubeX {get; private set;}
+    public static bool Patch_EnemyPack {get; private set;}
 
 
     public ModEntry(IPluginPackage<IModManifest> package, IModHelper helper, ILogger logger) : base(package, helper, logger)
@@ -167,6 +168,15 @@ internal class ModEntry : SimpleMod
          */
         KokoroApi = helper.ModRegistry.GetApi<IKokoroApi>("Shockah.Kokoro")!;
         MoreDifficultiesApi = helper.ModRegistry.GetApi<IMoreDifficultiesApi>("TheJazMaster.MoreDifficulties");
+        helper.Events.OnModLoadPhaseFinished += (_, phase) =>
+        {
+            if (phase == ModLoadPhase.AfterDbInit)
+            {
+                Patch_EnemyPack = helper.ModRegistry.LoadedMods.ContainsKey("TheJazMaster.EnemyPack");
+                DialogueMachine.Apply();
+            }
+
+        };
 
         AnyLocalizations = new JsonLocalizationProvider(
             tokenExtractor: new SimpleLocalizationTokenExtractor(),
@@ -321,7 +331,7 @@ internal class ModEntry : SimpleMod
         SprExLubeO = RegisterSprite(package, "assets/Artifact/ExperimentalLubricantO.png").Sprite;
         SprExLubeX = RegisterSprite(package, "assets/Artifact/ExperimentalLubricantX.png").Sprite;
 
-        DrawLoadingScreenFixer.Apply(Harmony);
+        //DrawLoadingScreenFixer.Apply(Harmony);
         //SashaSportingSession.Apply(Harmony);
     }
 

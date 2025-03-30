@@ -1,3 +1,5 @@
+using System;
+using Microsoft.Extensions.Logging;
 using static Illeana.Dialogue.CommonDefinitions;
 
 namespace Illeana.Dialogue;
@@ -146,6 +148,123 @@ internal static class CombatDialogue
                 }
             }
         };
+        DB.story.all[$"WeGotShotButTookNoDamage_{AmIlleana}_0"] = new()
+        {
+            type = NodeType.combat,
+            enemyShotJustHit = true,
+            maxDamageDealtToPlayerThisTurn = 0,
+            lastTurnPlayerStatuses = [Status.perfectShield],
+            
+            oncePerRun = true,
+            allPresent = [ AmIlleana ],
+            lines = new()
+            {
+                new CustomSay()
+                {
+                    who = AmIlleana,
+                    Text = "The results of my constant experimentions. Behold, perfection.",
+                    loopTag = "explain".Check()
+                }
+            }
+        };
+        DB.story.all[$"WeGotShotButTookNoDamage_{AmIlleana}_1"] = new()
+        {
+            type = NodeType.combat,
+            enemyShotJustHit = true,
+            maxDamageDealtToPlayerThisTurn = 0,
+            lastTurnPlayerStatuses = [Status.perfectShield],
+            
+            oncePerRun = true,
+            allPresent = [ AmIlleana ],
+            lines = new()
+            {
+                new CustomSay()
+                {
+                    who = AmIlleana,
+                    Text = "See? All that hull perforation wasn't in vain.",
+                    loopTag = "explain".Check()
+                }
+            }
+        };
+        DB.story.all[$"WeGotShotButTookNoDamage_{AmIlleana}_2"] = new()
+        {
+            type = NodeType.combat,
+            enemyShotJustHit = true,
+            maxDamageDealtToPlayerThisTurn = 0,
+            lastTurnPlayerStatuses = [Status.perfectShield],
+            
+            oncePerRun = true,
+            allPresent = [ AmIlleana ],
+            lines = new()
+            {
+                new CustomSay()
+                {
+                    who = AmIlleana,
+                    Text = "That could've been really bad... if you didn't believe in my research.",
+                    loopTag = "explain".Check()
+                }
+            }
+        };
+        DB.story.all[$"WeAreMovingAroundALot_{AmIlleana}_0"] = new()
+        {
+            type = NodeType.combat,
+            minMovesThisTurn = 3,
+            oncePerRun = true,
+            allPresent = [ AmIlleana ],
+            lines = new()
+            {
+                new CustomSay()
+                {
+                    who = AmIlleana,
+                    Text = "Dodge and weave! Dodge and weave!",
+                    loopTag = "shocked".Check()
+                }
+            }
+        };        
+        DB.story.all[$"WeAreMovingAroundALot_{AmIlleana}_1"] = new()
+        {
+            type = NodeType.combat,
+            minMovesThisTurn = 3,
+            oncePerRun = true,
+            allPresent = [ AmIlleana ],
+            lines = new()
+            {
+                new CustomSay()
+                {
+                    who = AmIlleana,
+                    Text = "The best form of defence is running away...",
+                    loopTag = "explain".Check()
+                },
+                new CustomSay()
+                {
+                    who = AmIlleana,
+                    Text = "wait no I meant movement.",
+                    loopTag = "intense".Check()
+                }
+            }
+        };
+    }
+
+    internal static void ModdedInject()
+    {
+        try
+        {
+            if (ModEntry.Patch_EnemyPack)
+            {
+                DB.story.all[$"EnemyPack_GooseEscape"].lines.Add(
+                    new CustomSay()
+                    {
+                        who = AmIlleana,
+                        Text = "It's getting away!",
+                        loopTag = "angry".Check()
+                    }
+                );
+            }
+        }
+        catch (Exception err)
+        {
+            ModEntry.Instance.Logger.LogError(err, "FUCK");
+        }
     }
 }
 

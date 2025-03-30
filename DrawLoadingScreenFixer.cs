@@ -1,8 +1,11 @@
 using Illeana.Dialogue;
 using HarmonyLib;
 using Microsoft.Extensions.Logging;
+using System;
 
 namespace Illeana;
+
+[Obsolete("Not used any more", true)]
 internal static class DrawLoadingScreenFixer
 {
     internal static void Apply(Harmony harmony)
@@ -23,5 +26,6 @@ internal static class DrawLoadingScreenFixer
         StoryDialogue.Inject();
         EventDialogue.Inject();
         CombatDialogue.Inject();
+        CombatDialogue.ModdedInject();
     }
 }

@@ -8,6 +8,7 @@ A corrosion engineer who works with corrosion to help keep the ship at tip top c
 
 #### a.3: Don't Talk With Your Mouth Full
 
+* **(0.3.7)**: More dialogue (EnemyPack edition)
 * **(0.3.6)**: Added a cat EXE card for Illeana and a secret card that has a rare chance to spawn
 * **(0.3.5)**: Fixed StoryDialogue not being converted to new system of animations && Removed unused variable in PartSwap
 * **(0.3.4)**: Simplified animation registering + Memory dialogue planned out (but not implemented)

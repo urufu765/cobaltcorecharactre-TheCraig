@@ -71,7 +71,11 @@ public class Obmutescent : Card, IRegisterable
     {
         return upgrade switch
         {
-            Upgrade.A or Upgrade.B => new CardData
+            Upgrade.B => new CardData
+            {
+                cost = 1,
+            },
+            Upgrade.A => new CardData
             {
                 cost = 2,
             },
