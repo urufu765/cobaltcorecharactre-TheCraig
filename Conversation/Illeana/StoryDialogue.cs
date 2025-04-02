@@ -6,7 +6,7 @@ internal static class StoryDialogue
 {
     internal static void Inject()
     {
-        DB.story.all[$"{AmIlleana}_Intro_0"] = new()
+        DB.story.all["Illeana_Intro_0"] = new()
         {
             type = NodeType.@event,
             lookup = new() {"zone_first"},

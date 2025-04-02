@@ -8,7 +8,7 @@ internal static class ArtifactDialogue
 {
     internal static void Inject()
     {
-        DB.story.all[$"ArtifactForgedCertificate_{AmIlleana}"] = new()
+        DB.story.all["ArtifactForgedCertificate_Illeana"] = new()
         {
             type = NodeType.combat,
             oncePerRun = true,
@@ -43,7 +43,7 @@ internal static class ArtifactDialogue
                 }
             }
         };
-        DB.story.all[$"ArtifactByproductProcessor_{AmIlleana}"] = new()
+        DB.story.all["ArtifactByproductProcessor_Illeana"] = new()
         {
             type = NodeType.combat,
             oncePerRun = true,
@@ -60,7 +60,7 @@ internal static class ArtifactDialogue
                 }
             }
         };
-        DB.story.all[$"ArtifactCausticArmor_{AmIlleana}"] = new()
+        DB.story.all["ArtifactCausticArmor_Illeana"] = new()
         {
             type = NodeType.combat,
             oncePerRun = true,
@@ -77,7 +77,7 @@ internal static class ArtifactDialogue
                 }
             }
         };
-        DB.story.all[$"ArtifactExperimentalLubricant_{AmIlleana}"] = new()
+        DB.story.all["ArtifactExperimentalLubricant_Illeana"] = new()
         {
             type = NodeType.combat,
             oncePerRun = true,
@@ -94,7 +94,7 @@ internal static class ArtifactDialogue
                 }
             }
         };
-        DB.story.all[$"ArtifactExternalFuelSource_{AmIlleana}"] = new()
+        DB.story.all["ArtifactExternalFuelSource_Illeana"] = new()
         {
             type = NodeType.combat,
             oncePerRun = true,
@@ -114,7 +114,7 @@ internal static class ArtifactDialogue
             }
         };
 
-        DB.story.all[$"ArtifactWarpPrototype_{AmIlleana}"] = new()
+        DB.story.all["ArtifactWarpPrototype_Illeana"] = new()
         {
             type = NodeType.combat,
             oncePerRun = true,
@@ -133,7 +133,7 @@ internal static class ArtifactDialogue
                 }
             }
         };
-        DB.story.all[$"ArtifactWarpPrototype_Multi_0"] = new()
+        DB.story.all["ArtifactWarpPrototype_Multi_0"] = new()
         {
             type = NodeType.combat,
             oncePerRun = true,
@@ -152,7 +152,7 @@ internal static class ArtifactDialogue
                 }
             }
         };
-        DB.story.all[$"ArtifactLightenedLoad_{AmIlleana}_0"] = new()
+        DB.story.all["ArtifactLightenedLoad_Illeana_0"] = new()
         {
             type = NodeType.combat,
             oncePerRun = true,
@@ -168,7 +168,7 @@ internal static class ArtifactDialogue
                 }
             }
         };
-        DB.story.all[$"ArtifactLightenedLoad_{AmIlleana}_1"] = new()
+        DB.story.all["ArtifactLightenedLoad_Illeana_1"] = new()
         {
             type = NodeType.combat,
             oncePerRun = true,
@@ -184,7 +184,7 @@ internal static class ArtifactDialogue
                 }
             }
         };
-        DB.story.all[$"ArtifactWarpMastery_{AmIlleana}"] = new()
+        DB.story.all["ArtifactWarpMastery_Illeana"] = new()
         {
             type = NodeType.combat,
             oncePerRun = true,
@@ -227,7 +227,7 @@ internal static class ArtifactDialogue
         // };
         try
         {
-            DB.story.all[$"ArtifactShieldPrepIsGone_Multi_0"].doesNotHaveArtifacts?.Add(
+            DB.story.all["ArtifactShieldPrepIsGone_Multi_0"].doesNotHaveArtifacts?.Add(
                 "WarpPrototype"
             );
         }
@@ -237,7 +237,7 @@ internal static class ArtifactDialogue
         }
         try
         {
-            DB.story.all[$"ArtifactShieldPrepIsGone_Multi_1"].doesNotHaveArtifacts?.Add(
+            DB.story.all["ArtifactShieldPrepIsGone_Multi_1"].doesNotHaveArtifacts?.Add(
                 "WarpPrototype"
             );
         }
@@ -247,7 +247,7 @@ internal static class ArtifactDialogue
         }
         try
         {
-            DB.story.all[$"ArtifactShieldPrepIsGone_Multi_2"].doesNotHaveArtifacts?.Add(
+            DB.story.all["ArtifactShieldPrepIsGone_Multi_2"].doesNotHaveArtifacts?.Add(
                 "WarpPrototype"
             );
         }
@@ -257,7 +257,7 @@ internal static class ArtifactDialogue
         }
         try
         {
-            DB.story.all[$"ArtifactShieldPrepIsGone_Multi_3"].doesNotHaveArtifacts?.Add(
+            DB.story.all["ArtifactShieldPrepIsGone_Multi_3"].doesNotHaveArtifacts?.Add(
                 "WarpPrototype"
             );
         }
@@ -265,7 +265,7 @@ internal static class ArtifactDialogue
         {
             ModEntry.Instance.Logger.LogError(err, "Failed to add condition to ShieldPrepIsGone3");
         }
-        DB.story.all[$"ArtifactShieldPrepIsGone_{AmIlleana}"] = new()
+        DB.story.all["ArtifactShieldPrepIsGone_Illeana"] = new()
         {
             type = NodeType.combat,
             oncePerRun = true,

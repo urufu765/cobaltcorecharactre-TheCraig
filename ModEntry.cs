@@ -274,7 +274,7 @@ internal class ModEntry : SimpleMod
                 artifacts = [
                 ]
             },
-            Description = AnyLocalizations.Bind(["character", "desc"]).Localize
+            Description = AnyLocalizations.Bind(["character", "Illeana", "desc"]).Localize
         });
 
         MoreDifficultiesApi?.RegisterAltStarters(IlleanaDeck.Deck, new StarterDeck

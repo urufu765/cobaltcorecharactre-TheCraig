@@ -6,7 +6,7 @@ internal static class MemoryDialogue
 {
     internal static void Inject()
     {
-        DB.story.all[$"RunWinWho_{AmIlleana}_1"] = new()
+        DB.story.all["RunWinWho_Illeana_1"] = new()
         {
             type = NodeType.@event,
             introDelay = false,
@@ -65,7 +65,7 @@ internal static class MemoryDialogue
                 }
             }
         };
-        DB.story.all[$"RunWinWho_{AmIlleana}_2"] = new()
+        DB.story.all["RunWinWho_Illeana_2"] = new()
         {
             type = NodeType.@event,
             introDelay = false,
@@ -127,7 +127,7 @@ internal static class MemoryDialogue
                 },
             }
         };
-        DB.story.all[$"RunWinWho_{AmIlleana}_3"] = new()
+        DB.story.all["RunWinWho_Illeana_3"] = new()
         {
             type = NodeType.@event,
             introDelay = false,
@@ -201,7 +201,7 @@ internal static class MemoryDialogue
                 }
             }
         };
-        DB.story.all[$"{AmIlleana}_Memory_1"] = new()
+        DB.story.all["Illeana_Memory_1"] = new()
         {
             type = NodeType.@event,
             introDelay = false,
@@ -230,7 +230,7 @@ internal static class MemoryDialogue
                 }
             }
         };        
-        DB.story.all[$"{AmIlleana}_Memory_2"] = new()
+        DB.story.all["Illeana_Memory_2"] = new()
         {
             type = NodeType.@event,
             introDelay = false,
@@ -263,7 +263,7 @@ internal static class MemoryDialogue
             }
         };
         // Illeana downloads herself to Craig's body and becomes her.
-        DB.story.all[$"{AmIlleana}_Memory_3"] = new()
+        DB.story.all["Illeana_Memory_3"] = new()
         {
             type = NodeType.@event,
             introDelay = false,

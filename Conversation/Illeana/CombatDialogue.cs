@@ -8,67 +8,67 @@ internal static class CombatDialogue
 {
     internal static void Inject()
     {
-        DB.story.all[$"WeAreCorroded_Multi_0"].lines.Add(new CustomSay()
+        DB.story.all["WeAreCorroded_Multi_0"].lines.Add(new CustomSay()
         {
             who = AmIlleana,
             Text = "No wait, stay! I got it.",
             loopTag = "intense".Check()
         });
-        DB.story.all[$"WeAreCorroded_Multi_1"].lines.Add(new CustomSay()
+        DB.story.all["WeAreCorroded_Multi_1"].lines.Add(new CustomSay()
         {
             who = AmIlleana,
             Text = "Hold on, I got it under control!",
             loopTag = "neutral".Check()
         });
-        DB.story.all[$"WeAreCorroded_Multi_2"].lines.Add(new CustomSay()
+        DB.story.all["WeAreCorroded_Multi_2"].lines.Add(new CustomSay()
         {
             who = AmIlleana,
             Text = "We can totally fix that in the middle of a fight.",
             loopTag = "sly".Check()
         });
-        DB.story.all[$"WeAreCorroded_Multi_3"].lines.Add(new CustomSay()
+        DB.story.all["WeAreCorroded_Multi_3"].lines.Add(new CustomSay()
         {
             who = AmIlleana,
             Text = "Nuh uh.",
             loopTag = "mad".Check()
         });
-        DB.story.all[$"WeAreCorroded_Multi_4"].lines.Add(new CustomSay()
+        DB.story.all["WeAreCorroded_Multi_4"].lines.Add(new CustomSay()
         {
             who = AmIlleana,
             Text = "Hush, I'm concentrating.",
             loopTag = "squint".Check()
         });
-        DB.story.all[$"WeAreCorroded_Multi_5"].lines.Add(new CustomSay()
+        DB.story.all["WeAreCorroded_Multi_5"].lines.Add(new CustomSay()
         {
             who = AmIlleana,
             Text = "It's all part of the plan.",
             loopTag = "explain".Check()
         });
-        DB.story.all[$"WeAreCorroded_Multi_6"].lines.Add(new CustomSay()
+        DB.story.all["WeAreCorroded_Multi_6"].lines.Add(new CustomSay()
         {
             who = AmIlleana,
             Text = "I'm working on it!",
             loopTag = "mad".Check()
         });
-        DB.story.all[$"WeAreCorroded_Multi_7"].lines.Add(new CustomSay()
+        DB.story.all["WeAreCorroded_Multi_7"].lines.Add(new CustomSay()
         {
             who = AmIlleana,
             Text = "Computer, snooze.",
             loopTag = "solemn".Check()
         });        
-        DB.story.all[$"WeAreCorroded_Multi_8"].lines.Add(new CustomSay()
+        DB.story.all["WeAreCorroded_Multi_8"].lines.Add(new CustomSay()
         {
             who = AmIlleana,
             Text = "Uh yes?",
             loopTag = "curious".Check()
         });
-        DB.story.all[$"TheyGotCorroded_Multi_5"].lines.Add(new CustomSay()
+        DB.story.all["TheyGotCorroded_Multi_5"].lines.Add(new CustomSay()
         {
             who = AmIlleana,
             Text = "Did I do that?",
             loopTag = "sly".Check()
         });
-        DB.story.all[$"ThatsALotOfDamageToUs_{AmIlleana}_0"] = new()
+        DB.story.all["ThatsALotOfDamageToUs_Illeana_0"] = new()
         {
             type = NodeType.combat,
             enemyShotJustHit = true,
@@ -84,7 +84,7 @@ internal static class CombatDialogue
                 }
             }
         };
-        DB.story.all[$"ThatsALotOfDamageToUs_{AmIlleana}_1"] = new()
+        DB.story.all["ThatsALotOfDamageToUs_Illeana_1"] = new()
         {
             type = NodeType.combat,
             enemyShotJustHit = true,
@@ -100,7 +100,7 @@ internal static class CombatDialogue
                 }
             }
         };        
-        DB.story.all[$"ThatsALotOfDamageToUs_{AmIlleana}_2"] = new()
+        DB.story.all["ThatsALotOfDamageToUs_Illeana_2"] = new()
         {
             type = NodeType.combat,
             enemyShotJustHit = true,
@@ -116,7 +116,7 @@ internal static class CombatDialogue
                 }
             }
         };
-        DB.story.all[$"ThatsALotOfDamageToThem_{AmIlleana}_0"] = new()
+        DB.story.all["ThatsALotOfDamageToThem_Illeana_0"] = new()
         {
             type = NodeType.combat,
             playerShotJustHit = true,
@@ -132,7 +132,7 @@ internal static class CombatDialogue
                 }
             }
         };        
-        DB.story.all[$"ThatsALotOfDamageToThem_{AmIlleana}_1"] = new()
+        DB.story.all["ThatsALotOfDamageToThem_Illeana_1"] = new()
         {
             type = NodeType.combat,
             playerShotJustHit = true,
@@ -148,7 +148,7 @@ internal static class CombatDialogue
                 }
             }
         };
-        DB.story.all[$"WeGotShotButTookNoDamage_{AmIlleana}_0"] = new()
+        DB.story.all["WeGotShotButTookNoDamage_Illeana_0"] = new()
         {
             type = NodeType.combat,
             enemyShotJustHit = true,
@@ -167,7 +167,7 @@ internal static class CombatDialogue
                 }
             }
         };
-        DB.story.all[$"WeGotShotButTookNoDamage_{AmIlleana}_1"] = new()
+        DB.story.all["WeGotShotButTookNoDamage_Illeana_1"] = new()
         {
             type = NodeType.combat,
             enemyShotJustHit = true,
@@ -186,7 +186,7 @@ internal static class CombatDialogue
                 }
             }
         };
-        DB.story.all[$"WeGotShotButTookNoDamage_{AmIlleana}_2"] = new()
+        DB.story.all["WeGotShotButTookNoDamage_Illeana_2"] = new()
         {
             type = NodeType.combat,
             enemyShotJustHit = true,
@@ -205,7 +205,7 @@ internal static class CombatDialogue
                 }
             }
         };
-        DB.story.all[$"WeAreMovingAroundALot_{AmIlleana}_0"] = new()
+        DB.story.all["WeAreMovingAroundALot_Illeana_0"] = new()
         {
             type = NodeType.combat,
             minMovesThisTurn = 3,
@@ -221,7 +221,7 @@ internal static class CombatDialogue
                 }
             }
         };        
-        DB.story.all[$"WeAreMovingAroundALot_{AmIlleana}_1"] = new()
+        DB.story.all["WeAreMovingAroundALot_Illeana_1"] = new()
         {
             type = NodeType.combat,
             minMovesThisTurn = 3,
@@ -251,7 +251,7 @@ internal static class CombatDialogue
         {
             if (ModEntry.Patch_EnemyPack)
             {
-                DB.story.all[$"EnemyPack_GooseEscape_{AmIlleana}_0"]
+                DB.story.all["EnemyPack_GooseEscape_Illeana_0"]
                 = new()
                 {
                     type = NodeType.combat,
@@ -272,7 +272,7 @@ internal static class CombatDialogue
                         }
                     ]
                 };                
-                DB.story.all[$"EnemyPack_GooseEscape_{AmIlleana}_1"]
+                DB.story.all["EnemyPack_GooseEscape_Illeana_1"]
                 = new()
                 {
                     type = NodeType.combat,

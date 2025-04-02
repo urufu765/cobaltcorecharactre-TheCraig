@@ -8,7 +8,7 @@ internal static class CardDialogue
 {
     internal static void Inject()
     {
-        DB.story.all[$"CATsummonedIlleanaCard_Multi_0"] = new()
+        DB.story.all["CATsummonedIlleanaCard_Multi_0"] = new()
         {
             type = NodeType.combat,
             oncePerRun = true,
@@ -24,7 +24,7 @@ internal static class CardDialogue
                 }
             }
         };
-        DB.story.all[$"CATsummonedIlleanaCard_Multi_1"] = new()
+        DB.story.all["CATsummonedIlleanaCard_Multi_1"] = new()
         {
             type = NodeType.combat,
             oncePerRun = true,
@@ -46,7 +46,7 @@ internal static class CardDialogue
                 }
             }
         };
-        DB.story.all[$"Reminicent_Multi_0"] = new()
+        DB.story.all["Reminicent_Multi_0"] = new()
         {
             type = NodeType.combat,
             oncePerRun = true,
@@ -63,7 +63,7 @@ internal static class CardDialogue
                 }
             }
         };
-        DB.story.all[$"Reminicent_Multi_1"] = new()
+        DB.story.all["Reminicent_Multi_1"] = new()
         {
             type = NodeType.combat,
             oncePerRun = true,
@@ -80,7 +80,7 @@ internal static class CardDialogue
                 }
             }
         };
-        DB.story.all[$"Coalescent_Multi_0"] = new()
+        DB.story.all["Coalescent_Multi_0"] = new()
         {
             type = NodeType.combat,
             oncePerRun = true,
@@ -97,7 +97,7 @@ internal static class CardDialogue
                 }
             }
         };
-        DB.story.all[$"Coalescent_Multi_1"] = new()
+        DB.story.all["Coalescent_Multi_1"] = new()
         {
             type = NodeType.combat,
             oncePerRun = true,
@@ -114,7 +114,7 @@ internal static class CardDialogue
                 }
             }
         };
-        DB.story.all[$"Obmutescent_Multi_0"] = new()
+        DB.story.all["Obmutescent_Multi_0"] = new()
         {
             type = NodeType.combat,
             oncePerRun = true,
@@ -131,7 +131,7 @@ internal static class CardDialogue
                 }
             }
         };
-        DB.story.all[$"Autotomy_Multi_0"] = new()
+        DB.story.all["Autotomy_Multi_0"] = new()
         {
             type = NodeType.combat,
             oncePerRun = true,
@@ -148,7 +148,7 @@ internal static class CardDialogue
                 }
             }
         };
-        DB.story.all[$"Autotomy_Multi_1"] = new()
+        DB.story.all["Autotomy_Multi_1"] = new()
         {
             type = NodeType.combat,
             oncePerRun = true,
@@ -177,7 +177,7 @@ internal static class CardDialogue
                 }
             }
         };
-        DB.story.all[$"Autotomy_Multi_2"] = new()
+        DB.story.all["Autotomy_Multi_2"] = new()
         {
             type = NodeType.combat,
             oncePerRun = true,
@@ -194,7 +194,7 @@ internal static class CardDialogue
                 }
             }
         };
-        DB.story.all[$"BuildACure_Multi_0"] = new()  
+        DB.story.all["BuildACure_Multi_0"] = new()  
         {
             type = NodeType.combat,
             oncePerRun = true,

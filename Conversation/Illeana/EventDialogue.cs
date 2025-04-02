@@ -6,7 +6,7 @@ internal static class EventDialogue
 {
     internal static void Inject()
     {
-        DB.story.all[$"ChoiceCardRewardOfYourColorChoice_{AmIlleana}"] = new()
+        DB.story.all["ChoiceCardRewardOfYourColorChoice_Illeana"] = new()
         {
             type = NodeType.@event,
             oncePerRun = true,
