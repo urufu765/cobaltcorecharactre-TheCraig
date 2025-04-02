@@ -232,14 +232,8 @@ internal static class CombatDialogue
                 new CustomSay()
                 {
                     who = AmIlleana,
-                    Text = "The best form of defence is running away...",
+                    Text = "The best form of defence is running away... wait no I meant movement.",
                     loopTag = "explain".Check()
-                },
-                new CustomSay()
-                {
-                    who = AmIlleana,
-                    Text = "wait no I meant movement.",
-                    loopTag = "intense".Check()
                 }
             }
         };
