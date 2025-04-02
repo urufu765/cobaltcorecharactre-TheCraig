@@ -23,6 +23,8 @@ internal class ModEntry : SimpleMod
     internal IKokoroApi KokoroApi;
     internal IDeckEntry IlleanaDeck;
     internal IDeckEntry DecrepitCraigDeck;
+    public bool modDialogueInited;
+
     internal IStatusEntry TarnishStatus { get; private set; } = null!;
 
     internal ILocalizationProvider<IReadOnlyList<string>> AnyLocalizations { get; }
@@ -133,6 +135,9 @@ internal class ModEntry : SimpleMod
         "mad",
         "neutral",
         "panic",
+        //"possessed",
+        //"possessedmad",
+        //"sad",
         //"shocked",
         //"silly",
         "sly",
@@ -161,7 +166,7 @@ internal class ModEntry : SimpleMod
     {
         Instance = this;
         Harmony = new Harmony("urufudoggo.Illeana");
-        
+        modDialogueInited = false;
         /*
          * Some mods provide an API, which can be requested from the ModRegistry.
          * The following is an example of a required dependency - the code would have unexpected errors if Kokoro was not present.
@@ -175,6 +180,7 @@ internal class ModEntry : SimpleMod
             {
                 Patch_EnemyPack = helper.ModRegistry.LoadedMods.ContainsKey("TheJazMaster.EnemyPack");
                 DialogueMachine.Apply();
+                DialogueMachine.ApplyModded();
             }
 
         };

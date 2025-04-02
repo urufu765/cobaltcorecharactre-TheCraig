@@ -151,9 +151,9 @@
             },
             "Amputation": {
                 "name": "Amputation",
-                "desc": "X = your missing hull.\n<c=healing>Heal X</c>.\n<c=status>-X Corrode</c>.\n<c=downside>-2 Max Hull</c>",
-                "descA": "X = your missing hull.\n<c=healing>Heal X</c>.\n<c=status>-X Corrode</c>.\n<c=downside>-1 Max Hull</c>",
-                "descB": "X = your missing hull.\n<c=healing>Heal X</c>.\n<c=status>X/2 Ace</c>.\n<c=status>-X Corrode</c>.\n<c=downside>-3 Max Hull</c>"
+                "desc": "X = your missing hull.\n<c=healing>Heal X</c>.\n<c=status>-X Corrode</c>.\n<c=downside>-2 Max Hull</c>.",
+                "descA": "X = your missing hull.\n<c=healing>Heal X</c>.\n<c=status>-X Corrode</c>.\n<c=downside>-1 Max Hull</c>.",
+                "descB": "X = your missing hull.\n<c=healing>Heal X</c>.\n<c=status>X/2 Ace</c>.\n<c=status>-X Corrode</c>.\n<c=downside>-3 Max Hull</c>."
             },
             "DeadlyAdrenaline": {
                 "name": "Deadly Adrenaline"
@@ -220,8 +220,8 @@
             },
             "Coalescent": {
                 "name": "Coalescent",
-                "desc": "X = your max hull.\n<c=status>X foe tarnish</c>.\n<c=downside>X self tarnish</c>",
-                "descB": "X = enemy max hull.\n<c=status>X foe tarnish</c>.\n<c=downside>X self tarnish</c>"
+                "desc": "X = your max hull.\n<c=status>X foe tarnish</c>.\n<c=downside>X self tarnish</c>.",
+                "descB": "X = enemy max hull.\n<c=status>X foe tarnish</c>.\n<c=downside>X self tarnish</c>."
             },
             "Obmutescent": {
                 "name": "Obmutescent"

@@ -39,7 +39,8 @@ public class Reminiscent : Card, IRegisterable
                 {
                     status = ModEntry.Instance.TarnishStatus.Status,
                     targetPlayer = false,
-                    statusAmount = 4
+                    statusAmount = 4,
+                    dialogueSelector = ".reminiceCraig"
                 }
             ],
             _ => 
@@ -48,7 +49,8 @@ public class Reminiscent : Card, IRegisterable
                 {
                     status = ModEntry.Instance.TarnishStatus.Status,
                     targetPlayer = false,
-                    statusAmount = 2
+                    statusAmount = 2,
+                    dialogueSelector = ".reminiceCraig"
                 },
                 new AAttack
                 {

@@ -45,7 +45,8 @@ public class Obmutescent : Card, IRegisterable
                 {
                     status = Status.autododgeRight,
                     targetPlayer = true,
-                    statusAmount = 1
+                    statusAmount = 1,
+                    dialogueSelector = ".obmutesceCraig"
                 },
             ],
             _ => 
@@ -60,7 +61,8 @@ public class Obmutescent : Card, IRegisterable
                 {
                     status = Status.autododgeLeft,
                     targetPlayer = true,
-                    statusAmount = 1
+                    statusAmount = 1,
+                    dialogueSelector = ".obmutesceCraig"
                 },
             ],
         };

@@ -47,7 +47,8 @@ public class Coalescent : Card, IRegisterable
             {
                 status = ModEntry.Instance.TarnishStatus.Status,
                 targetPlayer = true,
-                statusAmount = x
+                statusAmount = x,
+                dialogueSelector = ".coalesceCraig"
             },
         ];
     }

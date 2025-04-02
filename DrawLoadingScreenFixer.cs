@@ -23,9 +23,5 @@ internal static class DrawLoadingScreenFixer
     {
         if (__state <= 0) return;
         if ((__instance.loadingQueue?.Count ?? 0) > 0) return;
-        StoryDialogue.Inject();
-        EventDialogue.Inject();
-        CombatDialogue.Inject();
-        CombatDialogue.ModdedInject();
     }
 }

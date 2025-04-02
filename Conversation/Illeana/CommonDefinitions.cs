@@ -16,6 +16,12 @@ static class CommonDefinitions
     public const string AmCat = "comp";
 
     public static string AmDizzy => Deck.dizzy.Key();
+    public static string AmPeri => Deck.peri.Key();
+    public static string AmRiggs => Deck.riggs.Key();
+    public static string AmDrake => Deck.eunice.Key();
+    public static string AmIssac => Deck.goat.Key();
+    public static string AmBooks => Deck.shard.Key();
+    public static string AmMax => Deck.hacker.Key();
 
     public const string AmVoid = "void";
 
@@ -25,7 +31,7 @@ static class CommonDefinitions
     /// </summary>
     /// <param name="loopTag">The Looptag of the animation</param>
     /// <returns>a valid looptag</returns>
-    public static string Check(this string loopTag)
+    internal static string Check(this string loopTag)
     {
         if (ModEntry.IlleanaAnims.Contains(loopTag))
         {

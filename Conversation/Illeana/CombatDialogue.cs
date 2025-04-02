@@ -251,14 +251,48 @@ internal static class CombatDialogue
         {
             if (ModEntry.Patch_EnemyPack)
             {
-                DB.story.all["EnemyPack_GooseEscape"].lines.Add(
-                    new CustomSay()
-                    {
-                        who = AmIlleana,
-                        Text = "It's getting away!",
-                        loopTag = "angry".Check()
-                    }
-                );
+                DB.story.all[$"EnemyPack_GooseEscape_{AmIlleana}_0"]
+                = new()
+                {
+                    type = NodeType.combat,
+                    allPresent = [ AmIlleana ],
+                    enemyIntent = "gooseEscape",
+                    turnStart = true,
+                    lines = [
+                        new CustomSay()
+                        {
+                            who = "Goose",
+                            Text = "Honk!"
+                        },
+                        new CustomSay()
+                        {
+                            who = AmIlleana,
+                            Text = "It's getting away!",
+                            loopTag = "mad".Check()
+                        }
+                    ]
+                };                
+                DB.story.all[$"EnemyPack_GooseEscape_{AmIlleana}_1"]
+                = new()
+                {
+                    type = NodeType.combat,
+                    allPresent = [ AmIlleana ],
+                    enemyIntent = "gooseEscape",
+                    turnStart = true,
+                    lines = [
+                        new CustomSay()
+                        {
+                            who = "Goose",
+                            Text = "Honk!"
+                        },
+                        new CustomSay()
+                        {
+                            who = AmIlleana,
+                            Text = "No... I wanted goose for dinner...",
+                            loopTag = "sad".Check()
+                        }
+                    ]
+                };
             }
         }
         catch (Exception err)

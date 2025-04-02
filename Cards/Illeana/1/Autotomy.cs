@@ -38,7 +38,8 @@ public class Autotomy : Card, IRegisterable
                     status = Status.corrode,
                     statusAmount = 0,
                     mode = AStatusMode.Set,
-                    targetPlayer = true
+                    targetPlayer = true,
+                    dialogueSelector = ".autotomySnek"
                 },
                 new AHurt
                 {
@@ -65,7 +66,8 @@ public class Autotomy : Card, IRegisterable
                     status = Status.corrode,
                     statusAmount = 0,
                     mode = AStatusMode.Set,
-                    targetPlayer = true
+                    targetPlayer = true,
+                    dialogueSelector = ".autotomySnek"
                 },
                 new AHurt
                 {
@@ -87,7 +89,8 @@ public class Autotomy : Card, IRegisterable
                     status = Status.corrode,
                     statusAmount = 0,
                     mode = AStatusMode.Set,
-                    targetPlayer = true
+                    targetPlayer = true,
+                    dialogueSelector = ".autotomySnek"
                 },
                 new AHurt
                 {
