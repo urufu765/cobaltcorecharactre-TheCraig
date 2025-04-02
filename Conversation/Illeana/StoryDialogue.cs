@@ -18,54 +18,54 @@ internal static class StoryDialogue
                 new CustomSay()
                 {
                     who = AmCat,
-                    Text = "Wakey wakey!"
+                    what = "Wakey wakey!"
                 },
                 new CustomSay()
                 {
                     who = AmIlleana,
-                    Text = "Hey... That's my line...",
+                    what = "Hey... That's my line...",
                     loopTag = "tired".Check()
                 },
                 new CustomSay()
                 {
                     who = AmIlleana,
-                    Text = "...",
+                    what = "...",
                     loopTag = "neutral".Check()
                 },
                 new CustomSay()
                 {
                     who = AmIlleana,
-                    Text = "This isn't my ship.",
+                    what = "This isn't my ship.",
                     loopTag = "squint".Check()
                 },
                 new CustomSay()
                 {
                     who = AmCat,
-                    Text = "Who are you?",
+                    what = "Who are you?",
                     loopTag = "squint"
                 },
                 new CustomSay()
                 {
                     who = AmIlleana,
-                    Text = "Can't say...",
+                    what = "Can't say...",
                     loopTag = "squint".Check()
                 },
                 new CustomSay()
                 {
                     who = AmIlleana,
-                    Text = "But! I can make use of the unutilized hull you got.",
+                    what = "But! I can make use of the unutilized hull you got.",
                     loopTag = "neutral".Check()
                 },
                 new CustomSay()
                 {
                     who = AmCat,
-                    Text = "What! We need those!",
+                    what = "What! We need those!",
                     loopTag = "worried"
                 },
                 new CustomSay()
                 {
                     who = AmIlleana,
-                    Text = "Don't worry! You won't even notice it's gone.",
+                    what = "Don't worry! You won't even notice it's gone.",
                     loopTag = "sly".Check()
                 }
             }

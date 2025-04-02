@@ -25,43 +25,43 @@ internal static class MemoryDialogue
                 {
                     who = AmIlleana,
                     loopTag = "speechless".Check(),  // Speechless
-                    Text = "..."
+                    what = "..."
                 },
                 new CustomSay
                 {
                     who = AmVoid,
                     flipped = true,
-                    Text = "You don't belong here."
+                    what = "You don't belong here."
                 },
                 new CustomSay
                 {
                     who = AmIlleana,
                     loopTag = "curious".Check(),  // Curious
-                    Text = "I don't?"
+                    what = "I don't?"
                 },
                 new CustomSay
                 {
                     who = AmVoid,
                     flipped = true,
-                    Text = "No."
+                    what = "No."
                 },
                 new CustomSay
                 {
                     who = AmIlleana,
                     loopTag = "unamused".Check(),
-                    Text = "..."
+                    what = "..."
                 },
                 new CustomSay
                 {
                     who = AmIlleana,
                     loopTag = "eyebrowraise".Check(),
-                    Text = "Am I free to leave then?"
+                    what = "Am I free to leave then?"
                 },
                 new CustomSay
                 {
                     who = AmVoid,
                     flipped = true,
-                    Text = "No."
+                    what = "No."
                 }
             }
         };
@@ -87,43 +87,43 @@ internal static class MemoryDialogue
                 {
                     who = AmIlleana,
                     loopTag = "curious".Check(),  // Curious
-                    Text = "Why am I here?"
+                    what = "Why am I here?"
                 },
                 new CustomSay
                 {
                     who = AmVoid,
                     flipped = true,
-                    Text = "A series of unforeseen incidents."
+                    what = "A series of unforeseen incidents."
                 },
                 new CustomSay
                 {
                     who = AmIlleana,
                     loopTag = "curious".Check(),  // Eyebrow raise
-                    Text = "Why do I feel like these memories aren't mine?"
+                    what = "Why do I feel like these memories aren't mine?"
                 },
                 new CustomSay
                 {
                     who = AmVoid,
                     flipped = true,
-                    Text = "Because they aren't."
+                    what = "Because they aren't."
                 },
                 new CustomSay
                 {
                     who = AmIlleana,
                     loopTag = "shocked".Check(),
-                    Text = "What?"
+                    what = "What?"
                 },
                 new CustomSay
                 {
                     who = AmIlleana,
                     loopTag = "blinkrapid".Check(),
-                    Text = "..."
+                    what = "..."
                 },
                 new CustomSay
                 {
                     who = AmIlleana,
                     loopTag = "panic".Check(),
-                    Text = "What?"
+                    what = "What?"
                 },
             }
         };
@@ -149,55 +149,55 @@ internal static class MemoryDialogue
                 {
                     who = AmIlleana,
                     loopTag = "tired".Check(),  // Tired animated
-                    Text = "Sorry, can you give me a moment?"
+                    what = "Sorry, can you give me a moment?"
                 },
                 new CustomSay
                 {
                     who = AmIlleana,
                     loopTag = "tired".Check(),  // Tired animated
-                    Text = "I'm having an identity crisis."
+                    what = "I'm having an identity crisis."
                 },
                 new CustomSay
                 {
                     who = AmVoid,
                     flipped = true,
-                    Text = "You have all the time in the world."
+                    what = "You have all the time in the world."
                 },
                 new CustomSay
                 {
                     who = AmIlleana,
                     loopTag = "desperate".Check(),  // Desperate
-                    Text = "Really?"
+                    what = "Really?"
                 },
                 new CustomSay
                 {
                     who = AmVoid,
                     flipped = true,
-                    Text = "No."
+                    what = "No."
                 },
                 new CustomSay
                 {
                     who = AmIlleana,
                     loopTag = "speechless".Check(),  // Thousand mile stare
-                    Text = "..."
+                    what = "..."
                 },
                 new CustomSay
                 {
                     who = AmIlleana,
                     loopTag = "smile".Check(),  // Smile
-                    Text = "..."
+                    what = "..."
                 },
                 new CustomSay
                 {
                     who = AmIlleana,
                     loopTag = "silly",
-                    Text = "I don't know if that was intentional, but you've made me feel a little less overwhelmed. Thanks."
+                    what = "I don't know if that was intentional, but you've made me feel a little less overwhelmed. Thanks."
                 },
                 new CustomSay
                 {
                     who = AmVoid,
                     flipped = true,
-                    Text = "You're welcome."
+                    what = "You're welcome."
                 }
             }
         };
@@ -296,17 +296,17 @@ internal static class MemoryDialogue
                 new CustomSay
                 {
                     who = AmUnknown,
-                    Text = "..."
+                    what = "..."
                 },
                 new CustomSay
                 {
                     who = AmUnknown,
-                    Text = "Where am I?"
+                    what = "Where am I?"
                 },
                 new CustomSay
                 {
                     who = AmUnknown,
-                    Text = "This feels weird..."
+                    what = "This feels weird..."
                 },
                 new Wait
                 {
@@ -315,17 +315,17 @@ internal static class MemoryDialogue
                 new CustomSay
                 {
                     who = AmUnknown,
-                    Text = "Wait, there's something here?"
+                    what = "Wait, there's something here?"
                 },
                 new CustomSay
                 {
                     who = AmUnknown,
-                    Text = "..."
+                    what = "..."
                 },
                 new CustomSay
                 {
                     who = AmUnknown,
-                    Text = "Might as well try it..."
+                    what = "Might as well try it..."
                 },
                 // Flashbang.
                 new Wait
@@ -336,19 +336,19 @@ internal static class MemoryDialogue
                 {
                     who = AmIlleana,
                     loopTag = "screamA".Check(),
-                    Text = "aaaaaaaaaaahAAAAAAAAAAAAAAAAAAAAHH!!!!"
+                    what = "aaaaaaaaaaahAAAAAAAAAAAAAAAAAAAAHH!!!!"
                 },
                 new CustomSay
                 {
                     who = AmIlleana,
                     loopTag = "screamB".Check(),
-                    Text = "AAAAAAAAAAHHhhaaaaaaaaaaaaaaaaaAAAAAAA!!!"
+                    what = "AAAAAAAAAAHHhhaaaaaaaaaaaaaaaaaAAAAAAA!!!"
                 },
                 new CustomSay
                 {
                     who = AmIlleana,
                     loopTag = "screamC".Check(),
-                    Text = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA!!!!!"
+                    what = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA!!!!!"
                 },
                 // RUMBLE
                 new Wait

@@ -20,7 +20,7 @@ internal static class CardDialogue
                 new CustomSay
                 {
                     who = AmCat,
-                    Text = "We need Illeana's expertise right about now."
+                    what = "We need Illeana's expertise right about now."
                 }
             }
         };
@@ -37,12 +37,12 @@ internal static class CardDialogue
                 {
                     who = AmIlleana,
                     loopTag = "squint".Check(),
-                    Text = "Are you copying me?"
+                    what = "Are you copying me?"
                 },
                 new CustomSay
                 {
                     who = AmCat,
-                    Text = "ArE yOu CoPyInG mE?"
+                    what = "ArE yOu CoPyInG mE?"
                 }
             }
         };
@@ -59,7 +59,7 @@ internal static class CardDialogue
                 {
                     who = AmIlleana,
                     loopTag = "possessed".Check(),
-                    Text = "Quick! Toss a hull-breaching shell down to the cannoneer!"
+                    what = "Quick! Toss a hull-breaching shell down to the cannoneer!"
                 }
             }
         };
@@ -76,7 +76,7 @@ internal static class CardDialogue
                 {
                     who = AmIlleana,
                     loopTag = "possessed".Check(),
-                    Text = "There's nothing in the universe who can stop us now!"
+                    what = "There's nothing in the universe who can stop us now!"
                 }
             }
         };
@@ -93,7 +93,7 @@ internal static class CardDialogue
                 {
                     who = AmIlleana,
                     loopTag = "possessedmad".Check(),
-                    Text = "If I'm going down, I'm taking you with me!"
+                    what = "If I'm going down, I'm taking you with me!"
                 }
             }
         };
@@ -110,7 +110,7 @@ internal static class CardDialogue
                 {
                     who = AmIlleana,
                     loopTag = "possessedmad".Check(),
-                    Text = "I'm not letting you pass!"
+                    what = "I'm not letting you pass!"
                 }
             }
         };
@@ -127,7 +127,7 @@ internal static class CardDialogue
                 {
                     who = AmIlleana,
                     loopTag = "blink".Check(),
-                    Text = "..."
+                    what = "..."
                 }
             }
         };
@@ -144,7 +144,7 @@ internal static class CardDialogue
                 {
                     who = AmIlleana,
                     loopTag = "intense".Check(),
-                    Text = "AAH!!!... wait no my tail's fine."
+                    what = "AAH!!!... wait no my tail's fine."
                 }
             }
         };
@@ -161,7 +161,7 @@ internal static class CardDialogue
                 {
                     who = AmIlleana,
                     loopTag = "intense".Check(),
-                    Text = "NOO!! Oh whew, thought you chopped my tail off."
+                    what = "NOO!! Oh whew, thought you chopped my tail off."
                 },
                 new SaySwitch
                 {
@@ -170,7 +170,7 @@ internal static class CardDialogue
                         new CustomSay
                         {
                             who = AmDrake,
-                            Text = "And I'll do it again!",
+                            what = "And I'll do it again!",
                             loopTag = "sly"
                         }
                     }
@@ -190,7 +190,7 @@ internal static class CardDialogue
                 {
                     who = AmIlleana,
                     loopTag = "intense".Check(),
-                    Text = "GAH! Wait I'm fine."
+                    what = "GAH! Wait I'm fine."
                 }
             }
         };
@@ -207,7 +207,7 @@ internal static class CardDialogue
                 {
                     who = AmIlleana,
                     loopTag = "intense".Check(),
-                    Text = "So uhh, you guys aren't going to kick me out, right?"
+                    what = "So uhh, you guys aren't going to kick me out, right?"
                 }
             }
         };

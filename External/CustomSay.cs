@@ -4,7 +4,7 @@ internal sealed class CustomSay : Say
 {
     private static int NextId = 1;
     private readonly int Id;
-    public string? Text;
+    public string? what;
     public CustomSay()
     {
         this.Id = NextId++;
@@ -12,10 +12,10 @@ internal sealed class CustomSay : Say
 
     public override bool Execute(G g, IScriptTarget target, ScriptCtx ctx)
     {
-        if (string.IsNullOrEmpty(Text)) return base.Execute(g, target, ctx);
+        if (string.IsNullOrEmpty(what)) return base.Execute(g, target, ctx);
 
         hash = $"{GetType().FullName}:{Id}";
-        DB.currentLocale.strings[GetLocKey(ctx.script, hash)] = Text;
+        DB.currentLocale.strings[GetLocKey(ctx.script, hash)] = what;
         return base.Execute(g, target, ctx);
     }
 }

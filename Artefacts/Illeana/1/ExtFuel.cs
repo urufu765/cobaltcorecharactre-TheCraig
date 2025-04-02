@@ -17,7 +17,8 @@ public class ExternalFuelSource : Artifact
                 status = Status.evade,
                 statusAmount = 1,
                 targetPlayer = true,
-                artifactPulse = Key()
+                artifactPulse = Key(),
+                dialogueSelector = ".gotTemp"
             });
         }
     }

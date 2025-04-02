@@ -19,6 +19,7 @@ internal class ModEntry : SimpleMod
 {
     internal static ModEntry Instance { get; private set; } = null!;
     internal static IPlayableCharacterEntryV2 IlleanaTheSnek { get; private set; } = null!;
+    internal string UniqueName { get; private set; }
     internal Harmony Harmony;
     internal IKokoroApi KokoroApi;
     internal IDeckEntry IlleanaDeck;
@@ -131,6 +132,7 @@ internal class ModEntry : SimpleMod
         //"curious",
         //"desperate",
         "explain",
+        //"holdcable"
         "intense",
         "mad",
         "neutral",
@@ -166,6 +168,7 @@ internal class ModEntry : SimpleMod
     {
         Instance = this;
         Harmony = new Harmony("urufudoggo.Illeana");
+        UniqueName = package.Manifest.UniqueName;
         modDialogueInited = false;
         /*
          * Some mods provide an API, which can be requested from the ModRegistry.
