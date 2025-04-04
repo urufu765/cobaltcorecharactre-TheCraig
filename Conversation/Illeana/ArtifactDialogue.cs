@@ -636,6 +636,84 @@ internal static class ArtifactDialogue
                 }
             }
         };
+        DB.story.all["ArtifactTiderunner_Illeana_0"] = new()
+        {
+            type = NodeType.combat,
+            oncePerRun = true,
+            turnStart = true,
+            maxTurnsThisCombat = 1,
+            allPresent = [ AmIlleana ],
+            hasArtifacts = [ "TideRunner" ],
+            oncePerRunTags = [ "TideRunner" ],
+            lines = new()
+            {
+                new CustomSay
+                {
+                    who = AmIlleana,
+                    what = "Now this is my kind of ship.",
+                }
+            }
+        };
+        DB.story.all["ArtifactTiderunner_Illeana_1"] = new()
+        {
+            type = NodeType.combat,
+            oncePerRun = true,
+            turnStart = true,
+            maxTurnsThisCombat = 1,
+            allPresent = [ AmIlleana, AmRiggs ],
+            hasArtifacts = [ "TideRunner" ],
+            oncePerRunTags = [ "TideRunner" ],
+            lines = new()
+            {
+                new CustomSay
+                {
+                    who = AmIlleana,
+                    what = "Move over, I want to try piloting this one.",
+                },
+                new CustomSay
+                {
+                    who = AmRiggs,
+                    loopTag = "squint",
+                    what = "Go right ahead. I'm getting seasick anyways.",
+                }
+            }
+        };
+        DB.story.all["ArtifactTiderunner_Illeana_2"] = new()
+        {
+            type = NodeType.combat,
+            oncePerRun = true,
+            allPresent = [ AmIlleana ],
+            turnStart = true,
+            maxTurnsThisCombat = 1,
+            hasArtifacts = [ "TideRunner" ],
+            oncePerRunTags = [ "TideRunner" ],
+            lines = new()
+            {
+                new CustomSay
+                {
+                    who = AmIlleana,
+                    loopTag = "squint".Check(),
+                    what = "I like this ship, but I wish it came in a metal finish. Wood isn't a good material to test my stuff with.",
+                }
+            }
+        };
+        DB.story.all["ArtifactTridimensionalCockpit_Illeana_0"] = new()
+        {
+            type = NodeType.combat,
+            oncePerRun = true,
+            allPresent = [ AmIlleana ],
+            hasArtifacts = [ "TridimensionalCockpit" ],
+            oncePerRunTags = [ "TridimensionalCockpit" ],
+            lines = new()
+            {
+                new CustomSay
+                {
+                    who = AmIlleana,
+                    loopTag = "intense".Check(),
+                    what = "Alright, real funny guys. I fit in the scaffolding just fine. Now please let me back in the cockpit.",
+                }
+            }
+        };
         // DB.story.all["Artifact_Illeana_0"] = new()
         // {
         //     type = NodeType.combat,

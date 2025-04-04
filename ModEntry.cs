@@ -116,6 +116,8 @@ internal class ModEntry : SimpleMod
         //"eyebrowraise",
         "gameover",
         "mini",
+        //"readytoeat",
+        //"salavating",
         //"screamA",
         //"screamB",
         //"screamC",

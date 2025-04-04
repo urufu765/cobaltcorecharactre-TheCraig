@@ -8,6 +8,7 @@ A corrosion engineer who works with corrosion to help keep the ship at tip top c
 
 #### a.3: Don't Talk With Your Mouth Full
 
+* **(0.3.14)**: Many more dialogue 2: Finished artifact and more combat
 * **(0.3.13)**: Many more dialogue: Shopkeeper & Dracula & More & Fixed artifact dialogue not playing properly
 * **(0.3.12)**: Fixed a combat dialogue not dialoguing correctly
 * **(0.3.11)**: Fixed description not working.

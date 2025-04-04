@@ -104,6 +104,28 @@ internal static class EventDialogue
                 }
             ]
         };
+        DB.story.all["CrystallizedFriendEvent_illeana"] = new()
+        {
+            type = NodeType.@event,
+            oncePerRun = true,
+            allPresent = [ AmIlleana ],
+            bg = "BGCrystalizedFriend",
+            lines = new()
+            {
+                new Wait
+                {
+                    secs = 1.5,
+                },
+                new CustomSay()
+                {
+                    who = AmIlleana,
+                    what = "Hey.",
+                    loopTag = "sly".Check()
+                },
+            }
+        };
+
+
         try
         {
             foreach(Instruction i in DB.story.all["DraculaTime"].lines)

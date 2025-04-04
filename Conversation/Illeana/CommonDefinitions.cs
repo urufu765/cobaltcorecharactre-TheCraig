@@ -8,6 +8,7 @@ static class CommonDefinitions
     internal static ModEntry Instance => ModEntry.Instance;
 
     internal static string AmIlleana => Instance.IlleanaDeck.UniqueName;
+    internal static Deck AmIlleanaDeck => Instance.IlleanaDeck.Deck;
     internal static string AmCraig = "craig";  // Change to deck uniquename
     internal const string AmUnknown = "johndoe";
     internal const string AmCat = "comp";
