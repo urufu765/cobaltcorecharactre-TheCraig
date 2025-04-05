@@ -52,6 +52,25 @@ public class SnekTunezSad : Card, IRegisterable
                     statusAmount = 1,
                 }
             ],
+            Upgrade.A => 
+            [
+                ModEntry.Instance.KokoroApi.V2.EnergyAsStatus.MakeVariableHint().AsCardAction,
+                new AStatus
+                {
+                    targetPlayer = true,
+                    status = Status.drawNextTurn,
+                    statusAmount = x * 2,
+                    xHint = 2
+                },
+                new AStunShip(),
+                new AStatus
+                {
+                    targetPlayer = true,
+                    status = Status.corrode,
+                    statusAmount = 1,
+                },
+                new AEndTurn()
+            ],
             _ => 
             [
                 ModEntry.Instance.KokoroApi.V2.EnergyAsStatus.MakeVariableHint().AsCardAction,
@@ -79,19 +98,6 @@ public class SnekTunezSad : Card, IRegisterable
     {
         return upgrade switch
         {
-            Upgrade.B => new CardData
-            {
-                cost = 1,
-                singleUse = true,
-                artTint = "ffffff"
-            },
-            Upgrade.A => new CardData
-            {
-                cost = 0,
-                singleUse = true,
-                retain = true,
-                artTint = "ffffff"
-            },
             _ => new CardData
             {
                 cost = 0,

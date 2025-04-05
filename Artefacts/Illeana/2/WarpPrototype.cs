@@ -75,6 +75,11 @@ public static class WarpPrototypeHelper
             {
                 __result.Add(typeof(WarpPrototype));
             }
+            if (!s.EnumerateAllArtifacts().Any(a => a is PersonalStereo))
+            {
+                __result.Add(typeof(ModifiedStereo));
+                __result.Add(typeof(DigitalizedStereo));
+            }
         }
         catch (Exception err)
         {

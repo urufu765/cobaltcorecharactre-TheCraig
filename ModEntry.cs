@@ -89,7 +89,9 @@ internal class ModEntry : SimpleMod
         // typeof(TarnishedSyringe),
         typeof(CausticArmor),
         typeof(ExperimentalLubricant),
-        typeof(ExternalFuelSource)
+        typeof(ExternalFuelSource),
+        typeof(ModifiedStereo),
+        typeof(DigitalizedStereo)
     ];
     private static List<Type> IlleanaBossArtifacts = [
         // typeof(ConstantInnovation),
@@ -158,11 +160,11 @@ internal class ModEntry : SimpleMod
             .Concat(Illeana4Anims)
             .Concat(Illeana5Anims);
 
-    public Spr SprTunezOn {get; private set;}
-    public Spr SprTunezChill {get; private set;}
-    public Spr SprTunezHype {get; private set;}
-    public Spr SprTunezSad {get; private set;}
-    public Spr SprTunezGroovy {get; private set;}
+    public Spr SprStolenOn {get; private set;}
+    public Spr SprStolenChill {get; private set;}
+    public Spr SprStolenHype {get; private set;}
+    public Spr SprStolenSad {get; private set;}
+    public Spr SprStolenGroovy {get; private set;}
     public Spr SprBoostrE {get; private set;}
     public Spr SprBoostrB {get; private set;}
     public Spr SprBoostrO {get; private set;}
@@ -341,11 +343,11 @@ internal class ModEntry : SimpleMod
             helper.Content.Artifacts.RegisterArtifact(ta.Name, UhDuhHundo.ArtifactRegistrationHelper(ta, RegisterSprite(package, "assets/Artifact/" + ta.Name + ".png").Sprite));
         }
 
-        SprTunezOn = RegisterSprite(package, "assets/Artifact/Personal_Stereo.png").Sprite;
-        SprTunezChill = RegisterSprite(package, "assets/Artifact/Personal_Stereo_Chill.png").Sprite;
-        SprTunezHype = RegisterSprite(package, "assets/Artifact/Personal_Stereo_Hype.png").Sprite;
-        SprTunezSad = RegisterSprite(package, "assets/Artifact/Personal_Stereo_Sad.png").Sprite;
-        SprTunezGroovy = RegisterSprite(package, "assets/Artifact/Personal_Stereo_Groovy.png").Sprite;
+        SprStolenOn = RegisterSprite(package, "assets/Artifact/Personal_Stereo.png").Sprite;
+        SprStolenChill = RegisterSprite(package, "assets/Artifact/Personal_Stereo_Chill.png").Sprite;
+        SprStolenHype = RegisterSprite(package, "assets/Artifact/Personal_Stereo_Hype.png").Sprite;
+        SprStolenSad = RegisterSprite(package, "assets/Artifact/Personal_Stereo_Sad.png").Sprite;
+        SprStolenGroovy = RegisterSprite(package, "assets/Artifact/Personal_Stereo_Groovy.png").Sprite;
         SprBoostrE = RegisterSprite(package, "assets/Artifact/TempoboostersE.png").Sprite;
         SprBoostrB = RegisterSprite(package, "assets/Artifact/TempoboostersB.png").Sprite;
         SprBoostrO = RegisterSprite(package, "assets/Artifact/TempoboostersO.png").Sprite;

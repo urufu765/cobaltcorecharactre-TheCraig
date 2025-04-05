@@ -16,7 +16,7 @@ public enum SnekTunez
 }
 
 /// <summary>
-/// Wings count as empty, empty parts take 1 damage when a shot passes through
+/// Regular Slitherman, SNEKTUNEZ!!!
 /// </summary>
 [ArtifactMeta(pools = new[] { ArtifactPool.Boss })]
 public class PersonalStereo : Artifact
@@ -29,11 +29,11 @@ public class PersonalStereo : Artifact
     {
         return SongNumber switch
         {
-            SnekTunez.Chill => ModEntry.Instance.SprTunezChill,
-            SnekTunez.Hype => ModEntry.Instance.SprTunezHype,
-            SnekTunez.Sad => ModEntry.Instance.SprTunezSad,
-            SnekTunez.Groovy => ModEntry.Instance.SprTunezGroovy,
-            _ => ModEntry.Instance.SprTunezOn
+            SnekTunez.Chill => ModEntry.Instance.SprStolenChill,
+            SnekTunez.Hype => ModEntry.Instance.SprStolenHype,
+            SnekTunez.Sad => ModEntry.Instance.SprStolenSad,
+            SnekTunez.Groovy => ModEntry.Instance.SprStolenGroovy,
+            _ => ModEntry.Instance.SprStolenOn
         };
     }
 
@@ -41,58 +41,69 @@ public class PersonalStereo : Artifact
     public override void OnReceiveArtifact(State state)
     {
         if (SongNumber == SnekTunez.Start) SongNumber++;
+        AlsoDo(state);
+    }
+
+    public virtual void AlsoDo(State state)
+    {
     }
 
     public override void OnTurnStart(State state, Combat combat)
     {
         if (combat.turn == 1)
         {
-            switch (SongNumber)
-            {
-                case SnekTunez.Chill:
-                    combat.Queue(new AAddCard
-                    {
-                        amount = 1,
-                        card = new SnekTunezChill(),
-                        destination = CardDestination.Hand,
-                        artifactPulse = Key()
-                    });
-                    break;
-                case SnekTunez.Hype:
-                    combat.Queue(new AAddCard
-                    {
-                        amount = 1,
-                        card = new SnekTunezHype(),
-                        destination = CardDestination.Hand,
-                        artifactPulse = Key()
-                    });
-                    break;
-                case SnekTunez.Sad:
-                    combat.Queue(new AAddCard
-                    {
-                        amount = 1,
-                        card = new SnekTunezSad(),
-                        destination = CardDestination.Hand,
-                        artifactPulse = Key()
-                    });
-                    break;
-                case SnekTunez.Groovy:
-                    combat.Queue(new AAddCard
-                    {
-                        amount = 1,
-                        card = new SnekTunezGroovy(),
-                        destination = CardDestination.Hand,
-                        artifactPulse = Key()
-                    });
-                    break;
-                default:
-                    break;
-            }
+            SongSelect(combat, SongNumber);
             SongNumber++;
             if (SongNumber == SnekTunez.End && Repeat)
             {
                 SongNumber = SnekTunez.Start + 1;
             }
+        }
+    }
+
+
+    public virtual void SongSelect(Combat combat, SnekTunez song)
+    {
+        switch (song)
+        {
+            case SnekTunez.Chill:
+                combat.Queue(new AAddCard
+                {
+                    amount = 1,
+                    card = new SnekTunezChill(),
+                    destination = CardDestination.Hand,
+                    artifactPulse = Key()
+                });
+                break;
+            case SnekTunez.Hype:
+                combat.Queue(new AAddCard
+                {
+                    amount = 1,
+                    card = new SnekTunezHype(),
+                    destination = CardDestination.Hand,
+                    artifactPulse = Key()
+                });
+                break;
+            case SnekTunez.Sad:
+                combat.Queue(new AAddCard
+                {
+                    amount = 1,
+                    card = new SnekTunezSad(),
+                    destination = CardDestination.Hand,
+                    artifactPulse = Key()
+                });
+                break;
+            case SnekTunez.Groovy:
+                combat.Queue(new AAddCard
+                {
+                    amount = 1,
+                    card = new SnekTunezGroovy(),
+                    destination = CardDestination.Hand,
+                    artifactPulse = Key()
+                });
+                break;
+            default:
+                break;
         }
     }
 

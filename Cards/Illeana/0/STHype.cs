@@ -52,6 +52,25 @@ public class SnekTunezHype : Card, IRegisterable
                     statusAmount = 1,
                 }
             ],
+            Upgrade.A => 
+            [
+                ModEntry.Instance.KokoroApi.V2.EnergyAsStatus.MakeVariableHint().AsCardAction,
+                new AStatus
+                {
+                    targetPlayer = true,
+                    status = Status.overdrive,
+                    statusAmount = x * 2,
+                    xHint = 2
+                },
+                new AStunShip(),
+                new AStatus
+                {
+                    targetPlayer = true,
+                    status = Status.corrode,
+                    statusAmount = 1,
+                },
+                new AEndTurn()
+            ],
             _ => 
             [
                 ModEntry.Instance.KokoroApi.V2.EnergyAsStatus.MakeVariableHint().AsCardAction,
@@ -79,19 +98,6 @@ public class SnekTunezHype : Card, IRegisterable
     {
         return upgrade switch
         {
-            Upgrade.B => new CardData
-            {
-                cost = 1,
-                singleUse = true,
-                artTint = "ff3838"
-            },
-            Upgrade.A => new CardData
-            {
-                cost = 0,
-                singleUse = true,
-                retain = true,
-                artTint = "ff3838"
-            },
             _ => new CardData
             {
                 cost = 0,

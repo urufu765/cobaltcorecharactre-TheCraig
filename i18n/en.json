@@ -44,6 +44,14 @@
             "ExternalFuelSource": {
                 "name": "EXTERNAL FUEL SOURCE",
                 "desc": "Gain 1 <c=status>EVADE</c> whenever you gain a <c=cardtrait>temporary</c> card."
+            },
+            "ModifiedStereo": {
+                "name": "MODIFIED SLITHERMAN",
+                "desc": "Replaces <c=artifact>STOLEN SLITERMAN</c>.\nOn combat start, add a <c=cardtrait>temporary</c> <c=card>SnekTunez A</c> to your deck."
+            },            
+            "DigitalizedStereo": {
+                "name": "DIGITALIZED SLITHERMAN",
+                "desc": "Replaces <c=artifact>STOLEN SLITERMAN</c>.\nOn combat start, add an <c=cardtrait>expensive</c> <c=card>SnekTunez B</c> to your hand."
             }
         },
         "Boss": {
