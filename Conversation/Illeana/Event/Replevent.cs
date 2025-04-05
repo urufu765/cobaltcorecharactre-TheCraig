@@ -174,8 +174,8 @@ internal static partial class EventDialogue
                         {
                             who = AmIlleana,
                             flipped = true,
-                            loopTag = "salavating".Check(),
-                            what = "Kitten."
+                            loopTag = "intense".Check(),
+                            what = "I'm not suited for such glory!"
                         }
                     );
                     break;
@@ -186,5 +186,47 @@ internal static partial class EventDialogue
         {
             Instance.Logger.LogError(err, "Failed to add Illeana response to Knight_1");
         }
+        try
+        {
+            foreach(Instruction i in DB.story.all["LoseCharacterCard"].lines)
+            {
+                if (i is SaySwitch ss)
+                {
+                    ss.lines.Add(
+                        new CustomSay
+                        {
+                            who = AmIlleana,
+                            what = "Abort! Abort!"
+                        }
+                    );
+                    break;
+                }
+            }
+        }
+        catch (Exception err)
+        {
+            Instance.Logger.LogError(err, "Failed to add Illeana response to LoseCharacterCard");
+        }
+        try
+        {
+            foreach(Instruction i in DB.story.all["LoseCharacterCard_No"].lines)
+            {
+                if (i is SaySwitch ss)
+                {
+                    ss.lines.Add(
+                        new CustomSay
+                        {
+                            who = AmIlleana,
+                            what = "Never again."
+                        }
+                    );
+                    break;
+                }
+            }
+        }
+        catch (Exception err)
+        {
+            Instance.Logger.LogError(err, "Failed to add Illeana response to LoseCharacterCard_No");
+        }        
     }
 }

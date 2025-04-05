@@ -947,6 +947,30 @@ internal static partial class CombatDialogue
                 }
             }
         };
+        DB.story.all["LookOutMissile_Illeana_0"] = new()
+        {
+            type = NodeType.combat,
+            allPresent = [ AmIlleana, AmPeri ],
+            priority = true,
+            once = true,
+            oncePerRunTags = ["goodMissileAdvice"],
+            anyDronesHostile = ["missile_normal", "missile_heavy", "missile_corrode", "missile_breacher"],
+            lines = new()
+            {
+                new CustomSay()
+                {
+                    who = AmPeri,
+                    loopTag = "mad",
+                    what = "Shoot it down!"
+                },
+                new CustomSay()
+                {
+                    who = AmIlleana,
+                    loopTag = "neutral".Check(),
+                    what = "No! Full throttle!"
+                }
+            }
+        };
     }
 }
 

@@ -129,6 +129,22 @@ internal static partial class EventDialogue
                     loopTag = "sly".Check()
                 },
             }
+        };        
+        DB.story.all["LoseCharacterCard"] = new()
+        {
+            type = NodeType.@event,
+            allPresent = [ AmIlleana ],
+            oncePerRun = true,
+            bg = "BGSupernova",
+            lines = new()
+            {
+                new CustomSay()
+                {
+                    who = AmIlleana,
+                    what = "My research!"
+                }
+            }
         };
+
     }
 }

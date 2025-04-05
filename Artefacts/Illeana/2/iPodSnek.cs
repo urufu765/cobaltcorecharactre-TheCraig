@@ -43,54 +43,56 @@ public class PersonalStereo : Artifact
         if (SongNumber == SnekTunez.Start) SongNumber++;
     }
 
-
-    public override void OnCombatStart(State state, Combat combat)
+    public override void OnTurnStart(State state, Combat combat)
     {
-        switch (SongNumber)
+        if (combat.turn == 1)
         {
-            case SnekTunez.Chill:
-                combat.Queue(new AAddCard
-                {
-                    amount = 1,
-                    card = new SnekTunezChill(),
-                    destination = CardDestination.Hand,
-                    artifactPulse = Key()
-                });
-                break;
-            case SnekTunez.Hype:
-                combat.Queue(new AAddCard
-                {
-                    amount = 1,
-                    card = new SnekTunezHype(),
-                    destination = CardDestination.Hand,
-                    artifactPulse = Key()
-                });
-                break;
-            case SnekTunez.Sad:
-                combat.Queue(new AAddCard
-                {
-                    amount = 1,
-                    card = new SnekTunezSad(),
-                    destination = CardDestination.Hand,
-                    artifactPulse = Key()
-                });
-                break;
-            case SnekTunez.Groovy:
-                combat.Queue(new AAddCard
-                {
-                    amount = 1,
-                    card = new SnekTunezGroovy(),
-                    destination = CardDestination.Hand,
-                    artifactPulse = Key()
-                });
-                break;
-            default:
-                break;
-        }
-        SongNumber++;
-        if (SongNumber == SnekTunez.End && Repeat)
-        {
-            SongNumber = SnekTunez.Start + 1;
+            switch (SongNumber)
+            {
+                case SnekTunez.Chill:
+                    combat.Queue(new AAddCard
+                    {
+                        amount = 1,
+                        card = new SnekTunezChill(),
+                        destination = CardDestination.Hand,
+                        artifactPulse = Key()
+                    });
+                    break;
+                case SnekTunez.Hype:
+                    combat.Queue(new AAddCard
+                    {
+                        amount = 1,
+                        card = new SnekTunezHype(),
+                        destination = CardDestination.Hand,
+                        artifactPulse = Key()
+                    });
+                    break;
+                case SnekTunez.Sad:
+                    combat.Queue(new AAddCard
+                    {
+                        amount = 1,
+                        card = new SnekTunezSad(),
+                        destination = CardDestination.Hand,
+                        artifactPulse = Key()
+                    });
+                    break;
+                case SnekTunez.Groovy:
+                    combat.Queue(new AAddCard
+                    {
+                        amount = 1,
+                        card = new SnekTunezGroovy(),
+                        destination = CardDestination.Hand,
+                        artifactPulse = Key()
+                    });
+                    break;
+                default:
+                    break;
+            }
+            SongNumber++;
+            if (SongNumber == SnekTunez.End && Repeat)
+            {
+                SongNumber = SnekTunez.Start + 1;
+            }
         }
     }
 
