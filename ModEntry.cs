@@ -117,20 +117,18 @@ internal class ModEntry : SimpleMod
         "gameover",
         "mini",
         //"readytoeat",
-        //"salavating",
         //"screamA",
         //"screamB",
         //"screamC",
-        "sickofyoshit",
-        //"smile",
+        "sickofyoshit",  // replace with tired
+        //"smile",  // replace with silly
         //"speechless",
         //"stareatcamera",
-        //"thousandmilestare",
-        "unamused",
+        //"thousandmilestare",  // is same with stareatcamera
+        "unamused",  // replace with solemn
         "placeholder"
     ];
     private static List<string> Illeana4Anims = [
-        //"blinkrapid",
         //"curious",
         //"desperate",
         "explain",
@@ -139,19 +137,24 @@ internal class ModEntry : SimpleMod
         "mad",
         "neutral",
         "panic",
-        //"possessed",
-        //"possessedmad",
-        //"sad",
         //"shocked",
-        //"silly",
         "sly",
         "solemn",
         "squint",
         //"tired",
     ];
+    private static List<string> Illeana5Anims = [
+        //"blinkrapid",
+        //"possessed",
+        //"possessedmad",
+        //"sad",
+        //"salavating",
+        //"silly",
+    ];
     public readonly static IEnumerable<string> IlleanaAnims =
         Illeana1Anims
-            .Concat(Illeana4Anims);
+            .Concat(Illeana4Anims)
+            .Concat(Illeana5Anims);
 
     public Spr SprTunezOn {get; private set;}
     public Spr SprTunezChill {get; private set;}
@@ -185,7 +188,6 @@ internal class ModEntry : SimpleMod
             {
                 Patch_EnemyPack = helper.ModRegistry.LoadedMods.ContainsKey("TheJazMaster.EnemyPack");
                 DialogueMachine.Apply();
-                DialogueMachine.ApplyModded();
             }
 
         };
@@ -260,6 +262,10 @@ internal class ModEntry : SimpleMod
         foreach (string s4 in Illeana4Anims)
         {
             RegisterAnimation(package, s4, $"assets/Animation/illeana_{s4}", 4);
+        }
+        foreach (string s5 in Illeana5Anims)
+        {
+            RegisterAnimation(package, s5, $"assets/Animation/illeana_{s5}", 5);
         }
 
         IlleanaTheSnek = helper.Content.Characters.V2.RegisterPlayableCharacter("illeana", new PlayableCharacterConfigurationV2

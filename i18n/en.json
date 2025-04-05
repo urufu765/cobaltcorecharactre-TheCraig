@@ -43,7 +43,7 @@
             },
             "ExternalFuelSource": {
                 "name": "EXTERNAL FUEL SOURCE",
-                "desc": "Gain 1 <c=status>EVADE</c> whenever you add a <c=cardtrait>temporary</c> card to your deck."
+                "desc": "Gain 1 <c=status>EVADE</c> whenever you gain a <c=cardtrait>temporary</c> card."
             }
         },
         "Boss": {

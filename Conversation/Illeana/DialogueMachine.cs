@@ -16,11 +16,6 @@ public static class DialogueMachine
         ArtifactDialogue.Inject();
     }
 
-    public static void ApplyModded()
-    {
-        CombatDialogue.ModdedInject();
-    }
-
 
     public static void ApplyInjections()
     {

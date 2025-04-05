@@ -4,9 +4,15 @@ using static Illeana.Dialogue.CommonDefinitions;
 
 namespace Illeana.Dialogue;
 
-internal static class EventDialogue
+internal static partial class EventDialogue
 {
     internal static void Inject()
+    {
+        EventExtend();
+        Reply();
+    }
+
+    private static void EventExtend()
     {
         DB.story.all["ChoiceCardRewardOfYourColorChoice_Illeana"] = new()
         {
@@ -124,50 +130,5 @@ internal static class EventDialogue
                 },
             }
         };
-
-
-        try
-        {
-            foreach(Instruction i in DB.story.all["DraculaTime"].lines)
-            {
-                if (i is SaySwitch ss)
-                {
-                    ss.lines.Add(
-                        new CustomSay
-                        {
-                            who = AmIlleana,
-                            what = "No, I don't recall any Dracula in my friends list...",
-                            loopTag = "squint".Check()
-                        }
-                    );
-                    break;
-                }
-            }
-        }
-        catch (Exception err)
-        {
-            Instance.Logger.LogError(err, "Failed to add Illeana response to Dracular");
-        }
-        try
-        {
-            foreach(Instruction i in DB.story.all["AbandonedShipyard_Repaired"].lines)
-            {
-                if (i is SaySwitch ss)
-                {
-                    ss.lines.Add(
-                        new CustomSay
-                        {
-                            who = AmIlleana,
-                            what = "I helped!"
-                        }
-                    );
-                    break;
-                }
-            }
-        }
-        catch (Exception err)
-        {
-            Instance.Logger.LogError(err, "Failed to add Illeana response to AbandonedShipyard_Repaired");
-        }
     }
 }

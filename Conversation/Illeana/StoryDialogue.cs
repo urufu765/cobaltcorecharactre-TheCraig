@@ -65,7 +65,7 @@ internal static class StoryDialogue
                 new CustomSay()
                 {
                     who = AmIlleana,
-                    what = "Don't worry! You won't even notice it's gone.",
+                    what = "Don't worry! You won't even notice they're gone.",
                     loopTag = "sly".Check()
                 }
             }

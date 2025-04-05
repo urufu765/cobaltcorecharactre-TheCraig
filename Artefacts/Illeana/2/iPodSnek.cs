@@ -49,7 +49,7 @@ public class PersonalStereo : Artifact
         switch (SongNumber)
         {
             case SnekTunez.Chill:
-                combat.QueueImmediate(new AAddCard
+                combat.Queue(new AAddCard
                 {
                     amount = 1,
                     card = new SnekTunezChill(),
@@ -58,7 +58,7 @@ public class PersonalStereo : Artifact
                 });
                 break;
             case SnekTunez.Hype:
-                combat.QueueImmediate(new AAddCard
+                combat.Queue(new AAddCard
                 {
                     amount = 1,
                     card = new SnekTunezHype(),
@@ -67,7 +67,7 @@ public class PersonalStereo : Artifact
                 });
                 break;
             case SnekTunez.Sad:
-                combat.QueueImmediate(new AAddCard
+                combat.Queue(new AAddCard
                 {
                     amount = 1,
                     card = new SnekTunezSad(),
@@ -76,7 +76,7 @@ public class PersonalStereo : Artifact
                 });
                 break;
             case SnekTunez.Groovy:
-                combat.QueueImmediate(new AAddCard
+                combat.Queue(new AAddCard
                 {
                     amount = 1,
                     card = new SnekTunezGroovy(),
