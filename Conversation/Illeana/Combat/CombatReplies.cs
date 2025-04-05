@@ -298,5 +298,264 @@ internal static partial class CombatDialogue
         {
             Instance.Logger.LogError(err, "Failed to add Illeana response to DualNotEnoughDronesShouts_Multi_2");
         }
+        try
+        {
+            foreach(Instruction i in DB.story.all["OverheatDrakeFix_Multi_6"].lines)
+            {
+                if (i is SaySwitch ss)
+                {
+                    ss.lines.Add(
+                        new CustomSay
+                        {
+                            who = AmIlleana,
+                            loopTag = "squint".Check(),
+                            what = "Good job. Don't ever do that again."
+                        }
+                    );
+                    ss.lines.Add(
+                        new CustomSay
+                        {
+                            who = AmIlleana,
+                            loopTag = "solemn".Check(),
+                            what = "You know, I had the patchkit ready."
+                        }
+                    );
+                    break;
+                }
+            }
+        }
+        catch (Exception err)
+        {
+            Instance.Logger.LogError(err, "Failed to add Illeana response to OverheatDrakeFix_Multi_6");
+        }
+        try
+        {
+            foreach(Instruction i in DB.story.all["OverheatDrakesFault_Multi_9"].lines)
+            {
+                if (i is SaySwitch ss)
+                {
+                    ss.lines.Add(
+                        new CustomSay
+                        {
+                            who = AmIlleana,
+                            loopTag = "tired".Check(),
+                            what = "I'll get the fire extinguisher."
+                        }
+                    );
+                    break;
+                }
+            }
+        }
+        catch (Exception err)
+        {
+            Instance.Logger.LogError(err, "Failed to add Illeana response to OverheatDrakesFault_Multi_9");
+        }
+        try
+        {
+            foreach(Instruction i in DB.story.all["RiderAvast"].lines)
+            {
+                if (i is SaySwitch ss)
+                {
+                    ss.lines.Add(
+                        new CustomSay
+                        {
+                            who = AmIlleana,
+                            loopTag = "curious".Check(),
+                            what = "A vest?"
+                        }
+                    );
+                    break;
+                }
+            }
+        }
+        catch (Exception err)
+        {
+            Instance.Logger.LogError(err, "Failed to add Illeana response to RiderAvast");
+        }
+        try
+        {
+            bool skip1 = false;
+            foreach(Instruction i in DB.story.all["RiderTiderunnerShouts"].lines)
+            {
+                if (i is SaySwitch ss)
+                {
+                    if (skip1)
+                    {
+                        ss.lines.Add(
+                            new CustomSay
+                            {
+                                who = AmIlleana,
+                                loopTag = "squint".Check(),
+                                what = "You're not allowed to have it."
+                            }
+                        );
+                        break;
+                    }
+                    skip1 = true;
+                }
+            }
+        }
+        catch (Exception err)
+        {
+            Instance.Logger.LogError(err, "Failed to add Illeana response to RiderTiderunnerShouts");
+        }
+        try
+        {
+            bool skip1 = false;
+            foreach(Instruction i in DB.story.all["SkunkFirstTurnShouts_Multi_0"].lines)
+            {
+                if (i is SaySwitch ss)
+                {
+                    if (skip1)
+                    {
+                        ss.lines.Add(
+                            new CustomSay
+                            {
+                                who = AmIlleana,
+                                what = "I'm not an errosion engineer you know."
+                            }
+                        );
+                        break;
+                    }
+                    skip1 = true;
+                }
+            }
+        }
+        catch (Exception err)
+        {
+            Instance.Logger.LogError(err, "Failed to add Illeana response to SkunkFirstTurnShouts_Multi_0");
+        }
+        try
+        {
+            foreach(Instruction i in DB.story.all["SogginsEscapeIntent_1"].lines)
+            {
+                if (i is SaySwitch ss)
+                {
+                    ss.lines.Add(
+                        new CustomSay
+                        {
+                            who = AmIlleana,
+                            loopTag = "tired".Check(),
+                            what = "Just get out of here."
+                        }
+                    );
+                    break;
+                }
+            }
+        }
+        catch (Exception err)
+        {
+            Instance.Logger.LogError(err, "Failed to add Illeana response to SogginsEscapeIntent_1");
+        }
+        try
+        {
+            foreach(Instruction i in DB.story.all["SogginsEscapeIntent_3"].lines)
+            {
+                if (i is SaySwitch ss)
+                {
+                    ss.lines.Add(
+                        new CustomSay
+                        {
+                            who = AmIlleana,
+                            loopTag = "giggle".Check(),
+                            what = "Hee hee heeeee."
+                        }
+                    );
+                    break;
+                }
+            }
+        }
+        catch (Exception err)
+        {
+            Instance.Logger.LogError(err, "Failed to add Illeana response to SogginsEscapeIntent_3");
+        }
+        try
+        {
+            foreach(Instruction i in DB.story.all["Soggins_Missile_Shout_1"].lines)
+            {
+                if (i is SaySwitch ss)
+                {
+                    ss.lines.Add(
+                        new CustomSay
+                        {
+                            who = AmIlleana,
+                            loopTag = "mad".Check(),
+                            what = "Shoot you with what?"
+                        }
+                    );
+                    break;
+                }
+            }
+        }
+        catch (Exception err)
+        {
+            Instance.Logger.LogError(err, "Failed to add Illeana response to Soggins_Missile_Shout_1");
+        }
+        try
+        {
+            foreach(Instruction i in DB.story.all["SpikeGetsChatty_Multi_0"].lines)
+            {
+                if (i is SaySwitch ss)
+                {
+                    ss.lines.Add(
+                        new CustomSay
+                        {
+                            who = AmIlleana,
+                            what = "Here I come."
+                        }
+                    );
+                    break;
+                }
+            }
+        }
+        catch (Exception err)
+        {
+            Instance.Logger.LogError(err, "Failed to add Illeana response to SpikeGetsChatty_Multi_0");
+        }
+        try
+        {
+            foreach(Instruction i in DB.story.all["TookDamageHave2HP_Multi_1"].lines)
+            {
+                if (i is SaySwitch ss)
+                {
+                    ss.lines.Add(
+                        new CustomSay
+                        {
+                            who = AmIlleana,
+                            loopTag = "mad".Check(),
+                            what = "I'm on it."
+                        }
+                    );
+                    break;
+                }
+            }
+        }
+        catch (Exception err)
+        {
+            Instance.Logger.LogError(err, "Failed to add Illeana response to TookDamageHave2HP_Multi_1");
+        }
+        try
+        {
+            foreach(Instruction i in DB.story.all["WeJustGainedHeatAndDrakeIsHere_Multi_0"].lines)
+            {
+                if (i is SaySwitch ss)
+                {
+                    ss.lines.Add(
+                        new CustomSay
+                        {
+                            who = AmIlleana,
+                            loopTag = "mad".Check(),
+                            what = "You're messing up my experiments."
+                        }
+                    );
+                    break;
+                }
+            }
+        }
+        catch (Exception err)
+        {
+            Instance.Logger.LogError(err, "Failed to add Illeana response to WeJustGainedHeatAndDrakeIsHere_Multi_0");
+        }
+
     }
 }

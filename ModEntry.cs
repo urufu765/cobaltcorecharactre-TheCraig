@@ -115,6 +115,7 @@ internal class ModEntry : SimpleMod
         //"blink",
         //"eyebrowraise",
         "gameover",
+        //"knife",
         "mini",
         //"readytoeat",
         //"screamA",
@@ -132,6 +133,7 @@ internal class ModEntry : SimpleMod
         //"curious",
         //"desperate",
         "explain",
+        //"giggle",
         //"holdcable"
         "intense",
         "mad",

@@ -971,7 +971,284 @@ internal static partial class CombatDialogue
                 }
             }
         };
+        DB.story.all["ManyFlips_Illeana_0"] = new()
+        {
+            type = NodeType.combat,
+            allPresent = [ AmIlleana ],
+            minTimesYouFlippedACardThisTurn = 4,
+            oncePerCombat = true,
+            lines = new()
+            {
+                new CustomSay()
+                {
+                    who = AmIlleana,
+                    loopTag = "mad".Check(),
+                    what = "Oh my word. Can you pick a side already?!"
+                }
+            }
+        };
+        DB.story.all["ManyTurns_Illeana_0"] = new()
+        {
+            type = NodeType.combat,
+            allPresent = [ AmIlleana ],
+            minTurnsThisCombat = 9,
+            oncePerCombatTags = ["manyTurns"],
+
+            lines = new()
+            {
+                new CustomSay()
+                {
+                    who = AmIlleana,
+                    loopTag = "explain".Check(),
+                    what = "Slow and steady wins the race."
+                }
+            }
+        };
+        DB.story.all["ManyTurns_Illeana_1"] = new()
+        {
+            type = NodeType.combat,
+            allPresent = [ AmIlleana ],
+            minTurnsThisCombat = 9,
+            oncePerCombatTags = ["manyTurns"],
+            lines = new()
+            {
+                new CustomSay()
+                {
+                    who = AmIlleana,
+                    loopTag = "tired".Check(),
+                    what = "What time is it?"
+                }
+            }
+        };
+        DB.story.all["OldSpikeChattyPostRenameGeorge_Illeana_0"] = new()
+        {
+            type = NodeType.combat,
+            allPresent = [ AmIlleana, "spike" ],
+            oncePerCombatTags = ["OldSpikeNewName"],
+            maxTurnsThisCombat = 1,
+            spikeName = "george",
+            lines = new()
+            {
+                new CustomSay()
+                {
+                    who = "spike",
+                    what = "George time!"
+                },
+                new CustomSay()
+                {
+                    who = AmIlleana,
+                    what = "Hmm, would've sounded better if you were Spike"
+                }
+            }
+        };
+        DB.story.all["OldSpikeChattyPostRenameSpikeTwo_Illeana_0"] = new()
+        {
+            type = NodeType.combat,
+            allPresent = [ AmIlleana, "spike" ],
+            oncePerCombatTags = ["OldSpikeNewName"],
+            maxTurnsThisCombat = 1,
+            spikeName = "spiketwo",
+            lines = new()
+            {
+                new CustomSay()
+                {
+                    who = "spike",
+                    what = "Get ready! Spike Two is here!"
+                },
+                new CustomSay()
+                {
+                    who = AmIlleana,
+                    loopTag = "squint".Check(),
+                    what = "What kind of name is Spike Two? Are you a sequel or something?"
+                }
+            }
+        };
+        DB.story.all["OneHitPointThisIsFine_Illeana_0"] = new()
+        {
+            type = NodeType.combat,
+            allPresent = [ AmIlleana ],
+            oncePerCombatTags = ["aboutToDie"],
+            oncePerRun = true,
+            enemyShotJustHit = true,
+            maxHull = 1,
+            lines = new()
+            {
+                new CustomSay()
+                {
+                    who = AmIlleana,
+                    loopTag = "panic".Check(),
+                    what = "We're losing hull faster than I can patch them!"
+                }
+            }
+        };
+        DB.story.all["OneHitPointThisIsFine_Illeana_1"] = new()
+        {
+            type = NodeType.combat,
+            allPresent = [ AmIlleana ],
+            oncePerCombatTags = ["aboutToDie"],
+            oncePerRun = true,
+            enemyShotJustHit = true,
+            maxHull = 1,
+            lastTurnPlayerStatuses = [Status.corrode],
+            lines = new()
+            {
+                new CustomSay()
+                {
+                    who = AmIlleana,
+                    loopTag = "panic".Check(),
+                    what = "Uhhh... maybe I shouldn't have experimented this much."
+                }
+            }
+        };
+        DB.story.all["OverheatGeneric_Illeana_0"] = new()
+        {
+            type = NodeType.combat,
+            allPresent = [ AmIlleana ],
+            goingToOverheat = true,
+            oncePerCombatTags = ["OverheatGeneric"],
+            lines = new()
+            {
+                new CustomSay()
+                {
+                    who = AmIlleana,
+                    loopTag = "neutral".Check(),
+                    what = "My corrosive solution has boiled away."
+                }
+            }
+        };
+        DB.story.all["PlayedManyCards_Illeana_0"] = new()
+        {
+            type = NodeType.combat,
+            handEmpty = true,
+            minCardsPlayedThisTurn = 6,
+            allPresent = [ AmIlleana ],
+            lines = new()
+            {
+                new CustomSay()
+                {
+                    who = AmIlleana,
+                    what = "Got many things done! Good job."
+                }
+            }
+        };
+        DB.story.all["StrafeHit_Illeana_0"] = new()
+        {
+            type = NodeType.combat,
+            allPresent = [ AmIlleana ],
+            playerShotJustHit = true,
+            minDamageDealtToEnemyThisAction = 1,
+            playerShotWasFromStrafe = true,
+            oncePerCombat = true,
+            lines = new()
+            {
+                new CustomSay()
+                {
+                    who = AmIlleana,
+                    loopTag = "explain".Check(),
+                    what = "You know, I might invest in this strafe tech."
+                }
+            }
+        };
+        DB.story.all["StrafeMissedGood_Illeana_0"] = new()
+        {
+            type = NodeType.combat,
+            allPresent = [ AmIlleana ],
+            playerShotJustMissed = true,
+            playerShotWasFromStrafe = true,
+            hasArtifacts = [ "Recalibrator", "GrazerBeam"],
+            oncePerCombat = true,
+            lines = new()
+            {
+                new CustomSay()
+                {
+                    who = AmIlleana,
+                    what = "Nothing wasted."
+                }
+            }
+        };
+        DB.story.all["TookZeroDamageAtLowHealth_Illeana_0"] = new()
+        {
+            type = NodeType.combat,
+            allPresent = [ AmIlleana ],
+            enemyShotJustHit = true,
+            maxHull = 2,
+            maxDamageDealtToPlayerThisTurn = 0,
+            lines = new()
+            {
+                new CustomSay()
+                {
+                    who = AmIlleana,
+                    what = "Keep them at bay while I work my magic."
+                }
+            }
+        };
+        DB.story.all["VeryManyTurns_Illeana_0"] = new()
+        {
+            type = NodeType.combat,
+            allPresent = [ AmIlleana ],
+            minTurnsThisCombat = 20,
+            oncePerCombatTags = ["veryManyTurns"],
+            oncePerRun = true,
+            turnStart = true,
+            lines = new()
+            {
+                new CustomSay()
+                {
+                    who = AmIlleana,
+                    loopTag = "tired".Check(),
+                    what = "Okay this is getting ridiculous."
+                }
+            }
+        };
+        DB.story.all["WeGotHurtButNotTooBad_Illeana_0"] = new()
+        {
+            type = NodeType.combat,
+            allPresent = [ AmIlleana ],
+            enemyShotJustHit = true,
+            minDamageDealtToPlayerThisTurn = 1,
+            maxDamageDealtToPlayerThisTurn = 1,
+            lines = new()
+            {
+                new CustomSay()
+                {
+                    who = AmIlleana,
+                    what = "Totally fixable."
+                }
+            }
+        };
+        DB.story.all["WeMissedOopsie_Illeana_0"] = new()
+        {
+            type = NodeType.combat,
+            allPresent = [ AmIlleana ],
+            playerShotJustMissed = true,
+            oncePerCombat = true,
+            doesNotHaveArtifacts = ["Recalibrator", "GrazerBeam"],
+            lines = new()
+            {
+                new CustomSay()
+                {
+                    who = AmIlleana,
+                    loopTag = "explain".Check(),
+                    what = "Good thing I'm not the one shooting."
+                }
+            }
+        };
+        DB.story.all["WeMissedOopsie_Illeana_1"] = new()
+        {
+            type = NodeType.combat,
+            allPresent = [ AmIlleana ],
+            playerShotJustMissed = true,
+            oncePerCombat = true,
+            doesNotHaveArtifacts = ["Recalibrator", "GrazerBeam"],
+            lines = new()
+            {
+                new CustomSay()
+                {
+                    who = AmIlleana,
+                    what = "Realign and try again."
+                }
+            }
+        };
     }
 }
-
 

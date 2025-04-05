@@ -228,5 +228,71 @@ internal static partial class EventDialogue
         {
             Instance.Logger.LogError(err, "Failed to add Illeana response to LoseCharacterCard_No");
         }        
+        try
+        {
+            foreach(Instruction i in DB.story.all["Sasha_2_Multi_2"].lines)
+            {
+                if (i is SaySwitch ss)
+                {
+                    ss.lines.Add(
+                        new CustomSay
+                        {
+                            who = AmIlleana,
+                            loopTag = "sad".Check(),
+                            what = "Can't play sports..."
+                        }
+                    );
+                    break;
+                }
+            }
+        }
+        catch (Exception err)
+        {
+            Instance.Logger.LogError(err, "Failed to add Illeana response to Sasha_2_Multi_2");
+        }        
+        try
+        {
+            foreach(Instruction i in DB.story.all["SogginsEscape_1"].lines)
+            {
+                if (i is SaySwitch ss)
+                {
+                    ss.lines.Add(
+                        new CustomSay
+                        {
+                            who = AmIlleana,
+                            loopTag = "knife".Check(),
+                            what = "..."
+                        }
+                    );
+                    break;
+                }
+            }
+        }
+        catch (Exception err)
+        {
+            Instance.Logger.LogError(err, "Failed to add Illeana response to SogginsEscape_1");
+        }        
+        try
+        {
+            foreach(Instruction i in DB.story.all["Soggins_Infinite"].lines)
+            {
+                if (i is SaySwitch ss)
+                {
+                    ss.lines.Add(
+                        new CustomSay
+                        {
+                            who = AmIlleana,
+                            loopTag = "tired".Check(),
+                            what = "Do we really have to help him?"
+                        }
+                    );
+                    break;
+                }
+            }
+        }
+        catch (Exception err)
+        {
+            Instance.Logger.LogError(err, "Failed to add Illeana response to Soggins_Infinite");
+        }        
     }
 }
