@@ -218,7 +218,8 @@ internal class ModEntry : SimpleMod
 
             DefaultCardArt = StableSpr.cards_colorless,
             BorderSprite = RegisterSprite(package, "assets/frame_illeana.png").Sprite,
-            Name = AnyLocalizations.Bind(["character", "Illeana", "name"]).Localize
+            Name = AnyLocalizations.Bind(["character", "Illeana", "name"]).Localize,
+            ShineColorOverride = _ => new Color("3045c0").addClarityBright(),
         });
         DecrepitCraigDeck = helper.Content.Decks.RegisterDeck("deadcraig", new DeckConfiguration
         {

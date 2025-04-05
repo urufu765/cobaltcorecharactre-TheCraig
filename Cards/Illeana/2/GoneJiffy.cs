@@ -35,64 +35,64 @@ public class GoneJiffy : Card, IRegisterable
             [
                 new AStatus
                 {
-                    status = Status.perfectShield,
+                    status = Status.autododgeLeft,
                     statusAmount = 1,
                     targetPlayer = true
                 },
-                new AStatus
+                new AHeal
                 {
-                    status = Status.ace,
-                    statusAmount = 1,
+                    healAmount = 2,
                     targetPlayer = true
-                },
-                new AStatus
-                {
-                    status = ModEntry.IlleanaTheSnek.MissingStatus.Status,
-                    statusAmount = 3,
-                    targetPlayer = true
-                }
-            ],
-            Upgrade.A => 
-            [
-                new AStatus
-                {
-                    status = Status.perfectShield,
-                    statusAmount = 1,
-                    targetPlayer = true
-                },
-                new AStatus
-                {
-                    targetPlayer = true,
-                    status = Status.evade,
-                    statusAmount = 1,
-                },
-                new AStatus
-                {
-                    status = ModEntry.IlleanaTheSnek.MissingStatus.Status,
-                    statusAmount = 1,
-                    targetPlayer = true
-                }
-            ],
-            _ => 
-            [
-                new AStatus
-                {
-                    status = Status.perfectShield,
-                    statusAmount = 1,
-                    targetPlayer = true
-                },
-                new AStatus
-                {
-                    targetPlayer = true,
-                    status = Status.evade,
-                    statusAmount = 1,
                 },
                 new AStatus
                 {
                     status = ModEntry.IlleanaTheSnek.MissingStatus.Status,
                     statusAmount = 2,
                     targetPlayer = true
-                }
+                },
+                new AEndTurn()
+            ],
+            Upgrade.A => 
+            [
+                new AStatus
+                {
+                    status = Status.autododgeRight,
+                    statusAmount = 1,
+                    targetPlayer = true
+                },
+                new AHeal
+                {
+                    healAmount = 1,
+                    targetPlayer = true
+                },
+                new AStatus
+                {
+                    status = ModEntry.IlleanaTheSnek.MissingStatus.Status,
+                    statusAmount = 1,
+                    targetPlayer = true
+                },
+                new AEndTurn()
+            ],
+            _ => 
+            [
+                new AStatus
+                {
+                    status = Status.autododgeRight,
+                    statusAmount = 1,
+                    targetPlayer = true
+                },
+                new AHeal
+                {
+                    healAmount = 1,
+                    targetPlayer = true
+                },
+                new AStatus
+                {
+                    status = ModEntry.IlleanaTheSnek.MissingStatus.Status,
+                    statusAmount = 2,
+                    targetPlayer = true
+                },
+                new AEndTurn()
             ],
         };
     }
@@ -106,12 +106,10 @@ public class GoneJiffy : Card, IRegisterable
             {
                 cost = 1,
                 exhaust = true,
-                artTint = "f5e030"
             },
             _ => new CardData
             {
                 cost = 1,
-                artTint = "f5e030"
             }
         };
     }

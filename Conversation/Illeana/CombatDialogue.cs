@@ -1121,790 +1121,790 @@ internal static class CombatDialogue
                 }
             }
         };
-        DB.story.all[""] = new()
-        {
-            type = NodeType.combat,
-            allPresent = [ AmIlleana ],
-            lines = new()
-            {
-                new CustomSay()
-                {
-                    who = AmIlleana,
-                    loopTag = "squint".Check(),
-                    what = "I can't do anything with this."
-                }
-            }
-        };
-        DB.story.all[""] = new()
-        {
-            type = NodeType.combat,
-            allPresent = [ AmIlleana ],
-            lines = new()
-            {
-                new CustomSay()
-                {
-                    who = AmIlleana,
-                    loopTag = "squint".Check(),
-                    what = "I can't do anything with this."
-                }
-            }
-        };
-        DB.story.all[""] = new()
-        {
-            type = NodeType.combat,
-            allPresent = [ AmIlleana ],
-            lines = new()
-            {
-                new CustomSay()
-                {
-                    who = AmIlleana,
-                    loopTag = "squint".Check(),
-                    what = "I can't do anything with this."
-                }
-            }
-        };
-        DB.story.all[""] = new()
-        {
-            type = NodeType.combat,
-            allPresent = [ AmIlleana ],
-            lines = new()
-            {
-                new CustomSay()
-                {
-                    who = AmIlleana,
-                    loopTag = "squint".Check(),
-                    what = "I can't do anything with this."
-                }
-            }
-        };
-        DB.story.all[""] = new()
-        {
-            type = NodeType.combat,
-            allPresent = [ AmIlleana ],
-            lines = new()
-            {
-                new CustomSay()
-                {
-                    who = AmIlleana,
-                    loopTag = "squint".Check(),
-                    what = "I can't do anything with this."
-                }
-            }
-        };
-        DB.story.all[""] = new()
-        {
-            type = NodeType.combat,
-            allPresent = [ AmIlleana ],
-            lines = new()
-            {
-                new CustomSay()
-                {
-                    who = AmIlleana,
-                    loopTag = "squint".Check(),
-                    what = "I can't do anything with this."
-                }
-            }
-        };
-        DB.story.all[""] = new()
-        {
-            type = NodeType.combat,
-            allPresent = [ AmIlleana ],
-            lines = new()
-            {
-                new CustomSay()
-                {
-                    who = AmIlleana,
-                    loopTag = "squint".Check(),
-                    what = "I can't do anything with this."
-                }
-            }
-        };
-        DB.story.all[""] = new()
-        {
-            type = NodeType.combat,
-            allPresent = [ AmIlleana ],
-            lines = new()
-            {
-                new CustomSay()
-                {
-                    who = AmIlleana,
-                    loopTag = "squint".Check(),
-                    what = "I can't do anything with this."
-                }
-            }
-        };
-        DB.story.all[""] = new()
-        {
-            type = NodeType.combat,
-            allPresent = [ AmIlleana ],
-            lines = new()
-            {
-                new CustomSay()
-                {
-                    who = AmIlleana,
-                    loopTag = "squint".Check(),
-                    what = "I can't do anything with this."
-                }
-            }
-        };
-        DB.story.all[""] = new()
-        {
-            type = NodeType.combat,
-            allPresent = [ AmIlleana ],
-            lines = new()
-            {
-                new CustomSay()
-                {
-                    who = AmIlleana,
-                    loopTag = "squint".Check(),
-                    what = "I can't do anything with this."
-                }
-            }
-        };
-        DB.story.all[""] = new()
-        {
-            type = NodeType.combat,
-            allPresent = [ AmIlleana ],
-            lines = new()
-            {
-                new CustomSay()
-                {
-                    who = AmIlleana,
-                    loopTag = "squint".Check(),
-                    what = "I can't do anything with this."
-                }
-            }
-        };
-        DB.story.all[""] = new()
-        {
-            type = NodeType.combat,
-            allPresent = [ AmIlleana ],
-            lines = new()
-            {
-                new CustomSay()
-                {
-                    who = AmIlleana,
-                    loopTag = "squint".Check(),
-                    what = "I can't do anything with this."
-                }
-            }
-        };
-        DB.story.all[""] = new()
-        {
-            type = NodeType.combat,
-            allPresent = [ AmIlleana ],
-            lines = new()
-            {
-                new CustomSay()
-                {
-                    who = AmIlleana,
-                    loopTag = "squint".Check(),
-                    what = "I can't do anything with this."
-                }
-            }
-        };
-        DB.story.all[""] = new()
-        {
-            type = NodeType.combat,
-            allPresent = [ AmIlleana ],
-            lines = new()
-            {
-                new CustomSay()
-                {
-                    who = AmIlleana,
-                    loopTag = "squint".Check(),
-                    what = "I can't do anything with this."
-                }
-            }
-        };
-        DB.story.all[""] = new()
-        {
-            type = NodeType.combat,
-            allPresent = [ AmIlleana ],
-            lines = new()
-            {
-                new CustomSay()
-                {
-                    who = AmIlleana,
-                    loopTag = "squint".Check(),
-                    what = "I can't do anything with this."
-                }
-            }
-        };
-        DB.story.all[""] = new()
-        {
-            type = NodeType.combat,
-            allPresent = [ AmIlleana ],
-            lines = new()
-            {
-                new CustomSay()
-                {
-                    who = AmIlleana,
-                    loopTag = "squint".Check(),
-                    what = "I can't do anything with this."
-                }
-            }
-        };
-        DB.story.all[""] = new()
-        {
-            type = NodeType.combat,
-            allPresent = [ AmIlleana ],
-            lines = new()
-            {
-                new CustomSay()
-                {
-                    who = AmIlleana,
-                    loopTag = "squint".Check(),
-                    what = "I can't do anything with this."
-                }
-            }
-        };
-        DB.story.all[""] = new()
-        {
-            type = NodeType.combat,
-            allPresent = [ AmIlleana ],
-            lines = new()
-            {
-                new CustomSay()
-                {
-                    who = AmIlleana,
-                    loopTag = "squint".Check(),
-                    what = "I can't do anything with this."
-                }
-            }
-        };
-        DB.story.all[""] = new()
-        {
-            type = NodeType.combat,
-            allPresent = [ AmIlleana ],
-            lines = new()
-            {
-                new CustomSay()
-                {
-                    who = AmIlleana,
-                    loopTag = "squint".Check(),
-                    what = "I can't do anything with this."
-                }
-            }
-        };
-        DB.story.all[""] = new()
-        {
-            type = NodeType.combat,
-            allPresent = [ AmIlleana ],
-            lines = new()
-            {
-                new CustomSay()
-                {
-                    who = AmIlleana,
-                    loopTag = "squint".Check(),
-                    what = "I can't do anything with this."
-                }
-            }
-        };
-        DB.story.all[""] = new()
-        {
-            type = NodeType.combat,
-            allPresent = [ AmIlleana ],
-            lines = new()
-            {
-                new CustomSay()
-                {
-                    who = AmIlleana,
-                    loopTag = "squint".Check(),
-                    what = "I can't do anything with this."
-                }
-            }
-        };
-        DB.story.all[""] = new()
-        {
-            type = NodeType.combat,
-            allPresent = [ AmIlleana ],
-            lines = new()
-            {
-                new CustomSay()
-                {
-                    who = AmIlleana,
-                    loopTag = "squint".Check(),
-                    what = "I can't do anything with this."
-                }
-            }
-        };
-        DB.story.all[""] = new()
-        {
-            type = NodeType.combat,
-            allPresent = [ AmIlleana ],
-            lines = new()
-            {
-                new CustomSay()
-                {
-                    who = AmIlleana,
-                    loopTag = "squint".Check(),
-                    what = "I can't do anything with this."
-                }
-            }
-        };
-        DB.story.all[""] = new()
-        {
-            type = NodeType.combat,
-            allPresent = [ AmIlleana ],
-            lines = new()
-            {
-                new CustomSay()
-                {
-                    who = AmIlleana,
-                    loopTag = "squint".Check(),
-                    what = "I can't do anything with this."
-                }
-            }
-        };
-        DB.story.all[""] = new()
-        {
-            type = NodeType.combat,
-            allPresent = [ AmIlleana ],
-            lines = new()
-            {
-                new CustomSay()
-                {
-                    who = AmIlleana,
-                    loopTag = "squint".Check(),
-                    what = "I can't do anything with this."
-                }
-            }
-        };
-        DB.story.all[""] = new()
-        {
-            type = NodeType.combat,
-            allPresent = [ AmIlleana ],
-            lines = new()
-            {
-                new CustomSay()
-                {
-                    who = AmIlleana,
-                    loopTag = "squint".Check(),
-                    what = "I can't do anything with this."
-                }
-            }
-        };
-        DB.story.all[""] = new()
-        {
-            type = NodeType.combat,
-            allPresent = [ AmIlleana ],
-            lines = new()
-            {
-                new CustomSay()
-                {
-                    who = AmIlleana,
-                    loopTag = "squint".Check(),
-                    what = "I can't do anything with this."
-                }
-            }
-        };
-        DB.story.all[""] = new()
-        {
-            type = NodeType.combat,
-            allPresent = [ AmIlleana ],
-            lines = new()
-            {
-                new CustomSay()
-                {
-                    who = AmIlleana,
-                    loopTag = "squint".Check(),
-                    what = "I can't do anything with this."
-                }
-            }
-        };
-        DB.story.all[""] = new()
-        {
-            type = NodeType.combat,
-            allPresent = [ AmIlleana ],
-            lines = new()
-            {
-                new CustomSay()
-                {
-                    who = AmIlleana,
-                    loopTag = "squint".Check(),
-                    what = "I can't do anything with this."
-                }
-            }
-        };
-        DB.story.all[""] = new()
-        {
-            type = NodeType.combat,
-            allPresent = [ AmIlleana ],
-            lines = new()
-            {
-                new CustomSay()
-                {
-                    who = AmIlleana,
-                    loopTag = "squint".Check(),
-                    what = "I can't do anything with this."
-                }
-            }
-        };
-        DB.story.all[""] = new()
-        {
-            type = NodeType.combat,
-            allPresent = [ AmIlleana ],
-            lines = new()
-            {
-                new CustomSay()
-                {
-                    who = AmIlleana,
-                    loopTag = "squint".Check(),
-                    what = "I can't do anything with this."
-                }
-            }
-        };
-        DB.story.all[""] = new()
-        {
-            type = NodeType.combat,
-            allPresent = [ AmIlleana ],
-            lines = new()
-            {
-                new CustomSay()
-                {
-                    who = AmIlleana,
-                    loopTag = "squint".Check(),
-                    what = "I can't do anything with this."
-                }
-            }
-        };
-        DB.story.all[""] = new()
-        {
-            type = NodeType.combat,
-            allPresent = [ AmIlleana ],
-            lines = new()
-            {
-                new CustomSay()
-                {
-                    who = AmIlleana,
-                    loopTag = "squint".Check(),
-                    what = "I can't do anything with this."
-                }
-            }
-        };
-        DB.story.all[""] = new()
-        {
-            type = NodeType.combat,
-            allPresent = [ AmIlleana ],
-            lines = new()
-            {
-                new CustomSay()
-                {
-                    who = AmIlleana,
-                    loopTag = "squint".Check(),
-                    what = "I can't do anything with this."
-                }
-            }
-        };
-        DB.story.all[""] = new()
-        {
-            type = NodeType.combat,
-            allPresent = [ AmIlleana ],
-            lines = new()
-            {
-                new CustomSay()
-                {
-                    who = AmIlleana,
-                    loopTag = "squint".Check(),
-                    what = "I can't do anything with this."
-                }
-            }
-        };
-        DB.story.all[""] = new()
-        {
-            type = NodeType.combat,
-            allPresent = [ AmIlleana ],
-            lines = new()
-            {
-                new CustomSay()
-                {
-                    who = AmIlleana,
-                    loopTag = "squint".Check(),
-                    what = "I can't do anything with this."
-                }
-            }
-        };
-        DB.story.all[""] = new()
-        {
-            type = NodeType.combat,
-            allPresent = [ AmIlleana ],
-            lines = new()
-            {
-                new CustomSay()
-                {
-                    who = AmIlleana,
-                    loopTag = "squint".Check(),
-                    what = "I can't do anything with this."
-                }
-            }
-        };
-        DB.story.all[""] = new()
-        {
-            type = NodeType.combat,
-            allPresent = [ AmIlleana ],
-            lines = new()
-            {
-                new CustomSay()
-                {
-                    who = AmIlleana,
-                    loopTag = "squint".Check(),
-                    what = "I can't do anything with this."
-                }
-            }
-        };
-        DB.story.all[""] = new()
-        {
-            type = NodeType.combat,
-            allPresent = [ AmIlleana ],
-            lines = new()
-            {
-                new CustomSay()
-                {
-                    who = AmIlleana,
-                    loopTag = "squint".Check(),
-                    what = "I can't do anything with this."
-                }
-            }
-        };
-        DB.story.all[""] = new()
-        {
-            type = NodeType.combat,
-            allPresent = [ AmIlleana ],
-            lines = new()
-            {
-                new CustomSay()
-                {
-                    who = AmIlleana,
-                    loopTag = "squint".Check(),
-                    what = "I can't do anything with this."
-                }
-            }
-        };
-        DB.story.all[""] = new()
-        {
-            type = NodeType.combat,
-            allPresent = [ AmIlleana ],
-            lines = new()
-            {
-                new CustomSay()
-                {
-                    who = AmIlleana,
-                    loopTag = "squint".Check(),
-                    what = "I can't do anything with this."
-                }
-            }
-        };
-        DB.story.all[""] = new()
-        {
-            type = NodeType.combat,
-            allPresent = [ AmIlleana ],
-            lines = new()
-            {
-                new CustomSay()
-                {
-                    who = AmIlleana,
-                    loopTag = "squint".Check(),
-                    what = "I can't do anything with this."
-                }
-            }
-        };
-        DB.story.all[""] = new()
-        {
-            type = NodeType.combat,
-            allPresent = [ AmIlleana ],
-            lines = new()
-            {
-                new CustomSay()
-                {
-                    who = AmIlleana,
-                    loopTag = "squint".Check(),
-                    what = "I can't do anything with this."
-                }
-            }
-        };
-        DB.story.all[""] = new()
-        {
-            type = NodeType.combat,
-            allPresent = [ AmIlleana ],
-            lines = new()
-            {
-                new CustomSay()
-                {
-                    who = AmIlleana,
-                    loopTag = "squint".Check(),
-                    what = "I can't do anything with this."
-                }
-            }
-        };
-        DB.story.all[""] = new()
-        {
-            type = NodeType.combat,
-            allPresent = [ AmIlleana ],
-            lines = new()
-            {
-                new CustomSay()
-                {
-                    who = AmIlleana,
-                    loopTag = "squint".Check(),
-                    what = "I can't do anything with this."
-                }
-            }
-        };
-        DB.story.all[""] = new()
-        {
-            type = NodeType.combat,
-            allPresent = [ AmIlleana ],
-            lines = new()
-            {
-                new CustomSay()
-                {
-                    who = AmIlleana,
-                    loopTag = "squint".Check(),
-                    what = "I can't do anything with this."
-                }
-            }
-        };
-        DB.story.all[""] = new()
-        {
-            type = NodeType.combat,
-            allPresent = [ AmIlleana ],
-            lines = new()
-            {
-                new CustomSay()
-                {
-                    who = AmIlleana,
-                    loopTag = "squint".Check(),
-                    what = "I can't do anything with this."
-                }
-            }
-        };
-        DB.story.all[""] = new()
-        {
-            type = NodeType.combat,
-            allPresent = [ AmIlleana ],
-            lines = new()
-            {
-                new CustomSay()
-                {
-                    who = AmIlleana,
-                    loopTag = "squint".Check(),
-                    what = "I can't do anything with this."
-                }
-            }
-        };
-        DB.story.all[""] = new()
-        {
-            type = NodeType.combat,
-            allPresent = [ AmIlleana ],
-            lines = new()
-            {
-                new CustomSay()
-                {
-                    who = AmIlleana,
-                    loopTag = "squint".Check(),
-                    what = "I can't do anything with this."
-                }
-            }
-        };
-        DB.story.all[""] = new()
-        {
-            type = NodeType.combat,
-            allPresent = [ AmIlleana ],
-            lines = new()
-            {
-                new CustomSay()
-                {
-                    who = AmIlleana,
-                    loopTag = "squint".Check(),
-                    what = "I can't do anything with this."
-                }
-            }
-        };
-        DB.story.all[""] = new()
-        {
-            type = NodeType.combat,
-            allPresent = [ AmIlleana ],
-            lines = new()
-            {
-                new CustomSay()
-                {
-                    who = AmIlleana,
-                    loopTag = "squint".Check(),
-                    what = "I can't do anything with this."
-                }
-            }
-        };
-        DB.story.all[""] = new()
-        {
-            type = NodeType.combat,
-            allPresent = [ AmIlleana ],
-            lines = new()
-            {
-                new CustomSay()
-                {
-                    who = AmIlleana,
-                    loopTag = "squint".Check(),
-                    what = "I can't do anything with this."
-                }
-            }
-        };
-        DB.story.all[""] = new()
-        {
-            type = NodeType.combat,
-            allPresent = [ AmIlleana ],
-            lines = new()
-            {
-                new CustomSay()
-                {
-                    who = AmIlleana,
-                    loopTag = "squint".Check(),
-                    what = "I can't do anything with this."
-                }
-            }
-        };
-        DB.story.all[""] = new()
-        {
-            type = NodeType.combat,
-            allPresent = [ AmIlleana ],
-            lines = new()
-            {
-                new CustomSay()
-                {
-                    who = AmIlleana,
-                    loopTag = "squint".Check(),
-                    what = "I can't do anything with this."
-                }
-            }
-        };
-        DB.story.all[""] = new()
-        {
-            type = NodeType.combat,
-            allPresent = [ AmIlleana ],
-            lines = new()
-            {
-                new CustomSay()
-                {
-                    who = AmIlleana,
-                    loopTag = "squint".Check(),
-                    what = "I can't do anything with this."
-                }
-            }
-        };
-        DB.story.all[""] = new()
-        {
-            type = NodeType.combat,
-            allPresent = [ AmIlleana ],
-            lines = new()
-            {
-                new CustomSay()
-                {
-                    who = AmIlleana,
-                    loopTag = "squint".Check(),
-                    what = "I can't do anything with this."
-                }
-            }
-        };
+        // DB.story.all[""] = new()
+        // {
+        //     type = NodeType.combat,
+        //     allPresent = [ AmIlleana ],
+        //     lines = new()
+        //     {
+        //         new CustomSay()
+        //         {
+        //             who = AmIlleana,
+        //             loopTag = "squint".Check(),
+        //             what = "I can't do anything with this."
+        //         }
+        //     }
+        // };
+        // DB.story.all[""] = new()
+        // {
+        //     type = NodeType.combat,
+        //     allPresent = [ AmIlleana ],
+        //     lines = new()
+        //     {
+        //         new CustomSay()
+        //         {
+        //             who = AmIlleana,
+        //             loopTag = "squint".Check(),
+        //             what = "I can't do anything with this."
+        //         }
+        //     }
+        // };
+        // DB.story.all[""] = new()
+        // {
+        //     type = NodeType.combat,
+        //     allPresent = [ AmIlleana ],
+        //     lines = new()
+        //     {
+        //         new CustomSay()
+        //         {
+        //             who = AmIlleana,
+        //             loopTag = "squint".Check(),
+        //             what = "I can't do anything with this."
+        //         }
+        //     }
+        // };
+        // DB.story.all[""] = new()
+        // {
+        //     type = NodeType.combat,
+        //     allPresent = [ AmIlleana ],
+        //     lines = new()
+        //     {
+        //         new CustomSay()
+        //         {
+        //             who = AmIlleana,
+        //             loopTag = "squint".Check(),
+        //             what = "I can't do anything with this."
+        //         }
+        //     }
+        // };
+        // DB.story.all[""] = new()
+        // {
+        //     type = NodeType.combat,
+        //     allPresent = [ AmIlleana ],
+        //     lines = new()
+        //     {
+        //         new CustomSay()
+        //         {
+        //             who = AmIlleana,
+        //             loopTag = "squint".Check(),
+        //             what = "I can't do anything with this."
+        //         }
+        //     }
+        // };
+        // DB.story.all[""] = new()
+        // {
+        //     type = NodeType.combat,
+        //     allPresent = [ AmIlleana ],
+        //     lines = new()
+        //     {
+        //         new CustomSay()
+        //         {
+        //             who = AmIlleana,
+        //             loopTag = "squint".Check(),
+        //             what = "I can't do anything with this."
+        //         }
+        //     }
+        // };
+        // DB.story.all[""] = new()
+        // {
+        //     type = NodeType.combat,
+        //     allPresent = [ AmIlleana ],
+        //     lines = new()
+        //     {
+        //         new CustomSay()
+        //         {
+        //             who = AmIlleana,
+        //             loopTag = "squint".Check(),
+        //             what = "I can't do anything with this."
+        //         }
+        //     }
+        // };
+        // DB.story.all[""] = new()
+        // {
+        //     type = NodeType.combat,
+        //     allPresent = [ AmIlleana ],
+        //     lines = new()
+        //     {
+        //         new CustomSay()
+        //         {
+        //             who = AmIlleana,
+        //             loopTag = "squint".Check(),
+        //             what = "I can't do anything with this."
+        //         }
+        //     }
+        // };
+        // DB.story.all[""] = new()
+        // {
+        //     type = NodeType.combat,
+        //     allPresent = [ AmIlleana ],
+        //     lines = new()
+        //     {
+        //         new CustomSay()
+        //         {
+        //             who = AmIlleana,
+        //             loopTag = "squint".Check(),
+        //             what = "I can't do anything with this."
+        //         }
+        //     }
+        // };
+        // DB.story.all[""] = new()
+        // {
+        //     type = NodeType.combat,
+        //     allPresent = [ AmIlleana ],
+        //     lines = new()
+        //     {
+        //         new CustomSay()
+        //         {
+        //             who = AmIlleana,
+        //             loopTag = "squint".Check(),
+        //             what = "I can't do anything with this."
+        //         }
+        //     }
+        // };
+        // DB.story.all[""] = new()
+        // {
+        //     type = NodeType.combat,
+        //     allPresent = [ AmIlleana ],
+        //     lines = new()
+        //     {
+        //         new CustomSay()
+        //         {
+        //             who = AmIlleana,
+        //             loopTag = "squint".Check(),
+        //             what = "I can't do anything with this."
+        //         }
+        //     }
+        // };
+        // DB.story.all[""] = new()
+        // {
+        //     type = NodeType.combat,
+        //     allPresent = [ AmIlleana ],
+        //     lines = new()
+        //     {
+        //         new CustomSay()
+        //         {
+        //             who = AmIlleana,
+        //             loopTag = "squint".Check(),
+        //             what = "I can't do anything with this."
+        //         }
+        //     }
+        // };
+        // DB.story.all[""] = new()
+        // {
+        //     type = NodeType.combat,
+        //     allPresent = [ AmIlleana ],
+        //     lines = new()
+        //     {
+        //         new CustomSay()
+        //         {
+        //             who = AmIlleana,
+        //             loopTag = "squint".Check(),
+        //             what = "I can't do anything with this."
+        //         }
+        //     }
+        // };
+        // DB.story.all[""] = new()
+        // {
+        //     type = NodeType.combat,
+        //     allPresent = [ AmIlleana ],
+        //     lines = new()
+        //     {
+        //         new CustomSay()
+        //         {
+        //             who = AmIlleana,
+        //             loopTag = "squint".Check(),
+        //             what = "I can't do anything with this."
+        //         }
+        //     }
+        // };
+        // DB.story.all[""] = new()
+        // {
+        //     type = NodeType.combat,
+        //     allPresent = [ AmIlleana ],
+        //     lines = new()
+        //     {
+        //         new CustomSay()
+        //         {
+        //             who = AmIlleana,
+        //             loopTag = "squint".Check(),
+        //             what = "I can't do anything with this."
+        //         }
+        //     }
+        // };
+        // DB.story.all[""] = new()
+        // {
+        //     type = NodeType.combat,
+        //     allPresent = [ AmIlleana ],
+        //     lines = new()
+        //     {
+        //         new CustomSay()
+        //         {
+        //             who = AmIlleana,
+        //             loopTag = "squint".Check(),
+        //             what = "I can't do anything with this."
+        //         }
+        //     }
+        // };
+        // DB.story.all[""] = new()
+        // {
+        //     type = NodeType.combat,
+        //     allPresent = [ AmIlleana ],
+        //     lines = new()
+        //     {
+        //         new CustomSay()
+        //         {
+        //             who = AmIlleana,
+        //             loopTag = "squint".Check(),
+        //             what = "I can't do anything with this."
+        //         }
+        //     }
+        // };
+        // DB.story.all[""] = new()
+        // {
+        //     type = NodeType.combat,
+        //     allPresent = [ AmIlleana ],
+        //     lines = new()
+        //     {
+        //         new CustomSay()
+        //         {
+        //             who = AmIlleana,
+        //             loopTag = "squint".Check(),
+        //             what = "I can't do anything with this."
+        //         }
+        //     }
+        // };
+        // DB.story.all[""] = new()
+        // {
+        //     type = NodeType.combat,
+        //     allPresent = [ AmIlleana ],
+        //     lines = new()
+        //     {
+        //         new CustomSay()
+        //         {
+        //             who = AmIlleana,
+        //             loopTag = "squint".Check(),
+        //             what = "I can't do anything with this."
+        //         }
+        //     }
+        // };
+        // DB.story.all[""] = new()
+        // {
+        //     type = NodeType.combat,
+        //     allPresent = [ AmIlleana ],
+        //     lines = new()
+        //     {
+        //         new CustomSay()
+        //         {
+        //             who = AmIlleana,
+        //             loopTag = "squint".Check(),
+        //             what = "I can't do anything with this."
+        //         }
+        //     }
+        // };
+        // DB.story.all[""] = new()
+        // {
+        //     type = NodeType.combat,
+        //     allPresent = [ AmIlleana ],
+        //     lines = new()
+        //     {
+        //         new CustomSay()
+        //         {
+        //             who = AmIlleana,
+        //             loopTag = "squint".Check(),
+        //             what = "I can't do anything with this."
+        //         }
+        //     }
+        // };
+        // DB.story.all[""] = new()
+        // {
+        //     type = NodeType.combat,
+        //     allPresent = [ AmIlleana ],
+        //     lines = new()
+        //     {
+        //         new CustomSay()
+        //         {
+        //             who = AmIlleana,
+        //             loopTag = "squint".Check(),
+        //             what = "I can't do anything with this."
+        //         }
+        //     }
+        // };
+        // DB.story.all[""] = new()
+        // {
+        //     type = NodeType.combat,
+        //     allPresent = [ AmIlleana ],
+        //     lines = new()
+        //     {
+        //         new CustomSay()
+        //         {
+        //             who = AmIlleana,
+        //             loopTag = "squint".Check(),
+        //             what = "I can't do anything with this."
+        //         }
+        //     }
+        // };
+        // DB.story.all[""] = new()
+        // {
+        //     type = NodeType.combat,
+        //     allPresent = [ AmIlleana ],
+        //     lines = new()
+        //     {
+        //         new CustomSay()
+        //         {
+        //             who = AmIlleana,
+        //             loopTag = "squint".Check(),
+        //             what = "I can't do anything with this."
+        //         }
+        //     }
+        // };
+        // DB.story.all[""] = new()
+        // {
+        //     type = NodeType.combat,
+        //     allPresent = [ AmIlleana ],
+        //     lines = new()
+        //     {
+        //         new CustomSay()
+        //         {
+        //             who = AmIlleana,
+        //             loopTag = "squint".Check(),
+        //             what = "I can't do anything with this."
+        //         }
+        //     }
+        // };
+        // DB.story.all[""] = new()
+        // {
+        //     type = NodeType.combat,
+        //     allPresent = [ AmIlleana ],
+        //     lines = new()
+        //     {
+        //         new CustomSay()
+        //         {
+        //             who = AmIlleana,
+        //             loopTag = "squint".Check(),
+        //             what = "I can't do anything with this."
+        //         }
+        //     }
+        // };
+        // DB.story.all[""] = new()
+        // {
+        //     type = NodeType.combat,
+        //     allPresent = [ AmIlleana ],
+        //     lines = new()
+        //     {
+        //         new CustomSay()
+        //         {
+        //             who = AmIlleana,
+        //             loopTag = "squint".Check(),
+        //             what = "I can't do anything with this."
+        //         }
+        //     }
+        // };
+        // DB.story.all[""] = new()
+        // {
+        //     type = NodeType.combat,
+        //     allPresent = [ AmIlleana ],
+        //     lines = new()
+        //     {
+        //         new CustomSay()
+        //         {
+        //             who = AmIlleana,
+        //             loopTag = "squint".Check(),
+        //             what = "I can't do anything with this."
+        //         }
+        //     }
+        // };
+        // DB.story.all[""] = new()
+        // {
+        //     type = NodeType.combat,
+        //     allPresent = [ AmIlleana ],
+        //     lines = new()
+        //     {
+        //         new CustomSay()
+        //         {
+        //             who = AmIlleana,
+        //             loopTag = "squint".Check(),
+        //             what = "I can't do anything with this."
+        //         }
+        //     }
+        // };
+        // DB.story.all[""] = new()
+        // {
+        //     type = NodeType.combat,
+        //     allPresent = [ AmIlleana ],
+        //     lines = new()
+        //     {
+        //         new CustomSay()
+        //         {
+        //             who = AmIlleana,
+        //             loopTag = "squint".Check(),
+        //             what = "I can't do anything with this."
+        //         }
+        //     }
+        // };
+        // DB.story.all[""] = new()
+        // {
+        //     type = NodeType.combat,
+        //     allPresent = [ AmIlleana ],
+        //     lines = new()
+        //     {
+        //         new CustomSay()
+        //         {
+        //             who = AmIlleana,
+        //             loopTag = "squint".Check(),
+        //             what = "I can't do anything with this."
+        //         }
+        //     }
+        // };
+        // DB.story.all[""] = new()
+        // {
+        //     type = NodeType.combat,
+        //     allPresent = [ AmIlleana ],
+        //     lines = new()
+        //     {
+        //         new CustomSay()
+        //         {
+        //             who = AmIlleana,
+        //             loopTag = "squint".Check(),
+        //             what = "I can't do anything with this."
+        //         }
+        //     }
+        // };
+        // DB.story.all[""] = new()
+        // {
+        //     type = NodeType.combat,
+        //     allPresent = [ AmIlleana ],
+        //     lines = new()
+        //     {
+        //         new CustomSay()
+        //         {
+        //             who = AmIlleana,
+        //             loopTag = "squint".Check(),
+        //             what = "I can't do anything with this."
+        //         }
+        //     }
+        // };
+        // DB.story.all[""] = new()
+        // {
+        //     type = NodeType.combat,
+        //     allPresent = [ AmIlleana ],
+        //     lines = new()
+        //     {
+        //         new CustomSay()
+        //         {
+        //             who = AmIlleana,
+        //             loopTag = "squint".Check(),
+        //             what = "I can't do anything with this."
+        //         }
+        //     }
+        // };
+        // DB.story.all[""] = new()
+        // {
+        //     type = NodeType.combat,
+        //     allPresent = [ AmIlleana ],
+        //     lines = new()
+        //     {
+        //         new CustomSay()
+        //         {
+        //             who = AmIlleana,
+        //             loopTag = "squint".Check(),
+        //             what = "I can't do anything with this."
+        //         }
+        //     }
+        // };
+        // DB.story.all[""] = new()
+        // {
+        //     type = NodeType.combat,
+        //     allPresent = [ AmIlleana ],
+        //     lines = new()
+        //     {
+        //         new CustomSay()
+        //         {
+        //             who = AmIlleana,
+        //             loopTag = "squint".Check(),
+        //             what = "I can't do anything with this."
+        //         }
+        //     }
+        // };
+        // DB.story.all[""] = new()
+        // {
+        //     type = NodeType.combat,
+        //     allPresent = [ AmIlleana ],
+        //     lines = new()
+        //     {
+        //         new CustomSay()
+        //         {
+        //             who = AmIlleana,
+        //             loopTag = "squint".Check(),
+        //             what = "I can't do anything with this."
+        //         }
+        //     }
+        // };
+        // DB.story.all[""] = new()
+        // {
+        //     type = NodeType.combat,
+        //     allPresent = [ AmIlleana ],
+        //     lines = new()
+        //     {
+        //         new CustomSay()
+        //         {
+        //             who = AmIlleana,
+        //             loopTag = "squint".Check(),
+        //             what = "I can't do anything with this."
+        //         }
+        //     }
+        // };
+        // DB.story.all[""] = new()
+        // {
+        //     type = NodeType.combat,
+        //     allPresent = [ AmIlleana ],
+        //     lines = new()
+        //     {
+        //         new CustomSay()
+        //         {
+        //             who = AmIlleana,
+        //             loopTag = "squint".Check(),
+        //             what = "I can't do anything with this."
+        //         }
+        //     }
+        // };
+        // DB.story.all[""] = new()
+        // {
+        //     type = NodeType.combat,
+        //     allPresent = [ AmIlleana ],
+        //     lines = new()
+        //     {
+        //         new CustomSay()
+        //         {
+        //             who = AmIlleana,
+        //             loopTag = "squint".Check(),
+        //             what = "I can't do anything with this."
+        //         }
+        //     }
+        // };
+        // DB.story.all[""] = new()
+        // {
+        //     type = NodeType.combat,
+        //     allPresent = [ AmIlleana ],
+        //     lines = new()
+        //     {
+        //         new CustomSay()
+        //         {
+        //             who = AmIlleana,
+        //             loopTag = "squint".Check(),
+        //             what = "I can't do anything with this."
+        //         }
+        //     }
+        // };
+        // DB.story.all[""] = new()
+        // {
+        //     type = NodeType.combat,
+        //     allPresent = [ AmIlleana ],
+        //     lines = new()
+        //     {
+        //         new CustomSay()
+        //         {
+        //             who = AmIlleana,
+        //             loopTag = "squint".Check(),
+        //             what = "I can't do anything with this."
+        //         }
+        //     }
+        // };
+        // DB.story.all[""] = new()
+        // {
+        //     type = NodeType.combat,
+        //     allPresent = [ AmIlleana ],
+        //     lines = new()
+        //     {
+        //         new CustomSay()
+        //         {
+        //             who = AmIlleana,
+        //             loopTag = "squint".Check(),
+        //             what = "I can't do anything with this."
+        //         }
+        //     }
+        // };
+        // DB.story.all[""] = new()
+        // {
+        //     type = NodeType.combat,
+        //     allPresent = [ AmIlleana ],
+        //     lines = new()
+        //     {
+        //         new CustomSay()
+        //         {
+        //             who = AmIlleana,
+        //             loopTag = "squint".Check(),
+        //             what = "I can't do anything with this."
+        //         }
+        //     }
+        // };
+        // DB.story.all[""] = new()
+        // {
+        //     type = NodeType.combat,
+        //     allPresent = [ AmIlleana ],
+        //     lines = new()
+        //     {
+        //         new CustomSay()
+        //         {
+        //             who = AmIlleana,
+        //             loopTag = "squint".Check(),
+        //             what = "I can't do anything with this."
+        //         }
+        //     }
+        // };
+        // DB.story.all[""] = new()
+        // {
+        //     type = NodeType.combat,
+        //     allPresent = [ AmIlleana ],
+        //     lines = new()
+        //     {
+        //         new CustomSay()
+        //         {
+        //             who = AmIlleana,
+        //             loopTag = "squint".Check(),
+        //             what = "I can't do anything with this."
+        //         }
+        //     }
+        // };
+        // DB.story.all[""] = new()
+        // {
+        //     type = NodeType.combat,
+        //     allPresent = [ AmIlleana ],
+        //     lines = new()
+        //     {
+        //         new CustomSay()
+        //         {
+        //             who = AmIlleana,
+        //             loopTag = "squint".Check(),
+        //             what = "I can't do anything with this."
+        //         }
+        //     }
+        // };
+        // DB.story.all[""] = new()
+        // {
+        //     type = NodeType.combat,
+        //     allPresent = [ AmIlleana ],
+        //     lines = new()
+        //     {
+        //         new CustomSay()
+        //         {
+        //             who = AmIlleana,
+        //             loopTag = "squint".Check(),
+        //             what = "I can't do anything with this."
+        //         }
+        //     }
+        // };
+        // DB.story.all[""] = new()
+        // {
+        //     type = NodeType.combat,
+        //     allPresent = [ AmIlleana ],
+        //     lines = new()
+        //     {
+        //         new CustomSay()
+        //         {
+        //             who = AmIlleana,
+        //             loopTag = "squint".Check(),
+        //             what = "I can't do anything with this."
+        //         }
+        //     }
+        // };
+        // DB.story.all[""] = new()
+        // {
+        //     type = NodeType.combat,
+        //     allPresent = [ AmIlleana ],
+        //     lines = new()
+        //     {
+        //         new CustomSay()
+        //         {
+        //             who = AmIlleana,
+        //             loopTag = "squint".Check(),
+        //             what = "I can't do anything with this."
+        //         }
+        //     }
+        // };
+        // DB.story.all[""] = new()
+        // {
+        //     type = NodeType.combat,
+        //     allPresent = [ AmIlleana ],
+        //     lines = new()
+        //     {
+        //         new CustomSay()
+        //         {
+        //             who = AmIlleana,
+        //             loopTag = "squint".Check(),
+        //             what = "I can't do anything with this."
+        //         }
+        //     }
+        // };
+        // DB.story.all[""] = new()
+        // {
+        //     type = NodeType.combat,
+        //     allPresent = [ AmIlleana ],
+        //     lines = new()
+        //     {
+        //         new CustomSay()
+        //         {
+        //             who = AmIlleana,
+        //             loopTag = "squint".Check(),
+        //             what = "I can't do anything with this."
+        //         }
+        //     }
+        // };
+        // DB.story.all[""] = new()
+        // {
+        //     type = NodeType.combat,
+        //     allPresent = [ AmIlleana ],
+        //     lines = new()
+        //     {
+        //         new CustomSay()
+        //         {
+        //             who = AmIlleana,
+        //             loopTag = "squint".Check(),
+        //             what = "I can't do anything with this."
+        //         }
+        //     }
+        // };
+        // DB.story.all[""] = new()
+        // {
+        //     type = NodeType.combat,
+        //     allPresent = [ AmIlleana ],
+        //     lines = new()
+        //     {
+        //         new CustomSay()
+        //         {
+        //             who = AmIlleana,
+        //             loopTag = "squint".Check(),
+        //             what = "I can't do anything with this."
+        //         }
+        //     }
+        // };
+        // DB.story.all[""] = new()
+        // {
+        //     type = NodeType.combat,
+        //     allPresent = [ AmIlleana ],
+        //     lines = new()
+        //     {
+        //         new CustomSay()
+        //         {
+        //             who = AmIlleana,
+        //             loopTag = "squint".Check(),
+        //             what = "I can't do anything with this."
+        //         }
+        //     }
+        // };
+        // DB.story.all[""] = new()
+        // {
+        //     type = NodeType.combat,
+        //     allPresent = [ AmIlleana ],
+        //     lines = new()
+        //     {
+        //         new CustomSay()
+        //         {
+        //             who = AmIlleana,
+        //             loopTag = "squint".Check(),
+        //             what = "I can't do anything with this."
+        //         }
+        //     }
+        // };
     }
 
     internal static void ModdedInject()

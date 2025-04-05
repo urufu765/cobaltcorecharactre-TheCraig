@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Reflection;
+using Microsoft.Extensions.Logging;
 using Nanoray.PluginManager;
 using Nickel;
 
@@ -101,6 +103,15 @@ public class Amputation : Card, IRegisterable
 
     public override CardData GetData(State state)
     {
+        int x = 0;
+        try
+        {
+            x = state.ship.hullMax - state.ship.hull;
+        }
+        catch (Exception e)
+        {
+            ModEntry.Instance.Logger.LogError(e, $"Error getting hull");
+        }
         return upgrade switch
         {
             Upgrade.A => new CardData
@@ -113,7 +124,7 @@ public class Amputation : Card, IRegisterable
             {
                 cost = 0,
                 singleUse = true,
-                description = ModEntry.Instance.Localizations.Localize(["card", "Uncommon", "Amputation", "descB"])
+                description = string.Format(ModEntry.Instance.Localizations.Localize(["card", "Uncommon", "Amputation", "descB"]), (x/2).ToString())
             },
             _ => new CardData
             {
