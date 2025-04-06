@@ -15,6 +15,10 @@
         "Tarnish": {
             "name": "Tarnish",
             "desc": "Take double normal damage and reduce <c=status>CORRODE</c> by 1 per hit. <c=downside>Decreases by 1 at start of turn.</c>"
+        },
+        "SnekTunezStat": {
+            "name": "???",
+            "desc": "Gives either <c=energy>ENERGY NEXT TURN</c>, <c=damage>OVERDRIVE</c>, <c=healing>DRAW NEXT TURN</c>, or <c=status>EVADE</c>."
         }
     },
     "action": {
@@ -45,8 +49,8 @@
                 "name": "EXTERNAL FUEL SOURCE",
                 "desc": "Gain 1 <c=status>EVADE</c> whenever you gain a <c=cardtrait>temporary</c> card."
             },
-            "ModifiedStereo": {
-                "name": "MODIFIED SLITHERMAN",
+            "SportsStereo": {
+                "name": "SPORTS SLITHERMAN",
                 "desc": "Replaces <c=artifact>STOLEN SLITERMAN</c>.\nOn combat start, add a <c=cardtrait>temporary</c> <c=card>SnekTunez A</c> to your deck."
             },            
             "DigitalizedStereo": {
@@ -222,6 +226,9 @@
             },
             "SnekTunezGroovy": {
                 "name": "SnekTunez: Groovy"
+            },
+            "SnekTunezPlaceholder": {
+                "name": "SnekTunez: ???"
             },
             "Reminiscent": {
                 "name": "Reminiscent"

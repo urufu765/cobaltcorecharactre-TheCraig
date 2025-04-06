@@ -9,7 +9,7 @@ A corrosion engineer who works with corrosion to help keep the ship at tip top c
 #### a.3: Don't Talk With Your Mouth Full
 
 * **(0.3.21)**: Portrait fix!
-* **(0.3.20)**: Custom sprites for the new Slitherman variants
+* **(0.3.20)**: Custom sprites for the new Slitherman variants + tooltip clarification
 * **(0.3.19)**: New variants of the Slitherman + Snektunez A and B overhaul (A does double, B does not end turn)
 * **(0.3.18)**: Many more dialogue 5: Many many many more shouts, finished vanilla shouts
 * **(0.3.17)**: Many more dialogue 4: Many many more shouts & events + Even more delayed Personal Stereo

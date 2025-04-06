@@ -136,7 +136,12 @@ public class PersonalStereo : Artifact
                 card = new SnekTunezGroovy()
             },
             new TTGlossary("cardtrait.singleUse")],
-            _ => base.GetExtraTooltips()
+            _ => [ new TTCard
+            {
+                card = new SnekTunezPlaceholder(),
+                showCardTraitTooltips = false
+            },
+            new TTGlossary("cardtrait.singleUse")]
         };
     }
 

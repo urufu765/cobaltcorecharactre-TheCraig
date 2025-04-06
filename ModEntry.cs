@@ -27,6 +27,7 @@ internal class ModEntry : SimpleMod
     public bool modDialogueInited;
 
     internal IStatusEntry TarnishStatus { get; private set; } = null!;
+    internal IStatusEntry SnekTunezStatus { get; private set; } = null!;
 
     internal ILocalizationProvider<IReadOnlyList<string>> AnyLocalizations { get; }
     internal ILocaleBoundNonNullLocalizationProvider<IReadOnlyList<string>> Localizations { get; }
@@ -73,6 +74,7 @@ internal class ModEntry : SimpleMod
         typeof(SnekTunezHype),
         typeof(SnekTunezSad),
         typeof(SnekTunezGroovy),
+        typeof(SnekTunezPlaceholder),
         typeof(Reminiscent),
         typeof(Coalescent),
         typeof(Obmutescent)
@@ -90,7 +92,7 @@ internal class ModEntry : SimpleMod
         typeof(CausticArmor),
         typeof(ExperimentalLubricant),
         typeof(ExternalFuelSource),
-        typeof(ModifiedStereo),
+        typeof(SportsStereo),
         typeof(DigitalizedStereo)
     ];
     private static List<Type> IlleanaBossArtifacts = [
@@ -165,6 +167,16 @@ internal class ModEntry : SimpleMod
     public Spr SprStolenHype {get; private set;}
     public Spr SprStolenSad {get; private set;}
     public Spr SprStolenGroovy {get; private set;}
+    public Spr SprSportsOn {get; private set;}
+    public Spr SprSportsChill {get; private set;}
+    public Spr SprSportsHype {get; private set;}
+    public Spr SprSportsSad {get; private set;}
+    public Spr SprSportsGroovy {get; private set;}
+    public Spr SprDigitalOn {get; private set;}
+    public Spr SprDigitalChill {get; private set;}
+    public Spr SprDigitalHype {get; private set;}
+    public Spr SprDigitalSad {get; private set;}
+    public Spr SprDigitalGroovy {get; private set;}
     public Spr SprBoostrE {get; private set;}
     public Spr SprBoostrB {get; private set;}
     public Spr SprBoostrO {get; private set;}
@@ -321,6 +333,18 @@ internal class ModEntry : SimpleMod
             Name = AnyLocalizations.Bind(["status", "Tarnish", "name"]).Localize,
             Description = AnyLocalizations.Bind(["status", "Tarnish", "desc"]).Localize
         });
+        SnekTunezStatus = helper.Content.Statuses.RegisterStatus("SnekTunezStat", new StatusConfiguration
+        {
+            Definition = new StatusDef
+            {
+                isGood = true,
+                affectedByTimestop = true,
+                color = new Color("ffffff"),
+                icon = ModEntry.RegisterSprite(package, "assets/snektunezstat.png").Sprite
+            },
+            Name = AnyLocalizations.Bind(["status", "SnekTunezStat", "name"]).Localize,
+            Description = AnyLocalizations.Bind(["status", "SnekTunezStat", "desc"]).Localize
+        });
 
         /*
          * Managers are typically made to register themselves when constructed.
@@ -348,6 +372,16 @@ internal class ModEntry : SimpleMod
         SprStolenHype = RegisterSprite(package, "assets/Artifact/Personal_Stereo_Hype.png").Sprite;
         SprStolenSad = RegisterSprite(package, "assets/Artifact/Personal_Stereo_Sad.png").Sprite;
         SprStolenGroovy = RegisterSprite(package, "assets/Artifact/Personal_Stereo_Groovy.png").Sprite;
+        SprSportsOn = RegisterSprite(package, "assets/Artifact/Sports_Stereo.png").Sprite;
+        SprSportsChill = RegisterSprite(package, "assets/Artifact/Sports_Stereo_Chill.png").Sprite;
+        SprSportsHype = RegisterSprite(package, "assets/Artifact/Sports_Stereo_Hype.png").Sprite;
+        SprSportsSad = RegisterSprite(package, "assets/Artifact/Sports_Stereo_Sad.png").Sprite;
+        SprSportsGroovy = RegisterSprite(package, "assets/Artifact/Sports_Stereo_Groovy.png").Sprite;
+        SprDigitalOn = RegisterSprite(package, "assets/Artifact/Digitalized_Stereo.png").Sprite;
+        SprDigitalChill = RegisterSprite(package, "assets/Artifact/Digitalized_Stereo_Chill.png").Sprite;
+        SprDigitalHype = RegisterSprite(package, "assets/Artifact/Digitalized_Stereo_Hype.png").Sprite;
+        SprDigitalSad = RegisterSprite(package, "assets/Artifact/Digitalized_Stereo_Sad.png").Sprite;
+        SprDigitalGroovy = RegisterSprite(package, "assets/Artifact/Digitalized_Stereo_Groovy.png").Sprite;
         SprBoostrE = RegisterSprite(package, "assets/Artifact/TempoboostersE.png").Sprite;
         SprBoostrB = RegisterSprite(package, "assets/Artifact/TempoboostersB.png").Sprite;
         SprBoostrO = RegisterSprite(package, "assets/Artifact/TempoboostersO.png").Sprite;

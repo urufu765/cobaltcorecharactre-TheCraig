@@ -9,11 +9,28 @@ namespace Illeana.Artifacts;
 /// Digitalized Slitherman, SNEKTUNEZ!!!
 /// </summary>
 [ArtifactMeta(pools = new[] { ArtifactPool.Common })]
-public class ModifiedStereo : PersonalStereo
+public class SportsStereo : PersonalStereo
 {
+    public override Spr GetSprite()
+    {
+        return SongNumber switch
+        {
+            SnekTunez.Chill => ModEntry.Instance.SprSportsChill,
+            SnekTunez.Hype => ModEntry.Instance.SprSportsHype,
+            SnekTunez.Sad => ModEntry.Instance.SprSportsSad,
+            SnekTunez.Groovy => ModEntry.Instance.SprSportsGroovy,
+            _ => ModEntry.Instance.SprSportsOn
+        };
+    }
+
     public override void SongSelect(Combat combat, SnekTunez song)
     {
-        switch (song)
+        // Overrides so no cards are added here
+    }
+
+    public override void OnCombatStart(State state, Combat combat)
+    {
+        switch (SongNumber)
         {
             case SnekTunez.Chill:
                 combat.Queue(new AAddCard
@@ -135,7 +152,17 @@ public class ModifiedStereo : PersonalStereo
             },
             new TTGlossary("cardtrait.singleUse"),
             new TTGlossary("cardtrait.temporary")],
-            _ => base.GetExtraTooltips()
+            _ => [ new TTCard
+            {
+                card = new SnekTunezPlaceholder
+                {
+                    upgrade = Upgrade.A,
+                    temporaryOverride = true
+                },
+                showCardTraitTooltips = false
+            },
+            new TTGlossary("cardtrait.singleUse"),
+            new TTGlossary("cardtrait.temporary")]
         };
     }
 }

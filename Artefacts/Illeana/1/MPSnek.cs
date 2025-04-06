@@ -12,6 +12,19 @@ namespace Illeana.Artifacts;
 [ArtifactMeta(pools = new[] { ArtifactPool.Common })]
 public class DigitalizedStereo : PersonalStereo
 {
+    public override Spr GetSprite()
+    {
+        return SongNumber switch
+        {
+            SnekTunez.Chill => ModEntry.Instance.SprDigitalChill,
+            SnekTunez.Hype => ModEntry.Instance.SprDigitalHype,
+            SnekTunez.Sad => ModEntry.Instance.SprDigitalSad,
+            SnekTunez.Groovy => ModEntry.Instance.SprDigitalGroovy,
+            _ => ModEntry.Instance.SprDigitalOn
+        };
+    }
+
+
     public override void SongSelect(Combat combat, SnekTunez song)
     {
         switch (song)
@@ -136,7 +149,17 @@ public class DigitalizedStereo : PersonalStereo
             },
             new TTGlossary("cardtrait.singleUse"),
             new TTGlossary("cardtrait.expensive", ["1"])],
-            _ => base.GetExtraTooltips()
+            _ => [ new TTCard
+            {
+                card = new SnekTunezPlaceholder
+                {
+                    upgrade = Upgrade.B,
+                    discount = 1
+                },
+                showCardTraitTooltips = false
+            },
+            new TTGlossary("cardtrait.singleUse"),
+            new TTGlossary("cardtrait.expensive", ["1"])]
         };
     }
 }
