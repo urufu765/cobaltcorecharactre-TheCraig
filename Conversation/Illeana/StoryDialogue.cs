@@ -30,7 +30,7 @@ internal static class StoryDialogue
                 {
                     who = AmIlleana,
                     what = "...",
-                    loopTag = "neutral".Check()
+                    loopTag = "solemn".Check()
                 },
                 new CustomSay()
                 {
@@ -70,69 +70,69 @@ internal static class StoryDialogue
                 }
             }
         };
-        DB.story.all["Illeana_Peri_0"] = new()
-        {
-            type = NodeType.@event,
-            lookup = new() {"zone_first"},
-            once = true,
-            allPresent = [ AmIlleana, AmPeri ],
-            bg = "BGRunStart",
-            requiredScenes = [ "Illeana_Intro_0", "Peri_1" ],
-            lines = new()
-            {
-                new CustomSay()
-                {
-                    who = AmPeri,
-                    what = "Illeana, can I ask you something?",
-                },
-                new CustomSay()
-                {
-                    who = AmIlleana,
-                    what = "Hmm?"
-                },
-                new CustomSay()
-                {
-                    who = AmPeri,
-                    what = "On your file, the portrait looks nothing like you.",
-                    loopTag = "neutral".Check()
-                },
-                new CustomSay()
-                {
-                    who = AmIlleana,
-                    what = "Maybe the lighting wasn't good.",
-                    loopTag = "squint".Check()
-                },
-                new CustomSay()
-                {
-                    who = AmPeri,
-                    what = "Your eyes are different.",
-                    loopTag = "squint"
-                },
-                new CustomSay()
-                {
-                    who = AmIlleana,
-                    what = "Maybe the lighting was different.",
-                    loopTag = "neutral".Check()
-                },
-                new CustomSay()
-                {
-                    who = AmPeri,
-                    loopTag = "squint",
-                    what = "..."
-                },
-                new CustomSay()
-                {
-                    who = AmIlleana,
-                    what = "...",
-                    loopTag = "silly".Check()
-                },
-                new CustomSay()
-                {
-                    who = AmPeri,
-                    what = "I guess you look similar enough...",
-                    loopTag = "squint"
-                }
-            }
-        };
+        // DB.story.all["Illeana_Peri_0"] = new()
+        // {
+        //     type = NodeType.@event,
+        //     lookup = new() {"zone_first"},
+        //     once = true,
+        //     allPresent = [ AmIlleana, AmPeri ],
+        //     bg = "BGRunStart",
+        //     requiredScenes = [ "Illeana_Intro_0", "Peri_1" ],
+        //     lines = new()
+        //     {
+        //         new CustomSay()
+        //         {
+        //             who = AmPeri,
+        //             what = "Illeana, can I ask you something?",
+        //         },
+        //         new CustomSay()
+        //         {
+        //             who = AmIlleana,
+        //             what = "Hmm?"
+        //         },
+        //         new CustomSay()
+        //         {
+        //             who = AmPeri,
+        //             what = "On your file, the portrait looks nothing like you.",
+        //             loopTag = "neutral".Check()
+        //         },
+        //         new CustomSay()
+        //         {
+        //             who = AmIlleana,
+        //             what = "Maybe the lighting wasn't good.",
+        //             loopTag = "squint".Check()
+        //         },
+        //         new CustomSay()
+        //         {
+        //             who = AmPeri,
+        //             what = "Your eyes are different.",
+        //             loopTag = "squint"
+        //         },
+        //         new CustomSay()
+        //         {
+        //             who = AmIlleana,
+        //             what = "Maybe the lighting was different.",
+        //             loopTag = "neutral".Check()
+        //         },
+        //         new CustomSay()
+        //         {
+        //             who = AmPeri,
+        //             loopTag = "squint",
+        //             what = "..."
+        //         },
+        //         new CustomSay()
+        //         {
+        //             who = AmIlleana,
+        //             what = "...",
+        //             loopTag = "silly".Check()
+        //         },
+        //         new CustomSay()
+        //         {
+        //             who = AmPeri,
+        //             what = "I guess you look similar enough...",
+        //             loopTag = "squint"
+        //         }
+        //     }
+        // };
     }
 }

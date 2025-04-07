@@ -225,7 +225,7 @@ internal static partial class ArtifactDialogue
                 new CustomSay
                 {
                     who = AmIlleana,
-                    loopTag = "Tired".Check(),
+                    loopTag = "shocked".Check(),
                     what = "What have we done?",
                 }
             }
@@ -243,7 +243,7 @@ internal static partial class ArtifactDialogue
                 new CustomSay
                 {
                     who = AmIlleana,
-                    loopTag = "explain".Check(),
+                    loopTag = "neutral".Check(),
                     what = "More the merrier.",
                 }
             }
@@ -411,7 +411,7 @@ internal static partial class ArtifactDialogue
                 new CustomSay
                 {
                     who = AmIlleana,
-                    loopTag = "explain".Check(),
+                    loopTag = "nap".Check(),
                     what = "Saves me the burden of taking the wheel.",
                 }
             }
@@ -446,6 +446,7 @@ internal static partial class ArtifactDialogue
                 new CustomSay
                 {
                     who = AmIlleana,
+                    loopTag = "explain".Check(),
                     what = "I love it when things are not wasted.",
                 }
             }
@@ -464,6 +465,7 @@ internal static partial class ArtifactDialogue
                 new CustomSay
                 {
                     who = AmIlleana,
+                    loopTag = "silly".Check(),
                     what = "Boosting damage with new solution. Take it away, Peri!",
                 },
                 new CustomSay
@@ -487,8 +489,8 @@ internal static partial class ArtifactDialogue
                 new CustomSay
                 {
                     who = AmIlleana,
-                    loopTag = "squint".Check(),
-                    what = "If I ever had to go on the offense, this is the strat I'd have to use.",
+                    loopTag = "silly".Check(),
+                    what = "Yeeeeah baby!",
                 }
             }
         };
@@ -581,7 +583,7 @@ internal static partial class ArtifactDialogue
                 new CustomSay
                 {
                     who = AmIlleana,
-                    loopTag = "intense".Check(),
+                    loopTag = "shocked".Check(),
                     what = "Alright, real funny guys. I fit in the scaffolding just fine. Now please let me back in the cockpit.",
                 }
             }

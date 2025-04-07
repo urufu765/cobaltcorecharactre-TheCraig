@@ -164,7 +164,7 @@ internal static partial class CombatDialogue
                 {
                     who = AmIlleana,
                     what = "Dodge and weave! Dodge and weave!",
-                    loopTag = "shocked".Check()
+                    loopTag = "mad".Check()
                 }
             }
         };        
@@ -218,7 +218,7 @@ internal static partial class CombatDialogue
                 {
                     who = AmIlleana,
                     what = "I'm so sorry, my crewmates are idiots! Please forgive us!",
-                    loopTag = "panic".Check()
+                    loopTag = "shocked".Check()
                 },
                 new CustomSay()
                 {
@@ -238,7 +238,7 @@ internal static partial class CombatDialogue
                 new CustomSay()
                 {
                     who = AmIlleana,
-                    loopTag = "panic".Check(),
+                    loopTag = "intense".Check(),
                     what = "The trash is overflowing into my workspace!"
                 }
             }
@@ -272,7 +272,7 @@ internal static partial class CombatDialogue
                 new CustomSay()
                 {
                     who = AmIlleana,
-                    loopTag = "squint".Check(),
+                    loopTag = "shocked".Check(),
                     what = "Hey, where'd Books go?"
                 }
             }
@@ -327,7 +327,7 @@ internal static partial class CombatDialogue
                 {
                     who = AmIlleana,
                     loopTag = "intense".Check(),
-                    what = "Why does it suddenly feel so empty?"
+                    what = "Why does it suddenly feel so... lonely?"
                 }
             }
         };
@@ -362,8 +362,8 @@ internal static partial class CombatDialogue
                 new CustomSay()
                 {
                     who = AmIlleana,
-                    loopTag = "panic".Check(),
-                    what = "The computer guy!"
+                    loopTag = "intense".Check(),
+                    what = "Now who's gonna fix my broken equipment?"
                 }
             }
         };
@@ -380,7 +380,7 @@ internal static partial class CombatDialogue
                 new CustomSay()
                 {
                     who = AmIlleana,
-                    loopTag = "panic".Check(),
+                    loopTag = "shocked".Check(),
                     what = "Wait no I already miss her!"
                 }
             }
@@ -417,7 +417,7 @@ internal static partial class CombatDialogue
                 new CustomSay()
                 {
                     who = AmIlleana,
-                    loopTag = "neutral".Check(),
+                    loopTag = "silly".Check(),
                     what = "Gone. Goodbye!"
                 }
             }
@@ -553,7 +553,7 @@ internal static partial class CombatDialogue
                 new CustomSay()
                 {
                     who = AmIlleana,
-                    loopTag = "squint".Check(),
+                    loopTag = "mad".Check(),
                     what = "I hope not."
                 }
             }
@@ -645,8 +645,8 @@ internal static partial class CombatDialogue
                 new CustomSay()
                 {
                     who = AmIlleana,
-                    loopTag = "tired".Check(),
-                    what = "..."
+                    loopTag = "sad".Check(),
+                    what = "Nooooooowuh!"
                 }
             }
         };

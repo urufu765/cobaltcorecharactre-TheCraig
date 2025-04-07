@@ -126,7 +126,7 @@ internal static class CardDialogue
                 new CustomSay
                 {
                     who = AmIlleana,
-                    loopTag = "blink".Check(),
+                    loopTag = "nap".Check(),
                     what = "..."
                 }
             }

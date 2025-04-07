@@ -24,7 +24,7 @@ internal static class MemoryDialogue
                 new CustomSay
                 {
                     who = AmIlleana,
-                    loopTag = "speechless".Check(),  // Speechless
+                    loopTag = "unamused".Check(),
                     what = "..."
                 },
                 new CustomSay
@@ -117,13 +117,13 @@ internal static class MemoryDialogue
                 {
                     who = AmIlleana,
                     loopTag = "blinkrapid".Check(),
-                    what = "..."
+                    what = "............................."
                 },
                 new CustomSay
                 {
                     who = AmIlleana,
                     loopTag = "panic".Check(),
-                    what = "What?"
+                    what = "WHAT?!"
                 },
             }
         };
@@ -166,7 +166,7 @@ internal static class MemoryDialogue
                 new CustomSay
                 {
                     who = AmIlleana,
-                    loopTag = "desperate".Check(),  // Desperate
+                    loopTag = "neutral".Check(),  // Desperate
                     what = "Really?"
                 },
                 new CustomSay
@@ -178,8 +178,8 @@ internal static class MemoryDialogue
                 new CustomSay
                 {
                     who = AmIlleana,
-                    loopTag = "speechless".Check(),  // Thousand mile stare
-                    what = "..."
+                    loopTag = "blinkrapid".Check(),  // Thousand mile stare
+                    what = "..................."
                 },
                 new CustomSay
                 {

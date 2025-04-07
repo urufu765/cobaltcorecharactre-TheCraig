@@ -52,7 +52,6 @@ internal class ModEntry : SimpleMod
     ];
     private static List<Type> IlleanaUncommonCardTypes = [
         typeof(GoneJiffy),
-        typeof(MakeshiftHull),
         typeof(Amputation),
         typeof(DeadlyAdrenaline),
         typeof(PartSwap),
@@ -61,6 +60,7 @@ internal class ModEntry : SimpleMod
         typeof(AcidicPackage)
     ];
     private static List<Type> IlleanaRareCardTypes = [
+        typeof(MakeshiftHull),
         typeof(GreatHealing),
         typeof(ImmunityShot),
         typeof(LacedYoFood),
@@ -116,47 +116,51 @@ internal class ModEntry : SimpleMod
             .Concat(IlleanaArtifactTypes);
 
     private static List<string> Illeana1Anims = [
-        //"blink",
-        //"eyebrowraise",
         "gameover",
-        //"knife",
+        "knife",
         "mini",
-        //"readytoeat",
-        //"screamA",
-        //"screamB",
-        //"screamC",
-        //"speechless",
-        //"stareatcamera",
+        "readytoeat",
+        "stareatcamera",
         "placeholder"
     ];
+    private static List<string> Illeana3Anims = [
+        "giggle",
+        "nap",
+        //"screamA",
+        "screamB",
+        //"screamC",
+    ];
     private static List<string> Illeana4Anims = [
-        //"curious",
-        //"desperate",
+        "curious",
         "explain",
-        //"giggle",
-        //"holdcable"
+        "holdcable",
         "intense",
         "mad",
         "neutral",
         "panic",
-        //"shocked",
+        "shocked",
         "sly",
         "solemn",
         "squint",
-        //"tired",
+        "tired",
     ];
     private static List<string> Illeana5Anims = [
-        //"blinkrapid",
-        //"possessed",
-        //"possessedmad",
-        //"sad",
-        //"salavating",
-        //"silly",
+        "possessed",
+        "possessedmad",
+        "sad",
+        "silly",
+    ];
+    private static List<string> Illeana6Anims = [
+        "salavating",
+        "blinkrapid",
+        //"headbang"
     ];
     public readonly static IEnumerable<string> IlleanaAnims =
         Illeana1Anims
+            .Concat(Illeana3Anims)
             .Concat(Illeana4Anims)
-            .Concat(Illeana5Anims);
+            .Concat(Illeana5Anims)
+            .Concat(Illeana6Anims);
 
     public Spr SprStolenOn {get; private set;}
     public Spr SprStolenChill {get; private set;}
@@ -271,6 +275,10 @@ internal class ModEntry : SimpleMod
         {
             RegisterAnimation(package, s1, $"assets/Animation/illeana_{s1}", 1);
         }
+        foreach (string s3 in Illeana3Anims)
+        {
+            RegisterAnimation(package, s3, $"assets/Animation/illeana_{s3}", 3);
+        }
         foreach (string s4 in Illeana4Anims)
         {
             RegisterAnimation(package, s4, $"assets/Animation/illeana_{s4}", 4);
@@ -278,6 +286,10 @@ internal class ModEntry : SimpleMod
         foreach (string s5 in Illeana5Anims)
         {
             RegisterAnimation(package, s5, $"assets/Animation/illeana_{s5}", 5);
+        }
+        foreach (string s6 in Illeana6Anims)
+        {
+            RegisterAnimation(package, s6, $"assets/Animation/illeana_{s6}", 6);
         }
 
         IlleanaTheSnek = helper.Content.Characters.V2.RegisterPlayableCharacter("illeana", new PlayableCharacterConfigurationV2

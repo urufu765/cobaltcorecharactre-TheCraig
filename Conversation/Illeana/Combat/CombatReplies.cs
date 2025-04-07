@@ -187,7 +187,7 @@ internal static partial class CombatDialogue
                             {
                                 who = AmIlleana,
                                 loopTag = "neutral".Check(),
-                                what = "And you look delicious."
+                                what = "And I haven't had my breakfast today."
                             }
                         );
                         break;
@@ -214,7 +214,7 @@ internal static partial class CombatDialogue
                             {
                                 who = AmIlleana,
                                 loopTag = "salavating".Check(),
-                                what = "..."
+                                what = "You look very delicious."
                             }
                         );
                         break;
@@ -229,24 +229,20 @@ internal static partial class CombatDialogue
         }
         try
         {
-            bool skip1 = false;
             foreach(Instruction i in DB.story.all["CrabFactsAreOverNow_Multi_0"].lines)
             {
                 if (i is SaySwitch ss)
                 {
-                    if (skip1)
-                    {
-                        ss.lines.Add(
-                            new CustomSay
-                            {
-                                who = AmIlleana,
-                                loopTag = "readytoeat".Check(),
-                                what = "..."
-                            }
-                        );
-                        break;
-                    }
-                    skip1 = true;
+
+                    ss.lines.Add(
+                        new CustomSay
+                        {
+                            who = AmIlleana,
+                            loopTag = "readytoeat".Check(),
+                            what = "..."
+                        }
+                    );
+                    break;
                 }
             }
         }
