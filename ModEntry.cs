@@ -125,12 +125,8 @@ internal class ModEntry : SimpleMod
         //"screamA",
         //"screamB",
         //"screamC",
-        "sickofyoshit",  // replace with tired
-        //"smile",  // replace with silly
         //"speechless",
         //"stareatcamera",
-        //"thousandmilestare",  // is same with stareatcamera
-        "unamused",  // replace with solemn
         "placeholder"
     ];
     private static List<string> Illeana4Anims = [

@@ -48,13 +48,13 @@ internal static class MemoryDialogue
                 new CustomSay
                 {
                     who = AmIlleana,
-                    loopTag = "unamused".Check(),
+                    loopTag = "solemn".Check(),
                     what = "..."
                 },
                 new CustomSay
                 {
                     who = AmIlleana,
-                    loopTag = "eyebrowraise".Check(),
+                    loopTag = "solemn".Check(),
                     what = "Am I free to leave then?"
                 },
                 new CustomSay
@@ -184,7 +184,7 @@ internal static class MemoryDialogue
                 new CustomSay
                 {
                     who = AmIlleana,
-                    loopTag = "smile".Check(),  // Smile
+                    loopTag = "silly".Check(),  // Smile
                     what = "..."
                 },
                 new CustomSay

@@ -599,7 +599,7 @@ internal static partial class CombatDialogue
                 new CustomSay()
                 {
                     who = AmIlleana,
-                    loopTag = "sickofyoshit".Check(),
+                    loopTag = "tired".Check(),
                     what = "..."
                 }
             }
@@ -645,7 +645,7 @@ internal static partial class CombatDialogue
                 new CustomSay()
                 {
                     who = AmIlleana,
-                    loopTag = "sickofyoshit".Check(),
+                    loopTag = "tired".Check(),
                     what = "..."
                 }
             }
