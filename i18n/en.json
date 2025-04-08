@@ -31,7 +31,7 @@
             },
             "ByproductProcessor": {
                 "name": "BYPRODUCT PROCESSOR",
-                "desc": "If you end your turn with more than 0 <c=energy>ENERGY</c> and <c=status>CORRODE</c>, reduce <c=status>CORRODE</c> by 1 and gain 1 <c=status>EVADE</c>.\n<c=downside><c=status>CORRODE</c> will still proc before removal.</c>"
+                "desc": "If you end your turn with more than 0 <c=energy>ENERGY</c> and <c=status>CORRODE</c>, reduce <c=status>CORRODE</c> by 1 and gain 1 <c=status>EVADE</c>.\n<c=downside><c=status>CORRODE</c> will still trigger before removal.</c>"
             },
             "TarnishedSyringe": {
                 "name": "TARNISHED SYRINGE",
@@ -129,7 +129,7 @@
             "FindACure": {
                 "name": "Find-A-Cure",
                 "descB": "Add a <c=card>Cure B</c> and an <c=card>Accident B</c> to your draw pile.",
-                "descA": "Add 2 <c=card>Cure</c> and an <c=card>Accident A</c> to your draw pile.",
+                "descA": "Add 2 <c=card>Cure</c> and an <c=card>Accident</c> to your draw pile.",
                 "desc": "Add a <c=card>Cure</c> and an <c=card>Accident</c> to your draw pile."
             },
             "Cleanse": {

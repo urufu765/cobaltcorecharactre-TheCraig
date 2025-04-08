@@ -59,13 +59,13 @@ internal static class StoryDialogue
                 new CustomSay()
                 {
                     who = AmCat,
-                    what = "What! We need those!",
+                    what = "What! We need that!",
                     loopTag = "worried"
                 },
                 new CustomSay()
                 {
                     who = AmIlleana,
-                    what = "Don't worry! You won't even notice they're gone.",
+                    what = "Don't worry! You won't even notice its gone.",
                     loopTag = "sly".Check()
                 }
             }

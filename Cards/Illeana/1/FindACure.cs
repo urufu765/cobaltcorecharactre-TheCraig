@@ -63,10 +63,7 @@ public class FindCure : Card, IRegisterable
                 },
                 new AAddCard
                 {
-                    card = new TheAccident
-                    {
-                        upgrade = Upgrade.A
-                    },
+                    card = new TheAccident(),
                     destination = CardDestination.Deck,
                     insertRandomly = true
                 },
