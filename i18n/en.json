@@ -123,7 +123,7 @@
             "BuildACure": {
                 "name": "Build-A-Cure",
                 "descB": "Add an <c=cardtrait>exhaustible</c> <c=card>Cure B</c> and a <c=card>Failure B</c> to your draw pile.",
-                "descA": "Add 2 <c=cardtrait>exhaustible</c> <c=card>Cure</c> and a <c=card>Failure A</c> to your draw pile.",
+                "descA": "Add 2 <c=cardtrait>exhaustible</c> <c=card>Cure</c> and a <c=card>Failure</c> to your draw pile.",
                 "desc": "Add an <c=cardtrait>exhaustible</c> <c=card>Cure</c> and a <c=card>Failure</c> to your draw pile."
             },
             "FindACure": {

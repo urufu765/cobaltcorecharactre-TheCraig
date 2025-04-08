@@ -67,10 +67,7 @@ public class BuildCure : Card, IRegisterable
                 },
                 new AAddCard
                 {
-                    card = new TheFailure
-                    {
-                        upgrade = Upgrade.A
-                    },
+                    card = new TheFailure(),
                     destination = CardDestination.Deck,
                     insertRandomly = true
                 },

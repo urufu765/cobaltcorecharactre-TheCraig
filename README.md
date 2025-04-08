@@ -4,6 +4,11 @@ A corrosion engineer who works with corrosion to help keep the ship at tip top c
 
 ## Changalog
 
+### PUBLIC
+
+#### 1.0: First Public Release!!!
+* **(1.0.0)**: Build-A-Cure A no longer offers Failure A
+
 ### ALPHA
 
 #### a.3: Don't Talk With Your Mouth Full
