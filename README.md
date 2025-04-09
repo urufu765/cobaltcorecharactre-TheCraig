@@ -7,6 +7,8 @@ A corrosion engineer who works with corrosion to help keep the ship at tip top c
 ### PUBLIC
 
 #### 1.0: First Public Release!!!
+
+* **(1.0.1)**: Fixed Restoration giving the wrong amount of heal
 * **(1.0.0)**: Build-A-Cure A no longer offers Failure A
 
 ### ALPHA

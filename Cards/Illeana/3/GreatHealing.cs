@@ -29,7 +29,7 @@ public class GreatHealing : Card, IRegisterable
 
     public override List<CardAction> GetActions(State s, Combat c)
     {
-        int x = s.ship.Get(Status.corrode);
+        int x = s.ship.Get(Status.corrode) + 1;
         return upgrade switch
         {
             Upgrade.B => 
