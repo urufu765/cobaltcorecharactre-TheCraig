@@ -15,7 +15,7 @@ public class ForgedCertificate : Artifact
 
     public override void OnPlayerLoseHull(State state, Combat combat, int amount)
     {
-        if (TimesHit >= 4)
+        if (TimesHit >= 3)
         {
             combat.QueueImmediate(new AHeal
             {
