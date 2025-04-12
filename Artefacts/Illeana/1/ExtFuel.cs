@@ -8,9 +8,29 @@ namespace Illeana.Artifacts;
 [ArtifactMeta(pools = new[] { ArtifactPool.Common })]
 public class ExternalFuelSource : Artifact
 {
+    private const int LIMIT = 2;
+    public int Limiter {get; set;}
+    public override int? GetDisplayNumber(State s)
+    {
+        return Limiter;
+    }
+
+    public override Spr GetSprite()
+    {  // TODO: sprites
+        return Limiter switch {
+            >= LIMIT => ModEntry.Instance.SprEFLdepleted,
+            _ => ModEntry.Instance.SprEFLavailable
+        };
+    }
+
+    public override void OnTurnStart(State state, Combat combat)
+    {
+        Limiter = 0;
+    }
+
     public override void OnPlayerRecieveCardMidCombat(State state, Combat combat, Card card)
     {
-        if (card.GetData(state).temporary)
+        if (Limiter < LIMIT && card.GetData(state).temporary)
         {
             combat.QueueImmediate(new AStatus
             {
@@ -20,6 +40,7 @@ public class ExternalFuelSource : Artifact
                 artifactPulse = Key(),
                 dialogueSelector = ".gotTemp"
             });
+            Limiter++;
         }
     }
 

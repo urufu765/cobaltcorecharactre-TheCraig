@@ -47,7 +47,7 @@
             },
             "ExternalFuelSource": {
                 "name": "EXTERNAL FUEL SOURCE",
-                "desc": "Gain 1 <c=status>EVADE</c> whenever you gain a <c=cardtrait>temporary</c> card."
+                "desc": "Gain 1 <c=status>EVADE</c> whenever you gain a <c=cardtrait>temporary</c> card.\n<c=downside>Caps at 2 <c=status>EVADE</c> per turn.</c>"
             },
             "SportsStereo": {
                 "name": "SPORTS SLITHERMAN",

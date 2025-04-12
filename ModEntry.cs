@@ -182,6 +182,8 @@ internal class ModEntry : SimpleMod
     public Spr SprBoostrO {get; private set;}
     public Spr SprExLubeO {get; private set;}
     public Spr SprExLubeX {get; private set;}
+    public Spr SprEFLavailable {get; private set;}
+    public Spr SprEFLdepleted {get; private set;}
     public static bool Patch_EnemyPack {get; private set;}
 
 
@@ -395,6 +397,8 @@ internal class ModEntry : SimpleMod
         SprBoostrO = RegisterSprite(package, "assets/Artifact/TempoboostersO.png").Sprite;
         SprExLubeO = RegisterSprite(package, "assets/Artifact/ExperimentalLubricantO.png").Sprite;
         SprExLubeX = RegisterSprite(package, "assets/Artifact/ExperimentalLubricantX.png").Sprite;
+        SprEFLavailable = RegisterSprite(package, "assets/Artifact/ExternalFuelSourceAvailable.png").Sprite;
+        SprEFLdepleted = RegisterSprite(package, "assets/Artifact/ExternalFuelSourceDepleted.png").Sprite;
 
         //DrawLoadingScreenFixer.Apply(Harmony);
         //SashaSportingSession.Apply(Harmony);

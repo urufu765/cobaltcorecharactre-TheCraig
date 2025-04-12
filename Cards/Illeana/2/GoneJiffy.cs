@@ -39,11 +39,6 @@ public class GoneJiffy : Card, IRegisterable
                     statusAmount = 1,
                     targetPlayer = true
                 },
-                new AHeal
-                {
-                    healAmount = 2,
-                    targetPlayer = true
-                },
                 new AStatus
                 {
                     status = ModEntry.IlleanaTheSnek.MissingStatus.Status,
@@ -62,7 +57,7 @@ public class GoneJiffy : Card, IRegisterable
                 },
                 new AHeal
                 {
-                    healAmount = 1,
+                    healAmount = 2,
                     targetPlayer = true
                 },
                 new AStatus
@@ -89,7 +84,7 @@ public class GoneJiffy : Card, IRegisterable
                 new AStatus
                 {
                     status = ModEntry.IlleanaTheSnek.MissingStatus.Status,
-                    statusAmount = 2,
+                    statusAmount = 1,
                     targetPlayer = true
                 },
                 new AEndTurn()

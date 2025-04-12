@@ -10,6 +10,7 @@ namespace Illeana.Cards;
 /// </summary>
 public class ScrapPatchkit : Card, IRegisterable
 {
+    private static Spr altSprite;
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
         helper.Content.Cards.RegisterCard(new CardConfiguration
@@ -24,6 +25,7 @@ public class ScrapPatchkit : Card, IRegisterable
             Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "Common", "ScrapPatchkit", "name"]).Localize,
             Art = ModEntry.RegisterSprite(package, "assets/Card/Illeana/1/ScrapPatchkit.png").Sprite
         });
+        altSprite = ModEntry.RegisterSprite(package, "assets/Card/Illeana/1/ScrapPatchkitAlt.png").Sprite;
     }
 
 
@@ -31,6 +33,26 @@ public class ScrapPatchkit : Card, IRegisterable
     {
         return upgrade switch
         {
+            Upgrade.B => 
+            [
+                new AStatus
+                {
+                    status = Status.corrode,
+                    statusAmount = 1,
+                    targetPlayer = true
+                },
+                new AHeal
+                {
+                    healAmount = 1,
+                    targetPlayer = true
+                },
+                new AStatus
+                {
+                    status = Status.tempShield,
+                    statusAmount = 2,
+                    targetPlayer = true
+                }
+            ],
             _ => 
             [
                 new AStatus
@@ -56,15 +78,18 @@ public class ScrapPatchkit : Card, IRegisterable
             Upgrade.B => new CardData
             {
                 cost = 1,
-                retain = true
+                retain = true,
+                art = altSprite,
             },
             Upgrade.A => new CardData
             {
-                cost = 0
+                cost = 0,
+                retain = true
             },
             _ => new CardData
             {
-                cost = 1
+                cost = 1,
+                retain = true
             }
         };
     }
