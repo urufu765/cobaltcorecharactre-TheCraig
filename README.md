@@ -8,6 +8,7 @@ A corrosion engineer who works with corrosion to help keep the ship at tip top c
 
 #### 1.0: First Public Release!!!
 
+* **(1.0.5)**: Balance patch: Immunity shot SETS perfect shield, instead of adding.
 * **(1.0.4)**: Balance patch: Gone-In-A-Jiffy balance change, EFS only grants up to 2 evade per turn, Scrap Patchkit balance
 * **(1.0.3)**: Fixed FailureB not giving player corrode
 * **(1.0.2)**: Fixed Forged Certificate requiring one more than described

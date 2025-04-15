@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 using Nanoray.PluginManager;
@@ -42,6 +43,7 @@ public class ImmunityShot : Card, IRegisterable
                 {
                     status = Status.perfectShield,
                     statusAmount = x * 3,
+                    mode = AStatusMode.Set,
                     targetPlayer = true,
                     xHint = new int?(3)
                 },
@@ -62,6 +64,7 @@ public class ImmunityShot : Card, IRegisterable
                 {
                     status = Status.perfectShield,
                     statusAmount = x * 2,
+                    mode = AStatusMode.Set,
                     targetPlayer = true,
                     xHint = new int?(2)
                 },
@@ -89,6 +92,7 @@ public class ImmunityShot : Card, IRegisterable
                 {
                     status = Status.perfectShield,
                     statusAmount = x * 2,
+                    mode = AStatusMode.Set,
                     targetPlayer = true,
                     xHint = new int?(2)
                 },
