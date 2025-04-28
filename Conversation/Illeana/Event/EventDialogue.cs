@@ -14,7 +14,7 @@ internal static partial class EventDialogue
 
     private static void EventExtend()
     {
-        DB.story.all["ChoiceCardRewardOfYourColorChoice_Illeana"] = new()
+        DB.story.all[$"ChoiceCardRewardOfYourColorChoice_{AmIlleana}"] = new()
         {
             type = NodeType.@event,
             oncePerRun = true,
@@ -110,7 +110,7 @@ internal static partial class EventDialogue
                 }
             ]
         };
-        DB.story.all["CrystallizedFriendEvent_illeana"] = new()
+        DB.story.all[$"CrystallizedFriendEvent_{AmIlleana}"] = new()
         {
             type = NodeType.@event,
             oncePerRun = true,
@@ -130,7 +130,7 @@ internal static partial class EventDialogue
                 },
             }
         };        
-        DB.story.all["LoseCharacterCard"] = new()
+        DB.story.all[$"LoseCharacterCard_{AmIlleana}"] = new()
         {
             type = NodeType.@event,
             allPresent = [ AmIlleana ],

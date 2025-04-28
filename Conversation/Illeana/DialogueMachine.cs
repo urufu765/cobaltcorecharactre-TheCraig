@@ -5,7 +5,7 @@ using System;
 
 namespace Illeana;
 
-public static class DialogueMachine
+public static class Diamach
 {
     public static void Apply()
     {

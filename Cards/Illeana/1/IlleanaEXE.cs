@@ -72,18 +72,21 @@ public class IlleanaExe : Card, IRegisterable
             Upgrade.B => new CardData
             {
                 cost = 1,
+                exhaust = true,
                 description = ColorlessLoc.GetDesc(state, 3, ModEntry.Instance.IlleanaDeck.Deck),
                 artTint = "45e260"
             },
             Upgrade.A => new CardData
             {
                 cost = 0,
+                exhaust = true,
                 description = ColorlessLoc.GetDesc(state, 2, ModEntry.Instance.IlleanaDeck.Deck),
                 artTint = "45e260"
             },
             _ => new CardData
             {
                 cost = 1,
+                exhaust = true,
                 description = ColorlessLoc.GetDesc(state, 2, ModEntry.Instance.IlleanaDeck.Deck),
                 artTint = "45e260"
             }

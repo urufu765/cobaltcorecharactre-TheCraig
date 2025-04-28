@@ -186,6 +186,8 @@ internal class ModEntry : SimpleMod
     public Spr SprEFLdepleted {get; private set;}
     public static bool Patch_EnemyPack {get; private set;}
 
+    public LocalDB localDB { get; set; } = null!;
+
 
     public ModEntry(IPluginPackage<IModManifest> package, IModHelper helper, ILogger logger) : base(package, helper, logger)
     {
@@ -205,9 +207,16 @@ internal class ModEntry : SimpleMod
             if (phase == ModLoadPhase.AfterDbInit)
             {
                 Patch_EnemyPack = helper.ModRegistry.LoadedMods.ContainsKey("TheJazMaster.EnemyPack");
-                DialogueMachine.Apply();
+                Diamach.Apply();
+                localDB = new(package);
             }
-
+        };
+        helper.Events.OnLoadStringsForLocale += (_, thing) =>
+        {
+            foreach (KeyValuePair<string, string> entry in localDB.GetLocalizationResults())
+            {
+                thing.Localizations[entry.Key] = entry.Value;
+            }
         };
 
         AnyLocalizations = new JsonLocalizationProvider(
@@ -312,7 +321,8 @@ internal class ModEntry : SimpleMod
                 artifacts = [
                 ]
             },
-            Description = AnyLocalizations.Bind(["character", "Illeana", "desc"]).Localize
+            Description = AnyLocalizations.Bind(["character", "Illeana", "desc"]).Localize,
+            ExeCardType = typeof(IlleanaExe)
         });
 
         MoreDifficultiesApi?.RegisterAltStarters(IlleanaDeck.Deck, new StarterDeck

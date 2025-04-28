@@ -9,7 +9,7 @@ internal static class StoryDialogue
         DB.story.all["Illeana_Intro_0"] = new()
         {
             type = NodeType.@event,
-            lookup = new() {"zone_first"},
+            lookup = [ "zone_first" ],
             once = true,
             allPresent = [ AmIlleana ],
             bg = "BGRunStart",

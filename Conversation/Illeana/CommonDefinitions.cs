@@ -21,6 +21,7 @@ static class CommonDefinitions
     internal static string AmMax => Deck.hacker.Key();
     internal const string AmVoid = "void";
     internal const string AmShopkeeper = "nerd";
+    internal const string AmBrimford = "walrus";
 
     internal static Status Tarnished => Instance.TarnishStatus.Status;
     internal static Status MissingIlleana => ModEntry.IlleanaTheSnek.MissingStatus.Status;

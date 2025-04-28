@@ -214,7 +214,7 @@ internal static class MemoryDialogue
             {
                 new TitleCard  // Replace with Custom Titlecard
                 {
-                    
+
                 },
                 new Wait
                 {
@@ -227,7 +227,83 @@ internal static class MemoryDialogue
                 new Wait
                 {
                     secs = 1
+                },
+                new CustomSay
+                {
+                    who = AmBrimford,
+                    what = "Back again are we?"
+                },
+                new CustomSay
+                {
+                    who = AmCraig,
+                    what = "Give me something big this time."
+                },
+                new CustomSay
+                {
+                    who = AmBrimford,
+                    what = "Don't you do this as a side gig? Since you know..."
+                },
+                new CustomSay
+                {
+                    who = AmCraig,
+                    loopTag = "craigEyeroll".Check(),
+                    what = "Yeah yeah, since I got a full-time job and all."
+                },
+                new CustomSay
+                {
+                    who = AmCraig,
+                    what = "Listen, people don't need professional dockers anymore. Their silly little computer chips that come standard in the modern space ships is enough for them."
+                },
+                new CustomSay
+                {
+                    who = AmCraig,
+                    loopTag = "craigGlare".Check(),
+                    what = "And don't you dare call me a hypocrite, the artificial intelligence I'M working on can't even orient the ship correctly."
+                },
+                new CustomSay
+                {
+                    who = AmBrimford,
+                    what = "Didn't say nothing."
+                },
+                new CustomSay
+                {
+                    who = AmCraig,
+                    what = "Anyways, enterprises aren't hiring me, I'm running low on money, I need a big fish to catch."
+                },
+                new CustomSay
+                {
+                    who = AmBrimford,
+                    what = "I've got just the thing. Posted not too long ago too. Perfect chance to get in while it's fresh."
+                },
+                new CustomSay
+                {
+                    who = AmBrimford,
+                    what = "Hey wait, isn't your ship missing cannons? I remember you telling me you lost your firearm license along with your cannons."
+                },
+                new CustomSay
+                {
+                    who = AmCraig,
+                    loopTag = "craigExplain".Check(),
+                    what = "You're talking to a professional docker."
+                },
+                new CustomSay
+                {
+                    who = AmCraig,
+                    loopTag = "craigExcited".Check(),
+                    what = "I'm sure I can compensate by grabbing the target ship with my giant docking hands!"
+                },
+                new CustomSay
+                {
+                    who = AmBrimford,
+                    what = "You're totally gonna get yourself killed."
+                },
+                new CustomSay
+                {
+                    who = AmCraig,
+                    loopTag = "craigSly".Check(),
+                    what = "Oh the face you'll make when I return from this bounty alive and rich."
                 }
+                    
             }
         };        
         DB.story.all["Illeana_Memory_2"] = new()
@@ -246,7 +322,7 @@ internal static class MemoryDialogue
             {
                 new TitleCard  // Replace with Custom Titlecard
                 {
-                    
+
                 },
                 new Wait
                 {
@@ -259,6 +335,52 @@ internal static class MemoryDialogue
                 new Wait
                 {
                     secs = 1
+                },
+                new CustomSay
+                {
+                    who = AmCraig,
+                    loopTag = "craigInjured".Check(),
+                    what = "Agh.. who would've known they had a decent sharpshooter aboard that ship..."
+                },
+                new CustomSay
+                {
+                    who = AmCraig,
+                    loopTag = "craigInjuredButDetermined".Check(),
+                    what = "But this won't stop me from living another day!"
+                },
+                new CustomSay
+                {
+                    who = AmCraig,
+                    loopTag = "craigInjured".Check(),
+                    what = "Computer, initiate emergency escape protocal."
+                },
+                new CustomSay
+                {
+                    who = "illeanaComp",
+                    what = "Your engines have been destroyed. Your thrusters ruined beyond recognition. Your robotic hands have been disabled. The fact you are still conscious is a miracle."
+                },
+                new CustomSay
+                {
+                    who = AmCraig,
+                    loopTag = "craigInjured".Check(),
+                    what = "... What have I said about irrelevant information?"
+                },
+                new CustomSay
+                {
+                    who = "illeanaComp",
+                    what = "To forget about it and only inform you about hard facts. Unfortunately, these are the hard facts."
+                },
+                new CustomSay
+                {
+                    who = AmCraig,
+                    loopTag = "craigClosed".Check(),
+                    what = "..."
+                },
+                new CustomSay
+                {
+                    who = AmCraig,
+                    loopTag = "craigInjured".Check(),
+                    what = "Damn... guess I'll die..."
                 }
             }
         };

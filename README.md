@@ -6,8 +6,16 @@ A corrosion engineer who works with corrosion to help keep the ship at tip top c
 
 ### PUBLIC
 
+#### 1.1: Illeana Memories!
+
+* *(1.1.3)**: Sprites for memories!
+* *(1.1.2)**: Memory implementation + full body sprite
+* *(1.1.1)**: New tarnish implementation
+* *(1.1.0)**: Switch over to DialogueMachine
+
 #### 1.0: First Public Release!!!
 
+* **(1.0.6)**: Fixed issue where some dialogues didn't select Illeana, EXE now implemented to starter deck and also exhausts.
 * **(1.0.5)**: Balance patch: Immunity shot SETS perfect shield, instead of adding.
 * **(1.0.4)**: Balance patch: Gone-In-A-Jiffy balance change, EFS only grants up to 2 evade per turn, Scrap Patchkit balance
 * **(1.0.3)**: Fixed FailureB not giving player corrode
