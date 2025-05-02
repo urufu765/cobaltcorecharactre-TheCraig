@@ -56,6 +56,38 @@
             "DigitalizedStereo": {
                 "name": "DIGITALIZED SLITHERMAN",
                 "desc": "Replaces <c=artifact>STOLEN SLITERMAN</c>.\nOn combat start, add an <c=cardtrait>expensive</c> <c=card>SnekTunez B</c> to your hand."
+            },
+            "ReusableScrap": {
+                "name": "REUSABLE SCRAP",
+                "desc": "Whenever you gain any <c=status>SHIELD</c>, gain <c=status>TEMP SHIELD</c> equal to your <c=status>TARNISH</c>."
+            },
+            "ThrustThursters": {
+                "name": "THRUST THURSTERS",
+                "desc": "Once per turn, when you gain <c=status>EVADE</c>, gain 1 more."
+            },
+            "Airlock": {
+                "name": "AIRLOCKED SNEK",
+                "desc": "Start combat with 3 <c=status>OVERDRIVE</c> and 2 <c=status>MISSING ILLEANA</c>.\n<c=trash>\"Peri is sick and tired of Illeana\"</c>"
+            },
+            "SuperInjection": {
+                "name": "SUPER INJECTION",
+                "desc": "All <c=drone>acid missiles</c> give 2 corrode."
+            },
+            "LubricatedHeatpump": {
+                "name": "LUBRICATED HEATPUMP",
+                "desc": "+1 Overheat limit. Convert any excess heat into corrode.\n<c=downside>Heat does not reset on overheat</c>"
+            },
+            "AutododgeExpress": {
+                "name": "AUTODODGE EXPRESS",
+                "desc": "Whenever you gain any <c=status>AUTODODGE</c>, activate it immediately."
+            },
+            "UnprotectedStorage": {
+                "name": "UNPROTECTED SHARD STORAGE",
+                "desc": "You can gain shards beyond the limit.\n<c=downside>Convert excess<c=status>SHARD</c> into <c=status>TARNISH</c> at the end of turn."
+            },
+            "PerfectedProtection": {
+                "name": "PERFECTED PROTECTION",
+                "desc": "Add 1 <c=card>Perfect Shield</c> to your deck."
             }
         },
         "Boss": {

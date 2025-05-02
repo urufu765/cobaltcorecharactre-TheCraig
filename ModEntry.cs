@@ -34,6 +34,7 @@ internal class ModEntry : SimpleMod
     internal ILocalizationProvider<IReadOnlyList<string>> AnyLocalizations { get; }
     internal ILocaleBoundNonNullLocalizationProvider<IReadOnlyList<string>> Localizations { get; }
     internal IMoreDifficultiesApi? MoreDifficultiesApi {get; private set; } = null!;
+    internal IDuoArtifactsApi? DuoArtifactsApi {get; private set;} = null!;
 
     /*
      * The following lists contain references to all types that will be registered to the game.
@@ -109,6 +110,9 @@ internal class ModEntry : SimpleMod
         typeof(LightenedLoad),
         //typeof(ToxicSports)
     ];
+    private static List<Type> IlleanaDuoArtifacts = [
+
+    ];
     private static List<Type> IlleanaDialogueTypes = [
         typeof(NewCombatDialogue),
         typeof(NewArtifactDialogue),
@@ -119,7 +123,8 @@ internal class ModEntry : SimpleMod
     private static IEnumerable<Type> IlleanaArtifactTypes =
         IlleanaCommonArtifacts
             .Concat(IlleanaBossArtifacts)
-            .Concat(IlleanaEventArtifacts);
+            .Concat(IlleanaEventArtifacts)
+            .Concat(IlleanaDuoArtifacts);
 
     private static IEnumerable<Type> AllRegisterableTypes =
         IlleanaCardTypes
@@ -213,10 +218,31 @@ internal class ModEntry : SimpleMod
          */
         KokoroApi = helper.ModRegistry.GetApi<IKokoroApi>("Shockah.Kokoro")!;
         MoreDifficultiesApi = helper.ModRegistry.GetApi<IMoreDifficultiesApi>("TheJazMaster.MoreDifficulties");
+        DuoArtifactsApi = helper.ModRegistry.GetApi<IDuoArtifactsApi>("Shockah.DuoArtifacts");
+
         helper.Events.OnModLoadPhaseFinished += (_, phase) =>
         {
             if (phase == ModLoadPhase.AfterDbInit)
             {
+                if (DuoArtifactsApi is not null)
+                {
+                    foreach (Type type in IlleanaDuoArtifacts)
+                    {
+                        DuoArtifactMeta? dam = type.GetCustomAttribute<DuoArtifactMeta>();
+                        if (dam is not null)
+                        {
+                            if (dam.duoModDeck is null)
+                            {
+                                DuoArtifactsApi.RegisterDuoArtifact(type, [IlleanaDeck!.Deck, dam.duoDeck]);
+                            }
+                            else
+                            {
+                                DuoArtifactsApi.RegisterDuoArtifact(type, [IlleanaDeck!.Deck, helper.Content.Decks.LookupByUniqueName(dam.duoModDeck)!.Deck]);
+                            }
+                        }
+                    }
+                }
+
                 localDB = new(helper, package);
             }
         };
