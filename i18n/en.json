@@ -240,6 +240,10 @@
             },
             "Obmutescent": {
                 "name": "Obmutescent"
+            },
+            "PerfectShield": {
+                "name": "Perfect Shield",
+                "desc": "X = your missing shield.\n<c=status>X Shield.\nX Temp Shield.</c>"
             }
         }
     }

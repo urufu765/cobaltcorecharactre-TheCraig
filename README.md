@@ -11,7 +11,8 @@ A corrosion engineer who works with corrosion to help keep the ship at tip top c
 * **(1.1.0)**: Switch over to DialogueMachine + New dialogue! + Duos + Tarnish!
   * **dev.a0**: Switch to DialogueMachine
   * **dev.a1**: Old dialogue cleanup + dialogue fixes
-  * *-dev.b0*: New duos!
+  * **dev.b0**: Added PerfectShield card for artifact
+  * *-dev.b1*: New duos!
   * *-dev.c0*: Duo art!
   * *-dev.d0*: Mini art and panic eyes art fix
   * *-dev.e0*: New tarnish implementation

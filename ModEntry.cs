@@ -79,7 +79,8 @@ internal class ModEntry : SimpleMod
         typeof(SnekTunezPlaceholder),
         typeof(Reminiscent),
         typeof(Coalescent),
-        typeof(Obmutescent)
+        typeof(Obmutescent),
+        typeof(PerfectShieldColourless)
     ];
     private static IEnumerable<Type> IlleanaCardTypes =
         IlleanaCommonCardTypes
