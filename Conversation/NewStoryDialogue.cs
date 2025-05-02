@@ -85,7 +85,7 @@ internal class NewStoryDialogue : IRegisterable
                     new(AmIlleana, "Sup?", true),
                     new(AmIsaac, "Mind if I ask something personal?"),
                     new(AmIlleana, "Depends.", true),
-                    new(AmIsaac, "explain", "I've read in a magazine somewhere that snakes see with their tongue."),
+                    new(AmIsaac, "explains", "I've read in a magazine somewhere that snakes see with their tongue."),
                     new(AmIsaac, "But I haven't seen you do that throughout our journey."),
                     new(AmIlleana, "Ah that?", true),
                     new(AmIlleana, "explain", "That's because I'm mostly a robot inside.", true),
@@ -94,7 +94,12 @@ internal class NewStoryDialogue : IRegisterable
                     new(AmIsaac, "writing", "I see, so you're not actually a biological snake... how do you taste things?"),
                     new(AmIlleana, "explain", "I use my nose.", true),
                     new(AmIsaac, "writing", "Do you NEED to eat? Is there a charging port on you somewhere?"),
-                    new(AmIlleana, "...", true),
+                    new(AmIlleana, "squint", "I think I have one on my back? I THINK I can recharge myself I guess? Never tried it.", true),
+                    new(AmIsaac, "writing", "Do you have a brain or a hard disk?"),
+                    new(AmIlleana, "intense", "Uhhhhh ummm... The latter?", true),
+                    new(AmIsaac, "writing", "Did you digitalize your mind? Are you an AI?"),
+                    new(AmIlleana, "panic", "...", true),
+                    new(AmIlleana, "shocked", "...", true),
                     new(AmIlleana, "intense", "Actually, can we forget that this conversation ever happened?", true),
                     new(AmIsaac, "Okay.")
                 ]

@@ -373,7 +373,7 @@ internal class NewCombatDialogue : IRegisterable
                 oncePerCombatTags = ["aboutToDie"],
                 oncePerRun = true,
                 dialogue = [
-                    new(AmMax, "frown", "We've lost!"),
+                    new(AmMax, "mad", "We've lost!"),
                     new(AmIlleana, "squint", "Not yet we haven't.")
                 ]
             }},

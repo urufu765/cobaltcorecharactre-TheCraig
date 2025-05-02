@@ -195,14 +195,12 @@ internal class ModEntry : SimpleMod
     public Spr SprExLubeX {get; private set;}
     public Spr SprEFLavailable {get; private set;}
     public Spr SprEFLdepleted {get; private set;}
-    public static bool Patch_EnemyPack {get; private set;}
 
     public LocalDB localDB { get; set; } = null!;
 
 
     public ModEntry(IPluginPackage<IModManifest> package, IModHelper helper, ILogger logger) : base(package, helper, logger)
     {
-        //Stopwatch sw = Stopwatch.StartNew();
         Instance = this;
         Harmony = new Harmony("urufudoggo.Illeana");
         UniqueName = package.Manifest.UniqueName;
@@ -218,8 +216,6 @@ internal class ModEntry : SimpleMod
         {
             if (phase == ModLoadPhase.AfterDbInit)
             {
-                Patch_EnemyPack = helper.ModRegistry.LoadedMods.ContainsKey("TheJazMaster.EnemyPack");
-                // Diamach.Apply();
                 localDB = new(helper, package);
             }
         };
@@ -229,7 +225,6 @@ internal class ModEntry : SimpleMod
             {
                 thing.Localizations[entry.Key] = entry.Value;
             }
-            //Logger.LogInformation("Total load took: {Milliseconds:##.####}s", sw.Elapsed.TotalSeconds);    
         };
 
         AnyLocalizations = new JsonLocalizationProvider(
