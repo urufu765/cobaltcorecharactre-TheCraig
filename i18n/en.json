@@ -65,7 +65,7 @@
                 "name": "THRUST THURSTERS",
                 "desc": "Once per turn, when you gain <c=status>EVADE</c>, gain 1 more."
             },
-            "Airlock": {
+            "AirlockSnek": {
                 "name": "AIRLOCKED SNEK",
                 "desc": "Start combat with 3 <c=status>OVERDRIVE</c> and 2 <c=status>MISSING ILLEANA</c>.\n<c=trash>\"Peri is sick and tired of Illeana\"</c>"
             },
@@ -75,11 +75,15 @@
             },
             "LubricatedHeatpump": {
                 "name": "LUBRICATED HEATPUMP",
-                "desc": "+1 Overheat limit. Convert any excess heat into corrode.\n<c=downside>Heat does not reset on overheat</c>"
+                "desc": "+1 Overheat limit. Instead of overheating, gain 1 <c=status>CORRODE</c>."
             },
             "AutododgeExpress": {
                 "name": "AUTODODGE EXPRESS",
                 "desc": "Whenever you gain any <c=status>AUTODODGE</c>, activate it immediately."
+            },
+            "ExtraSlip": {
+                "name": "EXTRA-SLIP",
+                "desc": "While you're <c=corrode>corroded</c>, playing your <c=keyword>left/rightmost card in hand</c> moves you left/right 1."
             },
             "UnprotectedStorage": {
                 "name": "UNPROTECTED SHARD STORAGE",
@@ -127,20 +131,6 @@
             "ToxicSports": {
                 "name": "TOXIC SPORTS",
                 "desc": "Whenever you apply <c=status>CORRODE</c> to yourself, attack for the same amount of total corrode you have.\n<c=keyword>Sasha's Sporting Event Only.</c>"
-            }
-        },
-        "Duo": {
-            "SuperInjection": {
-                "name": "SUPER INJECTION",
-                "desc": "All <c=drone>acid missiles</c> apply an additional <c=status>corrode</c>."
-            },
-            "DilutedSerums": {
-                "name": "DILUTED SERUMS",
-                "desc": "<c=status>Corrode</c> attacks the shield first."
-            },
-            "SnakeHate": {
-                "name": "COMPETITION",
-                "desc": "Whenever playing an <c=______>Eddie</c> card, the next <c=illeana>Illeana</c> card will play twice."
             }
         },
         "Extra": {

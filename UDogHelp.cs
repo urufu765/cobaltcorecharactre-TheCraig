@@ -10,7 +10,7 @@ namespace Illeana;
 /// </summary>
 public class UhDuhHundo
 {
-    public static ArtifactConfiguration ArtifactRegistrationHelper(Type a, Spr sprite)
+    public static ArtifactConfiguration ArtifactRegistrationHelper(Type a, Spr sprite, Deck deck)
     {
         ArtifactMeta? attrs = a.GetCustomAttribute<ArtifactMeta>();
         ArtifactPool[] artpl = attrs?.pools ?? new ArtifactPool[1];
@@ -19,7 +19,7 @@ public class UhDuhHundo
             ArtifactType = a,
             Meta = new ArtifactMeta
             {
-                owner = ModEntry.Instance.IlleanaDeck.Deck,
+                owner = deck,
                 pools = artpl,
                 unremovable = attrs is not null && attrs.unremovable,
                 extraGlossary = attrs?.extraGlossary ?? []

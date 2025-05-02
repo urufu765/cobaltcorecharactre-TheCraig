@@ -111,7 +111,11 @@ internal class ModEntry : SimpleMod
         //typeof(ToxicSports)
     ];
     private static List<Type> IlleanaDuoArtifacts = [
-
+        typeof(ReusableScrap),  // Dizzy
+        typeof(ThrustThursters),  // Riggs
+        typeof(AirlockSnek),  // Peri
+        typeof(ExtraSlip),  // Max
+        typeof(PerfectedProtection),  // CAT
     ];
     private static List<Type> IlleanaDialogueTypes = [
         typeof(NewCombatDialogue),
@@ -201,6 +205,7 @@ internal class ModEntry : SimpleMod
     public Spr SprExLubeX {get; private set;}
     public Spr SprEFLavailable {get; private set;}
     public Spr SprEFLdepleted {get; private set;}
+    public Spr SprThurstDepleted {get; private set;}
 
     public LocalDB localDB { get; set; } = null!;
 
@@ -413,7 +418,13 @@ internal class ModEntry : SimpleMod
         // Artifact Section
         foreach (Type ta in IlleanaArtifactTypes)
         {
-            helper.Content.Artifacts.RegisterArtifact(ta.Name, UhDuhHundo.ArtifactRegistrationHelper(ta, RegisterSprite(package, "assets/Artifact/" + ta.Name + ".png").Sprite));
+            Deck deck = IlleanaDeck.Deck;
+            if (DuoArtifactsApi is not null && IlleanaDuoArtifacts.Contains(ta))
+            {
+                deck = DuoArtifactsApi.DuoArtifactVanillaDeck;
+            }
+
+            helper.Content.Artifacts.RegisterArtifact(ta.Name, UhDuhHundo.ArtifactRegistrationHelper(ta, RegisterSprite(package, "assets/Artifact/" + ta.Name + ".png").Sprite, deck));
         }
 
         SprStolenOn = RegisterSprite(package, "assets/Artifact/Personal_Stereo.png").Sprite;
@@ -438,6 +449,7 @@ internal class ModEntry : SimpleMod
         SprExLubeX = RegisterSprite(package, "assets/Artifact/ExperimentalLubricantX.png").Sprite;
         SprEFLavailable = RegisterSprite(package, "assets/Artifact/ExternalFuelSourceAvailable.png").Sprite;
         SprEFLdepleted = RegisterSprite(package, "assets/Artifact/ExternalFuelSourceDepleted.png").Sprite;
+        SprThurstDepleted = RegisterSprite(package, "assets/Artifact/ThrustThurstersDepleted.png").Sprite;
         /*
          * All the IRegisterable types placed into the static lists at the start of the class are initialized here.
          * This snippet invokes all of them, allowing them to register themselves with the package and helper.
@@ -448,6 +460,7 @@ internal class ModEntry : SimpleMod
         //DrawLoadingScreenFixer.Apply(Harmony);
         //SashaSportingSession.Apply(Harmony);
         WarpPrototypeHelper.Apply(Harmony);
+        ThrustMaster.Apply(Harmony);
     }
 
     /*

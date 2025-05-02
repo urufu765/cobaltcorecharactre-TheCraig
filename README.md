@@ -13,6 +13,7 @@ A corrosion engineer who works with corrosion to help keep the ship at tip top c
   * **dev.a1**: Old dialogue cleanup + dialogue fixes
   * **dev.b0**: Added PerfectShield card for artifact
   * **dev.b1**: Duo descriptions and API
+  * **dev.b2**: Reusable Scrap, Thrust Thursters, Airlock, Extra Slip, Perfected Protection implemented
   * *-dev.c0*: Duo art!
   * *-dev.d0*: Mini art and panic eyes art fix
   * *-dev.e0*: New tarnish implementation
