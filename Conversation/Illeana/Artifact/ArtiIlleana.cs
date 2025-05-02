@@ -36,7 +36,7 @@ internal static partial class ArtifactDialogue
                         },
                         new CustomSay()
                         {
-                            who = AmIssac,
+                            who = AmIsaac,
                             what = "I'm never letting you touch my drones.",
                             loopTag = "squint"
                         }

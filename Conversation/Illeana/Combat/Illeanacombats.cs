@@ -12,13 +12,13 @@ internal static partial class CombatDialogue
         {
             type = NodeType.combat,
             oncePerRun = true,
-            allPresent = [ AmIssac ],
+            allPresent = [ AmIsaac ],
             lastTurnPlayerStatuses = [ Tarnished ],
             lines = new()
             {
                 new CustomSay()
                 {
-                    who = AmIssac,
+                    who = AmIsaac,
                     what = "That's not good...",
                     loopTag = "panic"
                 },
@@ -174,13 +174,13 @@ internal static partial class CombatDialogue
         {
             type = NodeType.combat,
             oncePerRun = true,
-            allPresent = [ AmIssac ],
+            allPresent = [ AmIsaac ],
             lastTurnEnemyStatuses = [ Tarnished ],
             lines = new()
             {
                 new CustomSay()
                 {
-                    who = AmIssac,
+                    who = AmIsaac,
                     what = "My drones will take care of them now."
                 }
             }
@@ -276,7 +276,7 @@ internal static partial class CombatDialogue
         DB.story.all["IlleanaWentMissing_Multi_4"] = new()
         {
             type = NodeType.combat,
-            allPresent = [ AmIssac ],
+            allPresent = [ AmIsaac ],
             priority = true,
             oncePerRun = true,
             oncePerCombatTags = ["illeanaWentMissing"],
@@ -285,7 +285,7 @@ internal static partial class CombatDialogue
             {
                 new CustomSay()
                 {
-                    who = AmIssac,
+                    who = AmIsaac,
                     what = "Um..."
                 }
             }

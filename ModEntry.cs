@@ -11,6 +11,8 @@ using Illeana.Cards;
 using Illeana.External;
 using Illeana.Features;
 using System.Reflection;
+using Illeana.Dialogue;
+using System.Diagnostics;
 //using System.Reflection;
 
 namespace Illeana;
@@ -106,6 +108,13 @@ internal class ModEntry : SimpleMod
         typeof(LightenedLoad),
         //typeof(ToxicSports)
     ];
+    private static List<Type> IlleanaDialogueTypes = [
+        typeof(NewCombatDialogue),
+        typeof(NewArtifactDialogue),
+        typeof(NewEventDialogue),
+        typeof(NewCardDialogue),
+        typeof(NewStoryDialogue)
+    ];
     private static IEnumerable<Type> IlleanaArtifactTypes =
         IlleanaCommonArtifacts
             .Concat(IlleanaBossArtifacts)
@@ -113,7 +122,9 @@ internal class ModEntry : SimpleMod
 
     private static IEnumerable<Type> AllRegisterableTypes =
         IlleanaCardTypes
-            .Concat(IlleanaArtifactTypes);
+            .Concat(IlleanaArtifactTypes)
+            .Concat(IlleanaDialogueTypes)
+            ;
 
     private static List<string> Illeana1Anims = [
         "gameover",
@@ -191,6 +202,7 @@ internal class ModEntry : SimpleMod
 
     public ModEntry(IPluginPackage<IModManifest> package, IModHelper helper, ILogger logger) : base(package, helper, logger)
     {
+        //Stopwatch sw = Stopwatch.StartNew();
         Instance = this;
         Harmony = new Harmony("urufudoggo.Illeana");
         UniqueName = package.Manifest.UniqueName;
@@ -207,8 +219,8 @@ internal class ModEntry : SimpleMod
             if (phase == ModLoadPhase.AfterDbInit)
             {
                 Patch_EnemyPack = helper.ModRegistry.LoadedMods.ContainsKey("TheJazMaster.EnemyPack");
-                Diamach.Apply();
-                localDB = new(package);
+                // Diamach.Apply();
+                localDB = new(helper, package);
             }
         };
         helper.Events.OnLoadStringsForLocale += (_, thing) =>
@@ -217,6 +229,7 @@ internal class ModEntry : SimpleMod
             {
                 thing.Localizations[entry.Key] = entry.Value;
             }
+            //Logger.LogInformation("Total load took: {Milliseconds:##.####}s", sw.Elapsed.TotalSeconds);    
         };
 
         AnyLocalizations = new JsonLocalizationProvider(
@@ -265,12 +278,6 @@ internal class ModEntry : SimpleMod
             Name = AnyLocalizations.Bind(["character", "DeadCraig", "name"]).Localize
         });
 
-        /*
-         * All the IRegisterable types placed into the static lists at the start of the class are initialized here.
-         * This snippet invokes all of them, allowing them to register themselves with the package and helper.
-         */
-        foreach (var type in AllRegisterableTypes)
-            AccessTools.DeclaredMethod(type, nameof(IRegisterable.Register))?.Invoke(null, [package, helper]);
 
 
         KokoroApi.V2.ActionCosts.RegisterStatusResourceCostIcon(Status.corrode, RegisterSprite(package, "assets/corrode_pay.png").Sprite, RegisterSprite(package, "assets/corrode_cost.png").Sprite);
@@ -409,6 +416,12 @@ internal class ModEntry : SimpleMod
         SprExLubeX = RegisterSprite(package, "assets/Artifact/ExperimentalLubricantX.png").Sprite;
         SprEFLavailable = RegisterSprite(package, "assets/Artifact/ExternalFuelSourceAvailable.png").Sprite;
         SprEFLdepleted = RegisterSprite(package, "assets/Artifact/ExternalFuelSourceDepleted.png").Sprite;
+        /*
+         * All the IRegisterable types placed into the static lists at the start of the class are initialized here.
+         * This snippet invokes all of them, allowing them to register themselves with the package and helper.
+         */
+        foreach (var type in AllRegisterableTypes)
+            AccessTools.DeclaredMethod(type, nameof(IRegisterable.Register))?.Invoke(null, [package, helper]);
 
         //DrawLoadingScreenFixer.Apply(Harmony);
         //SashaSportingSession.Apply(Harmony);

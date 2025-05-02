@@ -499,7 +499,7 @@ internal static partial class CombatDialogue
             oncePerRun = true,
             priority = true,
             lastNamedDroneDestroyed = "numberone",
-            allPresent = [ AmIlleana, AmIssac ],
+            allPresent = [ AmIlleana, AmIsaac ],
             lines = new()
             {
                 new CustomSay()
@@ -607,7 +607,7 @@ internal static partial class CombatDialogue
         DB.story.all["Duo_AboutToDieAndLoop_Illeana_4"] = new()
         {
             type = NodeType.combat,
-            allPresent = [ AmIlleana, AmIssac ],
+            allPresent = [ AmIlleana, AmIsaac ],
             enemyShotJustHit = true,
             maxHull = 2,
             oncePerCombatTags = ["aboutToDie"],
@@ -616,7 +616,7 @@ internal static partial class CombatDialogue
             {
                 new CustomSay()
                 {
-                    who = AmIssac,
+                    who = AmIsaac,
                     what = "Dang."
                 },
                 new CustomSay()

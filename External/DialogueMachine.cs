@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Microsoft.Extensions.Logging;
 using Nanoray.PluginManager;
 using Nickel;
@@ -8,7 +9,8 @@ using Nickel;
 namespace Illeana.External;
 
 /**
-ver.0.8
+ver.0.14
+
 To get DialogueMachine and the custom dialogue stuff working:
 - edit the namespace of this file to at least match your project namespace
 - Instantiate LocalDB in ModEntry.cs *after* all the dialogue has been added (or in a helper.Events.OnModLoadFinished AfterDbInit presented as such below):
@@ -16,7 +18,7 @@ To get DialogueMachine and the custom dialogue stuff working:
         {
             if (phase == ModLoadPhase.AfterDbInit)
             {
-                localDB = new(package);
+                localDB = new(helper, package);
             }
         };
 - Then register the locale of your dialogue by calling the instantiated LocalDB's GetLocalizationResults() in helper.Events.OnLoadStringsForLocale:
@@ -28,6 +30,7 @@ To get DialogueMachine and the custom dialogue stuff working:
             }
         };
 - You're all set!
+(when you're adding dialogue, you should use LocalDB.DumpStoryToLocalLocale())
 */
 
 public enum DMod
@@ -223,32 +226,39 @@ public class DialogueMachine : StoryNode
     /// <summary>
     /// Edits existing dialogue by finding the switch you want to insert your dialogue into. Best used for vanilla dialogue. WILL IGNORE 'dialogue' DICTIONARY IF 'edit' IS USED
     /// </summary>
-    public List<EditThing> edit = null!;
+    public List<EditThing>? edit;
     /// <summary>
     /// Where all your dialogue *should* go. It can also support titles, mod dialogue edits, and custom instructions!
     /// </summary>
-    public List<DialogueThing> dialogue = null!;
+    public List<DialogueThing>? dialogue;
 
     /// <summary>
     /// Add the type of the artifact rather than trying to use the string key. Gets converted to hasArtifacts later.
     /// </summary>
-    public List<Type> hasArtifactTypes = null!;
+    public List<Type>? hasArtifactTypes;
     /// <summary>
     /// Add the type of the artifact rather than trying to use the string key. Gets converted to doesNotHaveArtifacts later.
     /// </summary>
-    public List<Type> doesNotHaveArtifactTypes = null!;
+    public List<Type>? doesNotHaveArtifactTypes;
+    /// <summary>
+    /// Though any fields you declare will replace existing fields if you're modifying the original, lists and hashsets will be appended by default. Add the name of the list/hashset field if you want to completely replace them.
+    /// </summary>
+    public List<string>? replaceFields;
 
     /// <summary>
     /// Translates DialogueMachine into Instructions readable by LocalDB
     /// </summary>
-    public void Convert()
+    public void Convert(SimpleMod inst)
     {
         if (hasArtifactTypes is not null)
         {
             hasArtifacts ??= [];
             foreach (Type type in hasArtifactTypes)
             {
-                if(ModEntry.Instance.Helper?.Content?.Artifacts?.LookupByArtifactType(type) is IArtifactEntry iae) hasArtifacts.Add(iae.UniqueName);
+                // Modded
+                if(inst.Helper?.Content?.Artifacts?.LookupByArtifactType(type) is IArtifactEntry iae) hasArtifacts.Add(iae.UniqueName);
+                else if(DB.artifacts.ContainsValue(type)) hasArtifacts.Add(DB.artifacts.First(x => x.Value == type).Key);
+                else inst.Logger.LogWarning($"Error when moving {type.Name} from [hasArtifactTypes] to [hasArtifacts]! Perhaps the artifact isn't registered yet or misspelt?");
             }
         }
         if (doesNotHaveArtifactTypes is not null)
@@ -256,7 +266,10 @@ public class DialogueMachine : StoryNode
             doesNotHaveArtifacts ??= [];
             foreach (Type type in doesNotHaveArtifactTypes)
             {
-                if(ModEntry.Instance.Helper?.Content?.Artifacts?.LookupByArtifactType(type) is IArtifactEntry iae) doesNotHaveArtifacts.Add(iae.UniqueName);
+                // Modded
+                if(inst.Helper?.Content?.Artifacts?.LookupByArtifactType(type) is IArtifactEntry iae) doesNotHaveArtifacts.Add(iae.UniqueName);
+                else if(DB.artifacts.ContainsValue(type)) doesNotHaveArtifacts.Add(DB.artifacts.First(x => x.Value == type).Key);
+                else inst.Logger.LogWarning($"Error when moving {type.Name} from [doesNotHaveArtifactTypes] to [doesNotHaveArtifacts]! Perhaps the artifact isn't registered yet or misspelt?");
             }
         }
         if (edit is not null)  // Skips dialogue conversion if edits are available
@@ -286,7 +299,7 @@ public class DialogueMachine : StoryNode
             }
             return;
         }
-        foreach (DialogueThing d in dialogue)
+        foreach (DialogueThing d in dialogue??=[])
         {
             lines.Add(ConvertDialogueToLine(d));
         }
@@ -358,9 +371,9 @@ public class DialogueMachine : StoryNode
     /// </summary>
     /// <param name="name"></param>
     /// <returns></returns>
-    public static bool CharExists(string name)
+    public static bool CharExists(string name, SimpleMod inst)
     {
-        if (ModEntry.Instance.Helper.Content?.Decks?.LookupByUniqueName(name) is not null) return true;
+        if (inst.Helper.Content?.Decks?.LookupByUniqueName(name) is not null) return true;
 
         if (DB.currentLocale.strings.ContainsKey("char." + name)) return true;  // this probably doesn't even work
 
@@ -376,10 +389,10 @@ public class DialogueMachine : StoryNode
     /// </summary>
     /// <param name="name"></param>
     /// <returns></returns>
-    public static bool ArtifactExists(string name)
+    public static bool ArtifactExists(string name, SimpleMod inst)
     {
         // Modded artifacts
-        if (ModEntry.Instance.Helper.Content?.Artifacts?.LookupByUniqueName(name) is not null) return true;
+        if (inst.Helper.Content?.Artifacts?.LookupByUniqueName(name) is not null) return true;
         // Game artifacts
         if (DB.artifacts.ContainsKey(name)) return true;
         return false;
@@ -419,6 +432,10 @@ public class LocalDB
     /// Coded custom dialogue for different locales. Please use DumpStoryToLocalLocale() to add your dialogue safely instead!
     /// </summary>
     public static Dictionary<string, Story> LocalStoryLocale { get; private set; } = new();
+    /// <summary>
+    /// Coded custom dialogue specifically for modded support. Please use DumpStoryToLocalLocale() to add your dialogue safely instead
+    /// </summary>
+    public static Dictionary<string, Dictionary<string, Story>> ModdedStoryLocale { get; private set; } = new();
     private int incrementingHash = 1;
     /// <summary>
     /// An incrementing hash. WARNING: Hash may conflict if under the same namespace!
@@ -433,16 +450,34 @@ public class LocalDB
     private readonly Dictionary<string, string> customLocalisation;
 
     /// <summary>
+    /// Change ModEntry.Instance if necessary
+    /// </summary>
+    private static SimpleMod Inst => ModEntry.Instance;
+
+    /// <summary>
     /// Should be instantiated *after* all the dialogues have been registered OR at Events.OnModLoadPhaseFinished, AfterDbInit.
     /// </summary>
     /// <param name="package"></param>
-    public LocalDB(IPluginPackage<IModManifest> package)
+    public LocalDB(IModHelper helper, IPluginPackage<IModManifest> package)
     {
         customLocalisation = new();
         Story toUseStory;
         if (LocalStoryLocale.ContainsKey(DB.currentLocale.locale))  // For other coded translated dialogues
         {
             toUseStory = LocalStoryLocale[DB.currentLocale.locale];
+            foreach (KeyValuePair<string, Dictionary<string, Story>> thing in ModdedStoryLocale)
+            {
+                if(helper.ModRegistry.LoadedMods.ContainsKey(thing.Key) && ModdedStoryLocale[thing.Key].TryGetValue(DB.currentLocale.locale, out Story? value))
+                {
+                    foreach (KeyValuePair<string, StoryNode> thing2 in value.all)
+                    {
+                        if (!toUseStory.all.TryAdd(thing2.Key, thing2.Value))
+                        {
+                            Inst.Logger.LogWarning("Could not add dialogue: " + thing2.Key);
+                        }
+                    }
+                }
+            }
         }
         else if (File.Exists($"{package.PackageRoot}\\i18n\\{DB.currentLocale.locale}_story.json"))  // For i18n translated story dialogue
         {
@@ -466,6 +501,43 @@ public class LocalDB
     }
 
     /// <summary>
+    /// A modded version that adds separate dictionaries for each mod key so they could be included/excluded on load
+    /// </summary>
+    /// <param name="locale"></param>
+    /// <param name="modKey"></param>
+    /// <param name="storyStuff"></param>
+    public static void DumpStoryToLocalLocale(string locale, string modKey, Dictionary<string, DialogueMachine> storyStuff)
+    {
+        // Just to trigger the modded part on load lol
+        if (!LocalStoryLocale.ContainsKey(locale))
+        {
+            LocalStoryLocale[locale] = new Story();
+        }
+
+
+        if (!ModdedStoryLocale.ContainsKey(modKey))
+        {
+            ModdedStoryLocale[modKey] = new();
+        }
+        if (!ModdedStoryLocale[modKey].ContainsKey(locale))
+        {
+            ModdedStoryLocale[modKey][locale] = new Story();
+        }
+
+        foreach (KeyValuePair<string, DialogueMachine> dm in storyStuff)
+        {
+            ExistenceChecker(dm);
+
+            // Tries to add the dialogue in the local locale local locale thing
+            if (!ModdedStoryLocale[modKey][locale].all.TryAdd(dm.Key, dm.Value))
+            {
+                Inst.Logger.LogWarning("Could not add dialogue: " + dm.Key);
+            }
+        }
+    }
+
+
+    /// <summary>
     /// Adds a list of DialogueMachines to the appropriate locale, creating a new if locale doesn't exist.
     /// </summary>
     /// <param name="locale">the locale the storynodes will go in</param>
@@ -479,61 +551,66 @@ public class LocalDB
 
         foreach (KeyValuePair<string, DialogueMachine> dm in storyStuff)
         {
-            // Checks if the inputted artifact is a valid one that the game can check
-            if (dm.Value.hasArtifacts is not null)
-            {
-                foreach (string artifact in dm.Value.hasArtifacts)
-                {
-                    if (!DialogueMachine.ArtifactExists(artifact))
-                    {
-                        ModEntry.Instance.Logger.LogWarning(dm.Key + "'s <hasArtifacts> may contain an erroneous artifact [" + artifact + "] that may not be recognized by the game! (or if it's a modded artifact: the mod isn't loaded.)");
-                    }
-                }
-            }
-            if (dm.Value.doesNotHaveArtifacts is not null)
-            {
-                foreach (string artifact in dm.Value.doesNotHaveArtifacts)
-                {
-                    if (!DialogueMachine.ArtifactExists(artifact))
-                    {
-                        ModEntry.Instance.Logger.LogWarning(dm.Key + "'s <doesNotHaveArtifacts> may contain an erroneous artifact [" + artifact + "] that may not be recognized by the game! (or if it's a modded artifact: the mod isn't loaded.)");
-                    }
-                }
-            }
-
-            // Checks if the inputted character is a valid one
-            if (dm.Value.allPresent is not null)
-            {
-                foreach (string characer in dm.Value.allPresent)
-                {
-                    if (!DialogueMachine.CharExists(characer))
-                    {
-                        ModEntry.Instance.Logger.LogWarning(dm.Key + "'s <allPresent> may contain an erroneous character [" + characer + "] that may not be recognized by the game! (or if it's a modded artifact: the mod isn't loaded.)");
-                    }
-                }
-            }
-            if (dm.Value.nonePresent is not null)
-            {
-                foreach (string characer in dm.Value.nonePresent)
-                {
-                    if (!DialogueMachine.CharExists(characer))
-                    {
-                        ModEntry.Instance.Logger.LogWarning(dm.Key + "'s <nonePresent> may contain an erroneous character [" + characer + "] that may not be recognized by the game! (or if it's a modded artifact: the mod isn't loaded.)");
-                    }
-                }
-            }
-
-            // Checks if the edit dialogue thing's key is valid
-            if (dm.Value.edit is not null && !DB.story.all.ContainsKey(dm.Key))
-            {
-                ModEntry.Instance.Logger.LogWarning(dm.Key + " is trying to add to a dialogue that doesn't exist in game (yet)! If you're trying to edit modded dialogue, this may not be the appropriate way!");
-            }
+            ExistenceChecker(dm);
 
             // Tries to add the dialogue in the local locale local locale thing
             if (!LocalStoryLocale[locale].all.TryAdd(dm.Key, dm.Value))
             {
-                ModEntry.Instance.Logger.LogWarning("Could not add dialogue: " + dm.Key);
+                Inst.Logger.LogWarning("Could not add dialogue: " + dm.Key);
             }
+        }
+    }
+
+    private static void ExistenceChecker(KeyValuePair<string, DialogueMachine> dm)
+    {
+        // Checks if the inputted artifact is a valid one that the game can check
+        if (dm.Value.hasArtifacts is not null)
+        {
+            foreach (string artifact in dm.Value.hasArtifacts)
+            {
+                if (!DialogueMachine.ArtifactExists(artifact, Inst))
+                {
+                    Inst.Logger.LogWarning(dm.Key + "'s <hasArtifacts> may contain an erroneous artifact [" + artifact + "] that may not be recognized by the game! (or if it's a modded artifact: the mod isn't loaded.)");
+                }
+            }
+        }
+        if (dm.Value.doesNotHaveArtifacts is not null)
+        {
+            foreach (string artifact in dm.Value.doesNotHaveArtifacts)
+            {
+                if (!DialogueMachine.ArtifactExists(artifact, Inst))
+                {
+                    Inst.Logger.LogWarning(dm.Key + "'s <doesNotHaveArtifacts> may contain an erroneous artifact [" + artifact + "] that may not be recognized by the game! (or if it's a modded artifact: the mod isn't loaded.)");
+                }
+            }
+        }
+
+        // Checks if the inputted character is a valid one
+        if (dm.Value.allPresent is not null)
+        {
+            foreach (string characer in dm.Value.allPresent)
+            {
+                if (!DialogueMachine.CharExists(characer, Inst))
+                {
+                    Inst.Logger.LogWarning(dm.Key + "'s <allPresent> may contain an erroneous character [" + characer + "] that may not be recognized by the game! (or if it's a modded artifact: the mod isn't loaded.)");
+                }
+            }
+        }
+        if (dm.Value.nonePresent is not null)
+        {
+            foreach (string characer in dm.Value.nonePresent)
+            {
+                if (!DialogueMachine.CharExists(characer, Inst))
+                {
+                    Inst.Logger.LogWarning(dm.Key + "'s <nonePresent> may contain an erroneous character [" + characer + "] that may not be recognized by the game! (or if it's a modded artifact: the mod isn't loaded.)");
+                }
+            }
+        }
+
+        // Checks if the edit dialogue thing's key is valid
+        if (dm.Value.edit is not null && !DB.story.all.ContainsKey(dm.Key))
+        {
+            Inst.Logger.LogWarning(dm.Key + " is trying to add to a dialogue that doesn't exist in game (yet)! If you're trying to edit modded dialogue, this may not be the appropriate way!");
         }
     }
 
@@ -550,7 +627,7 @@ public class LocalDB
             // Convert all custom DialogueThings from DialogueMachine to StoryNode lines
             if (sn.Value is DialogueMachine dm)
             {
-                dm.Convert();
+                dm.Convert(Inst);
                 editMode = dm.edit is not null;
             }
 
@@ -573,6 +650,53 @@ public class LocalDB
                     MakeLinesRecognisable(sn.Value.lines[a], sn.Key);
                 }
                 to.all.Add(sn.Key, sn.Value);
+            }
+        }
+    }
+
+
+    /// <summary>
+    /// Overrides the original field if source is different, and appends list fields (unless specified)
+    /// </summary>
+    /// <param name="target"></param>
+    /// <param name="source"></param>
+    private void CombineFields(ref StoryNode target, StoryNode source)
+    {
+        if(target is null || source is null) return;
+        StoryNode defaultSource = new();
+        List<Type> additionList = [typeof(List<string>), typeof(HashSet<string>), typeof(HashSet<Status>)];
+        foreach (var field in typeof(StoryNode).GetFields(System.Reflection.BindingFlags.Public| System.Reflection.BindingFlags.Instance))
+        {
+            if (field.Name == "lines") continue;
+
+            var sourceValue = field.GetValue(source);
+            var defaultValue = field.GetValue(defaultSource);
+
+            if(sourceValue is not null && !EqualityComparer<object>.Default.Equals(defaultValue, sourceValue))
+            {
+                if(!additionList.Contains(field.FieldType) || (source is DialogueMachine dm && dm.replaceFields is not null && dm.replaceFields.Contains(field.Name)))
+                {
+                    field.SetValue(target, sourceValue);
+                }
+                else
+                {
+                    var targetValue = field.GetValue(target);
+                    if(sourceValue is List<string> l2)
+                    {
+                        List<string> l1 = (targetValue as List<string>)??[];
+                        field.SetValue(target, l1.Concat(l2).ToList());
+                    }
+                    else if(sourceValue is HashSet<string> h2)
+                    {
+                        HashSet<string> h1 = (targetValue as HashSet<string>)??[];
+                        field.SetValue(target, h1.Concat(h2).ToHashSet());
+                    }
+                    else if(sourceValue is HashSet<Status> h4)
+                    {
+                        HashSet<Status> h3 = (targetValue as HashSet<Status>)??[];
+                        field.SetValue(target, h3.Concat(h4).ToHashSet());
+                    }
+                }
             }
         }
     }
@@ -630,11 +754,12 @@ public class LocalDB
                     }
                 }
             }
+            CombineFields(ref result, newStory);
             return result;
         }
         catch (Exception err)
         {
-            ModEntry.Instance.Logger.LogError(err, "Failed to edit a line with key:" + script);
+            Inst.Logger.LogError(err, "Failed to edit a line with key:" + script);
             return existingStory;
         }
     }
@@ -666,7 +791,7 @@ public class LocalDB
     {
         try
         {
-            StoryNode result = new();
+            StoryNode result = existingStory;
             if (existingStory.lines is not null)
             {
                 bool newIsOriginal = false;
@@ -690,7 +815,7 @@ public class LocalDB
                         MakeLinesRecognisable(start.lines[x], script);
                         result.lines[x] = start.lines[x];
                     }
-                    else if (result.lines[x] is Say or SaySwitch)
+                    else if (result.lines[x] is Say or SaySwitch && start.lines[x] is Say or SaySwitch)
                     {
                         result.lines[x] = CombineTwoSays(result.lines[x], start.lines[x], script);
                     }
@@ -704,12 +829,13 @@ public class LocalDB
                         result.lines.Add(start.lines[y]);
                     }
                 }
+                CombineFields(ref result, start);
             }
             return result;
         }
         catch (Exception err)
         {
-            ModEntry.Instance.Logger.LogError(err, "Failed to edit a line with key:" + script);
+            Inst.Logger.LogError(err, "Failed to edit a line with key:" + script);
             return existingStory;
         }
     }

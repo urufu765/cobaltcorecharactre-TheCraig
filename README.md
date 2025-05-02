@@ -6,12 +6,17 @@ A corrosion engineer who works with corrosion to help keep the ship at tip top c
 
 ### PUBLIC
 
-#### 1.1: Illeana Memories!
+#### 1.1: Illeana Duo Machine!
 
 * *(1.1.3)**: Sprites for memories!
 * *(1.1.2)**: Memory implementation + full body sprite
 * *(1.1.1)**: New tarnish implementation
-* *(1.1.0)**: Switch over to DialogueMachine
+* **(1.1.0)**: Switch over to DialogueMachine + New dialogue! + Duos + Tarnish!
+  * *-dev.a0*: Switch to DialogueMachine
+  * *-dev.b0*: New duos!
+  * *-dev.c0*: Duo art!
+  * *-dev.d0*: New tarnish implementation
+  * *-dev.e0*: Card rework 3 (optimised for NEW Tarnish)
 
 #### 1.0: First Public Release!!!
 
