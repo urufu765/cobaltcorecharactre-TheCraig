@@ -37,7 +37,7 @@ public class ImmunityShot : Card, IRegisterable
             [
                 new AVariableHint
                 {
-                    status = new Status?(Status.corrode)
+                    status = Status.corrode
                 },
                 new AStatus
                 {
@@ -58,7 +58,7 @@ public class ImmunityShot : Card, IRegisterable
             [
                 new AVariableHint
                 {
-                    status = new Status?(Status.corrode)
+                    status = Status.corrode
                 },
                 new AStatus
                 {
@@ -86,7 +86,7 @@ public class ImmunityShot : Card, IRegisterable
             [
                 new AVariableHint
                 {
-                    status = new Status?(Status.corrode)
+                    status = Status.corrode
                 },
                 new AStatus
                 {

@@ -14,6 +14,7 @@ A corrosion engineer who works with corrosion to help keep the ship at tip top c
   * **dev.b0**: Added PerfectShield card for artifact
   * **dev.b1**: Duo descriptions and API
   * **dev.b2**: Reusable Scrap, Thrust Thursters, Airlock, Extra Slip, Perfected Protection implemented
+  * **dev.b3**: Super Injection, Lubricated Heatpump, Unprotected Storage, Hull Harvester implemented and tarnish tooltip changed to match upcoming rework. Byproduct Processor no longer needs energy
   * *-dev.c0*: Duo art!
   * *-dev.d0*: Mini art and panic eyes art fix
   * *-dev.e0*: New tarnish implementation

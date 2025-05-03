@@ -30,6 +30,7 @@ internal class ModEntry : SimpleMod
 
     internal IStatusEntry TarnishStatus { get; private set; } = null!;
     internal IStatusEntry SnekTunezStatus { get; private set; } = null!;
+    internal IStatusEntry ExcessShardStatus { get; private set; } = null!;
 
     internal ILocalizationProvider<IReadOnlyList<string>> AnyLocalizations { get; }
     internal ILocaleBoundNonNullLocalizationProvider<IReadOnlyList<string>> Localizations { get; }
@@ -116,6 +117,10 @@ internal class ModEntry : SimpleMod
         typeof(AirlockSnek),  // Peri
         typeof(ExtraSlip),  // Max
         typeof(PerfectedProtection),  // CAT
+        typeof(SuperInjection),  // Isaac
+        typeof(LubricatedHeatpump),  // Drake
+        typeof(UnprotectedStorage),  // Books
+        typeof(HullHarvester),  // Weth
     ];
     private static List<Type> IlleanaDialogueTypes = [
         typeof(NewCombatDialogue),
@@ -206,6 +211,7 @@ internal class ModEntry : SimpleMod
     public Spr SprEFLavailable {get; private set;}
     public Spr SprEFLdepleted {get; private set;}
     public Spr SprThurstDepleted {get; private set;}
+    public Spr SprHullHarvestDepleted {get; private set;}
 
     public LocalDB localDB { get; set; } = null!;
 
@@ -399,6 +405,18 @@ internal class ModEntry : SimpleMod
             Name = AnyLocalizations.Bind(["status", "SnekTunezStat", "name"]).Localize,
             Description = AnyLocalizations.Bind(["status", "SnekTunezStat", "desc"]).Localize
         });
+        ExcessShardStatus = helper.Content.Statuses.RegisterStatus("ExessShards", new StatusConfiguration
+        {
+            Definition = new StatusDef
+            {
+                isGood = true,
+                affectedByTimestop = false,
+                color = DB.statuses[Status.shard].color,
+                icon = StableSpr.icons_shard
+            },
+            Name = AnyLocalizations.Bind(["status", "ExcessShard", "name"]).Localize,
+            Description = AnyLocalizations.Bind(["status", "ExcessShard", "desc"]).Localize
+        });
 
         /*
          * Managers are typically made to register themselves when constructed.
@@ -450,6 +468,7 @@ internal class ModEntry : SimpleMod
         SprEFLavailable = RegisterSprite(package, "assets/Artifact/ExternalFuelSourceAvailable.png").Sprite;
         SprEFLdepleted = RegisterSprite(package, "assets/Artifact/ExternalFuelSourceDepleted.png").Sprite;
         SprThurstDepleted = RegisterSprite(package, "assets/Artifact/ThrustThurstersDepleted.png").Sprite;
+        SprHullHarvestDepleted = RegisterSprite(package, "assets/Artifact/HullHarvesterDepleted.png").Sprite;
         /*
          * All the IRegisterable types placed into the static lists at the start of the class are initialized here.
          * This snippet invokes all of them, allowing them to register themselves with the package and helper.
@@ -461,6 +480,8 @@ internal class ModEntry : SimpleMod
         //SashaSportingSession.Apply(Harmony);
         WarpPrototypeHelper.Apply(Harmony);
         ThrustMaster.Apply(Harmony);
+        HeatpumpLubricator.Apply(Harmony);
+        ShardStorageUnlimiter.Apply(Harmony);
     }
 
     /*

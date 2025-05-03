@@ -24,6 +24,11 @@ public class ThrustThursters : Artifact
         Depleted = false;
     }
 
+    public override void OnCombatEnd(State state)
+    {
+        Depleted = false;
+    }
+
     public override void AfterPlayerStatusAction(State state, Combat combat, Status status, AStatusMode mode, int statusAmount)
     {
         if(!Depleted && status == Status.evade && mode == AStatusMode.Add && statusAmount > 0)

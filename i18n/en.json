@@ -14,14 +14,24 @@
     "status": {
         "Tarnish": {
             "name": "Tarnish",
-            "desc": "Take double normal damage and reduce <c=status>CORRODE</c> by 1 per hit. <c=downside>Decreases by 1 at start of turn.</c>"
+            "desc": "Take double normal damage when hit. Convert any <c=status>CORRODE</c> into <c=status>TARNISH</c>. <c=downside>Decreases by 1 at start of turn.</c>"
         },
         "SnekTunezStat": {
             "name": "???",
             "desc": "Gives either <c=energy>ENERGY NEXT TURN</c>, <c=damage>OVERDRIVE</c>, <c=healing>DRAW NEXT TURN</c>, or <c=status>EVADE</c>."
+        },
+        "ExcessShard": {
+            "name": "Excess Shard",
+            "desc": "You have excess <c=status>SHARD</c>!"
         }
     },
     "action": {
+    },
+    "midrow": {
+        "bigCorrode": {
+            "name": "SUPER ACID MISSILE",
+            "desc": "This missile is going to inflict <c=damage>2</c> <c=corrode>CORRODE</c>."
+        }
     },
     "artifact": {
         "Common": {
@@ -31,7 +41,7 @@
             },
             "ByproductProcessor": {
                 "name": "BYPRODUCT PROCESSOR",
-                "desc": "If you end your turn with more than 0 <c=energy>ENERGY</c> and <c=status>CORRODE</c>, reduce <c=status>CORRODE</c> by 1 and gain 1 <c=status>EVADE</c>.\n<c=downside><c=status>CORRODE</c> will still trigger before removal.</c>"
+                "desc": "If you end your turn with more than 0 <c=status>CORRODE</c>, reduce <c=status>CORRODE</c> by 1 and gain 1 <c=status>EVADE</c>.\n<c=downside><c=status>CORRODE</c> will still trigger before removal.</c>"
             },
             "TarnishedSyringe": {
                 "name": "TARNISHED SYRINGE",
@@ -75,7 +85,7 @@
             },
             "LubricatedHeatpump": {
                 "name": "LUBRICATED HEATPUMP",
-                "desc": "+1 Overheat limit. Instead of overheating, gain 1 <c=status>CORRODE</c>."
+                "desc": "Increases your ship's <c=downside>overheat</c> threshold by 1. Instead of <c=downside>overheating</c>, gain 1 <c=status>CORRODE</c>."
             },
             "AutododgeExpress": {
                 "name": "AUTODODGE EXPRESS",
@@ -87,11 +97,15 @@
             },
             "UnprotectedStorage": {
                 "name": "UNPROTECTED SHARD STORAGE",
-                "desc": "You can gain shards beyond the limit.\n<c=downside>Convert excess<c=status>SHARD</c> into <c=status>TARNISH</c> at the end of turn."
+                "desc": "You can gain <c=status>SHARD</c> beyond the capacity (up to 5 <c=status>SHARD</c> gain at a time).\n<c=downside>Take blockable damage equal to excess <c=status>SHARD</c> at end of turn</c>."
             },
             "PerfectedProtection": {
                 "name": "PERFECTED PROTECTION",
                 "desc": "Add 1 <c=card>Perfect Shield</c> to your deck."
+            },
+            "HullHarvester": {
+                "name": "HULL HARVESTER",
+                "desc": "Each turn, the 5th time you hit the enemy <c=hull>heals</c> you for 1"
             }
         },
         "Boss": {

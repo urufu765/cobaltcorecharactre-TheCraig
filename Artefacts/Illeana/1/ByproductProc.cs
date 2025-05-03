@@ -10,7 +10,7 @@ public class ByproductProcessor : Artifact
 {
     public override void OnTurnEnd(State state, Combat combat)
     {
-        if (combat.energy > 0 && state.ship.Get(Status.corrode) > 0)
+        if (state.ship.Get(Status.corrode) > 0)
         {
             combat.QueueImmediate([
             new AStatus
@@ -35,7 +35,7 @@ public class ByproductProcessor : Artifact
     {
         return
         [
-            new TTGlossary("status.corrode", ["-1"]),
+            new TTGlossary("status.corrode", ["1"]),
             new TTGlossary("status.evade", ["1"])
         ];
     }

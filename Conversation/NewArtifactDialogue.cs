@@ -447,6 +447,7 @@ internal class NewArtifactDialogue : IRegisterable
                 oncePerRun = true,
                 allPresent = [ AmIlleana ],
                 hasArtifacts = [ "LightenedLoad".F() ],
+                lastTurnPlayerStatuses = [ Tarnished ],
                 dialogue = [
                     new(AmIlleana, "explain", "Good news is, we probably maybe won't get hit.")
                 ]
@@ -456,6 +457,7 @@ internal class NewArtifactDialogue : IRegisterable
                 oncePerRun = true,
                 allPresent = [ AmIlleana ],
                 hasArtifacts = [ "LightenedLoad".F() ],
+                lastTurnPlayerStatuses = [ Tarnished ],
                 dialogue = [
                     new(AmIlleana, "intense", "Bad news is, if we do get hit, it's gonna hurt a lot.")
                 ]
