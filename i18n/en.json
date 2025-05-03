@@ -49,7 +49,7 @@
             },
             "CausticArmor": {
                 "name": "CAUSTIC ARMOR",
-                "desc": "At the start of every turn, gain <c=status>TEMP SHIELD</c> equal to double your <c=status>CORRODE</c>."
+                "desc": "At the start of every turn, gain <c=status>TEMP SHIELD</c> equal to your <c=status>TARNISH</c> or double your <c=status>CORRODE</c>."
             },
             "ExperimentalLubricant": {
                 "name": "EXPERIMENTAL LUBRICANT",
@@ -77,7 +77,7 @@
             },
             "AirlockSnek": {
                 "name": "AIRLOCKED SNEK",
-                "desc": "Start combat with 3 <c=status>OVERDRIVE</c> and 2 <c=status>MISSING ILLEANA</c>.\n<c=trash>\"Peri is sick and tired of Illeana\"</c>"
+                "desc": "Start combat with 3 <c=status>OVERDRIVE</c> and 2 <c=status>MISSING ILLEANA</c>.\n<c=trash>\"Peri is sick and tired of Illeana's schenanigan.\"</c>"
             },
             "SuperInjection": {
                 "name": "SUPER INJECTION",
@@ -105,7 +105,11 @@
             },
             "HullHarvester": {
                 "name": "HULL HARVESTER",
-                "desc": "Each turn, the 5th time you hit the enemy <c=hull>heals</c> you for 1"
+                "desc": "Each turn, the 5th time you hit the enemy <c=hull>heal</c> for 1."
+            },
+            "Competition": {
+                "name": "COMPETITION",
+                "desc": "Once per turn, When you play an <c=e6e164>EDDIE</c> card, the next <c=45e260>ILLEANA</c> card plays <c=keyword>twice</c>;\nWhen you play an <c=45e260>ILLEANA</c> card, the next <c=e6e164>EDDIE</c> card fully refunds <c=energy>ENERGY</c>.\n<c=downside>Whoever's card you play first goes <c=status>MISSING</c> for 2.</c>"
             }
         },
         "Boss": {

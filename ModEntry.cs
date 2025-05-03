@@ -121,6 +121,7 @@ internal class ModEntry : SimpleMod
         typeof(LubricatedHeatpump),  // Drake
         typeof(UnprotectedStorage),  // Books
         typeof(HullHarvester),  // Weth
+        typeof(Competition),  // Eddie
     ];
     private static List<Type> IlleanaDialogueTypes = [
         typeof(NewCombatDialogue),
@@ -212,6 +213,9 @@ internal class ModEntry : SimpleMod
     public Spr SprEFLdepleted {get; private set;}
     public Spr SprThurstDepleted {get; private set;}
     public Spr SprHullHarvestDepleted {get; private set;}
+    public Spr SprCompetitionDepleted {get; private set;}
+    public Spr SprCompetitionIlleana {get; private set;}
+    public Spr SprCompetitionEddie {get; private set;}
 
     public LocalDB localDB { get; set; } = null!;
 
@@ -248,7 +252,14 @@ internal class ModEntry : SimpleMod
                             }
                             else
                             {
-                                DuoArtifactsApi.RegisterDuoArtifact(type, [IlleanaDeck!.Deck, helper.Content.Decks.LookupByUniqueName(dam.duoModDeck)!.Deck]);
+                                try
+                                {
+                                    DuoArtifactsApi.RegisterDuoArtifact(type, [IlleanaDeck!.Deck, helper.Content.Decks.LookupByUniqueName(dam.duoModDeck)!.Deck]);
+                                }
+                                catch (Exception err)
+                                {
+                                    Logger.LogError(err, "FUCK couldn't register {DuoModDeck}", dam.duoModDeck);
+                                }
                             }
                         }
                     }
@@ -469,6 +480,10 @@ internal class ModEntry : SimpleMod
         SprEFLdepleted = RegisterSprite(package, "assets/Artifact/ExternalFuelSourceDepleted.png").Sprite;
         SprThurstDepleted = RegisterSprite(package, "assets/Artifact/ThrustThurstersDepleted.png").Sprite;
         SprHullHarvestDepleted = RegisterSprite(package, "assets/Artifact/HullHarvesterDepleted.png").Sprite;
+        SprCompetitionIlleana = RegisterSprite(package, "assets/Artifact/CompetitionIlleana.png").Sprite;
+        SprCompetitionEddie = RegisterSprite(package, "assets/Artifact/CompetitionEddie.png").Sprite;
+        SprCompetitionDepleted = RegisterSprite(package, "assets/Artifact/CompetitionDepleted.png").Sprite;
+        
         /*
          * All the IRegisterable types placed into the static lists at the start of the class are initialized here.
          * This snippet invokes all of them, allowing them to register themselves with the package and helper.

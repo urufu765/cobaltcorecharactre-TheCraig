@@ -25,11 +25,23 @@ public class CausticArmor : Artifact
                 artifactPulse = Key()
             });
         }
+        if (state.ship.Get(ModEntry.Instance.TarnishStatus.Status) > 0)
+        {
+            combat.QueueImmediate(new AStatus
+            {
+                status = Status.tempShield,
+                statusAmount = state.ship.Get(ModEntry.Instance.TarnishStatus.Status),
+                targetPlayer = true,
+                artifactPulse = Key()
+            });
+        }
     }
 
     public override List<Tooltip>? GetExtraTooltips()
     {
-        return [new TTGlossary("status.tempShield", ["1"]), new TTGlossary("status.corrode", ["1"])];
+        List<Tooltip> l = StatusMeta.GetTooltips(ModEntry.Instance.TarnishStatus.Status, 1);
+        l.Insert(0, new TTGlossary("status.corrode", ["1"]));
+        l.Insert(0, new TTGlossary("status.tempShieldAlt"));
+        return l;
     }
-
 }
