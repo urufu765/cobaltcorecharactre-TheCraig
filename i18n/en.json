@@ -105,11 +105,11 @@
             },
             "HullHarvester": {
                 "name": "HULL HARVESTER",
-                "desc": "Each turn, the 5th time you hit the enemy <c=hull>heal</c> for 1."
+                "desc": "The 5th time you hit the enemy ship each turn, <c=hull>heal</c> 1."
             },
             "Competition": {
                 "name": "COMPETITION",
-                "desc": "Once per turn, When you play an <c=e6e164>EDDIE</c> card, the next <c=45e260>ILLEANA</c> card plays <c=keyword>twice</c>;\nWhen you play an <c=45e260>ILLEANA</c> card, the next <c=e6e164>EDDIE</c> card fully refunds <c=energy>ENERGY</c>.\n<c=downside>Whoever's card you play first goes <c=status>MISSING</c> for 2.</c>"
+                "desc": "Once per turn, When you play an <c=e6e164>EDDIE</c> card, the next <c=45e260>ILLEANA</c> card plays <c=keyword>twice</c>.\nWhen you play an <c=45e260>ILLEANA</c> card, the next <c=e6e164>EDDIE</c> card fully refunds <c=energy>ENERGY</c>.\n<c=downside>Whoever's card you play first goes <c=status>MISSING</c> for 2.</c>"
             }
         },
         "Boss": {
