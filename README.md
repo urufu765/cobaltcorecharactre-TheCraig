@@ -31,6 +31,7 @@ A corrosion engineer who works with corrosion to help keep the ship at tip top c
     * Makeshift Hull: Removed.
     * NEW Improvised Timing: Cost = max hull
     * NEW Solution: like Cure, but Takes Tarnish, gives Heal
+  * **dev.e1**: Tarnish only converts corrode when being added. New corrode with existing tarnish does nothing.
   * *ext.a0*: More dialogue! (Perfect shield interaction etc.)
   * *ext.b0*: Full body sprites + finish the screams + Craig sprites
   * *ext.c0*: Memory

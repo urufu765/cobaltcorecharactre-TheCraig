@@ -57,15 +57,15 @@ public class Tarnishing : IKokoroApi.IV2.IStatusLogicApi.IHook
 
     public int ModifyStatusChange(IKokoroApi.IV2.IStatusLogicApi.IHook.IModifyStatusChangeArgs args)
     {
-        // Convert new Corrode to Tarnish if Tarnish is present
-        if (args.Status == Status.corrode && args.NewAmount > 0 && args.Ship.Get(ModEntry.Instance.TarnishStatus.Status) > 0)
-        {
-            args.Ship.Add(ModEntry.Instance.TarnishStatus.Status, args.NewAmount);
-            return 0;
-        }
+        // // Convert new Corrode to Tarnish if Tarnish is present
+        // if (args.Status == Status.corrode && args.NewAmount > 0 && args.Ship.Get(ModEntry.Instance.TarnishStatus.Status) > 0)
+        // {
+        //     args.Ship.Add(ModEntry.Instance.TarnishStatus.Status, args.NewAmount);
+        //     return 0;
+        // }
 
         // Convert all Corrode to Tarnish when Tarnish is added
-        if (args.Status == ModEntry.Instance.TarnishStatus.Status && args.Ship.Get(Status.corrode) > 0)
+        if (args.Status == ModEntry.Instance.TarnishStatus.Status && args.NewAmount > 0 && args.Ship.Get(Status.corrode) > 0)
         {
             int result = args.Ship.Get(Status.corrode);
             args.Ship.Set(Status.corrode, 0);
