@@ -77,7 +77,7 @@
             },
             "AirlockSnek": {
                 "name": "AIRLOCKED SNEK",
-                "desc": "Start combat with 3 <c=status>OVERDRIVE</c> and 2 <c=status>MISSING ILLEANA</c>.\n<c=trash>\"Peri is sick and tired of Illeana's schenanigan.\"</c>"
+                "desc": "Start combat with 3 <c=status>OVERDRIVE</c> and 2 <c=status>MISSING ILLEANA</c>.\n<c=trash>\"Peri is sick and tired of Illeana's schenanigans.\"</c>"
             },
             "SuperInjection": {
                 "name": "SUPER INJECTION",

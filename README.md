@@ -17,7 +17,7 @@ A corrosion engineer who works with corrosion to help keep the ship at tip top c
   * **dev.b3**: Super Injection, Lubricated Heatpump, Unprotected Storage, Hull Harvester implemented and tarnish tooltip changed to match upcoming rework. Byproduct Processor no longer needs energy
   * **dev.c0**: Caustic Armor buff with the upcoming Tarnish rework, and implemented Competition
   * **dev.c1**: Duo sprites!
-  * *dev.c2*: Finished all duo sprites
+  * **dev.c2**: Finished all duo sprites and fixed Airlock description
   * *dev.d0*: Mini art and panic eyes art fix
   * *dev.e0*: New tarnish implementation
   * *dev.f0*: Card rework 3 (optimised for NEW Tarnish)
