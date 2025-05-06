@@ -47,7 +47,7 @@ public class TheCure : Card, IRegisterable
                     }
                 ).AsCardAction
             ],
-            Upgrade.A or Upgrade.None or _ => 
+            _ => 
             [
                 ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeCostAction(
                     ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeResourceCost(

@@ -38,7 +38,8 @@ public class BuildCure : Card, IRegisterable
                     card = new TheCure
                     {
                         upgrade = Upgrade.B,
-                        exhaustOverride = true
+                        exhaustOverride = true,
+                        exhaustOverrideIsPermanent = true
                     },
                     destination = CardDestination.Deck,
                     insertRandomly = true
@@ -57,13 +58,9 @@ public class BuildCure : Card, IRegisterable
             [
                 new AAddCard
                 {
-                    card = new TheCure
-                    {
-                        exhaustOverride = true
-                    },
+                    card = new TheCure(),
                     destination = CardDestination.Deck,
-                    insertRandomly = true,
-                    amount = 2,
+                    insertRandomly = true
                 },
                 new AAddCard
                 {
@@ -78,7 +75,8 @@ public class BuildCure : Card, IRegisterable
                 {
                     card = new TheCure
                     {
-                        exhaustOverride = true
+                        exhaustOverride = true,
+                        exhaustOverrideIsPermanent = true
                     },
                     destination = CardDestination.Deck,
                     insertRandomly = true,
@@ -98,7 +96,7 @@ public class BuildCure : Card, IRegisterable
     {
         return new CardData
         {
-            cost = 1,
+            cost = 0,
             description = ModEntry.Instance.Localizations.Localize(["card", "Common", "BuildACure", upgrade switch { Upgrade.A => "descA", Upgrade.B => "descB", _ => "desc" }]),
         };
     }

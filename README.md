@@ -20,7 +20,17 @@ A corrosion engineer who works with corrosion to help keep the ship at tip top c
   * **dev.c2**: Finished all duo sprites and fixed Airlock description
   * **dev.c3**: Mini art and panic(+blinkrapid, shocked) eyes art fix
   * **dev.d0**: New tarnish implementation
-  * *dev.e0*: Card rework 3 (optimised for NEW Tarnish)
+  * **dev.e0**: Card rework 3 (optimised for NEW Tarnish) & Tarnish cost implemented
+    * Autotomy: Corrode clear + Evade -> Corrode clear + Autododge & Blockable Hurt
+    * Build-A-Cure: Cost 1 -> 0, A gives 1 non-exhaust Cure instead of 2 exhaust Cure
+    * Find-A-Solution: Overhauled to give Tarnish more and give Solution instead of Cure.
+    * Part Swap: Ace and PS is given in different conditions and corrode cost adjusted
+    * Acidic Package: Removed.
+    * NEW Acid Backflow: Replaces Acidic Package by being reusable
+    * Immunity Shot: 1 Corrode -> 1 Tarnish
+    * Makeshift Hull: Removed.
+    * NEW Improvised Timing: Cost = max hull
+    * NEW Solution: like Cure, but Takes Tarnish, gives Heal
   * *ext.a0*: More dialogue! (Perfect shield interaction etc.)
   * *ext.b0*: Full body sprites + finish the screams + Craig sprites
   * *ext.c0*: Memory

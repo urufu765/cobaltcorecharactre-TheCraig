@@ -49,7 +49,7 @@ public class ImmunityShot : Card, IRegisterable
                 },
                 new AStatus
                 {
-                    status = Status.corrode,
+                    status = ModEntry.Instance.TarnishStatus.Status,
                     statusAmount = 1,
                     targetPlayer = true
                 }
@@ -77,7 +77,7 @@ public class ImmunityShot : Card, IRegisterable
                 },
                 new AStatus
                 {
-                    status = Status.corrode,
+                    status = ModEntry.Instance.TarnishStatus.Status,
                     statusAmount = 1,
                     targetPlayer = true
                 }
@@ -98,7 +98,7 @@ public class ImmunityShot : Card, IRegisterable
                 },
                 new AStatus
                 {
-                    status = Status.corrode,
+                    status = ModEntry.Instance.TarnishStatus.Status,
                     statusAmount = 1,
                     targetPlayer = true
                 }

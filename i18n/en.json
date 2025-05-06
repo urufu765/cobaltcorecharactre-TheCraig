@@ -110,6 +110,10 @@
             "Competition": {
                 "name": "COMPETITION",
                 "desc": "Once per turn, When you play an <c=e6e164>EDDIE</c> card, the next <c=45e260>ILLEANA</c> card plays <c=keyword>twice</c>.\nWhen you play an <c=45e260>ILLEANA</c> card, the next <c=e6e164>EDDIE</c> card fully refunds <c=energy>ENERGY</c>.\n<c=downside>Whoever's card you play first goes <c=status>MISSING</c> for 2.</c>"
+            },
+            "BountifulBloodBank": {
+                "name": "BOUNTIFUL BLOOD BANK",
+                "desc": "At the start of combat, add 1 <c=card>Credit Card</c> to your hand.\nUse the card to deposit with (25/50/100)% interest depending on combat type.\n<c=keyword>You cannot die from playing <c=card>Credit Card</c>.</c>\nAt the end of combat, withdraw all as <c=healing>max hull</c>."
             }
         },
         "Boss": {
@@ -163,14 +167,14 @@
             "BuildACure": {
                 "name": "Build-A-Cure",
                 "descB": "Add an <c=cardtrait>exhaustible</c> <c=card>Cure B</c> and a <c=card>Failure B</c> to your draw pile.",
-                "descA": "Add 2 <c=cardtrait>exhaustible</c> <c=card>Cure</c> and a <c=card>Failure</c> to your draw pile.",
+                "descA": "Add a <c=card>Cure</c> and a <c=card>Failure</c> to your draw pile.",
                 "desc": "Add an <c=cardtrait>exhaustible</c> <c=card>Cure</c> and a <c=card>Failure</c> to your draw pile."
             },
             "FindACure": {
-                "name": "Find-A-Cure",
-                "descB": "Add a <c=card>Cure B</c> and an <c=card>Accident B</c> to your draw pile.",
-                "descA": "Add 2 <c=card>Cure</c> and an <c=card>Accident</c> to your draw pile.",
-                "desc": "Add a <c=card>Cure</c> and an <c=card>Accident</c> to your draw pile."
+                "name": "Find-A-Solution",
+                "descB": "Add a <c=card>Solution B</c> and 2 <c=card>Accident</c> to your draw pile.",
+                "descA": "Add 2 <c=cardtrait>exhaustible</c> <c=card>Solution</c> and an <c=card>Accident A</c> to your draw pile.",
+                "desc": "Add an <c=cardtrait>exhaustible</c> <c=card>Solution</c> and an <c=card>Accident</c> to your draw pile."
             },
             "Cleanse": {
                 "name": "Cleanse"
@@ -221,6 +225,9 @@
             },
             "AcidicPackage": {
                 "name": "Acidic Package"
+            },
+            "AcidBackflow": {
+                "name": "Acid Backflow"
             }
         },
         "Rare": {
@@ -238,12 +245,27 @@
             },
             "WeaponisedPatchkit": {
                 "name": "Weaponised Patchkit"
+            },
+            "ImprovisedHull": {
+                "name": "Improvised Hull",
+                "desc": "<c=downside>Lose all but 1 hull.</c>\nConvert lost hull to <c=healing>max hull</c>.",
+                "descA": "<c=downside>Lose all but 1 hull.</c>\nConvert lost hull to <c=status>PERFECT SHIELD</c>(max 3) and <c=healing>max hull</c>.",
+                "descB": "On draw, if possible, <c=downside>lose 3 hull</c> and store 2.\nOn play, convert stored hull({0}) to <c=healing>max hull</c>."
+            },
+            "ImprovisedTiming": {
+                "name": "Improvised Timing",
+                "desc": "-1 Cost on draw.\nX = Cost\n<c=healing>X Max Hull</c>.\n<c=downside>X <c=status>Corrode</c>.</c>",
+                "descA": "-1 Cost on draw.\nX = Cost\n<c=healing>X Max Hull</c>.\n<c=downside>+1 <c=status>Corrode</c>.</c>",
+                "descB": "+1 Cost on draw.\nX = Cost\n<c=healing>X Max Hull</c>.\n<c=downside>X <c=status>Tarnish</c>.</c>"
             }
         },
         "Token": {
             "TheCure": {
                 "name": "Cure",
                 "altName": "DA CUre"
+            },
+            "TheSolution": {
+                "name": "Solution"
             },
             "TheFailure": {
                 "name": "Failure",
@@ -252,8 +274,8 @@
             },
             "TheAccident": {
                 "name": "Accident",
-                "descB": "<c=downside>+1 <c=status>corrode</c> to self, and foe on draw.</c>\n1 <c=status>tarnish</c> to foe when played.",
-                "desc": "<c=downside>+1 <c=status>corrode</c> to self on draw.</c>\n1 <c=status>tarnish</c> to foe when played."
+                "descB": "<c=downside>+1 <c=status>tarnish</c> to self, and foe on draw.</c>\n1 <c=status>tarnish</c> to foe when played.",
+                "desc": "<c=downside>+1 <c=status>tarnish</c> to self on draw.</c>\n1 <c=status>tarnish</c> to foe when played."
             },
             "SnekTunezChill": {
                 "name": "SnekTunez: Chill"
@@ -284,6 +306,12 @@
             "PerfectShield": {
                 "name": "Perfect Shield",
                 "desc": "X = your missing shield.\n<c=status>X Shield.\nX Temp Shield.</c>"
+            },
+            "BloodCard": {
+                "name": "Credit Card",
+                "desc": "Deposit ({0}) hull and max hull with {1}% interest.\n+1 when you flip the card.",
+                "descA": "Deposit ({0}) hull and max hull with 50% interest.\n+1 when you flip the card (Max: All but 1 max hull).",
+                "descB": "Deposit ({0}) hull and max hull with 100% interest.\n+1 when you flip the card (Max: All but 1 max hull)."
             }
         }
     }

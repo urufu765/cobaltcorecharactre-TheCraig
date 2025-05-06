@@ -35,7 +35,7 @@ public class FindCure : Card, IRegisterable
             [
                 new AAddCard
                 {
-                    card = new TheCure
+                    card = new TheSolution
                     {
                         upgrade = Upgrade.B
                     },
@@ -44,26 +44,29 @@ public class FindCure : Card, IRegisterable
                 },
                 new AAddCard
                 {
-                    card = new TheAccident
-                    {
-                        upgrade = Upgrade.B
-                    },
+                    card = new TheAccident(),
                     destination = CardDestination.Deck,
-                    insertRandomly = true
+                    insertRandomly = true,
+                    amount = 2
                 },
             ],
             Upgrade.A =>
             [
                 new AAddCard
                 {
-                    card = new TheCure(),
+                    card = new TheSolution{
+                        exhaustOverride = true,
+                        exhaustOverrideIsPermanent = true
+                    },
                     destination = CardDestination.Deck,
                     insertRandomly = true,
                     amount = 2
                 },
                 new AAddCard
                 {
-                    card = new TheAccident(),
+                    card = new TheAccident{
+                        upgrade = Upgrade.A
+                    },
                     destination = CardDestination.Deck,
                     insertRandomly = true
                 },
@@ -72,7 +75,10 @@ public class FindCure : Card, IRegisterable
             [
                 new AAddCard
                 {
-                    card = new TheCure(),
+                    card = new TheSolution{
+                        exhaustOverride = true,
+                        exhaustOverrideIsPermanent = true
+                    },
                     destination = CardDestination.Deck,
                     insertRandomly = true,
                 },
@@ -92,7 +98,6 @@ public class FindCure : Card, IRegisterable
         return new CardData
         {
             cost = 0,
-            exhaust = true,
             description = ModEntry.Instance.Localizations.Localize(["card", "Common", "FindACure", upgrade switch { Upgrade.A => "descA", Upgrade.B => "descB", _ => "desc" }]),
             artTint = "a43fff"
         };

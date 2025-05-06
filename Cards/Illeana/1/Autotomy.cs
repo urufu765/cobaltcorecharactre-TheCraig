@@ -29,61 +29,59 @@ public class Autotomy : Card, IRegisterable
 
     public override List<CardAction> GetActions(State s, Combat c)
     {
+        int x = s.ship.Get(Status.corrode);
+        int y = s.ship.Get(ModEntry.Instance.TarnishStatus.Status);
         return upgrade switch
         {
-            Upgrade.A => 
-            [
-                new AStatus
-                {
-                    status = Status.corrode,
-                    statusAmount = 0,
-                    mode = AStatusMode.Set,
-                    targetPlayer = true,
-                    dialogueSelector = ".autotomySnek"
-                },
-                new AHurt
-                {
-                    hurtAmount = 1,
-                    targetPlayer = true
-                },
-                new AStatus
-                {
-                    status = Status.evade,
-                    statusAmount = 5,
-                    targetPlayer = true
-                },
-                new AStatus
-                {
-                    status = Status.autododgeRight,
-                    statusAmount = 2,
-                    targetPlayer = true
-                }
-            ],
             Upgrade.B => 
             [
-                new AStatus
+                new AVariableHint
                 {
-                    status = Status.corrode,
-                    statusAmount = 0,
-                    mode = AStatusMode.Set,
-                    targetPlayer = true,
-                    dialogueSelector = ".autotomySnek"
+                    status = ModEntry.Instance.TarnishStatus.Status
                 },
                 new AHurt
                 {
-                    hurtAmount = 2,
+                    hurtAmount = y,
+                    xHint = 1,
                     hurtShieldsFirst = true,
                     targetPlayer = true
                 },
                 new AStatus
                 {
-                    status = Status.evade,
-                    statusAmount = 5,
+                    status = Status.autododgeRight,
+                    statusAmount = y,
+                    xHint = 1,
                     targetPlayer = true
+                },
+                new AStatus
+                {
+                    status = ModEntry.Instance.TarnishStatus.Status,
+                    statusAmount = 0,
+                    mode = AStatusMode.Set,
+                    targetPlayer = true,
+                    dialogueSelector = ".autotomySnek"
                 }
             ],
             _ => 
-            [                
+            [
+                new AVariableHint
+                {
+                    status = Status.corrode
+                },
+                new AHurt
+                {
+                    hurtAmount = x,
+                    xHint = 1,
+                    hurtShieldsFirst = true,
+                    targetPlayer = true
+                },
+                new AStatus
+                {
+                    status = Status.autododgeRight,
+                    statusAmount = x,
+                    xHint = 1,
+                    targetPlayer = true
+                },
                 new AStatus
                 {
                     status = Status.corrode,
@@ -91,17 +89,6 @@ public class Autotomy : Card, IRegisterable
                     mode = AStatusMode.Set,
                     targetPlayer = true,
                     dialogueSelector = ".autotomySnek"
-                },
-                new AHurt
-                {
-                    hurtAmount = 1,
-                    targetPlayer = true
-                },
-                new AStatus
-                {
-                    status = Status.evade,
-                    statusAmount = 5,
-                    targetPlayer = true
                 }
             ],
         };
@@ -112,10 +99,13 @@ public class Autotomy : Card, IRegisterable
     {
         return upgrade switch
         {
+            Upgrade.A => new CardData
+            {
+                cost = 1
+            },
             _ => new CardData
             {
-                cost = 2,
-                exhaust = true,
+                cost = 2
             }
         };
     }

@@ -6,11 +6,10 @@ using Nickel;
 namespace Illeana.Cards;
 
 /// <summary>
-/// Shoot the corrode out of your ship!
+/// A card that's obtained from Build-A-Cure or Find-A-Cure, reduces the corrosion stack of player when played
 /// </summary>
-public class AcidicPackage : Card, IRegisterable
+public class TheSolution : Card, IRegisterable
 {
-    private static Spr altSprite;
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
         helper.Content.Cards.RegisterCard(new CardConfiguration
@@ -19,15 +18,13 @@ public class AcidicPackage : Card, IRegisterable
             Meta = new CardMeta
             {
                 deck = ModEntry.Instance.IlleanaDeck.Deck,
-                rarity = Rarity.uncommon,
-                upgradesTo = [Upgrade.A, Upgrade.B],
+                rarity = Rarity.common,
                 dontOffer = true,
-                unreleased = true
+                upgradesTo = [Upgrade.A, Upgrade.B]
             },
-            Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "Uncommon", "AcidicPackage", "name"]).Localize,
-            Art = ModEntry.RegisterSprite(package, "assets/Card/Illeana/2/AcidicPackage.png").Sprite
+            Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "Token", "TheSolution", "name"]).Localize,
+            Art = ModEntry.RegisterSprite(package, "assets/Card/Illeana/0/TheCure.png").Sprite
         });
-        altSprite = ModEntry.RegisterSprite(package, "assets/Card/Illeana/2/AcidicPackageAlt.png").Sprite;
     }
 
 
@@ -35,18 +32,17 @@ public class AcidicPackage : Card, IRegisterable
     {
         return upgrade switch
         {
-            Upgrade.B => 
+            Upgrade.A => 
             [
                 ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeCostAction(
                     ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeResourceCost(
-                        ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeStatusResource(Status.corrode),
+                        ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeStatusResource(ModEntry.Instance.TarnishStatus.Status),
                         1
                     ),
-                    new AStatus
+                    new AHeal
                     {
-                        status = Status.corrode,
-                        statusAmount = 1,
-                        targetPlayer = false
+                        healAmount = 2,
+                        targetPlayer = true
                     }
                 ).AsCardAction
             ],
@@ -54,16 +50,13 @@ public class AcidicPackage : Card, IRegisterable
             [
                 ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeCostAction(
                     ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeResourceCost(
-                        ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeStatusResource(Status.corrode),
+                        ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeStatusResource(ModEntry.Instance.TarnishStatus.Status),
                         1
                     ),
-                    new ASpawn
+                    new AHeal
                     {
-                        thing = new Missile
-                        {
-                            yAnimation = 0.0,
-                            missileType = MissileType.corrode
-                        }
+                        healAmount = 1,
+                        targetPlayer = true,
                     }
                 ).AsCardAction
             ],
@@ -77,19 +70,19 @@ public class AcidicPackage : Card, IRegisterable
         {
             Upgrade.B => new CardData
             {
-                cost = 1,
-                exhaust = true,
-                art = altSprite
-            },
-            Upgrade.A => new CardData
-            {
                 cost = 0,
-                exhaust = true
+                temporary = true,
+                retain = true,
+                recycle = true,
+                artTint = "a43fff"
+
             },
             _ => new CardData
             {
-                cost = 1,
-                exhaust = true
+                cost = 0,
+                temporary = true,
+                retain = true,
+                artTint = "a43fff"
             }
         };
     }

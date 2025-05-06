@@ -51,7 +51,7 @@ public class TheAccident : Card, IRegisterable
             new AStatus
             {
                 targetPlayer = true,
-                status = Status.corrode,
+                status = ModEntry.Instance.TarnishStatus.Status,
                 statusAmount = 1
             }
         );
@@ -61,7 +61,7 @@ public class TheAccident : Card, IRegisterable
                 new AStatus
                 {
                     targetPlayer = false,
-                    status = Status.corrode,
+                    status = ModEntry.Instance.TarnishStatus.Status,
                     statusAmount = 1
                 }
             );

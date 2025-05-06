@@ -30,20 +30,29 @@ public class Exposure : Card, IRegisterable
 
     public override List<CardAction> GetActions(State s, Combat c)
     {
+        int x = c.otherShip.Get(Status.shield);
+        x += c.otherShip.Get(Status.tempShield);
         return upgrade switch
         {
             Upgrade.B => 
             [
-                new AStatus
-                {
-                    status = Status.corrode,
-                    targetPlayer = false,
-                    statusAmount = 1
-                },
+                ModEntry.Instance.KokoroApi.V2.VariableHintTargetPlayerTargetPlayer.MakeVariableHint(
+                    new AVariableHint
+                    {
+                        status = Status.shield
+                    }
+                ).SetTargetPlayer(false).AsCardAction,
                 new AStatus
                 {
                     status = ModEntry.Instance.TarnishStatus.Status,
                     targetPlayer = false,
+                    statusAmount = x,
+                    xHint = 1
+                },
+                new AStatus
+                {
+                    status = ModEntry.Instance.TarnishStatus.Status,
+                    targetPlayer = true,
                     statusAmount = 1
                 }
             ],
@@ -53,21 +62,27 @@ public class Exposure : Card, IRegisterable
                 {
                     status = ModEntry.Instance.TarnishStatus.Status,
                     targetPlayer = false,
-                    statusAmount = 1
+                    statusAmount = 2
                 },
+                new AStatus
+                {
+                    status = ModEntry.Instance.TarnishStatus.Status,
+                    targetPlayer = true,
+                    statusAmount = 1
+                }
             ],
             _ => 
             [
                 new AStatus
                 {
                     status = ModEntry.Instance.TarnishStatus.Status,
-                    targetPlayer = true,
+                    targetPlayer = false,
                     statusAmount = 1
                 },
                 new AStatus
                 {
                     status = ModEntry.Instance.TarnishStatus.Status,
-                    targetPlayer = false,
+                    targetPlayer = true,
                     statusAmount = 1
                 }
             ],

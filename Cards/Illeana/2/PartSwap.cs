@@ -36,27 +36,6 @@ public class PartSwap : Card, IRegisterable
         {
             Upgrade.B => 
             [
-                new AStatus
-                {
-                    status = Status.tempShield,
-                    statusAmount = 3,
-                    targetPlayer = true
-                },
-                ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeCostAction(
-                    ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeResourceCost(
-                        ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeStatusResource(Status.corrode),
-                        2
-                    ),
-                    new AStatus
-                    {
-                        status = Status.ace,
-                        statusAmount = 1,
-                        targetPlayer = true
-                    }
-                ).AsCardAction
-            ],
-            Upgrade.A => 
-            [
                 ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeCostAction(
                     ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeResourceCost(
                         ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeStatusResource(Status.corrode),
@@ -64,8 +43,8 @@ public class PartSwap : Card, IRegisterable
                     ),
                     new AStatus
                     {
-                        status = Status.perfectShield,
-                        statusAmount = 1,
+                        status = Status.tempShield,
+                        statusAmount = 3,
                         targetPlayer = true
                     }
                 ).AsCardAction,
@@ -80,30 +59,42 @@ public class PartSwap : Card, IRegisterable
                         statusAmount = 1,
                         targetPlayer = true
                     }
-                ).AsCardAction
+                ).AsCardAction,
+                ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeCostAction(
+                    ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeResourceCost(
+                        ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeStatusResource(ModEntry.Instance.TarnishStatus.Status),
+                        2
+                    ),
+                    new AStatus
+                    {
+                        status = Status.perfectShield,
+                        statusAmount = 1,
+                        targetPlayer = true
+                    }
+                ).AsCardAction,
             ],
             _ => 
             [
                 ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeCostAction(
                     ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeResourceCost(
                         ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeStatusResource(Status.corrode),
-                        1
+                        2
                     ),
                     new AStatus
                     {
-                        status = Status.perfectShield,
+                        status = Status.ace,
                         statusAmount = 1,
                         targetPlayer = true
                     }
                 ).AsCardAction,
                 ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeCostAction(
                     ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeResourceCost(
-                        ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeStatusResource(Status.corrode),
+                        ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeStatusResource(ModEntry.Instance.TarnishStatus.Status),
                         2
                     ),
                     new AStatus
                     {
-                        status = Status.ace,
+                        status = Status.perfectShield,
                         statusAmount = 1,
                         targetPlayer = true
                     }
@@ -119,9 +110,15 @@ public class PartSwap : Card, IRegisterable
         {
             Upgrade.B => new CardData
             {
-                cost = 1,
+                cost = 2,
                 artTint = "f5e030",
-                art = altSprite
+                art = altSprite,
+                retain = true
+            },
+            Upgrade.A => new CardData
+            {
+                cost = 1,
+                artTint = "f5e030"
             },
             _ => new CardData
             {

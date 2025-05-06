@@ -19,7 +19,9 @@ public class MakeshiftHull : Card, IRegisterable
             {
                 deck = ModEntry.Instance.IlleanaDeck.Deck,
                 rarity = Rarity.rare,
-                upgradesTo = [Upgrade.A, Upgrade.B]
+                upgradesTo = [Upgrade.A, Upgrade.B],
+                unreleased = true,
+                dontOffer = true
             },
             Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "Rare", "MakeshiftHull", "name"]).Localize,
             Art = ModEntry.RegisterSprite(package, "assets/Card/Illeana/2/MakeshiftHull.png").Sprite

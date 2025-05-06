@@ -8,9 +8,8 @@ namespace Illeana.Cards;
 /// <summary>
 /// Shoot the corrode out of your ship!
 /// </summary>
-public class AcidicPackage : Card, IRegisterable
+public class AcidBackflow : Card, IRegisterable
 {
-    private static Spr altSprite;
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
         helper.Content.Cards.RegisterCard(new CardConfiguration
@@ -21,13 +20,10 @@ public class AcidicPackage : Card, IRegisterable
                 deck = ModEntry.Instance.IlleanaDeck.Deck,
                 rarity = Rarity.uncommon,
                 upgradesTo = [Upgrade.A, Upgrade.B],
-                dontOffer = true,
-                unreleased = true
             },
-            Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "Uncommon", "AcidicPackage", "name"]).Localize,
-            Art = ModEntry.RegisterSprite(package, "assets/Card/Illeana/2/AcidicPackage.png").Sprite
+            Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "Uncommon", "AcidBackflow", "name"]).Localize,
+            Art = ModEntry.RegisterSprite(package, "assets/Card/Illeana/2/AcidBackflow.png").Sprite
         });
-        altSprite = ModEntry.RegisterSprite(package, "assets/Card/Illeana/2/AcidicPackageAlt.png").Sprite;
     }
 
 
@@ -39,16 +35,47 @@ public class AcidicPackage : Card, IRegisterable
             [
                 ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeCostAction(
                     ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeResourceCost(
+                        ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeStatusResource(ModEntry.Instance.TarnishStatus.Status),
+                        2
+                    ),
+                    new ASpawn
+                    {
+                        thing = new Missile
+                        {
+                            yAnimation = 0.0,
+                            missileType = MissileType.corrode
+                        }
+                    }
+                ).AsCardAction,
+                new AStatus
+                {
+                    status = ModEntry.Instance.TarnishStatus.Status,
+                    statusAmount = 2,
+                    targetPlayer = true,
+                }
+            ],
+            Upgrade.A => 
+            [
+                ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeCostAction(
+                    ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeResourceCost(
                         ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeStatusResource(Status.corrode),
                         1
                     ),
-                    new AStatus
+                    new ASpawn
                     {
-                        status = Status.corrode,
-                        statusAmount = 1,
-                        targetPlayer = false
+                        thing = new Missile
+                        {
+                            yAnimation = 0.0,
+                            missileType = MissileType.corrode
+                        }
                     }
-                ).AsCardAction
+                ).AsCardAction,
+                new AStatus
+                {
+                    status = Status.corrode,
+                    statusAmount = 1,
+                    targetPlayer = true,
+                }
             ],
             _ => 
             [
@@ -65,7 +92,13 @@ public class AcidicPackage : Card, IRegisterable
                             missileType = MissileType.corrode
                         }
                     }
-                ).AsCardAction
+                ).AsCardAction,
+                new AStatus
+                {
+                    status = Status.corrode,
+                    statusAmount = 2,
+                    targetPlayer = true,
+                }
             ],
         };
     }
@@ -77,19 +110,12 @@ public class AcidicPackage : Card, IRegisterable
         {
             Upgrade.B => new CardData
             {
-                cost = 1,
-                exhaust = true,
-                art = altSprite
-            },
-            Upgrade.A => new CardData
-            {
-                cost = 0,
-                exhaust = true
+                cost = 2,
+                artTint = "a43fff"
             },
             _ => new CardData
             {
-                cost = 1,
-                exhaust = true
+                cost = 2
             }
         };
     }

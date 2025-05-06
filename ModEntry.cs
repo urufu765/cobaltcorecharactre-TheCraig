@@ -61,17 +61,20 @@ internal class ModEntry : SimpleMod
         typeof(PartSwap),
         typeof(Distracted),
         typeof(Disinfect),
-        typeof(AcidicPackage)
+        typeof(AcidicPackage),
+        typeof(AcidBackflow)
     ];
     private static List<Type> IlleanaRareCardTypes = [
         typeof(MakeshiftHull),
         typeof(GreatHealing),
         typeof(ImmunityShot),
         typeof(LacedYoFood),
-        typeof(WeaponisedPatchkit)
+        typeof(WeaponisedPatchkit),
+        typeof(ImprovisedTiming)
     ];
     private static List<Type> IlleanaSpecialCardTypes = [
         typeof(TheCure),
+        typeof(TheSolution),
         typeof(TheFailure),
         typeof(TheAccident),
         typeof(SnekTunezChill),
@@ -322,8 +325,49 @@ internal class ModEntry : SimpleMod
             Name = AnyLocalizations.Bind(["character", "DeadCraig", "name"]).Localize
         });
 
+        /*
+         * Statuses are used to achieve many mechanics.
+         * However, statuses themselves do not contain any code - they just keep track of how much you have.
+         */
+        TarnishStatus = helper.Content.Statuses.RegisterStatus("Tarnish", new StatusConfiguration
+        {
+            Definition = new StatusDef
+            {
+                isGood = false,
+                affectedByTimestop = true,
+                color = new Color("a43fff"),
+                icon = ModEntry.RegisterSprite(package, "assets/tarnish.png").Sprite
+            },
+            Name = AnyLocalizations.Bind(["status", "Tarnish", "name"]).Localize,
+            Description = AnyLocalizations.Bind(["status", "Tarnish", "desc"]).Localize
+        });
+        SnekTunezStatus = helper.Content.Statuses.RegisterStatus("SnekTunezStat", new StatusConfiguration
+        {
+            Definition = new StatusDef
+            {
+                isGood = true,
+                affectedByTimestop = true,
+                color = new Color("ffffff"),
+                icon = ModEntry.RegisterSprite(package, "assets/snektunezstat.png").Sprite
+            },
+            Name = AnyLocalizations.Bind(["status", "SnekTunezStat", "name"]).Localize,
+            Description = AnyLocalizations.Bind(["status", "SnekTunezStat", "desc"]).Localize
+        });
+        ExcessShardStatus = helper.Content.Statuses.RegisterStatus("ExessShards", new StatusConfiguration
+        {
+            Definition = new StatusDef
+            {
+                isGood = true,
+                affectedByTimestop = false,
+                color = DB.statuses[Status.shard].color,
+                icon = StableSpr.icons_shard
+            },
+            Name = AnyLocalizations.Bind(["status", "ExcessShard", "name"]).Localize,
+            Description = AnyLocalizations.Bind(["status", "ExcessShard", "desc"]).Localize
+        });
 
 
+        KokoroApi.V2.ActionCosts.RegisterStatusResourceCostIcon(TarnishStatus.Status, RegisterSprite(package, "assets/tarnish_pay.png").Sprite, RegisterSprite(package, "assets/tarnish_cost.png").Sprite);
         KokoroApi.V2.ActionCosts.RegisterStatusResourceCostIcon(Status.corrode, RegisterSprite(package, "assets/corrode_pay.png").Sprite, RegisterSprite(package, "assets/corrode_cost.png").Sprite);
         
         /*
@@ -388,46 +432,6 @@ internal class ModEntry : SimpleMod
             ]
         });
 
-        /*
-         * Statuses are used to achieve many mechanics.
-         * However, statuses themselves do not contain any code - they just keep track of how much you have.
-         */
-        TarnishStatus = helper.Content.Statuses.RegisterStatus("Tarnish", new StatusConfiguration
-        {
-            Definition = new StatusDef
-            {
-                isGood = false,
-                affectedByTimestop = true,
-                color = new Color("a43fff"),
-                icon = ModEntry.RegisterSprite(package, "assets/tarnish.png").Sprite
-            },
-            Name = AnyLocalizations.Bind(["status", "Tarnish", "name"]).Localize,
-            Description = AnyLocalizations.Bind(["status", "Tarnish", "desc"]).Localize
-        });
-        SnekTunezStatus = helper.Content.Statuses.RegisterStatus("SnekTunezStat", new StatusConfiguration
-        {
-            Definition = new StatusDef
-            {
-                isGood = true,
-                affectedByTimestop = true,
-                color = new Color("ffffff"),
-                icon = ModEntry.RegisterSprite(package, "assets/snektunezstat.png").Sprite
-            },
-            Name = AnyLocalizations.Bind(["status", "SnekTunezStat", "name"]).Localize,
-            Description = AnyLocalizations.Bind(["status", "SnekTunezStat", "desc"]).Localize
-        });
-        ExcessShardStatus = helper.Content.Statuses.RegisterStatus("ExessShards", new StatusConfiguration
-        {
-            Definition = new StatusDef
-            {
-                isGood = true,
-                affectedByTimestop = false,
-                color = DB.statuses[Status.shard].color,
-                icon = StableSpr.icons_shard
-            },
-            Name = AnyLocalizations.Bind(["status", "ExcessShard", "name"]).Localize,
-            Description = AnyLocalizations.Bind(["status", "ExcessShard", "desc"]).Localize
-        });
 
         /*
          * Managers are typically made to register themselves when constructed.
