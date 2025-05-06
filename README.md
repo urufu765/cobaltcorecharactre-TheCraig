@@ -19,7 +19,7 @@ A corrosion engineer who works with corrosion to help keep the ship at tip top c
   * **dev.c1**: Duo sprites!
   * **dev.c2**: Finished all duo sprites and fixed Airlock description
   * **dev.c3**: Mini art and panic(+blinkrapid, shocked) eyes art fix
-  * *dev.d0*: New tarnish implementation
+  * **dev.d0**: New tarnish implementation
   * *dev.e0*: Card rework 3 (optimised for NEW Tarnish)
   * *ext.a0*: More dialogue! (Perfect shield interaction etc.)
   * *ext.b0*: Full body sprites + finish the screams + Craig sprites
