@@ -11,6 +11,7 @@ namespace Illeana.Cards;
 /// </summary>
 public class Exposure : Card, IRegisterable
 {
+    private static Spr altSprite;
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
         helper.Content.Cards.RegisterCard(new CardConfiguration
@@ -25,6 +26,7 @@ public class Exposure : Card, IRegisterable
             Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "Common", "Exposure", "name"]).Localize,
             Art = ModEntry.RegisterSprite(package, "assets/Card/Illeana/1/Exposure.png").Sprite
         });
+        altSprite = ModEntry.RegisterSprite(package, "assets/Card/Illeana/1/ExposureAlt.png").Sprite;
     }
 
 
@@ -98,6 +100,7 @@ public class Exposure : Card, IRegisterable
             {
                 cost = 1,
                 exhaust = true,
+                art = altSprite,
                 artTint = "a43fff"
             },
             _ => new CardData

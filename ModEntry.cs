@@ -85,7 +85,8 @@ internal class ModEntry : SimpleMod
         typeof(Reminiscent),
         typeof(Coalescent),
         typeof(Obmutescent),
-        typeof(PerfectShieldColourless)
+        typeof(PerfectShieldColourless),
+        typeof(CreditCard)
     ];
     private static IEnumerable<Type> IlleanaCardTypes =
         IlleanaCommonCardTypes
@@ -125,6 +126,7 @@ internal class ModEntry : SimpleMod
         typeof(UnprotectedStorage),  // Books
         typeof(HullHarvester),  // Weth
         typeof(Competition),  // Eddie
+        typeof(BountifulBloodBank),  // Dracula
     ];
     private static List<Type> IlleanaDialogueTypes = [
         typeof(NewCombatDialogue),

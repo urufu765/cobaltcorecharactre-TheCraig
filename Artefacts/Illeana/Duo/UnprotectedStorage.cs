@@ -19,21 +19,6 @@ namespace Illeana.Artifacts;
 public class UnprotectedStorage : Artifact
 {
     public const int MAXEXCESS = 5;
-    // public override void AfterPlayerStatusAction(State state, Combat combat, Status status, AStatusMode mode, int statusAmount)
-    // {
-    //     if (status == Status.shard)
-    //     {
-    //         combat.QueueImmediate(
-    //             new AStatus
-    //             {
-    //                 status = ModEntry.Instance.ExcessShardStatus.Status,
-    //                 statusAmount = state.ship.Get(Status.shard) - state.ship.GetMaxShard(),
-    //                 targetPlayer = true,
-    //                 statusPulse = ModEntry.Instance.ExcessShardStatus.Status
-    //             }
-    //         );
-    //     }
-    // }
     public override void OnTurnEnd(State state, Combat combat)
     {
         if (state.ship.Get(Status.shard) > state.ship.GetMaxShard())
@@ -61,7 +46,6 @@ public class UnprotectedStorage : Artifact
 public static class ShardStorageUnlimiter
 {
     private static bool isSet;
-    private static bool isVerySet;
     public static void Apply(Harmony harmony)
     {
         harmony.Patch(
@@ -92,7 +76,6 @@ public static class ShardStorageUnlimiter
 
     private static void FlagUpOnSet()
     {
-        //ModEntry.Instance.Logger.LogInformation("BANG");
         isSet = true;
     }
 
@@ -100,7 +83,6 @@ public static class ShardStorageUnlimiter
     {
         if (isSet && MG.inst.g.state.EnumerateAllArtifacts().Any(a => a is UnprotectedStorage))
         {
-            //ModEntry.Instance.Logger.LogInformation("BOOM!");
             __result = __instance.Get(Status.shard) + UnprotectedStorage.MAXEXCESS;
         }
     }

@@ -113,7 +113,7 @@
             },
             "BountifulBloodBank": {
                 "name": "BOUNTIFUL BLOOD BANK",
-                "desc": "At the start of combat, add 1 <c=card>Credit Card</c> to your hand.\nUse the card to deposit with (25/50/100)% interest depending on combat type.\n<c=keyword>You cannot die from playing <c=card>Credit Card</c>.</c>\nAt the end of combat, withdraw all as <c=healing>max hull</c>."
+                "desc": "At the start of combat, add a <c=card>Credit Card</c> to your hand.\n<c=keyword>Use the card to deposit your max hull.</c>\nFor every [<c=keyword>4</c>/<c=keyword>2</c>/<c=keyword>1</c>] you deposit (based on encounter type), add an additional <c=keyword>1</c> to the withdrawal amount.\nAt the end of combat, withdraw all as <c=healing>max hull</c>."
             }
         },
         "Boss": {
@@ -308,8 +308,11 @@
                 "desc": "X = your missing shield.\n<c=status>X Shield.\nX Temp Shield.</c>"
             },
             "BloodCard": {
-                "name": "Credit Card",
-                "desc": "Deposit ({0}) hull and max hull with {1}% interest.\n+1 when you flip the card.",
+                "name": " ",
+                "desc": "Deposit <c=boldPink>{0}</c> hull and max hull.",
+                "descFlip": "For every <c=keyword>{1}</c> you deposit, add <c=keyword>{2}</c> to withdrawal amount.",
+                "blank": " ",
+                "tooltip": "<c=keyword>You can't die from playing this card.</c>",
                 "descA": "Deposit ({0}) hull and max hull with 50% interest.\n+1 when you flip the card (Max: All but 1 max hull).",
                 "descB": "Deposit ({0}) hull and max hull with 100% interest.\n+1 when you flip the card (Max: All but 1 max hull)."
             }
