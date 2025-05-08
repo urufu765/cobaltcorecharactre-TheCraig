@@ -166,15 +166,15 @@
         "Common": {
             "BuildACure": {
                 "name": "Build-A-Cure",
-                "descB": "Add an <c=cardtrait>exhaustible</c> <c=card>Cure B</c> and a <c=card>Failure B</c> to your draw pile.",
-                "descA": "Add a <c=card>Cure</c> and a <c=card>Failure</c> to your draw pile.",
-                "desc": "Add an <c=cardtrait>exhaustible</c> <c=card>Cure</c> and a <c=card>Failure</c> to your draw pile."
+                "descB": "Add 2 <c=card>Cure B</c> and a <c=card>Failure B</c> to your draw pile.",
+                "descA": "Add a <c=card>Cure A</c> and a <c=card>Failure</c> to your draw pile.",
+                "desc": "Add a <c=card>Cure</c> and a <c=card>Failure</c> to your draw pile."
             },
             "FindACure": {
                 "name": "Find-A-Solution",
                 "descB": "Add a <c=card>Solution B</c> and 2 <c=card>Accident</c> to your draw pile.",
-                "descA": "Add 2 <c=cardtrait>exhaustible</c> <c=card>Solution</c> and an <c=card>Accident A</c> to your draw pile.",
-                "desc": "Add an <c=cardtrait>exhaustible</c> <c=card>Solution</c> and an <c=card>Accident</c> to your draw pile."
+                "descA": "Add 2 <c=card>Solution</c> and an <c=card>Accident A</c> to your draw pile.",
+                "desc": "Add a <c=card>Solution</c> and an <c=card>Accident</c> to your draw pile."
             },
             "Cleanse": {
                 "name": "Cleanse"

@@ -37,11 +37,10 @@ public class BuildCure : Card, IRegisterable
                 {
                     card = new TheCure
                     {
-                        upgrade = Upgrade.B,
-                        exhaustOverride = true,
-                        exhaustOverrideIsPermanent = true
+                        upgrade = Upgrade.B
                     },
                     destination = CardDestination.Deck,
+                    amount = 2,
                     insertRandomly = true
                 },
                 new AAddCard
@@ -58,7 +57,10 @@ public class BuildCure : Card, IRegisterable
             [
                 new AAddCard
                 {
-                    card = new TheCure(),
+                    card = new TheCure
+                    {
+                        upgrade = Upgrade.A
+                    },
                     destination = CardDestination.Deck,
                     insertRandomly = true
                 },
@@ -73,11 +75,7 @@ public class BuildCure : Card, IRegisterable
             [
                 new AAddCard
                 {
-                    card = new TheCure
-                    {
-                        exhaustOverride = true,
-                        exhaustOverrideIsPermanent = true
-                    },
+                    card = new TheCure(),
                     destination = CardDestination.Deck,
                     insertRandomly = true,
                 },

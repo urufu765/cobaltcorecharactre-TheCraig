@@ -72,7 +72,6 @@ public class TheSolution : Card, IRegisterable
             {
                 cost = 0,
                 temporary = true,
-                retain = true,
                 recycle = true,
                 artTint = "a43fff"
 
@@ -80,6 +79,7 @@ public class TheSolution : Card, IRegisterable
             _ => new CardData
             {
                 cost = 0,
+                exhaust = true,
                 temporary = true,
                 retain = true,
                 artTint = "a43fff"

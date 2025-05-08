@@ -75,11 +75,11 @@ public class TheCure : Card, IRegisterable
                 cost = 0,
                 temporary = true,
                 retain = true,
-                recycle = true,
             },
             _ => new CardData
             {
                 cost = 0,
+                exhaust = true,
                 temporary = true,
                 retain = true,
             }

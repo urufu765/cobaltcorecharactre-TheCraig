@@ -33,27 +33,39 @@ public class UntestedSubstance : Card, IRegisterable
         {
             Upgrade.B => 
             [
-                new AStatus
-                {
-                    status = ModEntry.Instance.TarnishStatus.Status,
-                    statusAmount = 1,
-                    targetPlayer = true
-                },
+                ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeCostAction(
+                    ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeResourceCost(
+                        ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeStatusResource(ModEntry.Instance.TarnishStatus.Status),
+                        2
+                    ),
+                    new AStatus
+                    {
+                        status = Status.evade,
+                        statusAmount = 5,
+                        targetPlayer = true
+                    }
+                ).AsCardAction,
                 new AStatus
                 {
                     targetPlayer = true,
-                    status = Status.autododgeRight,
-                    statusAmount = 1,
+                    status = ModEntry.Instance.TarnishStatus.Status,
+                    statusAmount = 4,
                 }
             ],
             _ => 
             [
-                new AStatus
-                {
-                    targetPlayer = true,
-                    status = Status.evade,
-                    statusAmount = 2,
-                },
+                ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeCostAction(
+                    ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeResourceCost(
+                        ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeStatusResource(ModEntry.Instance.TarnishStatus.Status),
+                        1
+                    ),
+                    new AStatus
+                    {
+                        status = Status.evade,
+                        statusAmount = 2,
+                        targetPlayer = true
+                    }
+                ).AsCardAction,
                 new AStatus
                 {
                     targetPlayer = true,
@@ -69,6 +81,12 @@ public class UntestedSubstance : Card, IRegisterable
     {
         return upgrade switch
         {
+            Upgrade.B => new CardData
+            {
+                cost = 1,
+                exhaust = true,
+                artTint = "a43fff"
+            },
             Upgrade.A => new CardData
             {
                 cost = 0,

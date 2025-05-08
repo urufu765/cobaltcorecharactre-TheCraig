@@ -34,6 +34,13 @@ A corrosion engineer who works with corrosion to help keep the ship at tip top c
   * **dev.e1**: Tarnish only converts corrode when being added. New corrode with existing tarnish does nothing.
   * **dev.e2**: Dracula Duo Complete!
   * **ext.f0**: Fixed duo not being excluded if duo mod not present and Reusable Scrap being annoying
+  * **ext.f1**: Card edits
+    * Untested Substance: Now requires 1 tarnish to play, reworked B to only give exhaust
+    * Build-A-Cure: Removed the "Exhaustible" part, and B gives two Cure B's
+    * Find-A-Solution: Removed the "Exhaustible" part
+    * Solution: B loses retain, base and A now exhaust
+    * Cure: A loses recycle, base and B now exhaust
+  * *ext.f2*: Forgot to remove the code that removes corrode when hitting tarnished
   * *ext.f2*: More dialogue! (Perfect shield interaction etc.)
   * *ext.b0*: Full body sprites + finish the screams + Craig sprites
   * *ext.c0*: Memory

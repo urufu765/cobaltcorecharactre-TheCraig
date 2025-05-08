@@ -54,10 +54,7 @@ public class FindCure : Card, IRegisterable
             [
                 new AAddCard
                 {
-                    card = new TheSolution{
-                        exhaustOverride = true,
-                        exhaustOverrideIsPermanent = true
-                    },
+                    card = new TheSolution(),
                     destination = CardDestination.Deck,
                     insertRandomly = true,
                     amount = 2
@@ -75,10 +72,7 @@ public class FindCure : Card, IRegisterable
             [
                 new AAddCard
                 {
-                    card = new TheSolution{
-                        exhaustOverride = true,
-                        exhaustOverrideIsPermanent = true
-                    },
+                    card = new TheSolution(),
                     destination = CardDestination.Deck,
                     insertRandomly = true,
                 },
