@@ -25,21 +25,10 @@ public class Tarnishing : IKokoroApi.IV2.IStatusLogicApi.IHook
     }
 
 
-    public static void Ship_MDDTP_butDOUBLE(Ship __instance, ref int __result, State s, Combat c, int incomingDamage, Part part, bool piercing = false)
+    public static void Ship_MDDTP_butDOUBLE(Ship __instance, ref int __result)
     {
         if (__instance.Get(ModEntry.Instance.TarnishStatus.Status) > 0)
         {
-            if (__instance.Get(Status.corrode) > 0)
-            {
-                c.QueueImmediate(
-                    new AStatus
-                    {
-                        status = Status.corrode,
-                        statusAmount = -1,
-                        targetPlayer = __instance.isPlayerShip
-                    }
-                );
-            }
             __result *= 2;
         }
     }
