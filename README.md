@@ -33,7 +33,8 @@ A corrosion engineer who works with corrosion to help keep the ship at tip top c
     * NEW Solution: like Cure, but Takes Tarnish, gives Heal
   * **dev.e1**: Tarnish only converts corrode when being added. New corrode with existing tarnish does nothing.
   * **dev.e2**: Dracula Duo Complete!
-  * *ext.a0*: More dialogue! (Perfect shield interaction etc.)
+  * **ext.f0**: Fixed duo not being excluded if duo mod not present and Reusable Scrap being annoying
+  * *ext.f2*: More dialogue! (Perfect shield interaction etc.)
   * *ext.b0*: Full body sprites + finish the screams + Craig sprites
   * *ext.c0*: Memory
 

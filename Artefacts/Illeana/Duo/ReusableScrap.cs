@@ -10,7 +10,7 @@ public class ReusableScrap : Artifact
 {
     public override void AfterPlayerStatusAction(State state, Combat combat, Status status, AStatusMode mode, int statusAmount)
     {
-        if(status == Status.shield && mode == AStatusMode.Add && statusAmount > 0)
+        if(status == Status.shield && mode == AStatusMode.Add && statusAmount > 0 && state.ship.Get(ModEntry.Instance.TarnishStatus.Status) > 0)
         {
             combat.QueueImmediate(new AStatus
             {

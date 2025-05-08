@@ -454,9 +454,16 @@ internal class ModEntry : SimpleMod
         foreach (Type ta in IlleanaArtifactTypes)
         {
             Deck deck = IlleanaDeck.Deck;
-            if (DuoArtifactsApi is not null && IlleanaDuoArtifacts.Contains(ta))
+            if (IlleanaDuoArtifacts.Contains(ta))
             {
-                deck = DuoArtifactsApi.DuoArtifactVanillaDeck;
+                if (DuoArtifactsApi is null)
+                {
+                    continue;
+                }
+                else
+                {
+                    deck = DuoArtifactsApi.DuoArtifactVanillaDeck;
+                }
             }
 
             helper.Content.Artifacts.RegisterArtifact(ta.Name, UhDuhHundo.ArtifactRegistrationHelper(ta, RegisterSprite(package, "assets/Artifact/" + ta.Name + ".png").Sprite, deck));
