@@ -42,6 +42,7 @@ A corrosion engineer who works with corrosion to help keep the ship at tip top c
     * Cure: A loses recycle, base and B now exhaust
   * **ext.f2**: Forgot to remove the code that removes corrode when hitting tarnished
   * **ext.f3**: Set X begun
+  * **ext.f4**: Set X Continu and FINISH! (disabled in next version as it will be ported over to Nickel)
   * *ext.f2*: More dialogue! (Perfect shield interaction etc.)
   * *ext.b0*: Full body sprites + finish the screams + Craig sprites
   * *ext.c0*: Memory

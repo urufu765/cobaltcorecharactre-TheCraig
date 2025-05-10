@@ -510,6 +510,7 @@ internal class ModEntry : SimpleMod
         ThrustMaster.Apply(Harmony);
         HeatpumpLubricator.Apply(Harmony);
         ShardStorageUnlimiter.Apply(Harmony);
+        SetXRenderer.Apply(Harmony);
     }
 
     /*
