@@ -41,6 +41,7 @@ A corrosion engineer who works with corrosion to help keep the ship at tip top c
     * Solution: B loses retain, base and A now exhaust
     * Cure: A loses recycle, base and B now exhaust
   * **ext.f2**: Forgot to remove the code that removes corrode when hitting tarnished
+  * **ext.f3**: Set X begun
   * *ext.f2*: More dialogue! (Perfect shield interaction etc.)
   * *ext.b0*: Full body sprites + finish the screams + Craig sprites
   * *ext.c0*: Memory
