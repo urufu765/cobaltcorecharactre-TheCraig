@@ -87,7 +87,7 @@ internal class NewEventDialogue : IRegisterable
             }},
             {"EphemeralCardGift", new(){
                 edit = [
-                    new(EMod.countFromStart, 1, AmIlleana, "screamB", "AAAAAaaaagh!")
+                    new(EMod.countFromStart, 1, AmIlleana, "screamB", "AAAAAAAAAAaaaaaaaagh!")
                 ]
             }},
             {"ForeignCardOffering_After", new(){

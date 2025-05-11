@@ -31,6 +31,49 @@ internal class NewStoryDialogue : IRegisterable
                     new(AmIlleana, "sly", "Don't worry, you won't even notice it's gone.")
                 ]
             }},
+            {"Illeana_Intro_1", new(){
+                type = NodeType.@event,
+                lookup = [ "zone_first" ],
+                once = true,
+                allPresent = [ AmIlleana ],
+                requiredScenes = ["Illeana_Intro_0"],
+                bg = "BGRunStart",
+                dialogue = [
+                    new(AmCat, "Beep beep!"),
+                    new(AmIlleana, "tired", "I'm up..."),
+                    new(AmIlleana, "squint", "..."),
+                    new(AmIlleana, "curious", "What's with all this padding on the wall?"),
+                    new(AmCat, "smug", "It's to stop you from destroying anything."),
+                    new(AmIlleana, "silly", "Oh really? Is that a challenge?"),
+                    new(AmCat, "worried", "What? No?"),
+                    new(AmCat, "lean", "Hey! Get back here!")
+                ]
+            }},
+            {"Illeana_Intro_2", new(){
+                type = NodeType.@event,
+                lookup = [ "zone_first" ],
+                once = true,
+                allPresent = [ AmIlleana ],
+                requiredScenes = ["Illeana_Intro_1"],
+                bg = "BGRunStart",
+                dialogue = [
+                    new(AmCat, "squint", "..."),
+                    new(AmIlleana, "nap", "..."),
+                    new(AmCat, "mad", "Wake up!"),
+                    new(AmIlleana, "shocked", "AAH!"),
+                    new(AmIlleana, "intense", "Oh hello."),
+                    new(AmCat, "grumpy", "You better not touch anything."),
+                    new(AmIlleana, "curious", "..."),
+                    new(AmCat, "grumpy", "I realized there's no stopping you, no matter what I try."),
+                    new(AmCat, "grumpy", "So I'm just going to tell you to not do what you usually do."),
+                    new(AmIlleana, "But if I don't do anything, how would I know I'm doing what I usually do?"),
+                    new(AmCat, "squint", "Good point..."),
+                    new(AmIlleana, "explain", "So I'll touch something and see if that's part of my usual routine."),
+                    new(AmCat, "Alright, go ahead then."),
+                    new(AmCat, "squint", "..."),
+                    new(AmCat, "mad", "Wait wh- HEY!")
+                ]
+            }},
             {"Illeana_Peri_0", new(){
                 type = NodeType.@event,
                 lookup = [ "zone_first"],
@@ -129,6 +172,26 @@ internal class NewStoryDialogue : IRegisterable
                     new(AmRiggs, "huh", "...")
                 ]
             }},
+            {"Illeana_Drake_0", new(){
+                type = NodeType.@event,
+                lookup = [ "zone_first"],
+                once = true,
+                allPresent = [ AmIlleana, AmDrake ],
+                bg = "BGRunStart",
+                requiredScenes = [ "Illeana_Intro_0"],
+                dialogue = [
+                    new(AmDrake, "squint", "..."),
+                    new(AmIlleana, "curious", "...", true),
+                    new(AmDrake, "squint", "..."),
+                    new(AmIlleana, "Why are you staring at me like that?", true),
+                    new(AmDrake, "squint", "I'm trying to figure out how to get a jar your size."),
+                    new(AmIlleana, "intense", "... why?", true),
+                    new(AmDrake, "blush", "I heard snake rum is delicious."),
+                    new(AmIlleana, "unamused", "You do know making something like that takes ages, right?", true),
+                    new(AmDrake, "slyblush", "I can wait."),
+                    new(AmIlleana, "squint", "Don't you dare.", true)
+                ]
+            }}
         });
     }
 }

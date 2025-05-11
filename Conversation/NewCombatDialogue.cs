@@ -1077,6 +1077,39 @@ internal class NewCombatDialogue : IRegisterable
                     new(AmIlleana, "explain", "At least I'm not a doctor. Imagine signing a hypocratic oath.")
                 ]
             }},
+            {"IlleanaGotPerfect_Multi_0", new(){
+                type = NodeType.combat,
+                allPresent = [ AmIlleana ],
+                oncePerRun = true,
+                lastTurnPlayerStatuses = [Status.perfectShield],
+                dialogue = [
+                    new(AmIlleana, "explain", "Thanks to this new thing, we can safely do reckless behavior."),
+                    new([
+                        new(AmDizzy, "squint", "I don't think you were the one to come up with this."),
+                        new(AmPeri, "mad", "Don't."),
+                        new(AmDrake, "Turning up the heat! Don't complain!")
+                    ])
+                ]
+            }},
+            {"IlleanaGotBoots_Multi_0", new(){
+                type = NodeType.combat,
+                allPresent = [ AmIlleana ],
+                oncePerRun = true,
+                lastTurnPlayerStatuses = [Status.hermes],
+                dialogue = [
+                    new(AmIlleana, "Boosters boosted!")
+                ]
+            }},
+            {"IlleanaGotBoots_Multi_1", new(){
+                type = NodeType.combat,
+                allPresent = [ AmIlleana ],
+                oncePerRun = true,
+                lastTurnPlayerStatuses = [Status.hermes],
+                dialogue = [
+                    new(AmIlleana, "Engines boosted, full throttle!")
+                ]
+            }},
+
             // {"", new(){
 
             //     dialogue = [

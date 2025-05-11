@@ -484,6 +484,231 @@ internal class NewArtifactDialogue : IRegisterable
             }},
             {"ArtifactShieldPrepIsGone_Multi_3", new(){
                 doesNotHaveArtifactTypes = [typeof(WarpPrototype)]
+            }}
+            
+        });
+
+        LocalDB.DumpStoryToLocalLocale("en", "Shockah.DuoArtifacts", new Dictionary<string, DialogueMachine>(){
+            {"ArtifactReusableScrap_Illeana_0", new(){
+                type = NodeType.combat,
+                oncePerRun = true,
+                oncePerRunTags = [ "ReusableScrapButWeAlsoHaveShieldBurst" ],
+                allPresent = [ AmIlleana, AmDizzy],
+                hasArtifacts = [ "ReusableScrap".F(), "ShieldBurst" ],
+                dialogue = [
+                    new(AmIlleana, "Hey, I made something new!"),
+                    new(AmDizzy, "squint", "That's plagiarism.")
+                ]
+            }},
+            {"ArtifactReusableScrap_Illeana_1", new(){
+                type = NodeType.combat,
+                oncePerRun = true,
+                oncePerRunTags = [ "ReusableScrapButWeAlsoHaveShieldBurst" ],
+                allPresent = [ AmIlleana, AmDizzy],
+                hasArtifacts = [ "ReusableScrap".F(), "ShieldBurst" ],
+                dialogue = [
+                    new(AmIlleana, "Fresh from the labs."),
+                    new(AmDizzy, "squint", "Do we need both?")
+                ]
+            }},
+            {"ArtifactReusableScrap_Illeana_2", new(){
+                type = NodeType.combat,
+                oncePerRun = true,
+                oncePerRunTags = [ "ReusableScrapButWeAlsoHaveShieldBurst" ],
+                allPresent = [ AmIlleana, AmDizzy],
+                hasArtifacts = [ "ReusableScrap".F(), "ShieldBurst"],
+                dialogue = [
+                    new(AmDizzy, "squint", "Did you take that from my desk?"),
+                    new(AmIlleana, "silly", "Noooooo?")
+                ]
+            }},
+            {"ArtifactReusableScrap_Illeana_3", new(){
+                type = NodeType.combat,
+                oncePerRun = true,
+                oncePerRunTags = [ "ReusableScrapButIlleanaWasFirst" ],
+                allPresent = [ AmIlleana, AmDizzy],
+                hasArtifacts = [ "ReusableScrap".F()],
+                doesNotHaveArtifacts = ["ShieldBurst"],
+                dialogue = [
+                    new(AmIlleana, "Hey Dizzy, look what I've got!"),
+                    new(AmDizzy, "squint", "Why does that look so familiar?")
+                ]
+            }},
+            {"ArtifactReusableScrap_Illeana_4", new(){
+                type = NodeType.combat,
+                oncePerRun = true,
+                oncePerRunTags = [ "ReusableScrapButIlleanaWasFirst" ],
+                allPresent = [ AmIlleana, AmDizzy],
+                hasArtifacts = [ "ReusableScrap".F()],
+                doesNotHaveArtifacts = ["ShieldBurst"],
+                dialogue = [
+                    new(AmDizzy, "Hey, that's something I might've come up with!"),
+                    new(AmIlleana, "explain", "And that's why you need me here.")
+                ]
+            }},
+            {"ArtifactThurstThursters_Illeana_0", new(){
+                type = NodeType.combat,
+                oncePerRun = true,
+                oncePerRunTags = [ "ThurstThrusters" ],
+                allPresent = [ AmIlleana, AmRiggs ],
+                hasArtifactTypes = [ typeof(ThrustThursters) ],
+                dialogue = [
+                    new(AmRiggs, "squint", "Do we even need this much thrust?"),
+                    new([
+                        new(AmIlleana, "sly", "Trust me bro."),
+                        new(AmIlleana, "Yes ma'am!"),
+                        new(AmIlleana, "Yup!"),
+                        new(AmIlleana, "Definitely."),
+                        new(AmIlleana, "Without a doubt.")
+                    ])
+                ]
+            }},
+            {"ArtifactThurstThursters_Illeana_1", new(){
+                type = NodeType.combat,
+                oncePerRun = true,
+                oncePerRunTags = [ "ThurstThrusters" ],
+                allPresent = [ AmIlleana, AmRiggs ],
+                hasArtifactTypes = [ typeof(ThrustThursters) ],
+                dialogue = [
+                    new(AmRiggs, "Where's all this thrust coming from?"),
+                    new(AmIlleana, "giggle", "Hehe.")
+                ]
+            }},
+            {"ArtifactAirlock_Illeana_0", new(){
+                type = NodeType.combat,
+                oncePerRun = true,
+                oncePerRunTags = [ "AirlockedSnek" ],
+                allPresent = [ AmIlleana, AmPeri ],
+                hasArtifactTypes = [ typeof(AirlockSnek) ],
+                dialogue = [
+                    new(AmIlleana, "panic", "Wait Peri! No! Don't lock me in the airlock again!"),
+                    new(AmPeri, "mad", "Quiet, I'm concentrating.")
+                ]
+            }},
+            {"ArtifactAirlock_Illeana_1", new(){
+                type = NodeType.combat,
+                oncePerRun = true,
+                oncePerRunTags = [ "AirlockedSnek" ],
+                allPresent = [ AmIlleana, AmPeri ],
+                hasArtifactTypes = [ typeof(AirlockSnek) ],
+                dialogue = [
+                    new(AmIlleana, "shocked", "Peri! I'm sorry! I won't do it again!"),
+                    new(AmPeri, "mad", "I'm not falling for that again.")
+                ]
+            }},
+            {"ArtifactAirlock_Illeana_2", new(){
+                type = NodeType.combat,
+                oncePerRun = true,
+                oncePerRunTags = [ "IlleanaGotAirlocked" ],
+                priority = true,
+                allPresent = [ AmPeri ],
+                hasArtifactTypes = [ typeof(AirlockSnek) ],
+                dialogue = [
+                    new(AmPeri, "nap", "Ah, peace and quiet.")
+                ]
+            }},
+            {"ArtifactAirlock_Illeana_3", new(){
+                type = NodeType.combat,
+                oncePerRun = true,
+                oncePerRunTags = [ "IlleanaGotAirlocked" ],
+                priority = true,
+                allPresent = [ AmPeri ],
+                hasArtifactTypes = [ typeof(AirlockSnek) ],
+                dialogue = [
+                    new(AmPeri, "vengeful", "Well that big snake was good for something I guess.")
+                ]
+            }},
+            {"ArtifactAirlock_Illeana_4", new(){
+                type = NodeType.combat,
+                oncePerRun = true,
+                oncePerRunTags = [ "IlleanaGotAirlocked" ],
+                priority = true,
+                allPresent = [ AmPeri ],
+                hasArtifactTypes = [ typeof(AirlockSnek) ],
+                dialogue = [
+                    new(AmPeri, "vengeful", "I should keep her locked up in the airlock more often.")
+                ]
+            }},
+            {"ArtifactSuperInjection_Illeana_0", new(){
+                type = NodeType.combat,
+                oncePerRun = true,
+                oncePerRunTags = [ "AcidAcidBaby" ],
+                allPresent = [ AmIlleana, AmIsaac ],
+                hasArtifactTypes = [ typeof(SuperInjection) ],
+                dialogue = [
+                    new(AmIlleana, "Check this out! I made the acid more potent!"),
+                    new(AmIsaac, "squint", "That's not gonna melt through the container, is it?")
+                ]
+            }},
+            {"ArtifactSuperInjection_Illeana_1", new(){
+                type = NodeType.combat,
+                oncePerRun = true,
+                oncePerRunTags = [ "AcidAcidBaby" ],
+                allPresent = [ AmIlleana, AmIsaac ],
+                hasArtifactTypes = [ typeof(SuperInjection) ],
+                dialogue = [
+                    new(AmIsaac, "Umm, I don't even launch this type of missile?"),
+                    new(AmIlleana, "sly", "I got you, bro.")
+                ]
+            }},
+            {"ArtifactSuperInjection_Illeana_2", new(){
+                type = NodeType.combat,
+                oncePerRun = true,
+                oncePerRunTags = [ "AcidAcidBaby" ],
+                allPresent = [ AmIlleana, AmIsaac ],
+                hasArtifactTypes = [ typeof(SuperInjection) ],
+                dialogue = [
+                    new(AmIsaac, "Normally, I'm all for missiles, but keep that one away from me please."),
+                    new(AmIlleana, "silly", "Aww, scared of getting a bit of face-melting acid on yourself?")
+                ]
+            }},
+            {"ArtifactLubedHeatpump_Illeana_0", new(){
+                type = NodeType.combat,
+                oncePerRun = true,
+                oncePerRunTags = [ "WondersOfLubrication" ],
+                allPresent = [ AmIlleana, AmDrake ],
+                hasArtifactTypes = [ typeof(LubricatedHeatpump) ],
+                dialogue = [
+                    new(AmDrake, "Woah! Did someone improve the cooling system?"),
+                    new([
+                        new(AmIlleana, "explain", "You're welcome."),
+                        new(AmIlleana, "Guess who?"),
+                        new(AmIlleana, "squint", "That still doesn't mean you can start a fire by the way.")
+                    ])
+                ]
+            }},
+            {"ArtifactExtraSlip_Illeana_0", new(){
+                type = NodeType.combat,
+                oncePerRun = true,
+                oncePerRunTags = [ "SlipNSlideOnAcid" ],
+                allPresent = [ AmIlleana, AmMax ],
+                hasArtifactTypes = [ typeof(ExtraSlip) ],
+                dialogue = [
+                    new(AmMax, "intense", "Why is the floor so slippery?"),
+                    new(AmIlleana, "intense", "Uhh whoops.")
+                ]
+            }},
+            {"ArtifactPerfectPerfect_Illeana_0", new(){
+                type = NodeType.combat,
+                oncePerRun = true,
+                oncePerRunTags = [ "GotDaPerfect" ],
+                allPresent = [ AmIlleana, AmCat ],
+                hasArtifactTypes = [ typeof(PerfectedProtection) ],
+                dialogue = [
+                    new(AmIlleana, "Hey computer! Look what I got you!"),
+                    new(AmCat, "squint", "That's good. Now get back to work.")
+                ]
+            }},
+            {"ArtifactPerfectPerfect_Illeana_1", new(){
+                type = NodeType.combat,
+                oncePerRun = true,
+                oncePerRunTags = [ "GotDaPerfect" ],
+                allPresent = [ AmIlleana, AmCat ],
+                hasArtifactTypes = [ typeof(PerfectedProtection) ],
+                dialogue = [
+                    new(AmIlleana, "explain", "Behold, my masterpiece!"),
+                    new(AmCat, "mad", "Is that all you've got to show for destroying half of the ship?!")
+                ]
             }},
         });
     }

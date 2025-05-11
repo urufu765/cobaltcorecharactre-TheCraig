@@ -45,7 +45,7 @@ A corrosion engineer who works with corrosion to help keep the ship at tip top c
   * **ext.f4**: Set X Continu and FINISH! (disabled in next version as it will be ported over to Nickel)
   * **ext.f5**: ImmunityShot no longer gives tarnish, Gone-Jiffy buffed and dialogue machine fixed! + more dialogue and dialogue fixes
   * **ext.f6**: Fixed Exposure counting Tempshield for some reason + Lightened Load only gives 1 dodge per tarnish + fixed missing period
-  * *ext.f2*: More dialogue! (Perfect shield interaction etc.)
+  * **RELEASE**: More dialogue! (a bit more)
   * *ext.b0*: Full body sprites + finish the screams + Craig sprites
   * *ext.c0*: Memory
 
