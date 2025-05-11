@@ -42,7 +42,7 @@ public class GoneJiffy : Card, IRegisterable
                 new AStatus
                 {
                     status = ModEntry.IlleanaTheSnek.MissingStatus.Status,
-                    statusAmount = 2,
+                    statusAmount = 1,
                     targetPlayer = true
                 },
                 new AEndTurn()
@@ -52,7 +52,7 @@ public class GoneJiffy : Card, IRegisterable
                 new AStatus
                 {
                     status = Status.autododgeRight,
-                    statusAmount = 1,
+                    statusAmount = 2,
                     targetPlayer = true
                 },
                 new AHeal
@@ -73,7 +73,7 @@ public class GoneJiffy : Card, IRegisterable
                 new AStatus
                 {
                     status = Status.autododgeRight,
-                    statusAmount = 1,
+                    statusAmount = 2,
                     targetPlayer = true
                 },
                 new AHeal

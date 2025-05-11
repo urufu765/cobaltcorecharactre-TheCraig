@@ -259,7 +259,10 @@ internal class ModEntry : SimpleMod
                             {
                                 try
                                 {
-                                    DuoArtifactsApi.RegisterDuoArtifact(type, [IlleanaDeck!.Deck, helper.Content.Decks.LookupByUniqueName(dam.duoModDeck)!.Deck]);
+                                    if (helper.Content.Decks.LookupByUniqueName(dam.duoModDeck) is IDeckEntry ide)
+                                    {
+                                        DuoArtifactsApi.RegisterDuoArtifact(type, [IlleanaDeck!.Deck, ide.Deck]);
+                                    }
                                 }
                                 catch (Exception err)
                                 {
@@ -510,7 +513,7 @@ internal class ModEntry : SimpleMod
         ThrustMaster.Apply(Harmony);
         HeatpumpLubricator.Apply(Harmony);
         ShardStorageUnlimiter.Apply(Harmony);
-        SetXRenderer.Apply(Harmony);
+        // SetXRenderer.Apply(Harmony);
     }
 
     /*

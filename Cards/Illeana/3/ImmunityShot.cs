@@ -46,12 +46,6 @@ public class ImmunityShot : Card, IRegisterable
                     mode = AStatusMode.Set,
                     targetPlayer = true,
                     xHint = new int?(3)
-                },
-                new AStatus
-                {
-                    status = ModEntry.Instance.TarnishStatus.Status,
-                    statusAmount = 1,
-                    targetPlayer = true
                 }
             ],
             Upgrade.A => 
@@ -74,12 +68,6 @@ public class ImmunityShot : Card, IRegisterable
                     statusAmount = x,
                     targetPlayer = true,
                     xHint = new int?(1)
-                },
-                new AStatus
-                {
-                    status = ModEntry.Instance.TarnishStatus.Status,
-                    statusAmount = 1,
-                    targetPlayer = true
                 }
             ],
             _ => 
@@ -95,12 +83,6 @@ public class ImmunityShot : Card, IRegisterable
                     mode = AStatusMode.Set,
                     targetPlayer = true,
                     xHint = new int?(2)
-                },
-                new AStatus
-                {
-                    status = ModEntry.Instance.TarnishStatus.Status,
-                    statusAmount = 1,
-                    targetPlayer = true
                 }
             ],
         };

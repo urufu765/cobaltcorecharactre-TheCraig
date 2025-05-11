@@ -23,7 +23,7 @@ public class TheSolution : Card, IRegisterable
                 upgradesTo = [Upgrade.A, Upgrade.B]
             },
             Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "Token", "TheSolution", "name"]).Localize,
-            Art = ModEntry.RegisterSprite(package, "assets/Card/Illeana/0/TheCure.png").Sprite
+            Art = ModEntry.RegisterSprite(package, "assets/Card/Illeana/0/TheSolution.png").Sprite
         });
     }
 

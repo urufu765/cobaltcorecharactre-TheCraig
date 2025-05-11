@@ -799,7 +799,7 @@ internal class NewCombatDialogue : IRegisterable
             }},
             {"DualNotEnoughDronesShouts_Multi_2", new(){
                 edit = [
-                    new(EMod.countFromStart, 1, AmIlleana, "panic", "How did you know I was a robot?")
+                    new("9b0ce906", AmIlleana, "panic", "How did you know I was a robot?")
                 ]
             }},
             {"OverheatDrakeFix_Multi_6", new(){
@@ -815,12 +815,12 @@ internal class NewCombatDialogue : IRegisterable
             }},
             {"RiderAvast", new(){
                 edit = [
-                    new(EMod.countFromStart, 1, AmIlleana, "curious", "A vest?")
+                    new(EMod.countFromStart, 2, AmIlleana, "curious", "A vest?")
                 ]
             }},
             {"RiderTiderunnerShouts", new(){
                 edit = [
-                    new(EMod.countFromStart, 2, "squint", "You're not allowed to have it.")
+                    new(EMod.countFromStart, 2, AmIlleana, "squint", "You're not allowed to have it.")
                 ]
             }},
             {"SkunkFirstTurnShouts_Multi_0", new(){
@@ -1104,7 +1104,19 @@ internal class NewCombatDialogue : IRegisterable
                     new("Goose", "Honk!"),
                     new(AmIlleana, "sad", "No... I wanted turkey for dinner...")
                 ]
-            }}
+            }},
+            // {"EnemyPack_DougChat_Multi_0", new(){
+            //     edit = [new(EMod.countFromStart, 1, AmIlleana, "And I work off of working eyes.")]
+            // }},
+            // {"EnemyPack_DougChat_Multi_1", new(){
+            //     edit = [new(EMod.countFromStart, 1, AmIlleana, "curious", "I'm not a pirate, so what does that make you?")]
+            // }},
+            // {"EnemyPack_DougBrokePart_Multi_0", new(){
+            //     edit = [new(EMod.countFromStart, 1, AmIlleana, "sly", "If by win you mean who's the fastest to explode, then yeah.")]
+            // }},
+            // {"EnemyPack_DougBrokePart_Multi_1", new(){
+            //     edit = [new(EMod.countFromStart, 1, AmIlleana, "Thanks!")]
+            // }}
         });
     }
 }
