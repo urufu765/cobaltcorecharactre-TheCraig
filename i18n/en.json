@@ -138,7 +138,7 @@
             },
             "Tempoboosters": {
                 "name": "TEMPOBOOSTERS",
-                "desc": "At the start of <c=keyword>elite</c> combat, gain 1 <c=status>ACE</c> and 1 <c=status>CORRODE</c>.\nOn <c=keyword>boss</c> encounters gain an additional 1 <c=status>ACE</c> and 1 <c=status>TARNISH</c>"
+                "desc": "At the start of <c=keyword>elite</c> combat, gain 1 <c=status>ACE</c> and 1 <c=status>CORRODE</c>.\nOn <c=keyword>boss</c> encounters gain an additional 1 <c=status>ACE</c> and 1 <c=status>TARNISH</c>."
             },
             "WarpPrototype": {
                 "name": "WARP PROTOTYPE",
@@ -148,7 +148,7 @@
         "EventOnly": {
             "LightenedLoad": {
                 "name": "LIGHTENED LOAD",
-                "desc": "Whenever you apply <c=status>TARNISH</c> to yourself, gain equal amount of <c=status>AUTODODGE RIGHT</c>"
+                "desc": "Whenever you apply <c=status>TARNISH</c> to yourself, gain 1 <c=status>AUTODODGE RIGHT</c>."
             },
             "ToxicSports": {
                 "name": "TOXIC SPORTS",

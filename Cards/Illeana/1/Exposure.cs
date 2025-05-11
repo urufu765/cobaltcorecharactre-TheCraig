@@ -33,7 +33,7 @@ public class Exposure : Card, IRegisterable
     public override List<CardAction> GetActions(State s, Combat c)
     {
         int x = c.otherShip.Get(Status.shield);
-        x += c.otherShip.Get(Status.tempShield);
+        //x += c.otherShip.Get(Status.tempShield);
         return upgrade switch
         {
             Upgrade.B => 

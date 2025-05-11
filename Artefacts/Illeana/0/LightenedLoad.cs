@@ -15,7 +15,7 @@ public class LightenedLoad : Artifact
             combat.QueueImmediate(new AStatus
             {
                 status = Status.autododgeRight,
-                statusAmount = statusAmount,
+                statusAmount = 1,
                 targetPlayer = true,
                 artifactPulse = Key()
             });
