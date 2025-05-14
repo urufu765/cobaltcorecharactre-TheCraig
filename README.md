@@ -8,6 +8,7 @@ A corrosion engineer who works with corrosion to help keep the ship at tip top c
 
 #### 1.1: Illeana Duo Machine!
 
+* **(1.1.3)**: Optimized for release (not built: Changed IncludedMOdProjectPaths to ModFiles, updated ModBuildConfig)
 * **(1.1.2)**: Made the harmless warnings shut up and moved dialogue validators after mod existence checks, internal changes
 * **(1.1.1)**: Autotomy B cardart tint was wrong
 * **(1.1.0)**: Switch over to DialogueMachine + New dialogue! + Duos + Tarnish!
