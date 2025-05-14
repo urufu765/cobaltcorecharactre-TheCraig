@@ -99,6 +99,11 @@ public class Autotomy : Card, IRegisterable
     {
         return upgrade switch
         {
+            Upgrade.B => new CardData
+            {
+                cost = 2,
+                artTint = "a43fff"
+            },
             Upgrade.A => new CardData
             {
                 cost = 1
