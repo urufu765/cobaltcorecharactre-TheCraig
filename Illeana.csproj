@@ -2,7 +2,7 @@
 	<PropertyGroup>
 		<RootNamespace>Illeana</RootNamespace>
 		<Version>1.1.3</Version>
-		<ModFiles>i18n;assets</ModFiles>
+		<!-- <IncludedModProjectPaths>i18n;assets</IncludedModProjectPaths> -->
 
 		<TargetFramework>net8.0</TargetFramework>
 		<LangVersion>12.0</LangVersion>
@@ -15,6 +15,8 @@
 		<GameDllPath>$(MSBuildProjectDirectory)\..\..\..\Decompiled\CobaltCore.dll</GameDllPath>
 	</PropertyGroup>
 	<ItemGroup>
+		<ModFiles Include="assets/**" />
+		<ModFiles Include="i18n/**" />
 		<PackageReference Include="Nickel.ModBuildConfig" Version="2.0.2" />
 		<PackageReference Include="EnumByNameSourceGenerator" Version="1.1.2" />
 	</ItemGroup> 
