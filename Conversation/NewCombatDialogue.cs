@@ -63,7 +63,7 @@ internal class NewCombatDialogue : IRegisterable
                 enemyShotJustHit = true,
                 maxDamageDealtToPlayerThisTurn = 0,
                 lastTurnPlayerStatuses = [Status.perfectShield],
-                
+
                 oncePerRun = true,
                 allPresent = [ AmIlleana ],
                 dialogue = [
@@ -75,7 +75,7 @@ internal class NewCombatDialogue : IRegisterable
                 enemyShotJustHit = true,
                 maxDamageDealtToPlayerThisTurn = 0,
                 lastTurnPlayerStatuses = [Status.perfectShield],
-                
+
                 oncePerRun = true,
                 allPresent = [ AmIlleana ],
                 dialogue = [
@@ -87,7 +87,7 @@ internal class NewCombatDialogue : IRegisterable
                 enemyShotJustHit = true,
                 maxDamageDealtToPlayerThisTurn = 0,
                 lastTurnPlayerStatuses = [Status.perfectShield],
-                
+
                 oncePerRun = true,
                 allPresent = [ AmIlleana ],
                 dialogue = [
@@ -538,7 +538,7 @@ internal class NewCombatDialogue : IRegisterable
                 once = true,
                 oncePerRunTags = ["goodMissileAdvice"],
                 anyDronesHostile = ["missile_normal", "missile_heavy", "missile_corrode", "missile_breacher"],
-                dialogue = [    
+                dialogue = [
                     new(AmPeri, "mad", "Shoot it down!"),
                     new(AmIlleana, "No! Full throttle!")
                 ]
@@ -1138,18 +1138,16 @@ internal class NewCombatDialogue : IRegisterable
                     new(AmIlleana, "sad", "No... I wanted turkey for dinner...")
                 ]
             }},
-            // {"EnemyPack_DougChat_Multi_0", new(){
-            //     edit = [new(EMod.countFromStart, 1, AmIlleana, "And I work off of working eyes.")]
-            // }},
-            // {"EnemyPack_DougChat_Multi_1", new(){
-            //     edit = [new(EMod.countFromStart, 1, AmIlleana, "curious", "I'm not a pirate, so what does that make you?")]
-            // }},
-            // {"EnemyPack_DougBrokePart_Multi_0", new(){
-            //     edit = [new(EMod.countFromStart, 1, AmIlleana, "sly", "If by win you mean who's the fastest to explode, then yeah.")]
-            // }},
-            // {"EnemyPack_DougBrokePart_Multi_1", new(){
-            //     edit = [new(EMod.countFromStart, 1, AmIlleana, "Thanks!")]
-            // }}
+        });
+
+        LocalDB.DumpStoryToLocalLocale("en", "urufudoggo.Weth", new Dictionary<string, DialogueMachine>()
+        {
+            {"JustPlayedASashaCard_Weth_0", new(){
+                dialogue = [
+                    new(),
+                    new(AmIlleana, "mad", "In front of me?!")
+                ]
+            }},
         });
     }
 }

@@ -371,7 +371,7 @@ internal class NewArtifactDialogue : IRegisterable
                     new([
                         new(AmPeri, "squint", "Is that written in crayon?"),
                         new(AmDizzy, "squint", "I could show you mi- hey wait that doesn't look real."),
-                        new(AmDizzy, "squint", "I'm never letting you touch my drones."),
+                        new(AmIsaac, "squint", "I'm never letting you touch my drones."),
                         new(AmMax, "You need a certificate to be an engineer?")
                     ])
                 ]
@@ -708,6 +708,54 @@ internal class NewArtifactDialogue : IRegisterable
                 dialogue = [
                     new(AmIlleana, "explain", "Behold, my masterpiece!"),
                     new(AmCat, "mad", "Is that all you've got to show for destroying half of the ship?!")
+                ]
+            }},
+            {"ArtifactHullHarvestor_Illeana_0", new(){
+                type = NodeType.combat,
+                oncePerRun = true,
+                lookup = ["hullHarvesterHarvested"],
+                oncePerCombatTags = ["hullHarvestoreded"],
+                allPresent = [ AmIlleana, AmWeth ],
+                hasArtifactTypes = [ typeof(HullHarvester) ],
+                dialogue = [
+                    new(AmIlleana, "Way to go!"),
+                    new(AmWeth, "happy", "Thanks!")
+                ]
+            }},
+            {"ArtifactHullHarvestor_Illeana_1", new(){
+                type = NodeType.combat,
+                oncePerRun = true,
+                lookup = ["hullHarvesterHarvested"],
+                oncePerCombatTags = ["hullHarvestoreded"],
+                allPresent = [ AmIlleana, AmWeth ],
+                hasArtifactTypes = [ typeof(HullHarvester) ],
+                dialogue = [
+                    new(AmIlleana, "explain", "And that's enough to make one good hull."),
+                    new(AmWeth, "isthisa", "Happy to help!")
+                ]
+            }},
+            {"ArtifactHullHarvestor_Illeana_2", new(){
+                type = NodeType.combat,
+                oncePerRun = true,
+                lookup = ["hullHarvesterHarvested"],
+                oncePerCombatTags = ["hullHarvestoreded"],
+                allPresent = [ AmIlleana, AmWeth ],
+                hasArtifactTypes = [ typeof(HullHarvester) ],
+                dialogue = [
+                    new(AmIlleana, "Who knew broken scrap could be so useful?"),
+                    new(AmWeth, "dontcare", "You've only scratched the surface.")
+                ]
+            }},
+            {"ArtifactHullHarvestor_Illeana_3", new(){
+                type = NodeType.combat,
+                oncePerRun = true,
+                lookup = ["hullHarvesterHarvested"],
+                oncePerCombatTags = ["hullHarvestoreded"],
+                allPresent = [ AmIlleana, AmWeth ],
+                hasArtifactTypes = [ typeof(HullHarvester) ],
+                dialogue = [
+                    new(AmIlleana, "I think I understand why you're so insistent on collecting debris."),
+                    new(AmWeth, "bringiton", "Join me!")
                 ]
             }},
         });

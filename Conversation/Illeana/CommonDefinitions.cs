@@ -1,7 +1,16 @@
 using System.Linq;
+using Microsoft.Extensions.Logging;
 using Nickel;
 
 namespace Illeana.Dialogue;
+
+/// <summary>
+/// For if a dialogue needs to be registered AFTER mods have been loaded
+/// </summary>
+internal interface IDialogueRegisterable
+{
+    static abstract void LateRegister();
+}
 
 static class CommonDefinitions
 {
@@ -22,7 +31,7 @@ static class CommonDefinitions
     internal const string AmVoid = "void";
     internal const string AmShopkeeper = "nerd";
     internal const string AmBrimford = "walrus";
-    internal static string AmWeth = "urufudoggo.Weth::weth";
+    internal readonly static string AmWeth = "urufudoggo.Weth::weth";
 
     internal static Status Tarnished => Instance.TarnishStatus.Status;
     internal static Status MissingIlleana => ModEntry.IlleanaTheSnek.MissingStatus.Status;
@@ -41,6 +50,24 @@ static class CommonDefinitions
         }
         return "placeholder";
     }
+
+
+    internal static Status TryGetMissing(this string who)
+    {
+        if (
+            who is not null &&
+            // ModEntry.Instance.Helper.Content.Decks.LookupByUniqueName(who) is IDeckEntry ide &&
+            // ModEntry.Instance.Helper.Content.Characters.V2.LookupByDeck(ide.Deck) is IPlayableCharacterEntryV2 ipce
+            ModEntry.Instance.Helper.Content.Characters.V2.LookupByUniqueName(who) is IPlayableCharacterEntryV2 ipce
+            )
+        {
+            return ipce.MissingStatus.Status;
+        }
+        ModEntry.Instance.Logger.LogWarning("Couldn't find a missing!");
+        return MissingIlleana;
+    }
+
+
 
 
     /// <summary>

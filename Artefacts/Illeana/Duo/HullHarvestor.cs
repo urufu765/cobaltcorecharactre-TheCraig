@@ -43,7 +43,8 @@ public class HullHarvester : Artifact
             {
                 healAmount = 1,
                 targetPlayer = true,
-                artifactPulse = Key()
+                artifactPulse = Key(),
+                dialogueSelector = ".hullHarvesterHarvested"
             });
             Depleted = true;
         }
