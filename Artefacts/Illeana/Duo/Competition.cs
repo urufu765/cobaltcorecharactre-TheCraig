@@ -21,6 +21,16 @@ public class Competition : Artifact
     public CompetitionState ComState{get; set;}
     public override Spr GetSprite()
     {
+        if (ModEntry.Instance.shoeanaMode)
+        {
+            return ComState switch
+            {
+                CompetitionState.IlleanaTiem => ModEntry.Instance.SprCompetitionShoeana,
+                CompetitionState.EddieTiem => ModEntry.Instance.SprCompetitionEddie,
+                CompetitionState.Depleted => ModEntry.Instance.SprCompetitionShoeDepleted,
+                _ => ModEntry.Instance.SprCompetitionShoe
+            };
+        }
         return ComState switch
         {
             CompetitionState.IlleanaTiem => ModEntry.Instance.SprCompetitionIlleana,

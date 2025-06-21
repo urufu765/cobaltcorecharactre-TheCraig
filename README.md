@@ -8,7 +8,7 @@ A corrosion engineer who works with corrosion to help keep the ship at tip top c
 
 #### 1.1: Illeana Duo Machine!
 
-* **(1.1.5)*: Added mod options
+* **(1.1.5)**: Added mod options (along with Ophidiophobia mode :D)
 * **(1.1.4)**: Fixed a dialogue being said by the wrong person, and added dialogue for Weth stuff
 * **(1.1.3)**: Optimized for release (not built: Changed IncludedMOdProjectPaths to ModFiles, updated ModBuildConfig)
   * **1.1.3a**: csproj fix so assets are properly copied

@@ -10,6 +10,8 @@ namespace Illeana.Cards;
 /// </summary>
 public class GoneJiffy : Card, IRegisterable
 {
+    private static Spr shoeSprite;
+
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
         helper.Content.Cards.RegisterCard(new CardConfiguration
@@ -24,6 +26,7 @@ public class GoneJiffy : Card, IRegisterable
             Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "Uncommon", "GoneJiffy", "name"]).Localize,
             Art = ModEntry.RegisterSprite(package, "assets/Card/Illeana/2/GoneInAJiffy.png").Sprite
         });
+        shoeSprite = ModEntry.RegisterSprite(package, "assets/Card/Illeana/2/GoneInAJiffyShoe.png").Sprite;
     }
 
 
@@ -101,10 +104,12 @@ public class GoneJiffy : Card, IRegisterable
             {
                 cost = 1,
                 exhaust = true,
+                art = ModEntry.Instance.shoeanaMode ? shoeSprite : null
             },
             _ => new CardData
             {
                 cost = 1,
+                art = ModEntry.Instance.shoeanaMode ? shoeSprite : null
             }
         };
     }

@@ -8,10 +8,16 @@ namespace Illeana.Artifacts;
 [ArtifactMeta(pools = new[] { ArtifactPool.Common }), DuoArtifactMeta(duoDeck = Deck.peri)]
 public class AirlockSnek : Artifact
 {
+    public override Spr GetSprite()
+    {
+        return ModEntry.Instance.shoeanaMode? ModEntry.Instance.SprAirlockShoe : base.GetSprite();
+    }
+    
     public override void OnCombatStart(State state, Combat combat)
     {
         combat.Queue(
-            new AStatus{
+            new AStatus
+            {
                 status = ModEntry.IlleanaTheSnek.MissingStatus.Status,
                 statusAmount = 2,
                 targetPlayer = true

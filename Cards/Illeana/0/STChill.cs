@@ -10,6 +10,7 @@ namespace Illeana.Cards;
 /// </summary>
 public class SnekTunezChill : Card, IRegisterable
 {
+    private static Spr shoeSprite;
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
         helper.Content.Cards.RegisterCard(new CardConfiguration
@@ -25,6 +26,8 @@ public class SnekTunezChill : Card, IRegisterable
             Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "Token", "SnekTunezChill", "name"]).Localize,
             Art = ModEntry.RegisterSprite(package, "assets/Card/Illeana/0/ChillSnekTunez.png").Sprite
         });
+
+        shoeSprite = ModEntry.RegisterSprite(package, "assets/Card/Illeana/0/ChillShoeTunez.png").Sprite;
     }
 
 
@@ -102,7 +105,8 @@ public class SnekTunezChill : Card, IRegisterable
             {
                 cost = 0,
                 singleUse = true,
-                artTint = "204ab7"
+                artTint = "204ab7",
+                art = ModEntry.Instance.shoeanaMode? shoeSprite : null
             }
         };
     }

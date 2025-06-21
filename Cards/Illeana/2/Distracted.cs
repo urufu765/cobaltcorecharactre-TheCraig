@@ -10,6 +10,8 @@ namespace Illeana.Cards;
 /// </summary>
 public class Distracted : Card, IRegisterable
 {
+    private static Spr shoeSprite;
+
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
         helper.Content.Cards.RegisterCard(new CardConfiguration
@@ -24,6 +26,7 @@ public class Distracted : Card, IRegisterable
             Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "Uncommon", "Distracted", "name"]).Localize,
             Art = ModEntry.RegisterSprite(package, "assets/Card/Illeana/3/Distracted.png").Sprite
         });
+        shoeSprite = ModEntry.RegisterSprite(package, "assets/Card/Illeana/3/DistractedShoe.png").Sprite;
     }
 
 
@@ -72,10 +75,12 @@ public class Distracted : Card, IRegisterable
             Upgrade.A => new CardData
             {
                 cost = 0,
+                art = ModEntry.Instance.shoeanaMode? shoeSprite : null
             },
             _ => new CardData
             {
                 cost = 1,
+                art = ModEntry.Instance.shoeanaMode? shoeSprite : null
             },
         };
     }

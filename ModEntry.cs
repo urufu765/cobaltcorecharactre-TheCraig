@@ -26,6 +26,8 @@ internal class ModEntry : SimpleMod
     internal IKokoroApi KokoroApi;
     internal IDeckEntry IlleanaDeck;
     internal IDeckEntry DecrepitCraigDeck;
+    internal Settings settings;
+    private IWritableFileInfo SettingsFile => Helper.Storage.GetMainStorageFile("json");
     public bool modDialogueInited;
 
     internal IStatusEntry TarnishStatus { get; private set; } = null!;
@@ -153,7 +155,9 @@ internal class ModEntry : SimpleMod
         "mini",
         "readytoeat",
         "stareatcamera",
-        "placeholder"
+        "placeholder",
+        "shoeana",
+        "shoeanamini"
     ];
     private static List<string> Illeana3Anims = [
         "giggle",
@@ -217,12 +221,18 @@ internal class ModEntry : SimpleMod
     public Spr SprEFLavailable {get; private set;}
     public Spr SprEFLdepleted {get; private set;}
     public Spr SprThurstDepleted {get; private set;}
-    public Spr SprHullHarvestDepleted {get; private set;}
+    public Spr SprAirlockShoe { get; private set; }
+    public Spr SprHullHarvestDepleted { get; private set; }
     public Spr SprCompetitionDepleted {get; private set;}
-    public Spr SprCompetitionIlleana {get; private set;}
-    public Spr SprCompetitionEddie {get; private set;}
+    public Spr SprCompetitionShoeDepleted { get; private set; }
+    public Spr SprCompetitionShoe { get; private set; }
+    public Spr SprCompetitionIlleana { get; private set; }
+    public Spr SprCompetitionShoeana {get; private set; }
+    public Spr SprCompetitionEddie { get; private set; }
 
     public LocalDB localDB { get; set; } = null!;
+
+    public bool shoeanaMode = false;
 
 
     public ModEntry(IPluginPackage<IModManifest> package, IModHelper helper, ILogger logger) : base(package, helper, logger)
@@ -239,6 +249,8 @@ internal class ModEntry : SimpleMod
         KokoroApi = helper.ModRegistry.GetApi<IKokoroApi>("Shockah.Kokoro")!;
         MoreDifficultiesApi = helper.ModRegistry.GetApi<IMoreDifficultiesApi>("TheJazMaster.MoreDifficulties");
         DuoArtifactsApi = helper.ModRegistry.GetApi<IDuoArtifactsApi>("Shockah.DuoArtifacts");
+        settings = helper.Storage.LoadJson<Settings>(SettingsFile);
+
 
         helper.Events.OnModLoadPhaseFinished += (_, phase) =>
         {
@@ -374,7 +386,7 @@ internal class ModEntry : SimpleMod
 
         KokoroApi.V2.ActionCosts.RegisterStatusResourceCostIcon(TarnishStatus.Status, RegisterSprite(package, "assets/tarnish_pay.png").Sprite, RegisterSprite(package, "assets/tarnish_cost.png").Sprite);
         KokoroApi.V2.ActionCosts.RegisterStatusResourceCostIcon(Status.corrode, RegisterSprite(package, "assets/corrode_pay.png").Sprite, RegisterSprite(package, "assets/corrode_cost.png").Sprite);
-        
+
         /*
          * Characters have required animations, recommended animations, and you have the option to add more.
          * In addition, they must be registered before the character themselves is registered.
@@ -431,7 +443,7 @@ internal class ModEntry : SimpleMod
                 new Exposure(),
                 new FalseVaccine()
             ],
-            artifacts = 
+            artifacts =
             [
                 new LightenedLoad()
             ]
@@ -496,10 +508,14 @@ internal class ModEntry : SimpleMod
         SprEFLdepleted = RegisterSprite(package, "assets/Artifact/ExternalFuelSourceDepleted.png").Sprite;
         SprThurstDepleted = RegisterSprite(package, "assets/Artifact/ThrustThurstersDepleted.png").Sprite;
         SprHullHarvestDepleted = RegisterSprite(package, "assets/Artifact/HullHarvesterDepleted.png").Sprite;
+        SprAirlockShoe = RegisterSprite(package, "assets/Artifact/AirlockShoe.png").Sprite;
+        SprCompetitionShoeana = RegisterSprite(package, "assets/Artifact/CompetitionShoeana.png").Sprite;
+        SprCompetitionShoe = RegisterSprite(package, "assets/Artifact/CompetitionShoe.png").Sprite;
+        SprCompetitionShoeDepleted = RegisterSprite(package, "assets/Artifact/CompetitionShoeDepeleted.png").Sprite;
         SprCompetitionIlleana = RegisterSprite(package, "assets/Artifact/CompetitionIlleana.png").Sprite;
         SprCompetitionEddie = RegisterSprite(package, "assets/Artifact/CompetitionEddie.png").Sprite;
         SprCompetitionDepleted = RegisterSprite(package, "assets/Artifact/CompetitionDepleted.png").Sprite;
-        
+
         /*
          * All the IRegisterable types placed into the static lists at the start of the class are initialized here.
          * This snippet invokes all of them, allowing them to register themselves with the package and helper.
@@ -513,7 +529,33 @@ internal class ModEntry : SimpleMod
         ThrustMaster.Apply(Harmony);
         HeatpumpLubricator.Apply(Harmony);
         ShardStorageUnlimiter.Apply(Harmony);
+        IlleanaClock.Apply(Harmony);
+        SwapTheAnimation.Apply(Harmony);
         // SetXRenderer.Apply(Harmony);
+
+
+        helper.ModRegistry.AwaitApi<IModSettingsApi>(
+            "Nickel.ModSettings",
+            api => api.RegisterModSettings(api.MakeList([
+                api.MakeProfileSelector(
+                    () => package.Manifest.DisplayName ?? package.Manifest.UniqueName,
+                    settings.ProfileBased
+                ),
+                api.MakeCheckbox(
+                    () => Localizations.Localize(["settings", "AntiSnakeMode", "name"]),
+                    () => settings.ProfileBased.Current.AntiSnakeMode,
+                    (_, _, value) => settings.ProfileBased.Current.AntiSnakeMode = value
+                ).SetTooltips(() => [
+                    new GlossaryTooltip("illeanasettings.antisnakemode")
+                    {
+                        Description = Localizations.Localize(["settings", "AntiSnakeMode", "desc"])
+                    }
+                ])
+            ]).SubscribeToOnMenuClose(_ =>
+            {
+                helper.Storage.SaveJson(SettingsFile, settings);
+            }))
+        );
     }
 
     /*

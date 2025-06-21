@@ -317,5 +317,11 @@
                 "descB": "Deposit ({0}) hull and max hull with 100% interest.\n+1 when you flip the card (Max: All but 1 max hull)."
             }
         }
+    },
+    "settings": {
+        "AntiSnakeMode": {
+            "name": "Ophidiophobia Mode",
+            "desc": "Hides snake and snake-related content... by finding a suitable replacement."
+        }
     }
 }
