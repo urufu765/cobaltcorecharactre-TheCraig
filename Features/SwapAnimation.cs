@@ -18,10 +18,10 @@ public static class SwapTheAnimation
     {
         if (__instance.type != ModEntry.IlleanaTheSnek.CharacterType) return;
 
-        if (IlleanaClock.Clocked(10))
+        if (IlleanaClock.Clocked(15))
         {
             ModEntry.Instance.shoeanaMode = ModEntry.Instance.settings.ProfileBased.Current.AntiSnakeMode;
-            ModEntry.Instance.Logger.LogInformation("Shoeana mode is now {Mode}", ModEntry.Instance.shoeanaMode);
+            //ModEntry.Instance.Logger.LogInformation("Shoeana mode is now {Mode}", ModEntry.Instance.shoeanaMode);
         }
 
         if (ModEntry.Instance.shoeanaMode)
