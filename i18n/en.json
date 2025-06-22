@@ -8,7 +8,17 @@
         "DeadCraig":
         {
             "name": "Decrepit",
-            "desc": "<c=41b5ae>Craig</c>\nYour docking expert. Her cards manipulate the <c=keyword>midrow</c> and <c=keyword>ship positioning</c> with her handy <c=keyword>Robo-hand</c>."
+            "desc": "<c=41b5ae>...</c>"
+        },
+        "Craig":
+        {
+            "name": "Craig",
+            "desc": "<c=41b5ae>CRAIG</c>\nYour docking expert. Her cards manipulate the <c=keyword>midrow</c> and <c=keyword>ship positioning</c> with her handy <c=keyword>Robo-hand</c>."
+        },
+        "lisard":
+        {
+            "name": "//lisard.exe",
+            "desc": "<c=45e2b0>lisard.exe</c>\nCraig's prototype computer persona. May suggest crazy things."
         }
     },
     "status": {

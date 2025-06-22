@@ -16,17 +16,17 @@ public static class SwapTheAnimation
 
     private static void FaceSwapper(Character __instance, ref string animTag, bool mini = false)
     {
-        if (__instance.type != ModEntry.IlleanaTheSnek.CharacterType) return;
-
-        if (IlleanaClock.Clocked(15))
+        if (__instance.type == ModEntry.IlleanaTheSnek.CharacterType)
         {
-            ModEntry.Instance.shoeanaMode = ModEntry.Instance.settings.ProfileBased.Current.AntiSnakeMode;
-            //ModEntry.Instance.Logger.LogInformation("Shoeana mode is now {Mode}", ModEntry.Instance.shoeanaMode);
-        }
+            if (IlleanaClock.Clocked(15))
+            {
+                ModEntry.Instance.shoeanaMode = ModEntry.Instance.settings.ProfileBased.Current.AntiSnakeMode;
+            }
 
-        if (ModEntry.Instance.shoeanaMode)
-        {
-            animTag = mini ? "shoeanamini" : "shoeana";
+            if (ModEntry.Instance.shoeanaMode)
+            {
+                animTag = mini ? "shoeanamini" : "shoeana";
+            }
         }
     }
 }

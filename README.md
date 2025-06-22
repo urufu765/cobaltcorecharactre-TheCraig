@@ -6,6 +6,10 @@ A corrosion engineer who works with corrosion to help keep the ship at tip top c
 
 ### PUBLIC
 
+#### 1.2: Illeana Story
+
+* **dev.1**: Let us break out the story. Todo: stories, a lot of new sprites that aren't Illeana, backgrounds, maybe even a playable ship?
+
 #### 1.1: Illeana Duo Machine!
 
 * **(1.1.5)**: Added mod options (along with Ophidiophobia mode :D)

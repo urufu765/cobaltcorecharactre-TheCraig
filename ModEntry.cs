@@ -12,228 +12,11 @@ using Illeana.External;
 using Illeana.Features;
 using System.Reflection;
 using Illeana.Dialogue;
-using System.Diagnostics;
-//using System.Reflection;
 
 namespace Illeana;
 
-internal class ModEntry : SimpleMod
+internal partial class ModEntry : SimpleMod
 {
-    internal static ModEntry Instance { get; private set; } = null!;
-    internal static IPlayableCharacterEntryV2 IlleanaTheSnek { get; private set; } = null!;
-    internal string UniqueName { get; private set; }
-    internal Harmony Harmony;
-    internal IKokoroApi KokoroApi;
-    internal IDeckEntry IlleanaDeck;
-    internal IDeckEntry DecrepitCraigDeck;
-    internal Settings settings;
-    private IWritableFileInfo SettingsFile => Helper.Storage.GetMainStorageFile("json");
-    public bool modDialogueInited;
-
-    internal IStatusEntry TarnishStatus { get; private set; } = null!;
-    internal IStatusEntry SnekTunezStatus { get; private set; } = null!;
-    internal IStatusEntry ExcessShardStatus { get; private set; } = null!;
-
-    internal ILocalizationProvider<IReadOnlyList<string>> AnyLocalizations { get; }
-    internal ILocaleBoundNonNullLocalizationProvider<IReadOnlyList<string>> Localizations { get; }
-    internal IMoreDifficultiesApi? MoreDifficultiesApi {get; private set; } = null!;
-    internal IDuoArtifactsApi? DuoArtifactsApi {get; private set;} = null!;
-
-    /*
-     * The following lists contain references to all types that will be registered to the game.
-     * All cards and artifacts must be registered before they may be used in the game.
-     * In theory only one collection could be used, containing all registerable types, but it is seperated this way for ease of organization.
-     */
-    private static List<Type> IlleanaCommonCardTypes = [
-        typeof(BuildCure),
-        typeof(Cleanse),
-        typeof(Exposure),
-        typeof(UntestedSubstance),
-        typeof(Autotomy),
-        typeof(ScrapPatchkit),
-        typeof(FalseVaccine),
-        typeof(IncompatibleFuel),
-        typeof(FindCure),
-        typeof(IlleanaExe)
-    ];
-    private static List<Type> IlleanaUncommonCardTypes = [
-        typeof(GoneJiffy),
-        typeof(Amputation),
-        typeof(DeadlyAdrenaline),
-        typeof(PartSwap),
-        typeof(Distracted),
-        typeof(Disinfect),
-        typeof(AcidicPackage),
-        typeof(AcidBackflow)
-    ];
-    private static List<Type> IlleanaRareCardTypes = [
-        typeof(MakeshiftHull),
-        typeof(GreatHealing),
-        typeof(ImmunityShot),
-        typeof(LacedYoFood),
-        typeof(WeaponisedPatchkit),
-        typeof(ImprovisedTiming)
-    ];
-    private static List<Type> IlleanaSpecialCardTypes = [
-        typeof(TheCure),
-        typeof(TheSolution),
-        typeof(TheFailure),
-        typeof(TheAccident),
-        typeof(SnekTunezChill),
-        typeof(SnekTunezHype),
-        typeof(SnekTunezSad),
-        typeof(SnekTunezGroovy),
-        typeof(SnekTunezPlaceholder),
-        typeof(Reminiscent),
-        typeof(Coalescent),
-        typeof(Obmutescent),
-        typeof(PerfectShieldColourless),
-        typeof(CreditCard)
-    ];
-    private static IEnumerable<Type> IlleanaCardTypes =
-        IlleanaCommonCardTypes
-            .Concat(IlleanaUncommonCardTypes)
-            .Concat(IlleanaRareCardTypes)
-            .Concat(IlleanaSpecialCardTypes);
-
-    private static List<Type> IlleanaCommonArtifacts = [
-        typeof(ForgedCertificate),
-        typeof(ByproductProcessor),
-        // typeof(TarnishedSyringe),
-        typeof(CausticArmor),
-        typeof(ExperimentalLubricant),
-        typeof(ExternalFuelSource),
-        typeof(SportsStereo),
-        typeof(DigitalizedStereo)
-    ];
-    private static List<Type> IlleanaBossArtifacts = [
-        // typeof(ConstantInnovation),
-        // typeof(Limbless),
-        typeof(PersonalStereo),
-        typeof(Tempoboosters),
-        typeof(WarpPrototype)
-    ];
-    private static List<Type> IlleanaEventArtifacts = [
-        typeof(LightenedLoad),
-        //typeof(ToxicSports)
-    ];
-    private static List<Type> IlleanaDuoArtifacts = [
-        typeof(ReusableScrap),  // Dizzy
-        typeof(ThrustThursters),  // Riggs
-        typeof(AirlockSnek),  // Peri
-        typeof(ExtraSlip),  // Max
-        typeof(PerfectedProtection),  // CAT
-        typeof(SuperInjection),  // Isaac
-        typeof(LubricatedHeatpump),  // Drake
-        typeof(UnprotectedStorage),  // Books
-        typeof(HullHarvester),  // Weth
-        typeof(Competition),  // Eddie
-        typeof(BountifulBloodBank),  // Dracula
-    ];
-    private static List<Type> IlleanaDialogueTypes = [
-        typeof(NewCombatDialogue),
-        typeof(NewArtifactDialogue),
-        typeof(NewEventDialogue),
-        typeof(NewCardDialogue),
-        typeof(NewStoryDialogue)
-    ];
-    private static IEnumerable<Type> IlleanaArtifactTypes =
-        IlleanaCommonArtifacts
-            .Concat(IlleanaBossArtifacts)
-            .Concat(IlleanaEventArtifacts)
-            .Concat(IlleanaDuoArtifacts);
-
-    private static IEnumerable<Type> AllRegisterableTypes =
-        IlleanaCardTypes
-            .Concat(IlleanaArtifactTypes)
-            .Concat(IlleanaDialogueTypes)
-            ;
-
-    private static List<string> Illeana1Anims = [
-        "gameover",
-        "knife",
-        "mini",
-        "readytoeat",
-        "stareatcamera",
-        "placeholder",
-        "shoeana",
-        "shoeanamini"
-    ];
-    private static List<string> Illeana3Anims = [
-        "giggle",
-        "nap",
-        //"screamA",
-        "screamB",
-        //"screamC",
-    ];
-    private static List<string> Illeana4Anims = [
-        "curious",
-        "explain",
-        "holdcable",
-        "intense",
-        "mad",
-        "neutral",
-        "panic",
-        "shocked",
-        "sly",
-        "solemn",
-        "squint",
-        "tired",
-    ];
-    private static List<string> Illeana5Anims = [
-        "possessed",
-        "possessedmad",
-        "sad",
-        "silly",
-    ];
-    private static List<string> Illeana6Anims = [
-        "salavating",
-        "blinkrapid",
-        //"headbang"
-    ];
-    public readonly static IEnumerable<string> IlleanaAnims =
-        Illeana1Anims
-            .Concat(Illeana3Anims)
-            .Concat(Illeana4Anims)
-            .Concat(Illeana5Anims)
-            .Concat(Illeana6Anims);
-
-    public Spr SprStolenOn {get; private set;}
-    public Spr SprStolenChill {get; private set;}
-    public Spr SprStolenHype {get; private set;}
-    public Spr SprStolenSad {get; private set;}
-    public Spr SprStolenGroovy {get; private set;}
-    public Spr SprSportsOn {get; private set;}
-    public Spr SprSportsChill {get; private set;}
-    public Spr SprSportsHype {get; private set;}
-    public Spr SprSportsSad {get; private set;}
-    public Spr SprSportsGroovy {get; private set;}
-    public Spr SprDigitalOn {get; private set;}
-    public Spr SprDigitalChill {get; private set;}
-    public Spr SprDigitalHype {get; private set;}
-    public Spr SprDigitalSad {get; private set;}
-    public Spr SprDigitalGroovy {get; private set;}
-    public Spr SprBoostrE {get; private set;}
-    public Spr SprBoostrB {get; private set;}
-    public Spr SprBoostrO {get; private set;}
-    public Spr SprExLubeO {get; private set;}
-    public Spr SprExLubeX {get; private set;}
-    public Spr SprEFLavailable {get; private set;}
-    public Spr SprEFLdepleted {get; private set;}
-    public Spr SprThurstDepleted {get; private set;}
-    public Spr SprAirlockShoe { get; private set; }
-    public Spr SprHullHarvestDepleted { get; private set; }
-    public Spr SprCompetitionDepleted {get; private set;}
-    public Spr SprCompetitionShoeDepleted { get; private set; }
-    public Spr SprCompetitionShoe { get; private set; }
-    public Spr SprCompetitionIlleana { get; private set; }
-    public Spr SprCompetitionShoeana {get; private set; }
-    public Spr SprCompetitionEddie { get; private set; }
-
-    public LocalDB localDB { get; set; } = null!;
-
-    public bool shoeanaMode = false;
-
 
     public ModEntry(IPluginPackage<IModManifest> package, IModHelper helper, ILogger logger) : base(package, helper, logger)
     {
@@ -341,6 +124,11 @@ internal class ModEntry : SimpleMod
             OverBordersSprite = RegisterSprite(package, "assets/frame_dead_overlay.png").Sprite,
             Name = AnyLocalizations.Bind(["character", "DeadCraig", "name"]).Localize
         });
+        IlleanaEnd = RegisterSprite(package, "assets/Memry/illeana_end.png").Sprite;
+        IlloodleEnd = RegisterSprite(package, "assets/Memry/illoodle_end.png").Sprite;
+        ShoeanaEnd = RegisterSprite(package, "assets/Memry/shoeana_end.png").Sprite;
+        Vault.charsWithLore.Add(IlleanaDeck.Deck);
+        BGRunWin.charFullBodySprites.Add(IlleanaDeck.Deck, IlleanaEnd);
 
         /*
          * Statuses are used to achieve many mechanics.
@@ -394,26 +182,33 @@ internal class ModEntry : SimpleMod
          * The game uses the squint animation for the Extra-Planar Being and High-Pitched Static events, and the gameover animation while you are dying.
          * You may define any other animations, and they will only be used when explicitly referenced (such as dialogue).
          */
-        foreach (string s1 in Illeana1Anims)
+        foreach (KeyValuePair<int, List<string>> anims in IlleanaSnekAnims)
         {
-            RegisterAnimation(package, s1, $"assets/Animation/illeana_{s1}", 1);
+            foreach (string anim in anims.Value)
+            {
+                RegisterAnimation(IlleanaDeck.Deck.Key(), package, anim, $"assets/Animation/illeana_{anim}", anims.Key);
+            }
         }
-        foreach (string s3 in Illeana3Anims)
-        {
-            RegisterAnimation(package, s3, $"assets/Animation/illeana_{s3}", 3);
-        }
-        foreach (string s4 in Illeana4Anims)
-        {
-            RegisterAnimation(package, s4, $"assets/Animation/illeana_{s4}", 4);
-        }
-        foreach (string s5 in Illeana5Anims)
-        {
-            RegisterAnimation(package, s5, $"assets/Animation/illeana_{s5}", 5);
-        }
-        foreach (string s6 in Illeana6Anims)
-        {
-            RegisterAnimation(package, s6, $"assets/Animation/illeana_{s6}", 6);
-        }
+        // foreach (string s1 in Illeana1Anims)
+        // {
+        //     RegisterAnimation(package, s1, $"assets/Animation/illeana_{s1}", 1);
+        // }
+        // foreach (string s3 in Illeana3Anims)
+        // {
+        //     RegisterAnimation(package, s3, $"assets/Animation/illeana_{s3}", 3);
+        // }
+        // foreach (string s4 in Illeana4Anims)
+        // {
+        //     RegisterAnimation(package, s4, $"assets/Animation/illeana_{s4}", 4);
+        // }
+        // foreach (string s5 in Illeana5Anims)
+        // {
+        //     RegisterAnimation(package, s5, $"assets/Animation/illeana_{s5}", 5);
+        // }
+        // foreach (string s6 in Illeana6Anims)
+        // {
+        //     RegisterAnimation(package, s6, $"assets/Animation/illeana_{s6}", 6);
+        // }
 
         IlleanaTheSnek = helper.Content.Characters.V2.RegisterPlayableCharacter("illeana", new PlayableCharacterConfigurationV2
         {
@@ -436,6 +231,35 @@ internal class ModEntry : SimpleMod
             Description = AnyLocalizations.Bind(["character", "Illeana", "desc"]).Localize,
             ExeCardType = typeof(IlleanaExe)
         });
+
+        CraigTheSnek = helper.Content.Characters.V2.RegisterNonPlayableCharacter("craigsnek", new NonPlayableCharacterConfigurationV2
+        {
+            CharacterType = "craigsnek",
+            Name = AnyLocalizations.Bind(["character", "Craig", "name"]).Localize,
+            BorderSprite = RegisterSprite(package, "assets/char_frame_craig.png").Sprite,
+        });
+
+        LisardEXE = helper.Content.Characters.V2.RegisterNonPlayableCharacter("lisardexe", new NonPlayableCharacterConfigurationV2
+        {
+            CharacterType = "lisardexe",
+            Name = AnyLocalizations.Bind(["character", "lisard", "name"]).Localize,
+            BorderSprite = RegisterSprite(package, "assets/char_frame_lisard.png").Sprite,
+        });
+        foreach (KeyValuePair<int, List<string>> anims in CraigAnims)
+        {
+            foreach (string anim in anims.Value)
+            {
+                RegisterAnimation(CraigTheSnek.CharacterType, package, anim, $"assets/Animation/craig_{anim}", anims.Key);
+            }
+        }
+        foreach (KeyValuePair<int, List<string>> anims in LisardAnims)
+        {
+            foreach (string anim in anims.Value)
+            {
+                RegisterAnimation(LisardEXE.CharacterType, package, anim, $"assets/Animation/lisard_{anim}", anims.Key);
+            }
+        }
+
 
         MoreDifficultiesApi?.RegisterAltStarters(IlleanaDeck.Deck, new StarterDeck
         {
@@ -531,6 +355,7 @@ internal class ModEntry : SimpleMod
         ShardStorageUnlimiter.Apply(Harmony);
         IlleanaClock.Apply(Harmony);
         SwapTheAnimation.Apply(Harmony);
+        ReplaceSnakeBodyArt.Apply(Harmony);
         // SetXRenderer.Apply(Harmony);
 
 
@@ -580,6 +405,18 @@ internal class ModEntry : SimpleMod
         return Instance.Helper.Content.Characters.V2.RegisterCharacterAnimation(new CharacterAnimationConfigurationV2
         {
             CharacterType = Instance.IlleanaDeck.Deck.Key(),
+            LoopTag = tag,
+            Frames = Enumerable.Range(0, frames)
+                .Select(i => RegisterSprite(package, dir + i + ".png").Sprite)
+                .ToImmutableList()
+        });
+    }
+
+    public static ICharacterAnimationEntryV2 RegisterAnimation(string type, IPluginPackage<IModManifest> package, string tag, string dir, int frames)
+    {
+        return Instance.Helper.Content.Characters.V2.RegisterCharacterAnimation(new CharacterAnimationConfigurationV2
+        {
+            CharacterType = type,
             LoopTag = tag,
             Frames = Enumerable.Range(0, frames)
                 .Select(i => RegisterSprite(package, dir + i + ".png").Sprite)

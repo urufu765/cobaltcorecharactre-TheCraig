@@ -18,8 +18,9 @@ static class CommonDefinitions
 
     internal static string AmIlleana => Instance.IlleanaDeck.UniqueName;
     internal static Deck AmIlleanaDeck => Instance.IlleanaDeck.Deck;
-    internal static string AmCraig = "craig";  // Change to deck uniquename
+    internal static string AmCraig => ModEntry.CraigTheSnek.CharacterType;
     internal const string AmUnknown = "johndoe";
+    internal static string AmLisard => ModEntry.LisardEXE.CharacterType;
     internal const string AmCat = "comp";
     internal static string AmDizzy => Deck.dizzy.Key();
     internal static string AmPeri => Deck.peri.Key();
