@@ -1,6 +1,6 @@
-using static Illeana.Dialogue.CommonDefinitions;
+using static Illeana.Conversation.CommonDefinitions;
 
-namespace Illeana.Dialogue;
+namespace Illeana.Conversation;
 
 internal static class MemoryDialogue
 {

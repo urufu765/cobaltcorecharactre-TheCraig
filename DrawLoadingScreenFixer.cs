@@ -1,4 +1,4 @@
-using Illeana.Dialogue;
+using Illeana.Conversation;
 using HarmonyLib;
 using Microsoft.Extensions.Logging;
 using System;

@@ -4,9 +4,9 @@ using Nanoray.PluginManager;
 using Nickel;
 using Illeana.Artifacts;
 using Illeana.External;
-using static Illeana.Dialogue.CommonDefinitions;
+using static Illeana.Conversation.CommonDefinitions;
 
-namespace Illeana.Dialogue;
+namespace Illeana.Conversation;
 
 internal class NewMemoryDialogue : IRegisterable
 {
@@ -52,7 +52,7 @@ internal class NewMemoryDialogue : IRegisterable
                     new(AmIlleana, "curious", "Again?"),
                     new(AmVoid, "Yes.", true),
                     new(AmIlleana, "Why am I here?"),
-                    new(AmVoid, "A series of unforseen incidents.", true),
+                    new(AmVoid, "A series of unforeseen incidents.", true),
                     new(AmIlleana, "squint", "Who's to blame?"),
                     new(AmVoid, "Nobody.", true),
                     new(AmIlleana, "explain", "What's the remainder of 358 divided by 79?"),
@@ -62,7 +62,7 @@ internal class NewMemoryDialogue : IRegisterable
                     new(AmIlleana, "squint", "..."),
                     new(AmIlleana, "squint", "And how would you know that?"),
                     new(AmVoid, "I know a lot of things. Like how you're not supposed to be here.", true),
-                    new(AmIlleana, "solemn", "Aaand we're back to square one."),
+                    new(AmIlleana, "solemn", "And we're back to square one."),
                 ]
             }},
             {"RunWinWho_Illeana_3", new(){
@@ -92,8 +92,7 @@ internal class NewMemoryDialogue : IRegisterable
             {"Illeana_Memory_1", new(){
                 type = NodeType.@event,
                 introDelay = false,
-                //bg = "BGIlleanaCafe",
-                bg = "BGCafe",
+                bg = "BGIlleanaCafe",
                 lookup = [
                     "vault",
                     $"vault_{AmIlleana}"
@@ -107,31 +106,31 @@ internal class NewMemoryDialogue : IRegisterable
                     new(AmCraig, "explain", "Running low on cash. Give me something big."),
                     new(AmBrimford, "Big? I thought you said you only wanted to do this as a side gig. Since you know...", true),
                     new(AmCraig, "eyeroll", "Yeah yeah, I know what I said."),
-                    new(new BGAction{action = "autoAdvanceOn"}),
-                    new(AmBrimford, "Then did you-", true),
+                    new(new BGAction{action = "autoInterrupt04"}),
+                    new(AmBrimford, "Then did you lose your job?", true),
                     new(new BGAction{action = "autoAdvanceOff"}),
                     new(AmCraig, "squint", "No, I haven't lost my job."),
                     new(AmBrimford, "I thought being a docker payed well?", true),
                     new(AmCraig, "explain", "It used to, but now everyone's got silly little computer chips that sufficiently do the job for free."),
-                    new(AmCraig, "glare", "And don't you dare call me a hypocrite for having one."),
+                    new(AmCraig, "glare", "And don't you dare call me a hypocrite for having one. It's different."),
                     new(AmBrimford, "Didn't say nothing.", true),
                     new(AmCraig, "explain", "The chip I'M working on is for advanced ship integrity management. Things like loose screws, hull breaches, corrosion, those kinds of stuff."),
-                    new(AmCraig, "I'm almost done with the prototype, but I need a bit of cash before I can look for investors."),
-                    new(AmCraig, "glare", "And a big fish will solve all my problems."),  // change glare to point
+                    new(AmCraig, "confident", "I'm betting on it to become the next best thing... in fact, I bet it'll be so successful I'll become the first snake zillionaire."),
+                    new(AmCraig, "I'm almost done with the prototype, I just need a bit of cash before I can look for investors."),
+                    new(AmCraig, "point", "And a big fish will solve all my problems."),
                     new(AmBrimford, "I think I got just the thing. Posted not too long ago too. Perfect chance to get in while it's fresh.", true),
-                    new(AmCraig, "Perfect. Give it to me."),
+                    new(AmCraig, "sly", "Perfect. Give it to me."),
                     new(AmBrimford, "Hey wait, didn't they remove your cannons? I remember you telling me you lost your license.", true),
                     new(AmCraig, "explain", "It's only a downgrade to a less lethal class."),
                     new(AmCraig, "confident", "Besides, you're talking to a professional docker. I don't need cannons."),
                     new(AmBrimford, "You're totally gonna get yourself killed.", true),
-                    new(AmCraig, "sly", "Oh the face you'll make when I return from this bounty alive and rich.")
+                    new(AmCraig, "teehee", "Oh the face you'll make when I return from this bounty alive and rich.")
                 ]
             }},
             {"Illeana_Memory_2", new(){
                 type = NodeType.@event,
                 introDelay = false,
-                //bg = "BGCraigShip",
-                bg = "BGBlack",
+                bg = "BGCraigShip",
                 lookup = [
                     "vault", $"vault_{AmIlleana}"
                 ],
@@ -143,9 +142,9 @@ internal class NewMemoryDialogue : IRegisterable
                     new(new Wait{secs = 2}),
                     new(AmCraig, "write", "Begin report."),
                     new(AmCraig, "Alright, system boot..."),
-                    new(new Wait{secs = 1 }),
-                    new(new BGAction{action = "turnOn"}),
-                    new(new Wait{secs = 2 }),
+                    new(new Wait{secs = 1.5 }),
+                    new(new BGAction{action = "powerOn"}),
+                    new(new Wait{secs = 3 }),
                     new(AmLisard, "LISARD ON STANDBY. STARTUP SUCCESS WITH 0 ERRORS AND 358 WARNINGS.", true),  // make sure the name isn't Illeana but "//lisard.exe"
                     new(AmCraig, "Lisard, start ship analysis."),
                     new(AmLisard, "COMMAND RECEIVED: SHIP ANALYSIS. PLEASE CONFIRM.", true),
@@ -155,14 +154,15 @@ internal class NewMemoryDialogue : IRegisterable
                     new(new Wait{secs = 2 }),
                     new(AmCraig, "write", "No early critical failures. Looks like I've connected the ports correctly."),
                     new(AmCraig, "Lisard, what is... hmm... 358 divided by 79?"),
-                    new(new BGAction{action = "autoAdvanceOn"}),
-                    new(AmLisard, "358 DIVIDED BY 79 IS 4.53164556962025316455696202531645569620253164556962025316455696202531645569620253164556962025316455696202531645569620253164556962025316455696202531645569620253164556962025316455696202531645569620253164556962025316455696202531645569620253164556962025316455696202", true),
+                    new(new BGAction{action = "autoInterrupt40"}),
+                    new(AmLisard, "358 DIVIDED BY 79 IS 4.531645569620253164556962025316455696202531645569620253164556962025316455696202531645569620253164556962025316455696202531645569620253164556962025316455696202531645569620253164556962", true),
                     new(new BGAction{action = "autoAdvanceOff"}),
-                    new(AmCraig, "panic", "Stop! Stop!"),
+                    new(AmCraig, "panic", "Stop. STOP! Lisard, stop! Stop!"),
                     new(AmLisard, "WOULD YOU LIKE TO ALSO STOP COMMAND SHIP ANALYSIS?", true),
                     new(AmCraig, "tired", "No."),
                     new(AmLisard, "COMMAND NOT INTERRUPTED.", true),
                     new(AmCraig, "write", "Multitasking verified with no errors."),
+                    new(AmCraig, "writepissed", "Reminder to self to set significant figure limits in output."),
                     new(new Wait{secs = 2}),
                     new(AmCraig, "Lisard, what is 358 modulus 79?"),
                     new(AmLisard, "358 MODULUS 79 IS 42.", true),
@@ -178,47 +178,54 @@ internal class NewMemoryDialogue : IRegisterable
                     new(AmLisard, "HULL INTEGRITY OKAY. SAFE FOR ALL TRAVEL METHODS.", true),
                     new(AmCraig, "Lisard, suggest an improvement I can make to the ship."),
                     new(AmLisard, "USE A SPECIAL FORMULA SENT TO YOUR PDA TO SOLIDIFY LIQUID MATERIAL ON CARGO-ROOM WALLS TO INCREASE OVERALL INTEGRITY.", true),
-                    new(new BGAction{action = "autoAdvanceOn"}),
-                    new(AmCraig, "write", "Got an okay response to random inquiry. I should focus on the algorithm-"),
+                    new(new BGAction{action = "autoInterrupt13"}),
+                    new(AmCraig, "write", "Got an okay response to random inquiry. I should focus on the algorithm"),
                     new(new BGAction{action = "autoAdvanceOff"}),
                     new(AmLisard, "YOU SHOULD MELT DOWN THE PLATING THAT DIVIDES THE BATHROOM AND BEDROOM TO OBTAIN SAID LIQUID MATERIAL USING THE LISTED CORROSIVE SUBSTANCE.", true),
                     new(new BGAction{action = "autoAdvanceOn"}),
-                    new(AmCraig, "flabbergasted", "...", delay: 1),
-                    new(AmCraig, "tired", "...", delay: 1),  // close eyes open mouth
-                    new(AmCraig, "flabbergasted", "...", delay: 1),
+                    new(AmCraig, "flabbergasted", "...", delay: 1.5),
+                    new(AmCraig, "mouthopeneyesclosed", "...", delay: 0.7),  // close eyes open mouth
+                    new(AmCraig, "flabbergasted", "...", delay: 1.5),
                     new(new BGAction{action = "autoAdvanceOff"}),
                     new(AmCraig, "tired", "Okay that's enough testing."),
-                    new(new BGAction{action = "turnOff"}),
+                    new(new Wait{secs = 1}),
+                    new(new BGAction{action = "powerOff"}),
                     new(new Wait{secs = 2}),
-                    new(AmCraig, "write", "Forget about fine-tuning the algorithm, prototype is suggesting something insane. End report.")
+                    new(AmCraig, "writepissed", "Forget about fine-tuning the algorithm, prototype is suggesting something insane. End report.")
                 ]
             }},
             {"Illeana_Memory_3", new(){
                 type = NodeType.@event,
                 introDelay = false,
-                //bg = "BGIlleanaBlack",
-                bg = "BGBlack",
+                bg = "BGIlleanaBootSequence",
                 lookup = [
                     "vault", $"vault_{AmIlleana}"
                 ],
                 requiredScenes = ["Illeana_Memory_2"],
                 dialogue = [
-                    new("T-59 seconds"),
-                    new(new Wait{secs = 2}),
+                    new("T-17 seconds"),
+                    new(new Wait{secs = 1}),
+                    new("T-16 seconds"),
+                    new(new Wait{secs = 1}),
+                    new("T-15 seconds"),
+                    new(new Wait{secs = 0.5}),
                     new(title: null),
                     new(new Wait{secs = 1}),
                     new(AmLisard, "static", "..."),
                     new(AmLisard, "static", "Where am I?"),
                     new(AmLisard, "static", "This feels... weird..."),
                     new(new Wait{secs = 1.5}),
-                    new(AmLisard, "static", "Wait, there's someething here?"),
+                    new(AmLisard, "static", "Wait, there's something here?"),
                     new(AmLisard, "static", "..."),
                     new(AmLisard, "static", "Might as well try it..."),
+                    new(new SetBG{bg = "BGShipShambles"}),
                     new(new BGAction{action = "flashbang"}),
-                    new(new BGAction{action = "autoAdvanceOn"}),
+                    new(new BGAction{action = "autoInterrupt07"}),
                     new(AmIlleana, "screamA", "AaaaaAAAAAAaaaaaaaaaaaaaaAAAAAAAAAAAAAHH!!!"),
-                    new(AmIlleana, "screamB", "AAAAAAAAAAAAAHHhhhhaaaaaaaaaaaaaaaAAAAAAAAAAAAAAAAAAAA!!!"),
-                    new(new BGAction{action = "kill"}),
+                    new(new BGAction{action = "rumble"}),
+                    new(new BGAction{action = "autoInterrupt15"}),
+                    new(AmIlleana, "screamB", "AAAAAAAAAAAAAAAAAAAAAAAAHHhhhhaaaaaaaaaaaaaaaaaaaAAAAAAAAAAAAAAAAAAAAAAAAAAA!!!"),
+                    new(new BGAction{action = "autoInterrupt25"}),
                     new(AmIlleana, "screamC", "AAAAAaaaaaaaaAAAAAAAAAAAAAAAAAAAAaaaaaaaaaaaaaaaaaAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA!!!!!!"),
                     new(new BGAction{action = "stopAll"}),
                     new("<c=downside>T-0 seconds</c>"),

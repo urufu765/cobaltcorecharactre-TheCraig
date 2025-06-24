@@ -11,7 +11,7 @@ using Illeana.Cards;
 using Illeana.External;
 using Illeana.Features;
 using System.Reflection;
-using Illeana.Dialogue;
+using Illeana.Conversation;
 
 namespace Illeana;
 
@@ -212,7 +212,7 @@ internal partial class ModEntry : SimpleMod
         {1, [
             //"mini"
             "flabbergasted",
-            //"mouthopeneyeclosed",
+            //"mouthopeneyesclosed",
             "penthink",
         ]},
         {4, [
@@ -227,9 +227,11 @@ internal partial class ModEntry : SimpleMod
             "glare",
             "sly",
             "write",  // Delete one column to the right due to going out of square
+            //"writepissed",  // write while glare
             "tired",
             //"point",
-        ]}
+            //"teehee",
+        ] }
     };
     public readonly static Dictionary<int, List<string>> LisardAnims = new()
     {
@@ -281,6 +283,15 @@ internal partial class ModEntry : SimpleMod
     public Spr IlleanaEnd { get; private set; }
     public Spr IlloodleEnd { get; private set; }
     public Spr ShoeanaEnd { get; private set; }
+    public Spr BGShip_0_Platform { get; private set; }
+    public Spr BGShip_1_Craig { get; private set; }
+    public Spr BGShip_2_Persona { get; private set; }
+    public Spr BGShip_3_Backing { get; private set; }
+    public Spr BGShip_4_Props { get; private set; }
+    public Spr BGShip_A_Craig { get; private set; }
+    public Spr BGShip_B_Persona { get; private set; }
+    public Spr BGShip_C_Props { get; private set; }
+    public Spr BGShip_D_Glass { get; private set; }
     #endregion
 
     public LocalDB localDB { get; set; } = null!;

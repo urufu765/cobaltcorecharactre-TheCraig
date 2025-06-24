@@ -2,7 +2,7 @@ using System.Linq;
 using Microsoft.Extensions.Logging;
 using Nickel;
 
-namespace Illeana.Dialogue;
+namespace Illeana.Conversation;
 
 /// <summary>
 /// For if a dialogue needs to be registered AFTER mods have been loaded

@@ -2,12 +2,16 @@
 
 A corrosion engineer who works with corrosion to help keep the ship at tip top condition.
 
-## Changalog
+## Changelog
 
 ### PUBLIC
 
 #### 1.2: Illeana Story
 
+* **dev.5*: Fine-tune dialogue
+* **dev.4*: Have a Craig Ophidiophobia replacement sprite too
+* **dev.3*: Fix sprites, SFX, bg sprites
+* **dev.2**: Backgrounds worked on (0.75/2 done) (still need to properly animate the glow.. also remove the pen from Craig's mouth in bg)
 * **dev.1**: Let us break out the story. Todo: stories, a lot of new sprites that aren't Illeana, backgrounds, maybe even a playable ship?
 
 #### 1.1: Illeana Duo Machine!

@@ -11,7 +11,7 @@ using Illeana.Cards;
 using Illeana.External;
 using Illeana.Features;
 using System.Reflection;
-using Illeana.Dialogue;
+using Illeana.Conversation;
 
 namespace Illeana;
 
@@ -129,6 +129,19 @@ internal partial class ModEntry : SimpleMod
         ShoeanaEnd = RegisterSprite(package, "assets/Memry/shoeana_end.png").Sprite;
         Vault.charsWithLore.Add(IlleanaDeck.Deck);
         BGRunWin.charFullBodySprites.Add(IlleanaDeck.Deck, IlleanaEnd);
+        DB.backgrounds.Add("BGIlleanaCafe", typeof(BGIlleanaCafe));
+        DB.backgrounds.Add("BGCraigShip", typeof(BGCraigShip));
+        DB.backgrounds.Add("BGIlleanaBootSequence", typeof(BGIlleanaBootSequence));
+        DB.backgrounds.Add("BGShipShambles", typeof(BGShipShambles));
+        BGShip_0_Platform = RegisterSprite(package, "assets/Backgrounds/mem2_0_platform.png").Sprite;
+        BGShip_1_Craig = RegisterSprite(package, "assets/Backgrounds/mem2_1_craig.png").Sprite;
+        BGShip_2_Persona = RegisterSprite(package, "assets/Backgrounds/mem2_2_persona.png").Sprite;
+        BGShip_3_Backing = RegisterSprite(package, "assets/Backgrounds/mem2_3_bg.png").Sprite;
+        BGShip_4_Props = RegisterSprite(package, "assets/Backgrounds/mem2_4_props.png").Sprite;
+        BGShip_A_Craig = RegisterSprite(package, "assets/Backgrounds/mem2_a_craig.png").Sprite;
+        BGShip_B_Persona = RegisterSprite(package, "assets/Backgrounds/mem2_b_persona.png").Sprite;
+        BGShip_C_Props = RegisterSprite(package, "assets/Backgrounds/mem2_c_props.png").Sprite;
+        BGShip_D_Glass = RegisterSprite(package, "assets/Backgrounds/mem2_d_glass.png").Sprite;
 
         /*
          * Statuses are used to achieve many mechanics.
@@ -356,6 +369,7 @@ internal partial class ModEntry : SimpleMod
         IlleanaClock.Apply(Harmony);
         SwapTheAnimation.Apply(Harmony);
         ReplaceSnakeBodyArt.Apply(Harmony);
+        AutoDialogueAdvancer.Apply(Harmony);
         // SetXRenderer.Apply(Harmony);
 
 

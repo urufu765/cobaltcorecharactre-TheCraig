@@ -4,9 +4,9 @@ using Nanoray.PluginManager;
 using Nickel;
 using Illeana.Artifacts;
 using Illeana.External;
-using static Illeana.Dialogue.CommonDefinitions;
+using static Illeana.Conversation.CommonDefinitions;
 
-namespace Illeana.Dialogue;
+namespace Illeana.Conversation;
 
 internal class NewCombatDialogue : IRegisterable
 {

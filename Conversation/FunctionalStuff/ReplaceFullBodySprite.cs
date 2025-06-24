@@ -1,11 +1,11 @@
 using System.Linq;
 using Microsoft.Extensions.Logging;
 using Nickel;
-using static Illeana.Dialogue.CommonDefinitions;
+using static Illeana.Conversation.CommonDefinitions;
 using HarmonyLib;
 using System;
 
-namespace Illeana.Dialogue;
+namespace Illeana.Conversation;
 
 public static class ReplaceSnakeBodyArt
 {
