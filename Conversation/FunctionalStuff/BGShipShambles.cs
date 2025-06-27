@@ -96,6 +96,8 @@ public class BGShipShambles : BG, ICanAutoAdvanceDialogue
                 break;
             case "flashbang":
                 flash = 1;
+                ISoundInstance isi = ModEntry.Instance.BGShambles_0_Tinnitus.CreateInstance();
+                isi.Volume = 0.7f;
                 break;
             case "rumble":
                 rumble = true;

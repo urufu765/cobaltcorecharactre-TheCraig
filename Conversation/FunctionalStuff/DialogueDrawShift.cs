@@ -26,8 +26,9 @@ public static class DialogueDrawShift
         );
     }
 
-    private static void ExtraFX(Character __instance, G g, double x, double y, bool flipX, string animTag, double animationFrame, bool mini = false, bool? isSelected = null, bool renderLocked = false, bool hideFace = false)
+    private static void ExtraFX(Character __instance, G g, double x, double y, string animTag)
     {
+
         if (__instance.type == ModEntry.LisardEXE.CharacterType && animTag == "static")
         {
             int noiseIndex = (int)Mutil.Mod(g.state.time * 12 + x + y, Character.noiseSprites.Count);

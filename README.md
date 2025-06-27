@@ -8,9 +8,11 @@ A corrosion engineer who works with corrosion to help keep the ship at tip top c
 
 #### 1.2: Illeana Story
 
+* **ext.2*: Craig as playable?
+* **ext.1*: Craig ship?
 * **dev.6*: Fine-tune dialogue
-* **dev.5*: Have a Craig Ophidiophobia replacement sprite too
-* **dev.4*: SFX
+* **dev.5*: Have a Craig Ophidiophobia replacement sprite too (perhaps as Crocs)
+* **dev.4**: SFX
 * **dev.3**: Fix sprites, bg sprites
 * **dev.2**: Backgrounds worked on (0.75/2 done) (still need to properly animate the glow.. also remove the pen from Craig's mouth in bg)
 * **dev.1**: Let us break out the story. Todo: stories, a lot of new sprites that aren't Illeana, backgrounds, maybe even a playable ship?

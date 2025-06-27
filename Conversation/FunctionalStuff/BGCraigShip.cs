@@ -3,6 +3,7 @@ using FMOD.Studio;
 using FSPRO;
 using Illeana.API;
 using Microsoft.Extensions.Logging;
+using Nickel;
 
 namespace Illeana.Conversation;
 
@@ -12,7 +13,8 @@ public class BGCraigShip : BG, ICanAutoAdvanceDialogue
     private double timeToInterrupt = -1;
     private bool personaPower;
     private bool beepBoop;
-    private double beepBoopADSRDecay;
+    private double beepBoopDecay;
+    private double beepBoopHold;
     private double _beepBoopRandoTrigger;
 
     private static Spr BGn_0_Platform => ModEntry.Instance.BGShip_0_Platform;
@@ -77,6 +79,7 @@ public class BGCraigShip : BG, ICanAutoAdvanceDialogue
             Draw.Sprite(BGs_B_Persona, 0, 0, color: Glow_Breathe(t, darkGrey, darkishGrey, 0.25, squareify:0.15, flicker:0.7), blend: BlendMode.Screen);
         }
 
+        
         Draw.Sprite(BGn_1_Craig, 0, 0, color:new Color(0.2549f, 0.7098f, 0.6824f).gain(0.2));
         Draw.Sprite(BGn_1_CraigProps, 0, 0);
         Draw.Sprite(BGs_A_Craig, 0, 0, color: Glow_Breathe(t, darkerGrey, darkGrey, 3, 0.1), blend: BlendMode.Screen);
@@ -94,7 +97,7 @@ public class BGCraigShip : BG, ICanAutoAdvanceDialogue
             Draw.Sprite(BGn_0_Platform, 0, 0);
 
         BGComponents.Letterbox();
-        UpdateSounds();
+        UpdateSounds(g.dt);
     }
 
     /// <summary>
@@ -148,10 +151,18 @@ public class BGCraigShip : BG, ICanAutoAdvanceDialogue
                 break;
             case "makeBeepBoopSounds":
                 beepBoop = true;
-                beepBoopADSRDecay = 2;
+                beepBoopDecay = 1;
+                beepBoopHold = 2;
                 break;
             case "toasterDing":
+                beepBoop = false;
+                ISoundInstance isid = ModEntry.Instance.BGShip_1_Ding.CreateInstance();
+                isid.Volume = 0.2f;
                 // Make it play a hotel bell ding
+                break;
+            case "saveProject":
+                ISoundInstance isip = ModEntry.Instance.BGShip_0_Down.CreateInstance();
+                isip.Volume = 1f;
                 break;
             case "killSounds":
                 personaPower = beepBoop = false;
@@ -159,7 +170,7 @@ public class BGCraigShip : BG, ICanAutoAdvanceDialogue
         }
     }
 
-    public void UpdateSounds()
+    public void UpdateSounds(double tFrame)
     {
         if (personaPower)
         {
@@ -172,7 +183,25 @@ public class BGCraigShip : BG, ICanAutoAdvanceDialogue
         }
         if (beepBoop)
         {
+            if (beepBoopHold > 0) beepBoopHold -= tFrame;
+            else
+            {
+                if (beepBoopDecay > 0) beepBoopDecay -= tFrame;
+            }
+
             // do sound, decay makes it go from 100% vol to 20%, randotrigger triggers a random beep boop every random second
+            if (_beepBoopRandoTrigger <= 0)
+            {
+                _beepBoopRandoTrigger = 0.05 + Mutil.NextRand() * 0.1;
+                ISoundInstance isi = ModEntry.Instance.BGShip_2_Beep.CreateInstance();
+                //isi.Volume = (float)Mutil.Lerp(0.05, 0.1, beepBoopDecay);
+                isi.Volume = (float)Mutil.Lerp(0.2, 0.4, beepBoopDecay);
+                isi.Pitch = (float)Mutil.Lerp(0.7, 2, Mutil.NextRand());
+            }
+            else
+            {
+                _beepBoopRandoTrigger -= tFrame;
+            }
         }
     }
 }

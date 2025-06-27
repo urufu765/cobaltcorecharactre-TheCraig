@@ -143,8 +143,10 @@ internal partial class ModEntry : SimpleMod
         BGShip_B_Persona = RegisterSprite(package, "assets/Backgrounds/mem2_b_persona.png").Sprite;
         BGShip_C_Props = RegisterSprite(package, "assets/Backgrounds/mem2_c_props.png").Sprite;
         BGShip_D_Glass = RegisterSprite(package, "assets/Backgrounds/mem2_d_glass.png").Sprite;
-        WeeWooA = helper.Content.Audio.RegisterSound("weewooA", package.PackageRoot.GetRelativeFile("assets/SoundFX/alarmlessmuff.ogg"));
-        WeeWooB = helper.Content.Audio.RegisterSound("weewooB", package.PackageRoot.GetRelativeFile("assets/SoundFX/alarmmuffled.ogg"));
+        BGShip_0_Down = helper.Content.Audio.RegisterSound("BGShip0Down", package.PackageRoot.GetRelativeFile("assets/SoundFX/down.ogg"));
+        BGShip_1_Ding = helper.Content.Audio.RegisterSound("BGShip1Ding", package.PackageRoot.GetRelativeFile("assets/SoundFX/ding.ogg"));
+        BGShip_2_Beep = helper.Content.Audio.RegisterSound("BGShip2Beep", package.PackageRoot.GetRelativeFile("assets/SoundFX/beep.ogg"));
+        BGShambles_0_Tinnitus = helper.Content.Audio.RegisterSound("BGShambles0Tinnitus", package.PackageRoot.GetRelativeFile("assets/SoundFX/tinnitus.ogg"));
 
         /*
          * Statuses are used to achieve many mechanics.

@@ -298,8 +298,10 @@ internal partial class ModEntry : SimpleMod
     #endregion
 
     #region Story Sounds
-    public IModSoundEntry WeeWooA { get; private set; }
-    public IModSoundEntry WeeWooB { get; private set; }
+    public IModSoundEntry BGShip_0_Down { get; private set; }
+    public IModSoundEntry BGShip_1_Ding { get; private set; }
+    public IModSoundEntry BGShip_2_Beep { get; private set; }
+    public IModSoundEntry BGShambles_0_Tinnitus { get; private set; }
     #endregion
 
     public LocalDB localDB { get; set; } = null!;

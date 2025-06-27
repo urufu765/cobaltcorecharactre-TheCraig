@@ -144,7 +144,7 @@ internal class NewMemoryDialogue : IRegisterable
                     new(AmCraig, "Alright, system boot..."),
                     new(new Wait{secs = 1.5 }),
                     new(new BGAction{action = "powerOn"}),
-                    new(new Wait{secs = 3 }),
+                    new(new Wait{secs = 4.5 }),
                     new(AmLisard, "LISARD ON STANDBY. STARTUP SUCCESS WITH 0 ERRORS AND 358 WARNINGS.", true),  // make sure the name isn't Illeana but "//lisard.exe"
                     new(AmCraig, "Lisard, start ship analysis."),
                     new(AmLisard, "COMMAND RECEIVED: SHIP ANALYSIS. PLEASE CONFIRM.", true),
@@ -170,9 +170,9 @@ internal class NewMemoryDialogue : IRegisterable
                     new(AmLisard, "<c=keyword>ERR.</c> FALSE INFORMATION RECEIVED. IGNORING CORRECTION.", true),
                     new(AmCraig, "penthink", "..."),
                     new(AmCraig, "write", "Give persona more personality."),
-                    new(new Wait{secs = 3 }),
+                    new(new Wait{secs = 2 }),
                     new(new BGAction{action = "toasterDing"}),
-                    new(new Wait{secs = 0.5}),
+                    new(new Wait{secs = 1.5}),
                     new(AmLisard, "COMMAND SHIP ANALYSIS COMPLETE. WHAT WOULD YOU LIKE TO KNOW?", true),
                     new(AmCraig, "Lisard, summarize hull report."),
                     new(AmLisard, "HULL INTEGRITY <c=healing>OKAY</c>. SAFE FOR <c=keyword>ALL TRAVEL METHODS</c>.", true),
@@ -188,9 +188,10 @@ internal class NewMemoryDialogue : IRegisterable
                     new(AmCraig, "flabbergasted", "...", delay: 1.5),
                     new(new BGAction{action = "autoAdvanceOff"}),
                     new(AmCraig, "tired", "Okay that's enough testing."),
+                    new(new BGAction{action = "saveProject"}),
                     new(new Wait{secs = 1}),
                     new(new BGAction{action = "powerOff"}),
-                    new(new Wait{secs = 2}),
+                    new(new Wait{secs = 3}),
                     new(AmCraig, "writepissed", "Forget about fine-tuning the algorithm, prototype is suggesting something insane again. End report.")
                 ]
             }},
