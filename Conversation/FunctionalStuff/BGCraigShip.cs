@@ -1,10 +1,12 @@
+using System;
 using FMOD.Studio;
 using FSPRO;
 using Illeana.API;
+using Microsoft.Extensions.Logging;
 
 namespace Illeana.Conversation;
 
-public class BGCraigShip : BGRunStart, ICanAutoAdvanceDialogue
+public class BGCraigShip : BG, ICanAutoAdvanceDialogue
 {
     private bool _autoAdvance;
     private double timeToInterrupt = -1;
@@ -15,6 +17,7 @@ public class BGCraigShip : BGRunStart, ICanAutoAdvanceDialogue
 
     private static Spr BGn_0_Platform => ModEntry.Instance.BGShip_0_Platform;
     private static Spr BGn_1_Craig => ModEntry.Instance.BGShip_1_Craig;
+    private static Spr BGn_1_CraigProps => ModEntry.Instance.BGShip_1_CraigProps;
     private static Spr BGn_2_Persona => ModEntry.Instance.BGShip_2_Persona;
     private static Spr BGn_3_Backing => ModEntry.Instance.BGShip_3_Backing;
     private static Spr BGn_4_Props => ModEntry.Instance.BGShip_4_Props;
@@ -46,34 +49,80 @@ public class BGCraigShip : BGRunStart, ICanAutoAdvanceDialogue
 
     public override void Render(G g, double t, Vec offset)
     {
+        Color darkerGrey = new Color(0.1f, 0.1f, 0.1f);
+        Color darkGrey = new Color(0.2f, 0.2f, 0.2f);
+        Color darkishGrey = new Color(0.35f, 0.35f, 0.35f);
+        Color grey = new Color(0.65f, 0.65f, 0.65f);
+        Color coldDarkish = new Color(0.0f, 0.12f, 0.14f);
+        Color coldDark = new Color(0.0f, 0.05f, 0.06f);
+        Color warm = new Color(0.25f, 0.24f, 0.22f);
+        Color warmDark = new Color(0.12f, 0.1f, 0.06f);
         if (timeToInterrupt > 0) timeToInterrupt -= g.dt;
         if (timeToInterrupt <= 0 && timeToInterrupt > -1)
         {
             _autoAdvance = true;
             timeToInterrupt = -1;
         }
-        base.Render(g,t,offset);  // Stars
+        Voronois.RenderStarsMap(g, t, 12, G.screenSize / 2, G.screenSize, offset * 4 / 8);  // Stars
 
         Draw.Sprite(BGa_D_Glass, 0, 0, color:new(1,1,1,0.2), blend: BlendMode.Add);
 
-        Draw.Sprite(BGn_4_Props, 0, 0);
-        Draw.Sprite(BGs_C_Props, 0, 0, color:Color.Lerp(Colors.black, Colors.white, 0.5), blend: BlendMode.Screen);
+        Draw.Sprite(BGn_4_Props, 0, 0, color:Color.Lerp(Colors.black, Colors.white, 0.2));
+        Draw.Sprite(BGs_C_Props, 0, 0, color:Glow_Breathe(t, darkGrey, darkishGrey, 0.25, 0.6, squareify:0.15, flicker:0.7), blend: BlendMode.Screen);
 
         Draw.Sprite(BGn_3_Backing, 0, 0);
 
         if (personaPower)
         {
-            Draw.Sprite(BGn_2_Persona, 0, 0, color:new(1,1,1,1));
-            Draw.Sprite(BGs_B_Persona, 0, 0, color:Color.Lerp(Colors.black, Colors.white, 0.5), blend: BlendMode.Screen);
+            Draw.Sprite(BGs_B_Persona, 0, 0, color: Glow_Breathe(t, darkGrey, darkishGrey, 0.25, squareify:0.15, flicker:0.7), blend: BlendMode.Screen);
         }
 
-        Draw.Sprite(BGn_1_Craig, 0, 0);
-        Draw.Sprite(BGs_A_Craig, 0, 0, color:Color.Lerp(Colors.black, Colors.white, 0.5), blend: BlendMode.Screen);
+        Draw.Sprite(BGn_1_Craig, 0, 0, color:new Color(0.2549f, 0.7098f, 0.6824f).gain(0.2));
+        Draw.Sprite(BGn_1_CraigProps, 0, 0);
+        Draw.Sprite(BGs_A_Craig, 0, 0, color: Glow_Breathe(t, darkerGrey, darkGrey, 3, 0.1), blend: BlendMode.Screen);
+        Glow.Draw(new(149, 192), 15, Glow_Breathe(t, warmDark, warm, 0.01, flicker:1.2));
+        Glow.Draw(new(153, 189), 15, Glow_Breathe(t, warmDark, warm, 0.01, 0.4, flicker:1.2));
+        if (personaPower)
+        {
+            Draw.Sprite(BGn_2_Persona, 0, 0, color: Glow_Breathe(t, grey, Colors.white, 2));
+            Glow.Draw(new(161, 185), new Vec(7, 24), Glow_Breathe(t, coldDark, coldDarkish, 0.25, flicker: 0.7));
+            Glow.Draw(new(159, 160), new Vec(13, 25), Glow_Breathe(t, Colors.black, coldDark, 0.25, flicker: 0.7));
+            Glow.Draw(new(160, 177), new Vec(11, 16), Glow_Breathe(t, Colors.black, coldDark, 0.25, flicker: 0.7));
+            Glow.Draw(new(151, 157), new Vec(10, 15), Glow_Breathe(t, warmDark.gain(0.5), warm.gain(0.3), 0.25, flicker: 0.7));
+        }
 
-        Draw.Sprite(BGn_0_Platform, 0, 0);
+            Draw.Sprite(BGn_0_Platform, 0, 0);
 
         BGComponents.Letterbox();
         UpdateSounds();
+    }
+
+    /// <summary>
+    /// Makes the glow stuff pulse in a sine wave
+    /// </summary>
+    /// <param name="dt">Delta Time (accumulated)</param>
+    /// <param name="dark">Darkest color</param>
+    /// <param name="light">Lightest color</param>
+    /// <param name="cycleTime">Time for full revolution</param>
+    /// <param name="offset">Cycle offset (from 0 to <1)</param>
+    /// <param name="squareify">0 for sine wave, 1 for square wave</param> 
+    /// <param name="flicker">Introduce random flickering, from 0 to 1.0 chance</param>
+    /// <param name="fIntensity">Intensity of flicker. 1 is no change, more = lighter, less = darker</param>
+    /// <returns></returns>
+    private static Color Glow_Breathe(double dt, Color dark, Color light, double cycleTime, double offset=0, double squareify=0, double flicker=1)
+    {
+        // The sinning section ;)
+        double sin = (Math.Sin(dt / cycleTime * Math.PI - (offset * Math.PI)) + 1) / 2;
+        double square = Math.Round(sin);
+        double lerpVal = Mutil.Lerp(sin, square, squareify);
+
+        if (flicker != 1)
+        {
+            Random rand = new();
+            return Color.Lerp(dark, light, lerpVal).gain(Mutil.Lerp(1, flicker, rand.NextDouble()));
+        }
+
+        return Color.Lerp(dark, light, lerpVal);
     }
 
     public override void OnAction(State s, string action)

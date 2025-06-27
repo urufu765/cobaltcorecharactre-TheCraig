@@ -2,10 +2,11 @@ using Illeana.API;
 
 namespace Illeana.Conversation;
 
-public class BGIlleanaCafe : BGCafeFlashback, ICanAutoAdvanceDialogue
+public class BGIlleanaCafe : BG, ICanAutoAdvanceDialogue
 {
     private bool _autoAdvance;
     private double timeToInterrupt = -1;
+    private readonly BG baseBg = new BGCafeFlashback();
 
     public bool AutoAdvanceDialogue()
     {
@@ -14,7 +15,7 @@ public class BGIlleanaCafe : BGCafeFlashback, ICanAutoAdvanceDialogue
 
     public override void Render(G g, double t, Vec offset)
     {
-        base.Render(g, t, offset);
+        baseBg.Render(g, t, offset);
         BGComponents.Letterbox();
 
         if (timeToInterrupt > 0) timeToInterrupt -= g.dt;

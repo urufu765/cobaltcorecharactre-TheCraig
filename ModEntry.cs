@@ -135,6 +135,7 @@ internal partial class ModEntry : SimpleMod
         DB.backgrounds.Add("BGShipShambles", typeof(BGShipShambles));
         BGShip_0_Platform = RegisterSprite(package, "assets/Backgrounds/mem2_0_platform.png").Sprite;
         BGShip_1_Craig = RegisterSprite(package, "assets/Backgrounds/mem2_1_craig.png").Sprite;
+        BGShip_1_CraigProps = RegisterSprite(package, "assets/Backgrounds/mem2_1_craigprops.png").Sprite;
         BGShip_2_Persona = RegisterSprite(package, "assets/Backgrounds/mem2_2_persona.png").Sprite;
         BGShip_3_Backing = RegisterSprite(package, "assets/Backgrounds/mem2_3_bg.png").Sprite;
         BGShip_4_Props = RegisterSprite(package, "assets/Backgrounds/mem2_4_props.png").Sprite;
@@ -142,6 +143,8 @@ internal partial class ModEntry : SimpleMod
         BGShip_B_Persona = RegisterSprite(package, "assets/Backgrounds/mem2_b_persona.png").Sprite;
         BGShip_C_Props = RegisterSprite(package, "assets/Backgrounds/mem2_c_props.png").Sprite;
         BGShip_D_Glass = RegisterSprite(package, "assets/Backgrounds/mem2_d_glass.png").Sprite;
+        WeeWooA = helper.Content.Audio.RegisterSound("weewooA", package.PackageRoot.GetRelativeFile("assets/SoundFX/alarmlessmuff.ogg"));
+        WeeWooB = helper.Content.Audio.RegisterSound("weewooB", package.PackageRoot.GetRelativeFile("assets/SoundFX/alarmmuffled.ogg"));
 
         /*
          * Statuses are used to achieve many mechanics.
@@ -245,33 +248,33 @@ internal partial class ModEntry : SimpleMod
             ExeCardType = typeof(IlleanaExe)
         });
 
-        CraigTheSnek = helper.Content.Characters.V2.RegisterNonPlayableCharacter("craigsnek", new NonPlayableCharacterConfigurationV2
-        {
-            CharacterType = "craigsnek",
-            Name = AnyLocalizations.Bind(["character", "Craig", "name"]).Localize,
-            BorderSprite = RegisterSprite(package, "assets/char_frame_craig.png").Sprite,
-        });
-
-        LisardEXE = helper.Content.Characters.V2.RegisterNonPlayableCharacter("lisardexe", new NonPlayableCharacterConfigurationV2
-        {
-            CharacterType = "lisardexe",
-            Name = AnyLocalizations.Bind(["character", "lisard", "name"]).Localize,
-            BorderSprite = RegisterSprite(package, "assets/char_frame_lisard.png").Sprite,
-        });
         foreach (KeyValuePair<int, List<string>> anims in CraigAnims)
         {
             foreach (string anim in anims.Value)
             {
-                RegisterAnimation(CraigTheSnek.CharacterType, package, anim, $"assets/Animation/craig_{anim}", anims.Key);
+                RegisterAnimation("urufudoggo.Illeana::craigsnek", package, anim, $"assets/Animation/craig_{anim}", anims.Key);
             }
         }
         foreach (KeyValuePair<int, List<string>> anims in LisardAnims)
         {
             foreach (string anim in anims.Value)
             {
-                RegisterAnimation(LisardEXE.CharacterType, package, anim, $"assets/Animation/lisard_{anim}", anims.Key);
+                RegisterAnimation("urufudoggo.Illeana::lisardexe", package, anim, $"assets/Animation/lisard_{anim}", anims.Key);
             }
         }
+
+        CraigTheSnek = helper.Content.Characters.V2.RegisterNonPlayableCharacter("craigsnek", new NonPlayableCharacterConfigurationV2
+        {
+            CharacterType = "craigsnek",
+            Name = AnyLocalizations.Bind(["character", "Craig", "name"]).Localize,
+            BorderSprite = RegisterSprite(package, "assets/char_frame_craig.png").Sprite,
+        });
+        LisardEXE = helper.Content.Characters.V2.RegisterNonPlayableCharacter("lisardexe", new NonPlayableCharacterConfigurationV2
+        {
+            CharacterType = "lisardexe",
+            Name = AnyLocalizations.Bind(["character", "lisard", "name"]).Localize,
+            BorderSprite = RegisterSprite(package, "assets/char_frame_lisard.png").Sprite,
+        });
 
 
         MoreDifficultiesApi?.RegisterAltStarters(IlleanaDeck.Deck, new StarterDeck
@@ -348,7 +351,7 @@ internal partial class ModEntry : SimpleMod
         SprAirlockShoe = RegisterSprite(package, "assets/Artifact/AirlockShoe.png").Sprite;
         SprCompetitionShoeana = RegisterSprite(package, "assets/Artifact/CompetitionShoeana.png").Sprite;
         SprCompetitionShoe = RegisterSprite(package, "assets/Artifact/CompetitionShoe.png").Sprite;
-        SprCompetitionShoeDepleted = RegisterSprite(package, "assets/Artifact/CompetitionShoeDepeleted.png").Sprite;
+        SprCompetitionShoeDepleted = RegisterSprite(package, "assets/Artifact/CompetitionShoeDepleted.png").Sprite;
         SprCompetitionIlleana = RegisterSprite(package, "assets/Artifact/CompetitionIlleana.png").Sprite;
         SprCompetitionEddie = RegisterSprite(package, "assets/Artifact/CompetitionEddie.png").Sprite;
         SprCompetitionDepleted = RegisterSprite(package, "assets/Artifact/CompetitionDepleted.png").Sprite;
@@ -370,6 +373,7 @@ internal partial class ModEntry : SimpleMod
         SwapTheAnimation.Apply(Harmony);
         ReplaceSnakeBodyArt.Apply(Harmony);
         AutoDialogueAdvancer.Apply(Harmony);
+        DialogueDrawShift.Apply(Harmony);
         // SetXRenderer.Apply(Harmony);
 
 

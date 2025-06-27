@@ -210,9 +210,9 @@ internal partial class ModEntry : SimpleMod
     public readonly static Dictionary<int, List<string>> CraigAnims = new()
     {
         {1, [
-            //"mini"
+            "mini",
             "flabbergasted",
-            //"mouthopeneyesclosed",
+            "flabberclosed",
             "penthink",
         ]},
         {4, [
@@ -226,17 +226,19 @@ internal partial class ModEntry : SimpleMod
             "confident",
             "glare",
             "sly",
-            "write",  // Delete one column to the right due to going out of square
-            //"writepissed",  // write while glare
+            "write",
+            "writepissed",
             "tired",
-            //"point",
-            //"teehee",
+            "therefore",
+            "teehee",
+            "recall"
         ] }
     };
     public readonly static Dictionary<int, List<string>> LisardAnims = new()
     {
         {1, [
-            "static"
+            "static",
+            "mini"
         ]},
         {5, [
             "neutral"
@@ -285,6 +287,7 @@ internal partial class ModEntry : SimpleMod
     public Spr ShoeanaEnd { get; private set; }
     public Spr BGShip_0_Platform { get; private set; }
     public Spr BGShip_1_Craig { get; private set; }
+    public Spr BGShip_1_CraigProps { get; private set; }
     public Spr BGShip_2_Persona { get; private set; }
     public Spr BGShip_3_Backing { get; private set; }
     public Spr BGShip_4_Props { get; private set; }
@@ -292,6 +295,11 @@ internal partial class ModEntry : SimpleMod
     public Spr BGShip_B_Persona { get; private set; }
     public Spr BGShip_C_Props { get; private set; }
     public Spr BGShip_D_Glass { get; private set; }
+    #endregion
+
+    #region Story Sounds
+    public IModSoundEntry WeeWooA { get; private set; }
+    public IModSoundEntry WeeWooB { get; private set; }
     #endregion
 
     public LocalDB localDB { get; set; } = null!;
