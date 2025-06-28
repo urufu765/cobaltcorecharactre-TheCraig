@@ -12,6 +12,7 @@ public class BGCraigShip : BG, ICanAutoAdvanceDialogue
     private bool _autoAdvance;
     private double timeToInterrupt = -1;
     private bool personaPower;
+    private double powerProgression;
     private bool beepBoop;
     private double beepBoopDecay;
     private double beepBoopHold;
@@ -19,6 +20,7 @@ public class BGCraigShip : BG, ICanAutoAdvanceDialogue
 
     private static Spr BGn_0_Platform => ModEntry.Instance.BGShip_0_Platform;
     private static Spr BGn_1_Craig => ModEntry.Instance.BGShip_1_Craig;
+    private static Spr BGn_1_Varrigradona => ModEntry.Instance.BGShip_1_Varrigradona;
     private static Spr BGn_1_CraigProps => ModEntry.Instance.BGShip_1_CraigProps;
     private static Spr BGn_2_Persona => ModEntry.Instance.BGShip_2_Persona;
     private static Spr BGn_3_Backing => ModEntry.Instance.BGShip_3_Backing;
@@ -59,42 +61,67 @@ public class BGCraigShip : BG, ICanAutoAdvanceDialogue
         Color coldDark = new Color(0.0f, 0.05f, 0.06f);
         Color warm = new Color(0.25f, 0.24f, 0.22f);
         Color warmDark = new Color(0.12f, 0.1f, 0.06f);
+        bool noMoreCraig = ModEntry.Instance.settings.ProfileBased.Current.AntiSnakeMode;
         if (timeToInterrupt > 0) timeToInterrupt -= g.dt;
         if (timeToInterrupt <= 0 && timeToInterrupt > -1)
         {
             _autoAdvance = true;
             timeToInterrupt = -1;
         }
+        // Backfill
+        Draw.Fill(new Color(0.0314f, 0.0314f, 0.2667f).gain(0.1));
+
+        // stars
         Voronois.RenderStarsMap(g, t, 12, G.screenSize / 2, G.screenSize, offset * 4 / 8);  // Stars
 
+        // Translucent glass
         Draw.Sprite(BGa_D_Glass, 0, 0, color:new(1,1,1,0.2), blend: BlendMode.Add);
 
+        // screens and monitors
         Draw.Sprite(BGn_4_Props, 0, 0, color:Color.Lerp(Colors.black, Colors.white, 0.2));
         Draw.Sprite(BGs_C_Props, 0, 0, color:Glow_Breathe(t, darkGrey, darkishGrey, 0.25, 0.6, squareify:0.15, flicker:0.7), blend: BlendMode.Screen);
 
+        // Top wall part and PC
         Draw.Sprite(BGn_3_Backing, 0, 0);
 
+        // PC light (no RGB)
         if (personaPower)
         {
-            Draw.Sprite(BGs_B_Persona, 0, 0, color: Glow_Breathe(t, darkGrey, darkishGrey, 0.25, squareify:0.15, flicker:0.7), blend: BlendMode.Screen);
+            Draw.Sprite(BGs_B_Persona, 0, 0, color: Glow_Breathe(t, darkGrey, darkishGrey, 0.25, squareify: 0.15, flicker: 0.4), blend: BlendMode.Screen);
         }
 
-        
-        Draw.Sprite(BGn_1_Craig, 0, 0, color:new Color(0.2549f, 0.7098f, 0.6824f).gain(0.2));
+        // Craig/Varrigradona
+        if (noMoreCraig)
+        {
+            Draw.Sprite(BGn_1_Varrigradona, 0, 0, color: new Color(0.4824f, 0.1961f, 0.3451f).gain(0.7));
+        }
+        else
+        {
+            Draw.Sprite(BGn_1_Craig, 0, 0, color: new Color(0.2549f, 0.7098f, 0.6824f).gain(0.3));
+        }
+
+        // Cables and light bulbs
         Draw.Sprite(BGn_1_CraigProps, 0, 0);
         Draw.Sprite(BGs_A_Craig, 0, 0, color: Glow_Breathe(t, darkerGrey, darkGrey, 3, 0.1), blend: BlendMode.Screen);
         Glow.Draw(new(149, 192), 15, Glow_Breathe(t, warmDark, warm, 0.01, flicker:1.2));
         Glow.Draw(new(153, 189), 15, Glow_Breathe(t, warmDark, warm, 0.01, 0.4, flicker:1.2));
+
+        // Glow to PC and nearest monitor
         if (personaPower)
         {
             Draw.Sprite(BGn_2_Persona, 0, 0, color: Glow_Breathe(t, grey, Colors.white, 2));
-            Glow.Draw(new(161, 185), new Vec(7, 24), Glow_Breathe(t, coldDark, coldDarkish, 0.25, flicker: 0.7));
-            Glow.Draw(new(159, 160), new Vec(13, 25), Glow_Breathe(t, Colors.black, coldDark, 0.25, flicker: 0.7));
-            Glow.Draw(new(160, 177), new Vec(11, 16), Glow_Breathe(t, Colors.black, coldDark, 0.25, flicker: 0.7));
+            if (!noMoreCraig)  // Glow on snake
+            {
+                Glow.Draw(new(161, 185), new Vec(7, 24), Glow_Breathe(t, coldDark, coldDarkish, 0.25, flicker: 0.7));
+                Glow.Draw(new(159, 160), new Vec(13, 25), Glow_Breathe(t, Colors.black, coldDark, 0.25, flicker: 0.7));
+                Glow.Draw(new(160, 177), new Vec(11, 16), Glow_Breathe(t, Colors.black, coldDark, 0.25, flicker: 0.7));
+            }
+            // Glow on clipboard
             Glow.Draw(new(151, 157), new Vec(10, 15), Glow_Breathe(t, warmDark.gain(0.5), warm.gain(0.3), 0.25, flicker: 0.7));
         }
 
-            Draw.Sprite(BGn_0_Platform, 0, 0);
+        // Railing and floor
+        Draw.Sprite(BGn_0_Platform, 0, 0);
 
         BGComponents.Letterbox();
         UpdateSounds(g.dt);
@@ -174,12 +201,13 @@ public class BGCraigShip : BG, ICanAutoAdvanceDialogue
     {
         if (personaPower)
         {
+            powerProgression += tFrame;
             EventInstance? eventInstance = Audio.Auto(Event.Scenes_ColdStart);
             if (eventInstance == null)
             {
                 return;
             }
-            eventInstance.GetValueOrDefault().setParameterByName("ColdStart", 0f, false);
+            eventInstance.GetValueOrDefault().setParameterByName("ColdStart", powerProgression > 4? 2f:0f, false);
         }
         if (beepBoop)
         {

@@ -11,7 +11,7 @@ A corrosion engineer who works with corrosion to help keep the ship at tip top c
 * **ext.2*: Craig as playable?
 * **ext.1*: Craig ship?
 * **dev.6*: Fine-tune dialogue
-* **dev.5*: Have a Craig Ophidiophobia replacement sprite too (perhaps as Crocs)
+* **dev.5**: Craig Ophidiophobia replacement sprite (as Cracs), and gave background a little bit more fill
 * **dev.4**: SFX
 * **dev.3**: Fix sprites, bg sprites
 * **dev.2**: Backgrounds worked on (0.75/2 done) (still need to properly animate the glow.. also remove the pen from Craig's mouth in bg)

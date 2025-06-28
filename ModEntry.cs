@@ -135,6 +135,7 @@ internal partial class ModEntry : SimpleMod
         DB.backgrounds.Add("BGShipShambles", typeof(BGShipShambles));
         BGShip_0_Platform = RegisterSprite(package, "assets/Backgrounds/mem2_0_platform.png").Sprite;
         BGShip_1_Craig = RegisterSprite(package, "assets/Backgrounds/mem2_1_craig.png").Sprite;
+        BGShip_1_Varrigradona = RegisterSprite(package, "assets/Backgrounds/mem2_1_varrigradona.png").Sprite;
         BGShip_1_CraigProps = RegisterSprite(package, "assets/Backgrounds/mem2_1_craigprops.png").Sprite;
         BGShip_2_Persona = RegisterSprite(package, "assets/Backgrounds/mem2_2_persona.png").Sprite;
         BGShip_3_Backing = RegisterSprite(package, "assets/Backgrounds/mem2_3_bg.png").Sprite;

@@ -28,6 +28,13 @@ public static class SwapTheAnimation
                 animTag = mini ? "shoeanamini" : "shoeana";
             }
         }
+        if (__instance.type == ModEntry.CraigTheSnek.CharacterType)
+        {
+            if (ModEntry.Instance.settings.ProfileBased.Current.AntiSnakeMode)
+            {
+                animTag = mini ? "shoeanamini" : "cracs";
+            }
+        }
     }
 
     

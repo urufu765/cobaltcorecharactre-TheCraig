@@ -214,6 +214,7 @@ internal partial class ModEntry : SimpleMod
             "flabbergasted",
             "flabberclosed",
             "penthink",
+            "cracs"
         ]},
         {4, [
             "panic"
@@ -287,6 +288,7 @@ internal partial class ModEntry : SimpleMod
     public Spr ShoeanaEnd { get; private set; }
     public Spr BGShip_0_Platform { get; private set; }
     public Spr BGShip_1_Craig { get; private set; }
+    public Spr BGShip_1_Varrigradona { get; private set; }
     public Spr BGShip_1_CraigProps { get; private set; }
     public Spr BGShip_2_Persona { get; private set; }
     public Spr BGShip_3_Backing { get; private set; }
