@@ -88,8 +88,13 @@ public class Competition : Artifact
             else if (ComState == CompetitionState.IlleanaTiem)
             {
                 ComState = CompetitionState.Depleted;
+                List<CardAction> actions = card.GetActionsOverridden(state, combat);
+                foreach (CardAction action in actions)
+                {
+                    action.whoDidThis = deck;
+                }
                 combat.QueueImmediate(
-                    card.GetActions(state, combat)
+                    actions
                 );
                 Pulse();
             }

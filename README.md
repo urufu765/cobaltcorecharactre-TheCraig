@@ -10,7 +10,8 @@ A corrosion engineer who works with corrosion to help keep the ship at tip top c
 
 * **ext.2*: Craig as playable?
 * **ext.1*: Craig ship?
-* **dev.6*: Fine-tune dialogue
+* **dev.7*: Fine-tune dialogue
+* **dev.6**: Competition slight fix where it used the wrong action queue (shoulda be using overriden)
 * **dev.5**: Craig Ophidiophobia replacement sprite (as Cracs), and gave background a little bit more fill
 * **dev.4**: SFX
 * **dev.3**: Fix sprites, bg sprites
