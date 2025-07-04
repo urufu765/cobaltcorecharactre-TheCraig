@@ -8,11 +8,11 @@ namespace Illeana.Cards;
 /// <summary>
 /// A card that attempts to build a cure, creating The Cure and The Failure cards
 /// </summary>
-public class BuildCure : Card, IRegisterable
+public class BuildCure : Card, IRegisterable, IHasCustomCardTraits
 {
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
-        helper.Content.Cards.RegisterCard(new CardConfiguration
+        ICardEntry ice = helper.Content.Cards.RegisterCard(new CardConfiguration
         {
             CardType = MethodBase.GetCurrentMethod()!.DeclaringType!,
             Meta = new CardMeta
@@ -24,6 +24,8 @@ public class BuildCure : Card, IRegisterable
             Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "Common", "BuildACure", "name"]).Localize,
             Art = ModEntry.RegisterSprite(package, "assets/Card/Illeana/1/BuildACure.png").Sprite
         });
+
+        ModEntry.Instance.KokoroApi.V2.Limited.SetBaseLimitedUses(ice.UniqueName, Upgrade.A, 3);
     }
 
 
@@ -31,7 +33,7 @@ public class BuildCure : Card, IRegisterable
     {
         return upgrade switch
         {
-            Upgrade.B => 
+            Upgrade.B =>
             [
                 new AAddCard
                 {
@@ -71,7 +73,7 @@ public class BuildCure : Card, IRegisterable
                     insertRandomly = true
                 },
             ],
-            _ => 
+            _ =>
             [
                 new AAddCard
                 {
@@ -98,4 +100,10 @@ public class BuildCure : Card, IRegisterable
             description = ModEntry.Instance.Localizations.Localize(["card", "Common", "BuildACure", upgrade switch { Upgrade.A => "descA", Upgrade.B => "descB", _ => "desc" }]),
         };
     }
+    
+    public IReadOnlySet<ICardTraitEntry> GetInnateTraits(State state)
+    {
+        return upgrade == Upgrade.A ? new HashSet<ICardTraitEntry> { ModEntry.Instance.KokoroApi.V2.Limited.Trait } : [];
+    }
+
 }

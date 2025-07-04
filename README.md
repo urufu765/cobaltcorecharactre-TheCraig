@@ -8,15 +8,14 @@ A corrosion engineer who works with corrosion to help keep the ship at tip top c
 
 #### 1.2: Illeana Story
 
-* **ext.2*: Craig as playable?
-* **ext.1*: Craig ship?
-* **dev.7*: Fine-tune dialogue
-* **dev.6**: Competition slight fix where it used the wrong action queue (shoulda be using overriden)
-* **dev.5**: Craig Ophidiophobia replacement sprite (as Cracs), and gave background a little bit more fill
-* **dev.4**: SFX
-* **dev.3**: Fix sprites, bg sprites
-* **dev.2**: Backgrounds worked on (0.75/2 done) (still need to properly animate the glow.. also remove the pen from Craig's mouth in bg)
-* **dev.1**: Let us break out the story. Todo: stories, a lot of new sprites that aren't Illeana, backgrounds, maybe even a playable ship?
+* **(1.2.0)**: Release!
+  * **dev.7**: Build-A-Cure A is limited to 3 uses.
+  * **dev.6**: Competition slight fix where it used the wrong action queue (shoulda be using overriden)
+  * **dev.5**: Craig Ophidiophobia replacement sprite (as Cracs), and gave background a little bit more fill
+  * **dev.4**: SFX
+  * **dev.3**: Fix sprites, bg sprites
+  * **dev.2**: Backgrounds worked on (0.75/2 done) (still need to properly animate the glow.. also remove the pen from Craig's mouth in bg)
+  * **dev.1**: Let us break out the story. Todo: stories, a lot of new sprites that aren't Illeana, backgrounds, maybe even a playable ship?
 
 #### 1.1: Illeana Duo Machine!
 
