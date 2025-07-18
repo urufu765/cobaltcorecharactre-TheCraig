@@ -8,6 +8,9 @@ A corrosion engineer who works with corrosion to help keep the ship at tip top c
 
 #### 1.2: Illeana Story
 
+* **(1.2.2)**: Some artifact balancing, Tarnish blip
+  * Tempo Booster nerf: Boss condition now no longer gives additional ace, but instead gives a hermes and 3 extra tarnish.
+  * Forged Certificate buff: Damage quantity requirement 4 -> 3
 * **(1.2.1)**: Fixed first Illeana run win dialogue not showing a sprite
 * **(1.2.0)**: Release!
   * **dev.7**: Build-A-Cure A is limited to 3 uses.

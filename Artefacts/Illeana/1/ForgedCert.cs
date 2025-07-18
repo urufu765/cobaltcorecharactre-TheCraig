@@ -15,12 +15,13 @@ public class ForgedCertificate : Artifact
 
     public override void OnPlayerLoseHull(State state, Combat combat, int amount)
     {
-        if (TimesHit >= 3)
+        if (TimesHit >= 2)
         {
             combat.QueueImmediate(new AHeal
             {
                 targetPlayer = true,
                 healAmount = 1,
+                artifactPulse = Key()
             });
             TimesHit = 0;
         }

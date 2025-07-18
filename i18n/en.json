@@ -24,7 +24,7 @@
     "status": {
         "Tarnish": {
             "name": "Tarnish",
-            "desc": "Take double normal damage when hit. Convert any <c=status>CORRODE</c> into <c=status>TARNISH</c>. <c=downside>Decreases by 1 at start of turn.</c>"
+            "desc": "Take double damage when hit. Convert any <c=status>CORRODE</c> into <c=status>TARNISH</c>. <c=downside>Decreases by 1 at start of turn.</c>"
         },
         "SnekTunezStat": {
             "name": "???",
@@ -47,7 +47,7 @@
         "Common": {
             "ForgedCertificate": {
                 "name": "FORGED CERTIFICATE",
-                "desc": "Every 4th time you take hull damage, immediately <c=hull>heal 1</c>."
+                "desc": "Every 3rd time you take hull damage, immediately <c=hull>heal 1</c>."
             },
             "ByproductProcessor": {
                 "name": "BYPRODUCT PROCESSOR",
@@ -148,7 +148,7 @@
             },
             "Tempoboosters": {
                 "name": "TEMPOBOOSTERS",
-                "desc": "At the start of <c=keyword>elite</c> combat, gain 1 <c=status>ACE</c> and 1 <c=status>CORRODE</c>.\nOn <c=keyword>boss</c> encounters gain an additional 1 <c=status>ACE</c> and 1 <c=status>TARNISH</c>."
+                "desc": "At the start of <c=keyword>elite/boss</c> combat, gain <c=keyword>1</c> <c=status>ACE</c> and <c=downside>1</c> <c=status>CORRODE</c>.\nIf you have <c=artifact>LIGHTENED LOAD</c>, instead of <c=status>CORRODE</c> gain <c=downside>3</c> <c=status>TARNISH</c>."
             },
             "WarpPrototype": {
                 "name": "WARP PROTOTYPE",

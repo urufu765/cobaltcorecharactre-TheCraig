@@ -30,6 +30,7 @@ public class Tarnishing : IKokoroApi.IV2.IStatusLogicApi.IHook
         if (__instance.Get(ModEntry.Instance.TarnishStatus.Status) > 0)
         {
             __result *= 2;
+            __instance.PulseStatus(ModEntry.Instance.TarnishStatus.Status);
         }
     }
 
