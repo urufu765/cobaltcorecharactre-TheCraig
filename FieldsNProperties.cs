@@ -181,6 +181,7 @@ internal partial class ModEntry : SimpleMod
         "solemn",
         "squint",
         "tired",
+        "unamused"
     ];
     private static List<string> Illeana5Anims = [
         "possessed",

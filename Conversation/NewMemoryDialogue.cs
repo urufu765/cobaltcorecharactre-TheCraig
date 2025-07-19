@@ -24,9 +24,9 @@ internal class NewMemoryDialogue : IRegisterable
                 ],
                 dialogue = [
                     new(new Wait{secs = 3}),
-                    new(AmIlleana, "curious", "..."),
+                    new(AmIlleana, "solemn", "..."),
                     new(AmVoid, "...", true),
-                    new(AmIlleana, "curious", "So?"),
+                    new(AmIlleana, "unamused", "So?"),
                     new(AmVoid, "You don't belong here.", true),
                     new(AmIlleana, "solemn", "Says the one who brought me here."),
                     new(AmVoid, "That's not what I meant.", true),
