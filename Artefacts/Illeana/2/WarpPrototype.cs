@@ -44,6 +44,7 @@ public class WarpPrototype : Artifact
             }
         }
         state.artifacts.RemoveAll(r => r.Key() == artifactType);
+        state.UpdateArtifactCache();
     }
 
     public override List<Tooltip>? GetExtraTooltips()

@@ -8,6 +8,7 @@ A corrosion engineer who works with corrosion to help keep the ship at tip top c
 
 #### 1.2: Illeana Story
 
+* **(1.2.4)**: Fixed a bug introduced in new game update 1.2.4
 * **(1.2.3)**: Fixed an Illeana animation tag not registered by accident
 * **(1.2.2)**: Some artifact balancing, Tarnish blip
   * Tempo Booster nerf: Boss condition now no longer gives additional ace. Downside gives tarnish or corrode based on alt starter
