@@ -30,7 +30,7 @@ public class ExternalFuelSource : Artifact
 
     public override void OnPlayerRecieveCardMidCombat(State state, Combat combat, Card card)
     {
-        if (Limiter < LIMIT && card.GetData(state).temporary)
+        if (Limiter < LIMIT && card.GetDataWithOverrides(state).temporary)
         {
             combat.QueueImmediate(new AStatus
             {
