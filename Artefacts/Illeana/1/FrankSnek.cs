@@ -106,7 +106,7 @@ public class SportsStereo : PersonalStereo
                 character.artifacts.RemoveAll(r => r.Key() == artifactType);
             }
         }
-        state.UpdateArtifactCache();
+        //state.UpdateArtifactCache();
     }
 
     public override List<Tooltip>? GetExtraTooltips()
