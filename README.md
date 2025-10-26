@@ -13,7 +13,7 @@ A corrosion engineer who works with corrosion to help keep the ship at tip top c
   * **dev.6*: More duos!!
   * **dev.5*: Painter's palette (and other mod content)
   * **dev.4*: Gave Illeana a solo deck + solo starter
-  * **dev.3*: Added condition to prevent some artifacts to not show up if you have very little max hull
+  * **dev.3**: Added condition to prevent some artifacts to not show up if you have very little max hull and gave the SnekTunez placeholder clarification
   * **dev.2**:
     * Replaced Acid Backflow with Baked Hull
     * Amputation now retains and exhausts across the board

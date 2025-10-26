@@ -28,7 +28,7 @@
         },
         "SnekTunezStat": {
             "name": "???",
-            "desc": "Gives either <c=energy>ENERGY NEXT TURN</c>, <c=damage>OVERDRIVE</c>, <c=healing>DRAW NEXT TURN</c>, or <c=status>EVADE</c>."
+            "desc": "Gives either <c=energy>ENERGY NEXT TURN</c>, <c=damage>OVERDRIVE</c>, <c=healing>DRAW NEXT TURN</c>, or <c=status>EVADE</c>. Loops these four statuses in order, on repeat."
         },
         "ExcessShard": {
             "name": "Excess Shard",
@@ -249,7 +249,7 @@
                 "descB2": "<c=keyword>If base max shield >1:</c>\n<c=faint>X = Max Shield\n2X Max Hull\n-2 Max Shield</c>",
                 "descX": "If you have >0 max shield:\n<c=healing>1</c> max hull\n<c=downside>-1</c> <c=status>SHIELD CAP</c>\n<c=status>SHIELD</c> = 0\n<c=downside>1</c> <c=status>CORRODE</c>",
                 "descY": "If you have >0 max shield\n<c=healing>+3</c> max hull\n<c=downside>-1</c> max shield",
-                "desc": "On <c=keyword>3rd</c> use, <c=hull>heal 1</c> and gain <c=heal>1 max hull</c>.\n<c={{color}}>[{{uses}}/{{limit}}]</c>",
+                "desc": "On <c=keyword>3rd</c> use, <c=hull>heal 1</c> and gain <c=heal>1 max hull</c>.<c=downside>\n<c={{color}}>[{{uses}}/{{limit}}]</c>",
                 "descA": "On <c=keyword>5th</c> use and onward, gain <c=hull>1 max hull</c>.\n<c={{color}}>[{{uses}}/{{limit}}]</c>",
                 "descBA": "On <c=keyword>10th</c> use, <c=hull>double your max hull</c> and <c=downside>destroy this card</c>.\n<c={{color}}>[{{uses}}/{{limit}}]</c>"
             }

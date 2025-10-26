@@ -89,6 +89,13 @@ public static class WarpPrototypeHelper
             {
                 __result.Add(typeof(PersonalStereo));
             }
+            if (s.ship is not null && s.ship.hullMax <= 3)
+            {
+                __result.Add(typeof(ByproductProcessor));
+                __result.Add(typeof(CausticArmor));
+                __result.Add(typeof(PersonalStereo));
+                
+            }
         }
         catch (Exception err)
         {
