@@ -20,6 +20,7 @@ public class AcidBackflow : Card, IRegisterable
                 deck = ModEntry.Instance.IlleanaDeck.Deck,
                 rarity = Rarity.uncommon,
                 upgradesTo = [Upgrade.A, Upgrade.B],
+                unreleased = true
             },
             Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "Uncommon", "AcidBackflow", "name"]).Localize,
             Art = ModEntry.RegisterSprite(package, "assets/Card/Illeana/2/AcidBackflow.png").Sprite

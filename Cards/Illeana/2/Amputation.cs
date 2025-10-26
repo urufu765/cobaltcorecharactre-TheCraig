@@ -118,18 +118,21 @@ public class Amputation : Card, IRegisterable
             {
                 cost = 0,
                 exhaust = true,
+                retain = true,
                 description = ModEntry.Instance.Localizations.Localize(["card", "Uncommon", "Amputation", "descA"])
             },
             Upgrade.B => new CardData
             {
                 cost = 0,
-                singleUse = true,
+                exhaust = true,
+                retain = true,
                 description = string.Format(ModEntry.Instance.Localizations.Localize(["card", "Uncommon", "Amputation", "descB"]), (x/2).ToString())
             },
             _ => new CardData
             {
                 cost = 0,
                 exhaust = true,
+                retain = true,
                 description = ModEntry.Instance.Localizations.Localize(["card", "Uncommon", "Amputation", "desc"])
             },
         };

@@ -30,9 +30,32 @@ public class GreatHealing : Card, IRegisterable
     public override List<CardAction> GetActions(State s, Combat c)
     {
         int x = s.ship.Get(Status.corrode) + 1;
+        int y = s.ship.Get(ModEntry.Instance.TarnishStatus.Status);
         return upgrade switch
         {
             Upgrade.B => 
+            [
+                new AVariableHint
+                {
+                    status = ModEntry.Instance.TarnishStatus.Status
+                },
+                new AHeal
+                {
+                    healAmount = y * 3,
+                    targetPlayer = true,
+                    xHint = new int?(3)
+                },
+                new AStatus
+                {
+                    status = ModEntry.Instance.TarnishStatus.Status,
+                    statusAmount = y * 2,
+                    xHint = 2,
+                    mode = AStatusMode.Set,
+                    targetPlayer = true
+                },
+                new AEndTurn()
+            ],
+            Upgrade.A => 
             [
                 new AStatus
                 {
@@ -46,9 +69,15 @@ public class GreatHealing : Card, IRegisterable
                 },
                 new AHeal
                 {
-                    healAmount = x * 5,
+                    healAmount = x * 3,
                     targetPlayer = true,
-                    xHint = new int?(5)
+                    xHint = new int?(3)
+                },
+                new AStatus
+                {
+                    status = Status.corrode,
+                    statusAmount = -1,
+                    targetPlayer = true
                 },
                 new AEndTurn()
             ],
@@ -83,7 +112,8 @@ public class GreatHealing : Card, IRegisterable
             Upgrade.B => new CardData
             {
                 cost = 2,
-                singleUse = true
+                exhaust = true,
+                artTint = "a43fff"
             },
             Upgrade.A => new CardData
             {

@@ -10,11 +10,16 @@ A corrosion engineer who works with corrosion to help keep the ship at tip top c
 
 * **(1.3.0)**
   * **dev.7*: More dialogue!!!
-  * **dev.6*: Gone-In-A-Jiffy B heals and retains
-  * **dev.5*: Replaced the B upgrade of Restoration to a tarnish version
-  * **dev.4*: Removed Amputation B's single use. Amputation now retains and exhausts across the board
+  * **dev.6*: More duos!!
+  * **dev.5*: Painter's palette (and other mod content)
+  * **dev.4*: Gave Illeana a solo deck + solo starter
   * **dev.3*: Added condition to prevent some artifacts to not show up if you have very little max hull
-  * **dev.2*: Replaced Acid Backflow with Baked Hull
+  * **dev.2**:
+    * Replaced Acid Backflow with Baked Hull
+    * Amputation now retains and exhausts across the board
+    * Restoration A reduces corrode by 1 at the end
+    * Replaced the B upgrade of Restoration to a tarnish version (less heal, more tarnish), removed single-use
+    * Gone-In-A-Jiffy B no longer exhausts
   * **dev.1**: Fixed Illeana Drake story
 
 #### 1.2: Illeana Story

@@ -100,12 +100,6 @@ public class GoneJiffy : Card, IRegisterable
     {
         return upgrade switch
         {
-            Upgrade.B => new CardData
-            {
-                cost = 1,
-                exhaust = true,
-                art = ModEntry.Instance.shoeanaMode ? shoeSprite : null
-            },
             _ => new CardData
             {
                 cost = 1,

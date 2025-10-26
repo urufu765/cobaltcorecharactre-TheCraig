@@ -64,7 +64,9 @@ internal partial class ModEntry : SimpleMod
         typeof(Distracted),
         typeof(Disinfect),
         typeof(AcidicPackage),
-        typeof(AcidBackflow)
+        typeof(AcidBackflow),
+        typeof(BakedHull),
+        typeof(BakedHullOld)
     ];
     private static List<Type> IlleanaRareCardTypes = [
         typeof(MakeshiftHull),

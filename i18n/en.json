@@ -36,6 +36,10 @@
         }
     },
     "action": {
+        "ExtraCondition": {
+            "MaxShield": "If <c=keyword>base max shield</c> is lower than <c=keyword>{{requirement}}</c>, all actions on this card are <c=downside>disabled</c>!",
+            "MaxTotalShield": "If <c=keyword>total max shield</c> is lower than <c=keyword>{{requirement}}</c>, all actions on this card are <c=downside>disabled</c>!"
+        }
     },
     "midrow": {
         "bigCorrode": {
@@ -238,6 +242,16 @@
             },
             "AcidBackflow": {
                 "name": "Acid Backflow"
+            },
+            "BakedHull": {
+                "name": "Baked Hull",
+                "descB": "<c=keyword>If base max shield >1:</c>\nX = Max Shield\n<c=heal>2X Max Hull</c>({{amount}})\n<c=downside>-2 Max Shield</c>",
+                "descB2": "<c=keyword>If base max shield >1:</c>\n<c=faint>X = Max Shield\n2X Max Hull\n-2 Max Shield</c>",
+                "descX": "If you have >0 max shield:\n<c=healing>1</c> max hull\n<c=downside>-1</c> <c=status>SHIELD CAP</c>\n<c=status>SHIELD</c> = 0\n<c=downside>1</c> <c=status>CORRODE</c>",
+                "descY": "If you have >0 max shield\n<c=healing>+3</c> max hull\n<c=downside>-1</c> max shield",
+                "desc": "On <c=keyword>3rd</c> use, <c=hull>heal 1</c> and gain <c=heal>1 max hull</c>.\n<c={{color}}>[{{uses}}/{{limit}}]</c>",
+                "descA": "On <c=keyword>5th</c> use and onward, gain <c=hull>1 max hull</c>.\n<c={{color}}>[{{uses}}/{{limit}}]</c>",
+                "descBA": "On <c=keyword>10th</c> use, <c=hull>double your max hull</c> and <c=downside>destroy this card</c>.\n<c={{color}}>[{{uses}}/{{limit}}]</c>"
             }
         },
         "Rare": {
