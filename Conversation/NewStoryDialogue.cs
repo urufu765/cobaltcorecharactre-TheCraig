@@ -188,7 +188,7 @@ internal class NewStoryDialogue : IRegisterable
                     new(AmIlleana, "intense", "... why?", true),
                     new(AmDrake, "blush", "I heard snake rum is delicious."),
                     new(AmIlleana, "unamused", "You do know making something like that takes ages, right?", true),
-                    new(AmDrake, "slyblush", "I can wait."),
+                    new(AmDrake, "sly", "I can wait."),
                     new(AmIlleana, "squint", "Don't you dare.", true)
                 ]
             }}

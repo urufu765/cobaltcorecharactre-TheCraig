@@ -6,6 +6,17 @@ A corrosion engineer who works with corrosion to help keep the ship at tip top c
 
 ### PUBLIC
 
+#### 1.3: More just means MOAR
+
+* **(1.3.0)**
+  * **dev.7*: More dialogue!!!
+  * **dev.6*: Gone-In-A-Jiffy B heals and retains
+  * **dev.5*: Replaced the B upgrade of Restoration to a tarnish version
+  * **dev.4*: Removed Amputation B's single use. Amputation now retains and exhausts across the board
+  * **dev.3*: Added condition to prevent some artifacts to not show up if you have very little max hull
+  * **dev.2*: Replaced Acid Backflow with Baked Hull
+  * **dev.1**: Fixed Illeana Drake story
+
 #### 1.2: Illeana Story
 
 * **(1.2.6)**: Undid the fix for artifact removal
