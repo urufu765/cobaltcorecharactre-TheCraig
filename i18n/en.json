@@ -24,7 +24,7 @@
     "status": {
         "Tarnish": {
             "name": "Tarnish",
-            "desc": "Take double damage when hit. Convert any <c=status>CORRODE</c> into <c=status>TARNISH</c>. <c=downside>Decreases by 1 at start of turn.</c>"
+            "desc": "Take double damage when hit. When applying <c=status>TARNISH</c>, Convert any <c=status>CORRODE</c> into <c=status>TARNISH</c>. <c=downside>Decreases by 1 at start of turn.</c>"
         },
         "SnekTunezStat": {
             "name": "???",
@@ -293,7 +293,7 @@
             },
             "TheFailure": {
                 "name": "Failure",
-                "descB": "<c=downside>+1 <c=status>corrode</c> to self, and foe on draw.</c>\n-1 <c=status>corrode</c> when played.",
+                "descB": "<c=downside>+1 <c=status>corrode</c> to self and foe on draw.</c>\n-1 <c=status>corrode</c> to self when played.",
                 "desc": "<c=downside>+1 <c=status>corrode</c> to self on draw.</c>\n-1 <c=status>corrode</c> when played."
             },
             "TheAccident": {

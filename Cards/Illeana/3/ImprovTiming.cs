@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using Illeana.Conversation;
 using Nanoray.PluginManager;
 using Nickel;
 
@@ -91,6 +92,7 @@ public class ImprovisedTiming : Card, IRegisterable
 
     public override void OnDraw(State s, Combat c)
     {
+        if (s.ship.Get(CommonDefinitions.MissingIlleana) > 0) return;  // Prevent on draw actions from happening if there's no snek
         Drawn++;
     }
 

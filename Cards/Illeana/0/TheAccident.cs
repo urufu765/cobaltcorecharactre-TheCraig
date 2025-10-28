@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Reflection;
+using Illeana.Conversation;
 using Illeana.Features;
 using Nanoray.PluginManager;
 using Nickel;
@@ -47,6 +48,7 @@ public class TheAccident : Card, IRegisterable
     public override void OnDraw(State s, Combat c)
     {
         base.OnDraw(s, c);
+        if (s.ship.Get(CommonDefinitions.MissingIlleana) > 0) return;  // Prevent on draw actions from happening if there's no snek
         c.QueueImmediate(
             new AStatus
             {
