@@ -29,8 +29,14 @@ public class BakedHull : Card, IRegisterable, IHasCustomCardTraits
             };
         }
     }
+    private static Spr mainSpr;
+    private static Spr bakingSpr;
+    private static Spr doneSpr;
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
+        mainSpr = ModEntry.RegisterSprite(package, "assets/Card/Illeana/2/BakedHull.png").Sprite;
+        bakingSpr = ModEntry.RegisterSprite(package, "assets/Card/Illeana/2/BakedHullBaking.png").Sprite;
+        doneSpr = ModEntry.RegisterSprite(package, "assets/Card/Illeana/2/BakedHullDone.png").Sprite;
         helper.Content.Cards.RegisterCard(new CardConfiguration
         {
             CardType = MethodBase.GetCurrentMethod()!.DeclaringType!,
@@ -41,8 +47,18 @@ public class BakedHull : Card, IRegisterable, IHasCustomCardTraits
                 upgradesTo = [Upgrade.A, Upgrade.B]
             },
             Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "Uncommon", "BakedHull", "name"]).Localize,
-            Art = ModEntry.RegisterSprite(package, "assets/Card/Illeana/2/AcidBackflow.png").Sprite
+            Art = bakingSpr
         });
+
+        // LocalDB.DumpStoryToLocalLocale("en", new Dictionary<string, DialogueMachine>()
+        // {
+        //     {"IlleanaIsBakingACake_Multi_0",
+        //         new()
+        //         {
+        //             type = NodeType.combat
+        //         }
+        //     }
+        // });
 
         ModEntry.Instance.KokoroApi.V2.CardRendering.RegisterHook(new Hook());
     }
@@ -50,16 +66,37 @@ public class BakedHull : Card, IRegisterable, IHasCustomCardTraits
 
     public override List<CardAction> GetActions(State s, Combat c)
     {
-        return [
-            new ABakeACake
-            {
-                uuid = uuid,
-                amount = upgrade == Upgrade.B? s.ship.hullMax : 1,
-                constantReward = upgrade == Upgrade.A,
-                destroyOnCompletion = upgrade == Upgrade.B,
-                healToo = upgrade == Upgrade.None
-            }
-        ];
+        return upgrade switch
+        {
+            Upgrade.B =>
+            [
+                new ABakeACake
+                {
+                    uuid = uuid,
+                    amount = s.ship.hullMax,
+                    destroyOnCompletion = true
+                }
+            ],
+            Upgrade.A =>
+            [
+                new ABakeACake
+                {
+                    uuid = uuid,
+                    amount = 1,
+                    constantReward = true
+                }
+            ],
+            _ =>
+            [
+                new ABakeACake
+                {
+                    uuid = uuid,
+                    amount = 1,
+                    healOnCompletion = true,
+                    healAfterCompletion = true
+                }
+            ],
+        };
     }
 
 
@@ -86,7 +123,8 @@ public class BakedHull : Card, IRegisterable, IHasCustomCardTraits
                     uses = Uses,
                     limit = Limit
                 }
-            )
+            ),
+            art = Uses==0? mainSpr : (Uses<Limit? bakingSpr : doneSpr)
         };
     }
 
@@ -99,6 +137,7 @@ public class BakedHull : Card, IRegisterable, IHasCustomCardTraits
     {
         public Font? ReplaceTextCardFont(CRHook.IReplaceTextCardFontArgs args)
         {
+            // if (args.Card is BakedHullOld || (args.Card is BakedHull bh && bh.upgrade == Upgrade.None))
             if (args.Card is BakedHullOld)
             {
                 return ModEntry.Instance.KokoroApi.V2.Assets.PinchCompactFont;

@@ -9,12 +9,12 @@ A corrosion engineer who works with corrosion to help keep the ship at tip top c
 #### 1.3: More just means MOAR
 
 * **(1.3.0)**
-  * **dev.10*: More story dialogue!!!
+  * **dev.10*: More story dialogue!!! + Baked hull dialogue
   * **dev.9*: More duos!!
   * **dev.8*: Painter's palette (and other mod content)
-  * **dev.7*: Rebalanced some old cards
+  * **dev.7*: Rebalanced some old cards, less british
   * **dev.6*: Gave Illeana a solo deck + solo starter
-  * **dev.5*: Baked Hull card sprite + dialogue
+  * **dev.5**: Baked Hull card sprite, Baked Hull base now heals when completed.
   * **dev.4**: Illeana's on draw cards do not activate their action if Illeana is missing, slight word clarification for failure card. Tarnish tooltip slight clarification.
   * **dev.3**: Added condition to prevent some artifacts to not show up if you have very little max hull and gave the SnekTunez placeholder clarification
   * **dev.2**:
