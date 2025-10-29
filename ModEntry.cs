@@ -12,6 +12,7 @@ using Illeana.External;
 using Illeana.Features;
 using System.Reflection;
 using Illeana.Conversation;
+using APurpleApple.GenericArtifacts;
 
 namespace Illeana;
 
@@ -66,6 +67,24 @@ internal partial class ModEntry : SimpleMod
                             }
                         }
                     }
+                }
+
+                // Generic Artifacts patch
+                if (helper.ModRegistry.LoadedMods.ContainsKey("APurpleApple.GenericArtifacts"))
+                {
+                    helper.ModRegistry.AwaitApi<IAppleArtifactApi>(
+                        "APurpleApple.GenericArtifacts",
+                        api => api.SetPaletteAction(
+                            IlleanaDeck!.Deck,
+                            _ => new AStatus
+                            {
+                                status = Status.autododgeRight,
+                                statusAmount = 1,
+                                targetPlayer = true
+                            },
+                            new TTText(Localizations!.Localize(["other","SnekPigment"]))
+                        )
+                    );
                 }
 
                 localDB = new(helper, package);

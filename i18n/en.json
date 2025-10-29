@@ -348,5 +348,8 @@
             "name": "Ophidiophobia Mode",
             "desc": "Hides snake and snake-related content... by finding a suitable replacement."
         }
+    },
+    "other": {
+        "SnekPigment": "<c=45e260>ILLEANA PIGMENT</c>\nYour next colourless card also grants you <c=value>1</c> <c=status>AUTODODGE RIGHT</c>."
     }
 }
