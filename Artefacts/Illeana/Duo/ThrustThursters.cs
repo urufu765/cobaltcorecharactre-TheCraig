@@ -53,7 +53,9 @@ public class ThrustThursters : Artifact
     }
 }
 
-
+/// <summary>
+/// Make Evade go bloop bloop faster
+/// </summary>
 public static class ThrustMaster
 {
     public static void Apply(Harmony harmony)

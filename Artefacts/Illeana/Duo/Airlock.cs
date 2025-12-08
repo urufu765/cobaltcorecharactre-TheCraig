@@ -5,7 +5,7 @@ namespace Illeana.Artifacts;
 /// <summary>
 /// Start combat with 3 overdrive && 2 missing illeana
 /// </summary>
-[ArtifactMeta(pools = new[] { ArtifactPool.Common }), DuoArtifactMeta(duoDeck = Deck.peri)]
+[ArtifactMeta(pools = new[] { ArtifactPool.Unreleased }), DuoArtifactMeta(duoDeck = Deck.peri)]
 public class AirlockSnek : Artifact
 {
     public override Spr GetSprite()

@@ -18,7 +18,7 @@ public class BountifulBloodBank : Artifact
     public static List<int> BaseBloods {get;} = [4, 2, 1];
     public int Deposited {get; set;}
     public int HullNotMaxDeposited {get; set;}
-    
+    public bool InCombat { get; set; } = false;  // Visual purposes
 
     private int Withdrawal()
     {
@@ -27,11 +27,12 @@ public class BountifulBloodBank : Artifact
 
     public override int? GetDisplayNumber(State s)
     {
-        return Withdrawal();
+        return InCombat? Withdrawal() : null;
     }
 
     public override void OnCombatStart(State state, Combat combat)
     {
+        InCombat = true;
         if (state?.map?.markers[state.map.currentLocation]?.contents is MapBattle mb)
         {
             Encounter = mb.battleType switch
@@ -78,6 +79,7 @@ public class BountifulBloodBank : Artifact
 
     public override void OnCombatEnd(State state)
     {
+        InCombat = false;
         if(Deposited > 0)
         {
             state.ship.hullMax += Withdrawal();

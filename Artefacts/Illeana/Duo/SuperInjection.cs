@@ -7,7 +7,7 @@ namespace Illeana.Artifacts;
 /// <summary>
 /// Launch corrode 2 missiles
 /// </summary>
-[ArtifactMeta(pools = new[] { ArtifactPool.Common }), DuoArtifactMeta(duoDeck = Deck.goat)]
+[ArtifactMeta(pools = new[] { ArtifactPool.Unreleased }), DuoArtifactMeta(duoDeck = Deck.goat)]
 public class SuperInjection : Artifact
 {
     public override StuffBase ReplaceSpawnedThing(State state, Combat combat, StuffBase thing, bool spawnedByPlayer)

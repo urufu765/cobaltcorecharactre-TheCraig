@@ -13,13 +13,19 @@ public class HullHarvester : Artifact
     public int Hits{get;set;}
     public bool Depleted{get;set;}
     public const int HITLIMIT = 5;
+    public bool InCombat { get; set; } = false;  // Visual purposes
+
+    public override void OnCombatStart(State state, Combat combat)
+    {
+        InCombat = true;
+    }
     public override Spr GetSprite()
     {
         return Depleted? ModEntry.Instance.SprHullHarvestDepleted : base.GetSprite();
     }
     public override int? GetDisplayNumber(State s)
     {
-        return Hits;
+        return InCombat? Hits : null;
     }
     public override void OnTurnStart(State state, Combat combat)
     {
@@ -29,7 +35,7 @@ public class HullHarvester : Artifact
     public override void OnCombatEnd(State state)
     {
         Hits = 0;
-        Depleted = false;
+        Depleted = InCombat = false;
     }
     public override void OnEnemyGetHit(State state, Combat combat, Part? part)
     {

@@ -5,7 +5,7 @@ namespace Illeana.Artifacts;
 /// <summary>
 /// When shield gained, gain temp shield equal to tarnish
 /// </summary>
-[ArtifactMeta(pools = new[] { ArtifactPool.Common }), DuoArtifactMeta(duoDeck = Deck.dizzy)]
+[ArtifactMeta(pools = new[] { ArtifactPool.Unreleased }), DuoArtifactMeta(duoDeck = Deck.dizzy)]
 public class ReusableScrap : Artifact
 {
     public override void AfterPlayerStatusAction(State state, Combat combat, Status status, AStatusMode mode, int statusAmount)

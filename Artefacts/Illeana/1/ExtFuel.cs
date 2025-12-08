@@ -10,9 +10,22 @@ public class ExternalFuelSource : Artifact
 {
     private const int LIMIT = 2;
     public int Limiter {get; set;}
+    public bool InCombat { get; set; } = false;  // Visual purposes
+
+    public override void OnCombatEnd(State state)
+    {
+        InCombat = false;
+        Limiter = 0;
+    }
+
+    public override void OnCombatStart(State state, Combat combat)
+    {
+        InCombat = true;
+    }
+
     public override int? GetDisplayNumber(State s)
     {
-        return Limiter;
+        return InCombat? Limiter : null;
     }
 
     public override Spr GetSprite()

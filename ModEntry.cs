@@ -13,6 +13,7 @@ using Illeana.Features;
 using System.Reflection;
 using Illeana.Conversation;
 using APurpleApple.GenericArtifacts;
+using Shockah.Dyna;
 
 namespace Illeana;
 
@@ -33,6 +34,7 @@ internal partial class ModEntry : SimpleMod
         KokoroApi = helper.ModRegistry.GetApi<IKokoroApi>("Shockah.Kokoro")!;
         MoreDifficultiesApi = helper.ModRegistry.GetApi<IMoreDifficultiesApi>("TheJazMaster.MoreDifficulties");
         DuoArtifactsApi = helper.ModRegistry.GetApi<IDuoArtifactsApi>("Shockah.DuoArtifacts");
+        DynaApi = helper.ModRegistry.GetApi<IDynaApi>("Shockah.Dyna");
         settings = helper.Storage.LoadJson<Settings>(SettingsFile);
 
 
@@ -86,6 +88,9 @@ internal partial class ModEntry : SimpleMod
                         )
                     );
                 }
+
+                // Check for mod presence checks
+                PresenceCheck(helper);
 
                 localDB = new(helper, package);
             }
@@ -318,6 +323,8 @@ internal partial class ModEntry : SimpleMod
          */
         //_ = new KnowledgeManager();
         _ = new Tarnishing();
+        reactiveFormulae = new ReactiveFormulae();
+        demoSetupPro = new DemolitionSetupProfessional();
 
         /*
          * Some classes require so little management that a manager may not be worth writing.
@@ -377,6 +384,12 @@ internal partial class ModEntry : SimpleMod
         SprCompetitionIlleana = RegisterSprite(package, "assets/Artifact/CompetitionIlleana.png").Sprite;
         SprCompetitionEddie = RegisterSprite(package, "assets/Artifact/CompetitionEddie.png").Sprite;
         SprCompetitionDepleted = RegisterSprite(package, "assets/Artifact/CompetitionDepleted.png").Sprite;
+        SprDemolitionSetupDepleted = RegisterSprite(package, "assets/Artifact/DemolitionSetupDepleted.png").Sprite;
+        SprLooseStickDepleted = RegisterSprite(package, "assets/Artifact/LooseStickDepleted.png").Sprite;
+        SprResidualHeatWelderInactive = RegisterSprite(package, "assets/Artifact/ResidualHeatWelderInactive.png").Sprite;
+        SprSwaySwheelDepleted = RegisterSprite(package, "assets/Artifact/SwaySwheelDepleted.png").Sprite;
+        SprTakeABreakActive = RegisterSprite(package, "assets/Artifact/TakeABreakActive.png").Sprite;
+        SprTakeABreakDepleted = RegisterSprite(package, "assets/Artifact/TakeABreakDepleted.png").Sprite;
 
         /*
          * All the IRegisterable types placed into the static lists at the start of the class are initialized here.
@@ -386,11 +399,19 @@ internal partial class ModEntry : SimpleMod
             AccessTools.DeclaredMethod(type, nameof(IRegisterable.Register))?.Invoke(null, [package, helper]);
 
         //DrawLoadingScreenFixer.Apply(Harmony);
+
+        // Artifact Helpers
         //SashaSportingSession.Apply(Harmony);
         WarpPrototypeHelper.Apply(Harmony);
         ThrustMaster.Apply(Harmony);
         HeatpumpLubricator.Apply(Harmony);
         ShardStorageUnlimiter.Apply(Harmony);
+        JitterTheStick.Apply(Harmony);
+        HealToShield.Apply(Harmony);
+        ShouldWeCorrode.Apply(Harmony);
+        GetExtraHeat.Apply(Harmony);
+
+        // Other Helpers
         IlleanaClock.Apply(Harmony);
         SwapTheAnimation.Apply(Harmony);
         ReplaceSnakeBodyArt.Apply(Harmony);
@@ -421,6 +442,16 @@ internal partial class ModEntry : SimpleMod
                 helper.Storage.SaveJson(SettingsFile, settings);
             }))
         );
+    }
+
+    /// <summary>
+    /// Checks for mod presence, unloading hooks if not present. Used for status hooks at the moment.
+    /// </summary>
+    /// <param name="helper"></param>
+    private void PresenceCheck(IModHelper helper)
+    {
+        reactiveFormulae.ReactiveFormulaPossibilityCheck(helper);
+        demoSetupPro.DemolitionSetupProfessionalPossibilityCheck(helper);
     }
 
     /*

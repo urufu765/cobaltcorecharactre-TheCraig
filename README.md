@@ -9,11 +9,13 @@ A corrosion engineer who works with corrosion to help keep the ship at tip top c
 #### 1.3: More just means MOAR
 
 * **(1.3.0)**
-  * **dev.10*: More story dialogue!!! + Baked hull dialogue
-  * **dev.9*: More duos!!
-  * **dev.8*: More other mod content like artifact swap thing, and more idk
-  * **dev.7*: Rebalanced some old cards, less british
-  * **dev.6*: Gave Illeana a solo deck + solo starter
+  * **dev.*: Memory 3 expansion/redo
+  * **dev.*: More story dialogue!!! + Baked hull dialogue
+  * **dev.*: More duos!! + duo dialogue/start story dialogue
+  * **dev.*: More other mod content like artifact swap thing, and more idk
+  * **dev.*: Rebalance some old cards, less british
+  * **dev.*: Give Illeana a solo deck + solo starter
+  * **dev.7**: Artifact rebalance and replacements + more duos! Also made the display number disappear upon exiting combat.
   * **dev.6**: Painter's palette
   * **dev.5**: Baked Hull card sprite, Baked Hull base now heals when completed.
   * **dev.4**: Illeana's on draw cards do not activate their action if Illeana is missing, slight word clarification for failure card. Tarnish tooltip slight clarification.

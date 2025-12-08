@@ -8,6 +8,26 @@ namespace Illeana.Artifacts;
 [ArtifactMeta(pools = new[] { ArtifactPool.Common }), DuoArtifactMeta(duoDeck = Deck.hacker)]
 public class ExtraSlip : Artifact
 {
+    public bool LeftUsed {get;set;}
+    public bool RightUsed {get;set;}
+
+    public override void OnCombatEnd(State state)
+    {
+        LeftUsed = RightUsed = false;
+    }
+    public override void OnCombatStart(State state, Combat combat)
+    {
+        LeftUsed = false;
+    }
+
+    public override void OnTurnStart(State state, Combat combat)
+    {
+        RightUsed = false;
+    }
+
+    // TODO: insert code about left and right card used.
+
+
     public override int ModifyAutopilotAmount()
     {
         if (MG.inst.g.state.ship.Get(Status.corrode) > 0)
@@ -19,6 +39,10 @@ public class ExtraSlip : Artifact
 
     public override List<Tooltip>? GetExtraTooltips()
     {
-        return [new TTGlossary("status.corrode", ["1"])];
+        List<Tooltip> l = StatusMeta.GetTooltips(ModEntry.Instance.TarnishStatus.Status, 1);
+        l.Insert(0, new TTGlossary("status.autododgeRight", ["1"]));
+        l.Insert(0, new TTGlossary("status.autododgeLeft", ["1"]));
+        l.Insert(0, new TTGlossary("status.corrode", ["1"]));
+        return l;
     }
 }

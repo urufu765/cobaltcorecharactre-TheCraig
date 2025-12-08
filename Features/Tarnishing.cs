@@ -8,10 +8,11 @@ using Illeana.External;
 using HarmonyLib;
 using Nanoray.PluginManager;
 using Nickel;
+using StatusLogic = Illeana.External.IKokoroApi.IV2.IStatusLogicApi;
 
 namespace Illeana.Features;
 
-public class Tarnishing : IKokoroApi.IV2.IStatusLogicApi.IHook
+public class Tarnishing : StatusLogic.IHook
 {
 
     public Tarnishing()
@@ -34,10 +35,10 @@ public class Tarnishing : IKokoroApi.IV2.IStatusLogicApi.IHook
         }
     }
 
-    public bool HandleStatusTurnAutoStep(IKokoroApi.IV2.IStatusLogicApi.IHook.IHandleStatusTurnAutoStepArgs args)
+    public bool HandleStatusTurnAutoStep(StatusLogic.IHook.IHandleStatusTurnAutoStepArgs args)
     {
         if (args.Status != ModEntry.Instance.TarnishStatus.Status) return false;
-        if (args.Timing != IKokoroApi.IV2.IStatusLogicApi.StatusTurnTriggerTiming.TurnStart) return false;
+        if (args.Timing != StatusLogic.StatusTurnTriggerTiming.TurnStart) return false;
         if (args.Amount > 0)
         {
             args.Amount -= 1;
@@ -45,7 +46,7 @@ public class Tarnishing : IKokoroApi.IV2.IStatusLogicApi.IHook
         return false;
     }
 
-    public int ModifyStatusChange(IKokoroApi.IV2.IStatusLogicApi.IHook.IModifyStatusChangeArgs args)
+    public int ModifyStatusChange(StatusLogic.IHook.IModifyStatusChangeArgs args)
     {
         // // Convert new Corrode to Tarnish if Tarnish is present
         // if (args.Status == Status.corrode && args.NewAmount > 0 && args.Ship.Get(ModEntry.Instance.TarnishStatus.Status) > 0)

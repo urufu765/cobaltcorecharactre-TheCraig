@@ -1,7 +1,7 @@
 namespace Illeana.Artifacts;
 
 /// <summary>
-/// Heals 1 per 4 hull lost
+/// Heals 1 per 3 hull lost
 /// </summary>
 [ArtifactMeta(pools = new[] { ArtifactPool.Common })]
 public class ForgedCertificate : Artifact

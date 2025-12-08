@@ -12,6 +12,7 @@ using Illeana.External;
 using Illeana.Features;
 using System.Reflection;
 using Illeana.Conversation;
+using Shockah.Dyna;
 
 namespace Illeana;
 
@@ -38,12 +39,12 @@ internal partial class ModEntry : SimpleMod
     internal ILocaleBoundNonNullLocalizationProvider<IReadOnlyList<string>> Localizations { get; }
     internal IMoreDifficultiesApi? MoreDifficultiesApi { get; private set; } = null!;
     internal IDuoArtifactsApi? DuoArtifactsApi { get; private set; } = null!;
+    internal IDynaApi? DynaApi {get;private set;} = null!;
 
-    /*
-     * The following lists contain references to all types that will be registered to the game.
-     * All cards and artifacts must be registered before they may be used in the game.
-     * In theory only one collection could be used, containing all registerable types, but it is seperated this way for ease of organization.
-     */
+    internal ReactiveFormulae reactiveFormulae;
+    internal DemolitionSetupProfessional demoSetupPro;
+
+    #region Card/artifact type declaration
     private static List<Type> IlleanaCommonCardTypes = [
         typeof(BuildCure),
         typeof(Cleanse),
@@ -116,22 +117,80 @@ internal partial class ModEntry : SimpleMod
         typeof(WarpPrototype)
     ];
     private static List<Type> IlleanaEventArtifacts = [
-        typeof(LightenedLoad),
-        //typeof(ToxicSports)
+        typeof(LightenedLoad),      // Alt starter
+        typeof(ReusableScrap),      // (REPLACED) Dizzy duo
+        typeof(SuperInjection),     // (REPLACED) Isaac duo
+        typeof(AirlockSnek),        // (REPLACED) Peri duo
+        // typeof(TarnishedSyringe),   // (UNIMPLEMENTED) Old Illeana common
+        // typeof(ConstantInnovation), // (UNIMPLEMENTED) Old Illeana boss
+        // typeof(Limbless),           // (UNUSED) Old Illeana boss
+        // typeof(ToxicSports),        // (UNUSED) Sasha event-only temp artifact
+        // typeof(GooseH8r),           // (UNIMPLEMENTED) Goose event-only temp artifact
+        // typeof(AutododgeExpress),   // (UNIMPLEMENTED)
+        // typeof(PseudoPacifist),     // (UNIMPLEMENTED) Solo starter idea 1
+        // typeof(CobraVoodoo),        // (UNIMPLEMENTED) Solo starter idea 2
+        // typeof(JitterStick),        // (UNIMPLEMENTED) Peri V2 duo idea 1
+        // typeof(ResidualHeatSolder), // (UNIMPLEMENTED) Ilya duo idea 2
     ];
     private static List<Type> IlleanaDuoArtifacts = [
-        typeof(ReusableScrap),  // Dizzy
-        typeof(ThrustThursters),  // Riggs
-        typeof(AirlockSnek),  // Peri
-        typeof(ExtraSlip),  // Max
-        typeof(PerfectedProtection),  // CAT
-        typeof(SuperInjection),  // Isaac
-        typeof(LubricatedHeatpump),  // Drake
-        typeof(UnprotectedStorage),  // Books
-        typeof(HullHarvester),  // Weth
-        typeof(Competition),  // Eddie
-        typeof(BountifulBloodBank),  // Dracula
+        typeof(ResourceOverflowCatcher),// Dizzy V2
+        typeof(LooseStick),             // (Slated for replacement) Peri V2
+        // typeof(MadeFromAcid),           // Peri V3
+        typeof(ThrustThursters),        // Riggs
+        typeof(ExtraSlip),              // Max
+        typeof(PerfectedProtection),    // CAT
+        typeof(FuelEqualizer),          // Isaac V2
+        typeof(LubricatedHeatpump),     // Drake
+        typeof(UnprotectedStorage),     // Books
+        typeof(HullHarvester),          // Weth
+        typeof(Competition),            // Eddie
+        typeof(BountifulBloodBank),     // Dracula
+        typeof(ChanceOfAcid),           // Dave
+        typeof(ReactiveFormula),        // Marielle
+        typeof(DemolitionSetup),        // Dyna
+        typeof(RegenerativeBacktrack),  // Nibbs
+        typeof(SlippyShuffle),          // Nola
+        typeof(SwaySwheel),             // Isabelle
+        typeof(ResidualHeatWelder),     // Ilya
+        typeof(TakeABreak),             // Jost
+        //typeof(SpecialSalt),            // Gauss
+        // typeof(),                       // Sorrel*
+        // typeof(Oxyboom),                // Jack*
+        // typeof(WallSnek),               // Scarlet*
+        // typeof(),                       // TH34*
+        // typeof(),                       // Nichole*
+        // typeof(),                       // Equilynx*
+        // typeof(),                       // Bloch*
+        // typeof(),                       // Destiny*
+        // typeof(),                       // Natasha*
+        // typeof(),                       // Soggins*
+        // typeof(),                       // Bucket*
+        // typeof(),                       // Louis*
+        // typeof(),                       // Ty&Sasha*
+        // typeof(),                       // Tucker*
+        // typeof(),                       // Rosa*
+        // typeof(),                       // Wade*
+        // typeof(),                       // Install*
+        // typeof(),                       // Ruhig*
+        // typeof(),                       // Cleo*
+        // typeof(),                       // Sierra*
+        // typeof(),                       // Bjorn*
+        // typeof(),                       // Angder*
+        // typeof(),                       // D26*
+        // typeof(),                       // Grunan*
+        // typeof(),                       // Kobrette*
+        // typeof(),                       // Destiny*
+        // typeof(),                       // Mina*
+        // typeof(),                       // Pilot*
+        // typeof(),                       // Philip*
+        // typeof(),                       // Randall*
+        // typeof(),                       // Andromeda*
+        // typeof(),                       // Johnson*
+        // typeof(),                       // Garrus*
+
     ];
+    #endregion
+
     private static List<Type> IlleanaDialogueTypes = [
         typeof(NewCombatDialogue),
         typeof(NewArtifactDialogue),
@@ -283,6 +342,12 @@ internal partial class ModEntry : SimpleMod
     public Spr SprCompetitionIlleana { get; private set; }
     public Spr SprCompetitionShoeana {get; private set; }
     public Spr SprCompetitionEddie { get; private set; }
+    public Spr SprDemolitionSetupDepleted { get; private set; }
+    public Spr SprLooseStickDepleted { get; private set; }
+    public Spr SprResidualHeatWelderInactive { get; private set; }
+    public Spr SprSwaySwheelDepleted { get; private set; }
+    public Spr SprTakeABreakActive { get; private set; }
+    public Spr SprTakeABreakDepleted { get; private set; }
     #endregion
 
     #region Story Sprites

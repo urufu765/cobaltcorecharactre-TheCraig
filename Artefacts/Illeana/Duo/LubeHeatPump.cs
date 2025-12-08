@@ -37,6 +37,9 @@ public class LubricatedHeatpump : Artifact
     }
 }
 
+/// <summary>
+/// Make overheat not overheat
+/// </summary>
 public static class HeatpumpLubricator
 {
     private static bool onOverheat;

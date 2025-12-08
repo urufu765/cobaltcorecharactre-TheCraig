@@ -29,7 +29,7 @@ public class BakedHullOld : Card, IRegisterable, IHasCustomCardTraits
                 unreleased = true
             },
             Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "Uncommon", "BakedHull", "name"]).Localize,
-            Art = ModEntry.RegisterSprite(package, "assets/Card/Illeana/2/AcidBackflow.png").Sprite
+            Art = StableSpr.cards_ExtraBattery
         });
     }
 

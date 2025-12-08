@@ -63,7 +63,7 @@
             },
             "CausticArmor": {
                 "name": "CAUSTIC ARMOR",
-                "desc": "At the start of every turn, gain <c=status>TEMP SHIELD</c> equal to your <c=status>TARNISH</c> or double your <c=status>CORRODE</c>."
+                "desc": "At the start of every turn, gain <c=status>TEMP SHIELD</c> equal to your <c=status>TARNISH</c> and/or double your <c=status>CORRODE</c>."
             },
             "ExperimentalLubricant": {
                 "name": "EXPERIMENTAL LUBRICANT",
@@ -85,6 +85,10 @@
                 "name": "REUSABLE SCRAP",
                 "desc": "Whenever you gain any <c=status>SHIELD</c>, gain <c=status>TEMP SHIELD</c> equal to your <c=status>TARNISH</c>."
             },
+            "ResourceOverflowCatcher": {
+                "name": "HEAL OVERFLOW GUTTER",
+                "desc": "Healing beyond max hull will instead give <c=status>SHIELD</c> equal to the <c=keyword>overflow amount</c>."
+            },
             "ThrustThursters": {
                 "name": "THRUST THURSTERS",
                 "desc": "Once per turn, when you gain <c=status>EVADE</c>, gain 1 more."
@@ -93,9 +97,26 @@
                 "name": "AIRLOCKED SNEK",
                 "desc": "Start combat with 3 <c=status>OVERDRIVE</c> and 2 <c=status>MISSING ILLEANA</c>.\n<c=trash>\"Peri is sick and tired of Illeana's schenanigans.\"</c>"
             },
+            "JitterStick": {
+                "name": "JITTER STICK CONTROLS",
+                "desc": "<c=action>Movement</c> actions each give 1 <c=status>EVADE</c> and <c=status>LOSE ALL EVADE NEXT TURN</c>."
+            },
+            "LooseStick": {
+                "name": "LOOSE JITTER STICK",
+                "desc": "At the start of every turn, gain 1 <c=status>ENGINE STALL</c>. For <c=action>any move</c> done while <c=keyword>movement restricted</c>, gain the amount as <c=status>EVADE</c> (up to 3 per turn).",
+                "descAlt": "At the start of every turn, gain 1 <c=status>ENGINE STALL</c>. For <c=action>any move</c> that <c=keyword>fails completely</c> (includes running into walls), gain the amount as <c=status>EVADE</c> (up to 3 per turn)."
+            },
+            "MadeFromAcid": {
+                "name": "MADE WITH ACID",
+                "desc": "At the start of every turn, add a <c=card>Chipshot</c> to your hand for every stack of <c=status>CORRODE</c> you have."
+            },
             "SuperInjection": {
                 "name": "SUPER INJECTION",
                 "desc": "All <c=drone>acid missiles</c> give 2 corrode."
+            },
+            "FuelEqualizer": {
+                "name": "FUEL EQUALIZER",
+                "desc": "At the start of every turn, balance <c=status>EVADE</c> and <c=status>DRONESHIFT</c> such that their amount is equal to each other.\nIf the total is an <c=keyword>odd number</c>, gain 1 more to achieve the balance."
             },
             "LubricatedHeatpump": {
                 "name": "LUBRICATED HEATPUMP",
@@ -107,7 +128,8 @@
             },
             "ExtraSlip": {
                 "name": "EXTRA-SLIP",
-                "desc": "While you're <c=corrode>corroded</c>, playing your <c=keyword>left/rightmost card in hand</c> moves you left/right 1."
+                "desc": "While you're <c=corrode>corroded</c>, playing your <c=keyword>left/rightmost card in hand</c> moves you left/right 1.",
+                "descSoon": "While you're <c=corrode>corroded</c>, playing your <c=keyword>left/rightmost card in hand</c> moves you left/right 1.\nWhile you're <c=keys>tarnished</c>, your first <c=keyword>leftmost card each combat</c> gives 1 <c=status>AUTODODGE LEFT</c>, and your first <c=keyword>rightmost card each turn<c/> gives 1 <c=status>AUTODODGE RIGHT</c>."
             },
             "UnprotectedStorage": {
                 "name": "UNPROTECTED SHARD STORAGE",
@@ -128,6 +150,53 @@
             "BountifulBloodBank": {
                 "name": "BOUNTIFUL BLOOD BANK",
                 "desc": "At the start of combat, add a <c=card>Credit Card</c> to your hand.\n<c=keyword>Use the card to deposit your max hull.</c>\nFor every [<c=keyword>4</c>/<c=keyword>2</c>/<c=keyword>1</c>] you deposit (based on encounter type), add an additional <c=keyword>1</c> to the withdrawal amount.\nAt the end of combat, withdraw all as <c=healing>max hull</c>."
+            },
+            "ChanceOfAcid": {
+                "name": "CHANCE OF ACID",
+                "desc": "You have a 50% chance of taking hull damage from <c=corrode>corrode</c>."
+            },
+            "ReactiveFormula": {
+                "name": "REACTIVE FORMULA",
+                "desc": "When a ship gains <c=status>HEAT</c>, gain bonus <c=status>HEAT</c> equal to <c=status>CORRODE</c>.\nWhen a ship gains <c=status>CURSE</c>, gain bonus <c=status>CURSE</c> equal to <c=status>TARNISH</c>."
+            },
+            "DemolitionSetup": {
+                "name": "DEMOLITION SETUP PRO(TM)",
+                "desc": "Launching and sticking a <c=parttrait>charge</c> gives 1 <c=status>EVADE</c> (up to <c=keyword>3</c> times per turn).\n<c=downside>Lose all <c=status>EVADE</c> on <c=parttrait>charge</c> detonation.</c>"
+            },
+            "RegenerativeBacktrack": {
+                "name": "REGENERATIVE BACKTRACK",
+                "desc": "Refund at most half of unused <c=status>BACKTRACK</c> at the end of turn as <c=status>EVADE</c>."
+            },
+            "WallSnek": {
+                "name": "DODGING RESPONSIBILITIES",
+                "desc": "Ignore 1 <c=corrode>corrode</c> damage per 1 <c=status>FADE</c>. Lose <c=status>FADE</c> equal to <c=status>CORRODE</c>."
+            },
+            "Oxyboom": {
+                "name": "OXYBOOM",
+                "desc": "All <c=midrow>missiles</c> deal 1 less damage and apply 1 <c=status>OXIDATION</c>"
+            },
+            "SlippyShuffle": {
+                "name": "SLIP N SHUFFLE",
+                "desc": "Gain 1 <c=status>OXIDATION</c> whenever you draw cards.\nWhenever cards move from the discard pile to the draw pile, move the <c=status>OXIDATION</c> to enemy ship."
+            },
+            "SwaySwheel": {
+                "name": "SWAY SWHEEL",
+                "desc": "The first <c=action>move</c> action each turn gives equal amount of <c=status>TEMP SHIELD</c>."
+            },
+            "ResidualHeatWelder": {
+                "name": "RESIDUAL HEAT WELDER",
+                "desc": "After <c=action>OVERHEATING</c>, the next <c=heal>heal</c> will give <c=keyword>bonus</c> <c=heal>healing</c> equal to <c=keyword>excess heat</c> before the overheat (amount beyond the limit).\n<c=downside>Only usable during combat.</c>",
+                "descAlt": "After <c=action>overheating</c>, healing during the next 5 turns will heal 1 more. <c=action>Overheating</c> during the 5 turns <c=downside>does not reset the turn limit</c> but increases the <c=heal>bonus healing</c> amount."
+            },
+            "TakeABreak": {
+                "name": "TAKE-A-BREAK(TM)",
+                "desc": "Once per combat, playing <c=card>Off Balance</c> <c=heal>heals</c> for the number of cards played that turn.\nCards played <c=keyword>after</c> <c=card>Off Balance</c> do not count.",
+                "descAlt": "Once per combat, playing <c=card>Off Balance</c> <c=heal>heals</c> for the number of <c=87B2CF>Jost</c> cards played that turn.\nCards played <c=keyword>after</c> <c=card>Off Balance</c> do not count."
+            },
+            "SpecialSalt": {
+                "name": "ELECTRIFYING SALT",
+                "desc": "Hitting a <c=keys>tarnished</c> ship with <c=action>Chain Lightning</c> increases the <c=status>TARNISH</c> by 1.",
+                "descAlt": "Hitting a <c=keys>tarnished</c> ship with <c=action>Chain Lightning</c> increases the <c=status>TARNISH</c> by the chain amount."
             }
         },
         "Boss": {
@@ -167,6 +236,14 @@
             "ToxicSports": {
                 "name": "TOXIC SPORTS",
                 "desc": "Whenever you apply <c=status>CORRODE</c> to yourself, attack for the same amount of total corrode you have.\n<c=keyword>Sasha's Sporting Event Only.</c>"
+            },
+            "PseudoPacifist": {
+                "name": "PSEUDOPACIFIST",
+                "desc": "<c=downside>Disable all your cannons.</c> When a disabled part is hit, reflect shot <c=keyword>double</c> the hull damage taken."
+            },
+            "CobraVoodoo": {
+                "name": "MAGIC VOODOO SNAKE CUBE",
+                "desc": "At the start of turn, deal direct damage equal to the amount of hull damage taken last turn.\n<c=downside>Disabled for the rest of combat if you attack an enemy part.</c>"
             }
         },
         "Extra": {
@@ -347,6 +424,10 @@
         "AntiSnakeMode": {
             "name": "Ophidiophobia Mode",
             "desc": "Hides snake and snake-related content... by finding a suitable replacement."
+        },
+        "AllowAllArtifacts": {
+            "name": "Enable Unreleased Illeana Artifacts",
+            "desc": "Allows unreleased Illeana artifacts to appear in the artifact draw pool."
         }
     },
     "other": {
