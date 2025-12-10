@@ -31,23 +31,22 @@ public class FalseVaccine : Card, IRegisterable
     {
         return upgrade switch
         {
-            Upgrade.B => 
-            [
-                new AHeal
-                {
-                    healAmount = 1,
-                    targetPlayer = false
-                },
-                new ASpawn
-                {
-                    thing = new Missile
-                    {
-                        yAnimation = 0.0,
-                        missileType = MissileType.corrode
-                    }
-                    
-                }
-            ],
+            // Upgrade.B => 
+            // [
+            //     new AHeal
+            //     {
+            //         healAmount = 1,
+            //         targetPlayer = false
+            //     },
+            //     new ASpawn
+            //     {
+            //         thing = new Missile
+            //         {
+            //             yAnimation = 0.0,
+            //             missileType = MissileType.corrode
+            //         }
+            //     }
+            // ],
             _ => 
             [
                 new AStatus
@@ -75,7 +74,8 @@ public class FalseVaccine : Card, IRegisterable
         {
             Upgrade.B => new CardData
             {
-                cost = 3
+                cost = 1,
+                infinite = true
             },
             Upgrade.A => new CardData
             {

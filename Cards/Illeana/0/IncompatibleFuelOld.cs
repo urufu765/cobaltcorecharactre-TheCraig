@@ -8,7 +8,7 @@ namespace Illeana.Cards;
 /// <summary>
 /// Stop mixing acid in my diesel!
 /// </summary>
-public class IncompatibleFuel : Card, IRegisterable
+public class IncompatibleFuelOld : Card, IRegisterable
 {
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
@@ -33,18 +33,24 @@ public class IncompatibleFuel : Card, IRegisterable
         {
             Upgrade.B => 
             [
-                new AAddCard
+                new AStatus
                 {
-                    card = new CheapFuel{upgrade = Upgrade.A},
-                    destination = CardDestination.Deck,
-                    amount = 2
+                    status = Status.evade,
+                    statusAmount = 2,
+                    targetPlayer = true
                 },
-                new AAddCard
-                {
-                    card = new CheapFuel{upgrade = Upgrade.B},
-                    destination = CardDestination.Deck,
-                    amount = 2
-                },
+                ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeCostAction(
+                    ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeResourceCost(
+                        ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeStatusResource(Status.corrode),
+                        1
+                    ),
+                    new AStatus
+                    {
+                        status = Status.evade,
+                        statusAmount = 2,
+                        targetPlayer = true
+                    }
+                ).AsCardAction,
                 new AStatus
                 {
                     status = Status.corrode,
@@ -57,14 +63,8 @@ public class IncompatibleFuel : Card, IRegisterable
                 new AStatus
                 {
                     status = Status.evade,
-                    statusAmount = 1,
+                    statusAmount = 2,
                     targetPlayer = true
-                },
-                new AAddCard
-                {
-                    card = new CheapFuel(),
-                    destination = CardDestination.Deck,
-                    amount = 2
                 },
                 new AStatus
                 {
@@ -83,8 +83,7 @@ public class IncompatibleFuel : Card, IRegisterable
         {
             Upgrade.B => new CardData
             {
-                cost = 1,
-                exhaust = true
+                cost = 2
             },
             Upgrade.A => new CardData
             {

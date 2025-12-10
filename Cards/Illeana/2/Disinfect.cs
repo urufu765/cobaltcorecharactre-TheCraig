@@ -36,6 +36,12 @@ public class Disinfect : Card, IRegisterable
         {
             Upgrade.B => 
             [
+                new AStatus
+                {
+                    status = Status.tempShield,
+                    statusAmount = 1,
+                    targetPlayer = true
+                },
                 ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeCostAction(
                     ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeResourceCost(
                         ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeStatusResource(Status.corrode),
@@ -58,10 +64,48 @@ public class Disinfect : Card, IRegisterable
                         statusAmount = 1,
                         targetPlayer = true
                     }
-                ).AsCardAction
+                ).AsCardAction,
+            ],
+            Upgrade.A => 
+            [
+                new AStatus
+                {
+                    status = Status.tempShield,
+                    statusAmount = 3,
+                    targetPlayer = true
+                },
+                ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeCostAction(
+                    ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeResourceCost(
+                        ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeStatusResource(Status.corrode),
+                        1
+                    ),
+                    new AHeal
+                    {
+                        healAmount = 2,
+                        targetPlayer = true
+                    }
+                ).AsCardAction,
+                ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeCostAction(
+                    ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeResourceCost(
+                        ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeStatusResource(Status.corrode),
+                        1
+                    ),
+                    new AStatus
+                    {
+                        status = Status.perfectShield,
+                        statusAmount = 1,
+                        targetPlayer = true
+                    }
+                ).AsCardAction,
             ],
             _ => 
             [
+                new AStatus
+                {
+                    status = Status.tempShield,
+                    statusAmount = 2,
+                    targetPlayer = true
+                },
                 ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeCostAction(
                     ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeResourceCost(
                         ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeStatusResource(Status.corrode),
@@ -73,12 +117,18 @@ public class Disinfect : Card, IRegisterable
                         targetPlayer = true
                     }
                 ).AsCardAction,
-                new AStatus
-                {
-                    status = Status.tempShield,
-                    statusAmount = 3,
-                    targetPlayer = true
-                }
+                ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeCostAction(
+                    ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeResourceCost(
+                        ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeStatusResource(Status.corrode),
+                        1
+                    ),
+                    new AStatus
+                    {
+                        status = Status.perfectShield,
+                        statusAmount = 1,
+                        targetPlayer = true
+                    }
+                ).AsCardAction,
             ],
         };
     }
@@ -91,15 +141,13 @@ public class Disinfect : Card, IRegisterable
             Upgrade.B => new CardData
             {
                 cost = 2,
+                retain = true,
                 art = altSprite
-            },
-            Upgrade.A => new CardData
-            {
-                cost = 1
             },
             _ => new CardData
             {
-                cost = 2
+                cost = 2,
+                art = altSprite
             }
         };
     }

@@ -128,8 +128,8 @@
             },
             "ExtraSlip": {
                 "name": "EXTRA-SLIP",
-                "desc": "While you're <c=corrode>corroded</c>, playing your <c=keyword>left/rightmost card in hand</c> moves you left/right 1.",
-                "descSoon": "While you're <c=corrode>corroded</c>, playing your <c=keyword>left/rightmost card in hand</c> moves you left/right 1.\nWhile you're <c=keys>tarnished</c>, your first <c=keyword>leftmost card each combat</c> gives 1 <c=status>AUTODODGE LEFT</c>, and your first <c=keyword>rightmost card each turn<c/> gives 1 <c=status>AUTODODGE RIGHT</c>."
+                "descOld": "While you're <c=corrode>corroded</c>, playing your <c=keyword>left/rightmost card in hand</c> moves you left/right 1.",
+                "desc": "While you're <c=corrode>corroded</c>, playing your <c=keyword>left/rightmost card in hand</c> moves you left/right 1.\nWhile you're <c=keys>tarnished</c>, your first <c=keyword>leftmost card each combat</c> gives 1 <c=status>AUTODODGE LEFT</c>, and your first <c=keyword>rightmost card each turn<c/> gives 1 <c=status>AUTODODGE RIGHT</c>."
             },
             "UnprotectedStorage": {
                 "name": "UNPROTECTED SHARD STORAGE",
@@ -153,7 +153,8 @@
             },
             "ChanceOfAcid": {
                 "name": "CHANCE OF ACID",
-                "desc": "You have a 50% chance of taking hull damage from <c=corrode>corrode</c>."
+                "descOld": "You have a 50% chance of taking hull damage from <c=corrode>corrode</c>.",
+                "desc": "<c=corrode>Corrode</c> has a 50% chance of activating."
             },
             "ReactiveFormula": {
                 "name": "REACTIVE FORMULA",
@@ -417,6 +418,9 @@
                 "tooltip": "<c=keyword>You can't die from playing this card.</c>",
                 "descA": "Deposit ({0}) hull and max hull with 50% interest.\n+1 when you flip the card (Max: All but 1 max hull).",
                 "descB": "Deposit ({0}) hull and max hull with 100% interest.\n+1 when you flip the card (Max: All but 1 max hull)."
+            },
+            "CheapFuel": {
+                "name": "Cheap Fuel"
             }
         }
     },

@@ -26,6 +26,32 @@ public class ExtraSlip : Artifact
     }
 
     // TODO: insert code about left and right card used.
+    public override void OnPlayerPlayCard(int energyCost, Deck deck, Card card, State state, Combat combat, int handPosition, int handCount)
+    {
+        if (!LeftUsed && handPosition == 0)
+        {
+            combat.Queue(new AStatus
+            {
+                status = Status.autododgeLeft,
+                statusAmount = 1,
+                targetPlayer = true,
+                artifactPulse = Key()
+            });
+            LeftUsed = true;
+        }
+
+        if (!RightUsed && handPosition == handCount)
+        {
+            combat.Queue(new AStatus
+            {
+                status = Status.autododgeRight,
+                statusAmount = 1,
+                targetPlayer = true,
+                artifactPulse = Key()
+            });
+            RightUsed = true;
+        }
+    }
 
 
     public override int ModifyAutopilotAmount()

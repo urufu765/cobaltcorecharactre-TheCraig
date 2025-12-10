@@ -8,7 +8,7 @@ namespace Illeana.Cards;
 /// <summary>
 /// Wait, Illeana isn't biologically capable of-
 /// </summary>
-public class Autotomy : Card, IRegisterable
+public class Autotomy : Card, IRegisterable, IHasCustomCardTraits
 {
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
@@ -46,11 +46,11 @@ public class Autotomy : Card, IRegisterable
                     hurtShieldsFirst = true,
                     targetPlayer = true
                 },
-                new AStatus
+                new AMove
                 {
-                    status = Status.autododgeRight,
-                    statusAmount = y,
-                    xHint = 1,
+                    isRandom = true,
+                    dir = y * 2,
+                    xHint = 2,
                     targetPlayer = true
                 },
                 new AStatus
@@ -101,17 +101,20 @@ public class Autotomy : Card, IRegisterable
         {
             Upgrade.B => new CardData
             {
-                cost = 2,
+                cost = 0,
+                exhaust = true,
                 artTint = "a43fff"
-            },
-            Upgrade.A => new CardData
-            {
-                cost = 1
             },
             _ => new CardData
             {
-                cost = 2
+                cost = 0,
+                exhaust = true
             }
         };
+    }
+
+    public IReadOnlySet<ICardTraitEntry> GetInnateTraits(State state)
+    {
+        return upgrade == Upgrade.None? [] : new HashSet<ICardTraitEntry>{ModEntry.Instance.KokoroApi.V2.Heavy.Trait};
     }
 }

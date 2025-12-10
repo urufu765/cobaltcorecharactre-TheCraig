@@ -50,8 +50,8 @@ public static class ShouldWeCorrode
         )
         {
             coa.Pulse();
-            return true;  // Skipping prefix
+            return false;  // Skipping prefix
         }
-        return false;
+        return true;
     }
 }

@@ -35,22 +35,34 @@ public class Cleanse : Card, IRegisterable
             [
                 new AStatus
                 {
-                    status = Status.corrode,
-                    targetPlayer = true,
-                    statusAmount = -2
-                },
-                new AStatus
-                {
                     status = Status.evade,
                     statusAmount = 1,
                     targetPlayer = true
                 },
-                new AStatus
-                {
-                    status = Status.tempShield,
-                    targetPlayer = true,
-                    statusAmount = 1
-                }
+                ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeCostAction(
+                    ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeResourceCost(
+                        ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeStatusResource(Status.corrode),
+                        1
+                    ),
+                    new AStatus
+                    {
+                        status = Status.tempShield,
+                        statusAmount = 3,
+                        targetPlayer = true
+                    }
+                ).AsCardAction,
+                ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeCostAction(
+                    ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeResourceCost(
+                        ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeStatusResource(ModEntry.Instance.TarnishStatus.Status),
+                        1
+                    ),
+                    new AStatus
+                    {
+                        status = Status.tempShield,
+                        statusAmount = 2,
+                        targetPlayer = true
+                    }
+                ).AsCardAction
             ],
             _ => 
             [
@@ -81,9 +93,14 @@ public class Cleanse : Card, IRegisterable
     {
         return upgrade switch
         {
-            Upgrade.A or Upgrade.B => new CardData
+            Upgrade.B => new CardData
             {
-                cost = 0
+                cost = 1,
+                artTint = "a43fff"
+            },
+            Upgrade.A => new CardData
+            {
+                cost = 0,
             },
             _ => new CardData
             {

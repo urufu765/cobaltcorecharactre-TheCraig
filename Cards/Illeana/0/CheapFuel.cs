@@ -6,11 +6,10 @@ using Nickel;
 namespace Illeana.Cards;
 
 /// <summary>
-/// Here, have a Patchkit.
+/// A card that's obtained from Fraudulent Fuel
 /// </summary>
-public class ScrapPatchkit : Card, IRegisterable
+public class CheapFuel : Card, IRegisterable, IHasCustomCardTraits
 {
-    private static Spr altSprite;
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
         helper.Content.Cards.RegisterCard(new CardConfiguration
@@ -20,12 +19,12 @@ public class ScrapPatchkit : Card, IRegisterable
             {
                 deck = ModEntry.Instance.IlleanaDeck.Deck,
                 rarity = Rarity.common,
+                dontOffer = true,
                 upgradesTo = [Upgrade.A, Upgrade.B]
             },
-            Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "Common", "ScrapPatchkit", "name"]).Localize,
-            Art = ModEntry.RegisterSprite(package, "assets/Card/Illeana/1/ScrapPatchkit.png").Sprite
+            Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "Token", "CheapFuel", "name"]).Localize,
+            Art = StableSpr.cards_TrashFumes
         });
-        altSprite = ModEntry.RegisterSprite(package, "assets/Card/Illeana/1/ScrapPatchkitAlt.png").Sprite;
     }
 
 
@@ -33,39 +32,23 @@ public class ScrapPatchkit : Card, IRegisterable
     {
         return upgrade switch
         {
-            Upgrade.B => 
+            Upgrade.A => 
             [
                 new AStatus
                 {
-                    status = ModEntry.Instance.TarnishStatus.Status,
-                    statusAmount = 1,
+                    status = Status.evade,
+                    statusAmount = 2,
                     targetPlayer = true
                 },
-                new AStatus
-                {
-                    status = Status.corrode,
-                    statusAmount = 1,
-                    targetPlayer = true
-                },
-                new AHeal
-                {
-                    healAmount = 1,
-                    targetPlayer = true
-                }
             ],
             _ => 
             [
                 new AStatus
                 {
-                    status = Status.corrode,
+                    status = Status.evade,
                     statusAmount = 1,
                     targetPlayer = true
                 },
-                new AHeal
-                {
-                    healAmount = 1,
-                    targetPlayer = true
-                }
             ],
         };
     }
@@ -77,20 +60,20 @@ public class ScrapPatchkit : Card, IRegisterable
         {
             Upgrade.B => new CardData
             {
-                cost = 1,
-                retain = true,
-                art = altSprite
-            },
-            Upgrade.A => new CardData
-            {
                 cost = 0,
-                retain = true
+                temporary = true,
             },
             _ => new CardData
             {
-                cost = 1,
-                retain = true
+                cost = 0,
+                exhaust = true,
+                temporary = true
             }
         };
+    }
+
+    public IReadOnlySet<ICardTraitEntry> GetInnateTraits(State state)
+    {
+        return upgrade == Upgrade.B? [] : new HashSet<ICardTraitEntry>{ModEntry.Instance.KokoroApi.V2.Fleeting.Trait};
     }
 }

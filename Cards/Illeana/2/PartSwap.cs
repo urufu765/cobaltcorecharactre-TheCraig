@@ -8,7 +8,7 @@ namespace Illeana.Cards;
 /// <summary>
 /// Swap destroyed parts for new ones.
 /// </summary>
-public class PartSwap : Card, IRegisterable
+public class PartSwap : Card, IRegisterable, IHasCustomCardTraits
 {
     private static Spr altSprite;
 
@@ -63,7 +63,19 @@ public class PartSwap : Card, IRegisterable
                 ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeCostAction(
                     ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeResourceCost(
                         ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeStatusResource(ModEntry.Instance.TarnishStatus.Status),
-                        2
+                        1
+                    ),
+                    new AStatus
+                    {
+                        status = Status.tempShield,
+                        statusAmount = 2,
+                        targetPlayer = true
+                    }
+                ).AsCardAction,
+                ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeCostAction(
+                    ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeResourceCost(
+                        ModEntry.Instance.KokoroApi.V2.ActionCosts.MakeStatusResource(ModEntry.Instance.TarnishStatus.Status),
+                        1
                     ),
                     new AStatus
                     {
@@ -112,8 +124,7 @@ public class PartSwap : Card, IRegisterable
             {
                 cost = 2,
                 artTint = "f5e030",
-                art = altSprite,
-                retain = true
+                art = altSprite
             },
             Upgrade.A => new CardData
             {
@@ -126,5 +137,10 @@ public class PartSwap : Card, IRegisterable
                 artTint = "f5e030"
             },
         };
+    }
+
+    public IReadOnlySet<ICardTraitEntry> GetInnateTraits(State state)
+    {
+        return new HashSet<ICardTraitEntry>{ModEntry.Instance.KokoroApi.V2.Heavy.Trait};
     }
 }

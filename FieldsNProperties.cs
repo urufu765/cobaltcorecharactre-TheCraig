@@ -91,7 +91,8 @@ internal partial class ModEntry : SimpleMod
         typeof(Coalescent),
         typeof(Obmutescent),
         typeof(PerfectShieldColourless),
-        typeof(CreditCard)
+        typeof(CreditCard),
+        typeof(CheapFuel)
     ];
     private static IEnumerable<Type> IlleanaCardTypes =
         IlleanaCommonCardTypes

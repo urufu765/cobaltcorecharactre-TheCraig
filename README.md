@@ -13,8 +13,31 @@ A corrosion engineer who works with corrosion to help keep the ship at tip top c
   * **dev.*: More story dialogue!!! + Baked hull dialogue
   * **dev.*: More duos!! + duo dialogue/start story dialogue
   * **dev.*: More other mod content like artifact swap thing, and more idk
-  * **dev.*: Rebalance some old cards, less british
-  * **dev.*: Give Illeana a solo deck + solo starter
+  * **dev.*: Give Illeana a solo deck + solo starter, fixed EXE to allow Illeana to actually work properly (offers one of Build a Cure or Find A Solution)
+  * **dev.*: Extra slip new sprite, new sprites for cards.
+  * **dev.*: DialogueMachine 0.19: More instructions, Multi feature
+  * **dev.8**: Rebalance/redo some old cards, Extra slip buff (no new sprite yet), fixed corrode issue
+    * Scrap Patchkit - Gave B Tarnish to solidify upgrade B as the tarnish upgrade
+      * B: T.Shield 2->0, Tarnish 0->1
+    * Cleanse - replaced B
+      * B: [0 Cost; -2 Corrode, 1 Evade, 1 T.Shield] -> [1 Cost; 1 Evade, (1 cor cost) 3 T.Shield, (1 tar cost) 2 T.Shield]
+    * False Vaccine - Made upgraded B more in line with the rest
+      * B: Cost 3->1, No longer heals enemy, reduces enemy corrode by 1, now infinite
+    * Untested Substance - Made it more unique by removing the tarnish cost and evade gain, replacing it with more temp shield and hermes boots
+    * Autotomy - Made more of an "OH CRAP" card
+      * Base: Cost 2 -> 0, Exhausts
+      * A: Cost 1 -> 0, Exhaust and heavy
+      * B: Cost 2 -> 0, Exhaust and heavy, does 2X random move instead of giving autododge.
+    * Fraudulent Fuel - Gave it a more bootleg feeling while maintaining its power. Instead of just giving a lot of evade and corrosion, it now gives one evade, and two temporary 0 cost cards that give evade. B is spicy.
+    * Deadly Adrenaline - Nerfed A, made the overall card powerful. Cost is now 0 across the board, always does -1 max hull, doesn't hurt, and gives corrode or tarnish.
+    * Part Swap - Made it a bit easier to consider taking, while nerfing B a little bit. Now Heavy across the board.
+      * B: Gave tarnish side equal treatment as corrode.
+    * Disinfect - Made it a fair bit more consistent while adding an incentive for playing more risky.
+    * Restoration - Removed the stupid corrode in the beginning, made it set corrode, and reduce the heal power to compensate. Also nerfed B to all heck cuz Tarnish was too easy to stack.
+    * NEW Cheap Fuel - 0 cost temporary evade giver.
+      * Base: 1 Evade, exhaust fleeting
+      * A: 2 Evade, exhaust fleeting
+      * B: 1 Evade
   * **dev.7**: Artifact rebalance and replacements + more duos! Also made the display number disappear upon exiting combat.
   * **dev.6**: Painter's palette
   * **dev.5**: Baked Hull card sprite, Baked Hull base now heals when completed.

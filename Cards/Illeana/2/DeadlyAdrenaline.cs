@@ -38,24 +38,24 @@ public class DeadlyAdrenaline : Card, IRegisterable
                     amount = -1,
                     targetPlayer = true
                 },
-                new AHurt
-                {
-                    hurtAmount = 1,
-                    hurtShieldsFirst = true,
-                    targetPlayer = true
-                },
                 new AStatus
                 {
                     status = Status.ace,
                     statusAmount = 1,
                     targetPlayer = true
-                },            
+                },
+                new AStatus
+                {
+                    status = ModEntry.Instance.TarnishStatus.Status,
+                    statusAmount = 1,
+                    targetPlayer = true
+                },
             ],
             Upgrade.A => 
             [
-                new AHurt
+                new AHullMax
                 {
-                    hurtAmount = 1,
+                    amount = -1,
                     targetPlayer = true
                 },
                 new AStatus
@@ -63,7 +63,19 @@ public class DeadlyAdrenaline : Card, IRegisterable
                     status = Status.ace,
                     statusAmount = 1,
                     targetPlayer = true
-                },            
+                },
+                new AStatus
+                {
+                    status = Status.evade,
+                    statusAmount = 1,
+                    targetPlayer = true
+                },
+                new AStatus
+                {
+                    status = Status.corrode,
+                    statusAmount = 1,
+                    targetPlayer = true
+                },
             ],
             _ => 
             [
@@ -72,14 +84,15 @@ public class DeadlyAdrenaline : Card, IRegisterable
                     amount = -1,
                     targetPlayer = true
                 },
-                new AHurt
+                new AStatus
                 {
-                    hurtAmount = 1,
+                    status = Status.ace,
+                    statusAmount = 1,
                     targetPlayer = true
                 },
                 new AStatus
                 {
-                    status = Status.ace,
+                    status = Status.corrode,
                     statusAmount = 1,
                     targetPlayer = true
                 },
@@ -94,12 +107,12 @@ public class DeadlyAdrenaline : Card, IRegisterable
         {
             Upgrade.B => new CardData
             {
-                cost = 2,
-                buoyant = true
+                cost = 0,
+                artTint = "a43fff"
             },
             _ => new CardData
             {
-                cost = 2
+                cost = 0
             },
         };
     }

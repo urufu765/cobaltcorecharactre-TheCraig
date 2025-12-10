@@ -29,7 +29,7 @@ public class GreatHealing : Card, IRegisterable
 
     public override List<CardAction> GetActions(State s, Combat c)
     {
-        int x = s.ship.Get(Status.corrode) + 1;
+        int x = s.ship.Get(Status.corrode);
         int y = s.ship.Get(ModEntry.Instance.TarnishStatus.Status);
         return upgrade switch
         {
@@ -41,15 +41,15 @@ public class GreatHealing : Card, IRegisterable
                 },
                 new AHeal
                 {
-                    healAmount = y * 3,
+                    healAmount = y * 2,
                     targetPlayer = true,
-                    xHint = new int?(3)
+                    xHint = new int?(2)
                 },
                 new AStatus
                 {
-                    status = ModEntry.Instance.TarnishStatus.Status,
-                    statusAmount = y * 2,
-                    xHint = 2,
+                    status = Status.tempShield,
+                    statusAmount = y,
+                    xHint = 1,
                     mode = AStatusMode.Set,
                     targetPlayer = true
                 },
@@ -57,12 +57,6 @@ public class GreatHealing : Card, IRegisterable
             ],
             Upgrade.A => 
             [
-                new AStatus
-                {
-                    status = Status.corrode,
-                    statusAmount = 1,
-                    targetPlayer = true
-                },
                 new AVariableHint
                 {
                     status = new Status?(Status.corrode)
@@ -76,28 +70,30 @@ public class GreatHealing : Card, IRegisterable
                 new AStatus
                 {
                     status = Status.corrode,
-                    statusAmount = -1,
+                    statusAmount = 1,
+                    mode = AStatusMode.Set,
                     targetPlayer = true
                 },
                 new AEndTurn()
             ],
             _ => 
             [
-                new AStatus
-                {
-                    status = Status.corrode,
-                    statusAmount = 1,
-                    targetPlayer = true
-                },
                 new AVariableHint
                 {
                     status = new Status?(Status.corrode)
                 },
                 new AHeal
                 {
-                    healAmount = x * 3,
+                    healAmount = x * 2,
                     targetPlayer = true,
-                    xHint = new int?(3)
+                    xHint = new int?(2)
+                },
+                new AStatus
+                {
+                    status = Status.corrode,
+                    statusAmount = 1,
+                    mode = AStatusMode.Set,
+                    targetPlayer = true
                 },
                 new AEndTurn()
             ],
@@ -114,11 +110,6 @@ public class GreatHealing : Card, IRegisterable
                 cost = 2,
                 exhaust = true,
                 artTint = "a43fff"
-            },
-            Upgrade.A => new CardData
-            {
-                cost = 1,
-                exhaust = true
             },
             _ => new CardData
             {
