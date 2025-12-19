@@ -341,9 +341,9 @@ internal class NewArtifactDialogue : IRegisterable
             {"ArtifactTiderunner_Illeana_2", new(){
                 type = NodeType.combat,
                 oncePerRun = true,
-                allPresent = [ AmIlleana ],
                 turnStart = true,
                 maxTurnsThisCombat = 1,
+                allPresent = [ AmIlleana ],
                 hasArtifacts = [ "TideRunner" ],
                 oncePerRunTags = [ "TideRunner" ],
                 dialogue = [

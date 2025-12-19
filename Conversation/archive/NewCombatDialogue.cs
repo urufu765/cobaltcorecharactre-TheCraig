@@ -187,9 +187,8 @@ internal class NewCombatDialogue : IRegisterable
                 allPresent = [ AmIlleana ],
                 priority = true,
                 oncePerRun = true,
-                oncePerCombatTags = ["issacWentMissing"],
+                oncePerCombatTags = ["isaacWentMissing"],
                 lastTurnPlayerStatuses = [Status.missingIsaac],
-
                 dialogue = [
                     new(AmIlleana, "panic", "Ah!")
                 ]

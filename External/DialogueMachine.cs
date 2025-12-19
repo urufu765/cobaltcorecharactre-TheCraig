@@ -5,11 +5,12 @@ using System.Linq;
 using Microsoft.Extensions.Logging;
 using Nanoray.PluginManager;
 using Nickel;
+using OneOf.Types;
 
 namespace Illeana.External;
 
 /**
-ver.0.18
+ver.0.19
 
 To get DialogueMachine and the custom dialogue stuff working:
 - edit the namespace of this file to at least match your project namespace
@@ -24,7 +25,7 @@ To get DialogueMachine and the custom dialogue stuff working:
 - Then register the locale of your dialogue by calling the instantiated LocalDB's GetLocalizationResults() in helper.Events.OnLoadStringsForLocale:
         helper.Events.OnLoadStringsForLocale += (_, thing) =>
         {
-            foreach (KeyValuePair<string, string> entry in localDB.GetLocalizationResults())
+            foreach (KeyValuePair<string, string> entry in localDB.GetLocalizationResults(thing.Locale))
             {
                 thing.Localizations[entry.Key] = entry.Value;
             }
@@ -33,18 +34,48 @@ To get DialogueMachine and the custom dialogue stuff working:
 (when you're adding dialogue, you should use LocalDB.DumpStoryToLocalLocale())
 */
 
-public enum DMod
+
+
+public enum DMod  // Enumerator for setting the mode of dialogue.
 {
+    /// <summary>
+    /// Normal dialogue mode
+    /// </summary>
     dialogue,
+    /// <summary>
+    /// Switch say mode
+    /// </summary>
     switchsay,
+    /// <summary>
+    /// Place a placeholder (to allow dialogue from an external source to fill in the blank)
+    /// </summary>
     retain,
+    /// <summary>
+    /// Instruction mode
+    /// </summary>
     instruction,
+    /// <summary>
+    /// Title card mode
+    /// </summary>
     title,
 }
-public enum EMod
+
+/// <summary>
+/// 
+/// </summary>
+public enum EMod  // Enumerator for specifying the edit mode
 {
+    /// <summary>
+    /// Edit/add to the Nth switchsay starting from the start. First switchsay is 1, second is 2...
+    /// </summary>
     countFromStart,
+    /// <summary>
+    /// Edit/add to the Nth switchsay starting from the end. Last switchsay is 1, second last is 2...
+    /// </summary>
     countFromEnd,
+    /// <summary>
+    /// Find the switchsay based on a Say's hash inside the desired switchsay. May need to be updated if game's locale has changed.
+    /// </summary>
     findSwitchWithHash
 }
 
@@ -66,6 +97,18 @@ public class EditThing : AbstractThing
     public int? switchNumber;
     public EMod searchConfig;
     public string? hashSearch;
+    /// <summary>
+    /// An edit dialogue with emotions and all, counting from the start or end to find the Nth switch to add the desired dialogue to.
+    /// </summary>
+    /// <param name="searchConfig">Whether to search from the start or the end (findSwitchWithHash is not a valid config here)</param>
+    /// <param name="switchNumber">Counting from 1, the Nth switch to find</param>
+    /// <param name="who">Who says the line?</param>
+    /// <param name="loopTag">What is their emotion?</param>
+    /// <param name="what">What do they say?</param>
+    /// <param name="flipped">Flip the dialogue to right side?</param>
+    /// <param name="ifCrew"></param>
+    /// <param name="delay">How long in seconds to delay the chatter after making the character appear?</param>
+    /// <param name="choiceFunc"></param>
     public EditThing(EMod searchConfig, int switchNumber, string who, string loopTag, string what, bool flipped = false, bool ifCrew = false, double delay = 0.0, string? choiceFunc = null)
     {
         this.searchConfig = searchConfig;
@@ -78,6 +121,17 @@ public class EditThing : AbstractThing
         this.choiceFunc = choiceFunc;
         this.switchNumber = switchNumber;
     }
+    /// <summary>
+    /// An edit dialogue with neutral emotion, counting from the start or end to find the Nth switch to add the desired dialogue to.
+    /// </summary>
+    /// <param name="searchConfig">Whether to search from the start or the end (findSwitchWithHash is not a valid config here)</param>
+    /// <param name="switchNumber">Counting from 1, the Nth switch to find</param>
+    /// <param name="who">Who says the line?</param>
+    /// <param name="what">What do they say?</param>
+    /// <param name="flipped">Flip the dialogue to right side?</param>
+    /// <param name="ifCrew"></param>
+    /// <param name="delay">How long in seconds to delay the chatter after making the character appear?</param>
+    /// <param name="choiceFunc"></param>
     public EditThing(EMod searchConfig, int switchNumber, string who, string what, bool flipped = false, bool ifCrew = false, double delay = 0.0, string? choiceFunc = null)
     {
         this.searchConfig = searchConfig;
@@ -89,6 +143,17 @@ public class EditThing : AbstractThing
         this.choiceFunc = choiceFunc;
         this.switchNumber = switchNumber;
     }
+    /// <summary>
+    /// An edit dialogue with emotions and all, adding the dialogue to the desired switchsay by finding the switch with the specified existing line's hash.
+    /// </summary>
+    /// <param name="hashToFind">The hash of any existing line that belongs to the switchsay you want to find.</param>
+    /// <param name="who">Who says the line?</param>
+    /// <param name="loopTag">What is their emotion?</param>
+    /// <param name="what">What do they say?</param>
+    /// <param name="flipped">Flip the dialogue to right side?</param>
+    /// <param name="ifCrew"></param>
+    /// <param name="delay">How long in seconds to delay the chatter after making the character appear?</param>
+    /// <param name="choiceFunc"></param>
     public EditThing(string hashToFind, string who, string loopTag, string what, bool flipped = false, bool ifCrew = false, double delay = 0.0, string? choiceFunc = null)
     {
         this.searchConfig = EMod.findSwitchWithHash;
@@ -101,6 +166,17 @@ public class EditThing : AbstractThing
         this.choiceFunc = choiceFunc;
         this.hashSearch = hashToFind;
     }
+
+    /// <summary>
+    /// An edit dialogue with neutral emotions, adding the dialogue to the desired switchsay by finding the switch with the specified existing line's hash.
+    /// </summary>
+    /// <param name="hashToFind">The hash of any existing line that belongs to the switchsay you want to find.</param>
+    /// <param name="who">Who says the line?</param>
+    /// <param name="what">What do they say?</param>
+    /// <param name="flipped">Flip the dialogue to right side?</param>
+    /// <param name="ifCrew"></param>
+    /// <param name="delay">How long in seconds to delay the chatter after making the character appear?</param>
+    /// <param name="choiceFunc"></param>
     public EditThing(string hashToFind, string who, string what, bool flipped = false, bool ifCrew = false, double delay = 0.0, string? choiceFunc = null)
     {
         this.searchConfig = EMod.findSwitchWithHash;
@@ -219,6 +295,86 @@ public class DialogueThing : AbstractThing
     }
 }
 
+/// <summary>
+/// An instruction for writing multiple nodes that share similar or the same filters.
+/// DOES NOT SUPPORT EDITS
+/// </summary>
+public class QMulti : Instruction  // Quick disconnect
+{
+    /// <summary>
+    /// A mode that ignores any filters set by the child and only use the parent filters. Reduces calculations done per QuickMulti
+    /// </summary>
+    public bool quickMultiMode = false;
+
+    /// <summary>
+    /// A storynode that contains filters that will override the parent filters
+    /// </summary>
+    public DialogueMachine filterOverrides;
+
+    /// <summary>
+    /// Quick multi node separator that inherits the parent node's filters
+    /// </summary>
+    public QMulti()
+    {
+        quickMultiMode = true;
+        filterOverrides = new();
+    }
+
+    /// <summary>
+    /// Quick multi node separator that overrides commonly changed filters
+    /// </summary>
+    /// <param name="allPresent">Who needs to be present</param>
+    /// <param name="nonePresent">Who shouldn't be present</param>
+    /// <param name="oncePerCombatTags">Once per combat tag</param>
+    /// <param name="oncePerRunTags">Once per run tag</param>
+    /// <param name="hasArtifactTypes">Artifacts needed (Type)</param>
+    /// <param name="hasArtifacts">Artifacts needed (string)</param>
+    /// <param name="doesNotHaveArtifactTypes">Artifacts blacklist (Type)</param>
+    /// <param name="doesNotHaveArtifacts">Artifacts blacklist (string)</param>
+    /// <param name="lastTurnEnemyStatuses">Statuses enemy had</param>
+    /// <param name="lastTurnPlayerStatuses">Statuses player had</param>
+    /// <param name="anyDrones">Drones on the battle field</param>
+    /// <param name="anyDronesFriendly">Friendly drones on the battle field</param>
+    /// <param name="anyDronesHostile">Hostile drones on the battle field</param>
+    /// <param name="lastNamedDroneDestroyed">Name of drone destroyed</param>
+    /// <param name="lastNamedDroneSpawned">Name of drone spawned</param>
+    /// <param name="spikeName">Spike's name :)</param>
+    /// <param name="overrides">Delegate for any other filters that is not supported by the other parameters</param>
+    public QMulti(HashSet<string>? allPresent = null, HashSet<string>? nonePresent = null, HashSet<string>? oncePerCombatTags = null, HashSet<string>? oncePerRunTags = null, List<Type>? hasArtifactTypes = null, HashSet<string>? hasArtifacts = null, List<Type>? doesNotHaveArtifactTypes = null, HashSet<string>? doesNotHaveArtifacts = null, HashSet<Status>?lastTurnEnemyStatuses = null, HashSet<Status>? lastTurnPlayerStatuses = null, HashSet<string>? anyDrones = null, HashSet<string>? anyDronesFriendly = null, HashSet<string>? anyDronesHostile = null, string? lastNamedDroneDestroyed = null, string? lastNamedDroneSpawned = null, string? spikeName = null, Action<DialogueMachine>? overrides = null)
+    {
+        filterOverrides = new()
+        {
+            allPresent = allPresent,
+            nonePresent = nonePresent,
+            oncePerCombatTags = oncePerCombatTags,
+            oncePerRunTags = oncePerRunTags,
+            hasArtifactTypes = hasArtifactTypes,
+            hasArtifacts = hasArtifacts,
+            doesNotHaveArtifactTypes = doesNotHaveArtifactTypes,
+            doesNotHaveArtifacts = doesNotHaveArtifacts,
+            lastTurnEnemyStatuses = lastTurnEnemyStatuses,
+            lastTurnPlayerStatuses = lastTurnPlayerStatuses,
+            anyDrones = anyDrones,
+            anyDronesFriendly = anyDronesFriendly,
+            anyDronesHostile = anyDronesHostile,
+            lastNamedDroneDestroyed = lastNamedDroneDestroyed,
+            lastNamedDroneSpawned = lastNamedDroneSpawned,
+            spikeName = spikeName
+        };
+        overrides?.Invoke(filterOverrides);
+    }
+
+    /// <summary>
+    /// For using uncommon filters that differ with the parent node
+    /// </summary>
+    /// <param name="overrides">Delegate to input any desired DialogueMachine story node filters (which will override the parent filters)</param>
+    public QMulti(Action<DialogueMachine>? overrides)
+    {
+        filterOverrides = new();
+        overrides?.Invoke(filterOverrides);
+    }
+}
+
 public class DialogueMachine : StoryNode
 {
     // public List<(string whoOrCommand, string? loopTag, string? what)> dialogue = null!;
@@ -233,6 +389,13 @@ public class DialogueMachine : StoryNode
     public List<DialogueThing>? dialogue;
 
     /// <summary>
+    /// DO NOT USE (was used only for testing purposes)
+    /// Quicker writing of multiple nodes that share some or all the same filters. The node tag of the children takes the parent tag and adds "_multi_X" where X is the index in this list. WILL IGNORE 'edit' AND 'dialogue'.
+    /// </summary>
+    [Obsolete]
+    public List<QuickMultiMachine>? multi;
+
+    /// <summary>
     /// Add the type of the artifact rather than trying to use the string key. Gets converted to hasArtifacts later.
     /// </summary>
     public List<Type>? hasArtifactTypes;
@@ -243,7 +406,7 @@ public class DialogueMachine : StoryNode
     /// <summary>
     /// Though any fields you declare will replace existing fields if you're modifying the original, lists and hashsets will be appended by default. Add the name of the list/hashset field if you want to completely replace them.
     /// </summary>
-    public List<string>? replaceFields;
+    public List<string>? dontAppendListFields;
 
     /// <summary>
     /// Translates DialogueMachine into Instructions readable by LocalDB
@@ -256,8 +419,8 @@ public class DialogueMachine : StoryNode
             foreach (Type type in hasArtifactTypes)
             {
                 // Modded
-                if(inst.Helper?.Content?.Artifacts?.LookupByArtifactType(type) is IArtifactEntry iae) hasArtifacts.Add(iae.UniqueName);
-                else if(DB.artifacts.ContainsValue(type)) hasArtifacts.Add(DB.artifacts.First(x => x.Value == type).Key);
+                if (inst.Helper?.Content?.Artifacts?.LookupByArtifactType(type) is IArtifactEntry iae) hasArtifacts.Add(iae.UniqueName);
+                else if (DB.artifacts.ContainsValue(type)) hasArtifacts.Add(DB.artifacts.First(x => x.Value == type).Key);
                 else inst.Logger.LogWarning($"Error when moving {type.Name} from [hasArtifactTypes] to [hasArtifacts]! Perhaps the artifact isn't registered yet or misspelt?");
             }
         }
@@ -267,8 +430,8 @@ public class DialogueMachine : StoryNode
             foreach (Type type in doesNotHaveArtifactTypes)
             {
                 // Modded
-                if(inst.Helper?.Content?.Artifacts?.LookupByArtifactType(type) is IArtifactEntry iae) doesNotHaveArtifacts.Add(iae.UniqueName);
-                else if(DB.artifacts.ContainsValue(type)) doesNotHaveArtifacts.Add(DB.artifacts.First(x => x.Value == type).Key);
+                if (inst.Helper?.Content?.Artifacts?.LookupByArtifactType(type) is IArtifactEntry iae) doesNotHaveArtifacts.Add(iae.UniqueName);
+                else if (DB.artifacts.ContainsValue(type)) doesNotHaveArtifacts.Add(DB.artifacts.First(x => x.Value == type).Key);
                 else inst.Logger.LogWarning($"Error when moving {type.Name} from [doesNotHaveArtifactTypes] to [doesNotHaveArtifacts]! Perhaps the artifact isn't registered yet or misspelt?");
             }
         }
@@ -299,7 +462,7 @@ public class DialogueMachine : StoryNode
             }
             return;
         }
-        foreach (DialogueThing d in dialogue??=[])
+        foreach (DialogueThing d in dialogue ??= [])
         {
             lines.Add(ConvertDialogueToLine(d));
         }
@@ -401,6 +564,52 @@ public class DialogueMachine : StoryNode
 
 
 /// <summary>
+/// A thing to allow fast multi-storyNode writing. Though similar to DialogueMachine storyNode, it does NOT do edits since this gets chopped into multiple DialogueMachine storyNodes.
+/// </summary>
+public class QuickMultiMachine : StoryNode
+{
+    /// <summary>
+    /// Sets the flag to ignore all the other filters set here and just clone the parent DialogueMachine's filters. Always set to true if using the constructor with the dialogue parameter.
+    /// </summary>
+    public bool QuickMultiMode;
+    /// <summary>
+    /// Where all your dialogue *should* go. It can also support titles, mod dialogue edits, and custom instructions!
+    /// </summary>
+    public List<DialogueThing>? dialogue;
+
+    /// <summary>
+    /// Add the type of the artifact rather than trying to use the string key. Gets converted to hasArtifacts later.
+    /// </summary>
+    public List<Type>? hasArtifactTypes;
+    /// <summary>
+    /// Add the type of the artifact rather than trying to use the string key. Gets converted to doesNotHaveArtifacts later.
+    /// </summary>
+    public List<Type>? doesNotHaveArtifactTypes;
+
+    /// <summary>
+    /// For multi's that has filters that will override the parent DialogueMachine's filters.
+    /// </summary>
+    public QuickMultiMachine() { }
+
+    /// <summary>
+    /// For multi's that want to inherit all of the filters set by the parent DialogueMachine.
+    /// </summary>
+    /// <param name="dialogue"></param>
+    public QuickMultiMachine(List<DialogueThing> dialogue)
+    {
+        QuickMultiMode = true;
+        this.dialogue = dialogue;
+    }
+
+    public QuickMultiMachine(List<DialogueThing> dialogue, HashSet<string>? allPresent = null)
+    {
+        this.dialogue = dialogue;
+        this.allPresent = allPresent;
+    }
+}
+
+
+/// <summary>
 /// Puts a placeholder for the original dialogue you're editing to fill in in that very spot.
 /// </summary>
 public class RetainOrig : Instruction
@@ -431,6 +640,7 @@ public class LocalDB
     /// <summary>
     /// Default custom dialogue
     /// </summary>
+    [Obsolete]
     public static Story LocalStory { get; set; } = new();
     /// <summary>
     /// Coded custom dialogue for different locales. Please use DumpStoryToLocalLocale() to add your dialogue safely instead!
@@ -448,10 +658,16 @@ public class LocalDB
     {
         get => incrementingHash++;
     }
+
     /// <summary>
-    /// The localisation dictionary with the generated hashes and dialogue, which gets to be added to the game's locale
+    /// The localization dictionary that contains each translation dictionary with the locale as the key.
     /// </summary>
-    private readonly Dictionary<string, string> customLocalisation;
+    private readonly Dictionary<string, Dictionary<string, string>> localLocalization;
+
+    /// <summary>
+    /// A catalogue of hashes to be shared across languages
+    /// </summary>
+    private readonly Dictionary<string, List<string>> hashCatalogue;
 
     /// <summary>
     /// Change ModEntry.Instance if necessary
@@ -464,14 +680,15 @@ public class LocalDB
     /// <param name="package"></param>
     public LocalDB(IModHelper helper, IPluginPackage<IModManifest> package)
     {
-        customLocalisation = new();
-        Story toUseStory;
-        if (LocalStoryLocale.ContainsKey(DB.currentLocale.locale))  // For other coded translated dialogues
+        localLocalization = new();
+        hashCatalogue = new();
+        foreach (string key in LocalStoryLocale.Keys)
         {
-            toUseStory = LocalStoryLocale[DB.currentLocale.locale];
+            localLocalization.Add(key, new());
+            Story toUseStory = LocalStoryLocale[key];
             foreach (KeyValuePair<string, Dictionary<string, Story>> thing in ModdedStoryLocale)
             {
-                if(helper.ModRegistry.LoadedMods.ContainsKey(thing.Key) && ModdedStoryLocale[thing.Key].TryGetValue(DB.currentLocale.locale, out Story? value))
+                if (helper.ModRegistry.LoadedMods.ContainsKey(thing.Key) && ModdedStoryLocale[thing.Key].TryGetValue(key, out Story? value))
                 {
                     foreach (KeyValuePair<string, StoryNode> thing2 in value.all)
                     {
@@ -482,26 +699,33 @@ public class LocalDB
                     }
                 }
             }
+            PasteToDB(toUseStory, DB.story, key);
         }
-        else if (File.Exists($"{package.PackageRoot}\\i18n\\{DB.currentLocale.locale}_story.json"))  // For i18n translated story dialogue
-        {
-            toUseStory = Mutil.LoadJsonFile<Story>(package.PackageRoot.GetRelativeFile($"i18n/{DB.currentLocale.locale}_story.json").FullName);
-        }
-        else  // For default
-        {
-            toUseStory = LocalStory;
-        }
-        
-        PasteToDB(toUseStory, DB.story);
+        // if (LocalStoryLocale.ContainsKey(DB.currentLocale.locale))  // For other coded translated dialogues
+        // {
+        // }
+        // else if (File.Exists($"{package.PackageRoot}\\i18n\\{DB.currentLocale.locale}_story.json"))  // For i18n translated story dialogue
+        // {
+        //     toUseStory = Mutil.LoadJsonFile<Story>(package.PackageRoot.GetRelativeFile($"i18n/{DB.currentLocale.locale}_story.json").FullName);
+        // }
+        // else  // For default
+        // {
+        //     toUseStory = LocalStory;
+        // }
+
     }
 
     /// <summary>
     /// This one must be used in Events.OnLoadStringsForLocale.
     /// </summary>
     /// <returns></returns>
-    public Dictionary<string, string> GetLocalizationResults()
+    public Dictionary<string, string> GetLocalizationResults(string locale)
     {
-        return customLocalisation;
+        if (localLocalization.ContainsKey(locale))
+        {
+            return localLocalization[locale];
+        }
+        return [];
     }
 
     /// <summary>
@@ -565,7 +789,7 @@ public class LocalDB
 
     private static void ExistenceChecker(KeyValuePair<string, StoryNode> sn)
     {
-        #if DEBUG
+#if DEBUG
         // Checks if the inputted artifact is a valid one that the game can check
         if (sn.Value.hasArtifacts is not null)
         {
@@ -649,8 +873,8 @@ public class LocalDB
             {
                 Inst.Logger.LogWarning(sn.Key + " is trying to add to a dialogue that doesn't exist in game (yet)! If you're trying to edit modded dialogue, this may not be the appropriate way!");
             }
-        }   
-        #endif
+        }
+#endif
     }
 
     /// <summary>
@@ -658,7 +882,7 @@ public class LocalDB
     /// </summary>
     /// <param name="from"></param>
     /// <param name="to"></param>
-    private void PasteToDB(Story from, Story to)
+    private void PasteToDB(Story from, Story to, string locale)
     {
         foreach (KeyValuePair<string, StoryNode> sn in from.all)
         {
@@ -667,13 +891,121 @@ public class LocalDB
             if (sn.Value is DialogueMachine dm)
             {
                 ExistenceChecker(sn);
+                if (dm.dialogue is not null && dm.dialogue.Count > 0 && dm.dialogue[0].instruction is QMulti)
+                {
+                    Story multiStory = new();
+                    List<DialogueMachine> ldm = new();
+                    foreach (DialogueThing dt in dm.dialogue)
+                    {
+                        // Creating a new node with the parent node as the base for filters, and the child node overriding the base if any filters are specified.
+                        if (dt.instruction is QMulti qm)
+                        {
+                            if (qm.quickMultiMode)  // For if there's no filter overrides in place
+                            {
+                                ldm.Add(NodeCopier(dm, "lines", "edit", "dialogue"));
+                            }
+                            else
+                            {
+                                ldm.Add(NodeZipper(dm, qm.filterOverrides, false, "lines", "edit", "dialogue")); // Copy the dialogue machine and merge it with overriding filters
+                            }
+                            continue;
+                        }
+
+                        // add the remaining dialogue objects into each node divided by the QM
+                        if (ldm.Count > 0 && ldm[^1] is DialogueMachine dmm)
+                        {
+                            dmm.dialogue ??= [];
+                            dmm.dialogue.Add(dt);
+                        }
+                    }
+
+                    // Give each new node an automatic name and add them into the DB.Story
+                    for (int i = 0; i < ldm.Count; i++)
+                    {
+                        multiStory.all.Add(sn.Key + "_Multi_" + i, ldm[i]);
+                    }
+
+                    PasteToDB(multiStory, DB.story, locale);
+                    continue;
+                }
+                // if (dm.multi is not null)
+                // {
+                //     Story multiStory = new();
+                //     for (int n = 0; n < dm.multi.Count; n++)
+                //     {
+                //         DialogueMachine? dmm = MultiMultiplier(dm, dm.multi[n]);
+                //         if (dmm is not null)
+                //         {
+                //             multiStory.all.Add(sn.Key + "_Multi_" + n, dmm);
+                //         }
+                //     }
+                //     PasteToDB(multiStory, DB.story, locale);
+                //     continue;
+                // }
                 dm.Convert(Inst);
                 editMode = dm.edit is not null;
             }
 
+            // If dialogue node already exists in the LOCAL catalogue, meaning a different locale with the same keys may be loading in.
+            if (hashCatalogue.ContainsKey(sn.Key))
+            {
+                if (editMode)
+                {
+                    int i = 0;
+                    foreach (Instruction instruction in sn.Value.lines)
+                    {
+                        if (instruction is InsertDialogueInSwitch idis)
+                        {
+                            if (i < hashCatalogue[sn.Key].Count)
+                            {
+                                SetAnotherLocaleFromIDIS(idis, hashCatalogue[sn.Key][i], locale);
+                                i++;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    int j = 0;
+                    foreach (Instruction instruction in sn.Value.lines)
+                    {
+                        if (j < hashCatalogue[sn.Key].Count)
+                        {
+                            if (instruction is Say s)
+                            {
+                                SetLinesRecognize(s, hashCatalogue[sn.Key][j], locale);
+                                j++;
+                            }
+                            else if (instruction is SaySwitch ss)
+                            {
+                                foreach (Say sss in ss.lines)
+                                {
+                                    if (j < hashCatalogue[sn.Key].Count)
+                                    {
+                                        SetLinesRecognize(sss, hashCatalogue[sn.Key][j], locale);
+                                        j++;
+                                    }
+                                }
+                            }
+                            else if (instruction is TitleCard t && t.empty is not true)
+                            {
+                                SetLinesRecognize(t, hashCatalogue[sn.Key][j], locale);
+                                j++;
+                            }
+                        }
+                    }
+                }
+                continue;
+            }
+            else
+            {
+                hashCatalogue[sn.Key] = [];
+            }
+
+            // Adding nodes that don't exist in the catalogue yet
             if (editMode)
             {
-                to.all[sn.Key] = InjectALineIn(sn.Value, to.all[sn.Key], sn.Key);
+                to.all[sn.Key] = InjectALineIn(sn.Value, to.all[sn.Key], sn.Key, locale);
                 continue;
             }
 
@@ -681,13 +1013,13 @@ public class LocalDB
             // Copy storynodes from from to to
             if (to.all.ContainsKey(sn.Key))
             {
-                to.all[sn.Key] = StitchNodesTogether(sn.Value, to.all[sn.Key], sn.Key);
+                to.all[sn.Key] = StitchNodesTogether(sn.Value, to.all[sn.Key], sn.Key, locale);
             }
             else
             {
                 for (int a = 0; a < sn.Value.lines.Count; a++)
                 {
-                    MakeLinesRecognisable(sn.Value.lines[a], sn.Key);
+                    MakeLinesRecognisable(sn.Value.lines[a], sn.Key, locale);
                 }
                 to.all.Add(sn.Key, sn.Value);
             }
@@ -700,45 +1032,101 @@ public class LocalDB
     /// </summary>
     /// <param name="target"></param>
     /// <param name="source"></param>
-    private void CombineFields(ref StoryNode target, StoryNode source)
+    private static void CombineFields(ref StoryNode target, StoryNode source)
     {
-        if(target is null || source is null) return;
+        if (target is null || source is null) return;
         StoryNode defaultSource = new();
         List<Type> additionList = [typeof(List<string>), typeof(HashSet<string>), typeof(HashSet<Status>)];
-        foreach (var field in typeof(StoryNode).GetFields(System.Reflection.BindingFlags.Public| System.Reflection.BindingFlags.Instance))
+        foreach (var field in typeof(StoryNode).GetFields(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance))
         {
             if (field.Name == "lines") continue;
 
             var sourceValue = field.GetValue(source);
             var defaultValue = field.GetValue(defaultSource);
 
-            if(sourceValue is not null && !EqualityComparer<object>.Default.Equals(defaultValue, sourceValue))
+            if (sourceValue is not null && !EqualityComparer<object>.Default.Equals(defaultValue, sourceValue))
             {
-                if(!additionList.Contains(field.FieldType) || (source is DialogueMachine dm && dm.replaceFields is not null && dm.replaceFields.Contains(field.Name)))
+                if (!additionList.Contains(field.FieldType) || (source is DialogueMachine dm && dm.dontAppendListFields is not null && dm.dontAppendListFields.Contains(field.Name)))
                 {
                     field.SetValue(target, sourceValue);
                 }
                 else
                 {
                     var targetValue = field.GetValue(target);
-                    if(sourceValue is List<string> l2)
+                    if (sourceValue is List<string> l2)
                     {
-                        List<string> l1 = (targetValue as List<string>)??[];
+                        List<string> l1 = (targetValue as List<string>) ?? [];
                         field.SetValue(target, l1.Concat(l2).ToList());
                     }
-                    else if(sourceValue is HashSet<string> h2)
+                    else if (sourceValue is HashSet<string> h2)
                     {
-                        HashSet<string> h1 = (targetValue as HashSet<string>)??[];
+                        HashSet<string> h1 = (targetValue as HashSet<string>) ?? [];
                         field.SetValue(target, h1.Concat(h2).ToHashSet());
                     }
-                    else if(sourceValue is HashSet<Status> h4)
+                    else if (sourceValue is HashSet<Status> h4)
                     {
-                        HashSet<Status> h3 = (targetValue as HashSet<Status>)??[];
+                        HashSet<Status> h3 = (targetValue as HashSet<Status>) ?? [];
                         field.SetValue(target, h3.Concat(h4).ToHashSet());
                     }
                 }
             }
         }
+    }
+
+
+    /// <summary>
+    /// Exports a new DialogueMachine that uses the parent DialogueMachine as the base, and the kiddo QuickMultiMachine's values as overrides if present. 'dialogue' is always from kiddo.
+    /// </summary>
+    /// <param name="parent">Parent DialogueMachine</param>
+    /// <param name="kiddo">The separated dialogue (with potentially overriding fields)</param>
+    /// <returns>The merged cloned DialogueMachine with kiddo dialogue</returns>
+    private static DialogueMachine? MultiMultiplier(in DialogueMachine parent, in QuickMultiMachine kiddo)
+    {
+        if (parent is null || kiddo is null) return null;
+
+        DialogueMachine ndm = new();
+        List<string> exclusionList = ["lines", "edit", "multi", "replaceFields"];
+
+        foreach (System.Reflection.FieldInfo field in typeof(DialogueMachine).GetFields(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance))
+        {
+            if (exclusionList.Contains(field.Name)) continue;
+
+            if (field.Name == "dialogue")  // 'dialogue' field is always kiddo.
+            {
+                field.SetValue(ndm, kiddo.dialogue);
+            }
+            else
+            {
+                if (kiddo.QuickMultiMode)  // Just set the parent's field values, no need to check the kiddo's fields
+                {
+                    field.SetValue(ndm, field.GetValue(parent));
+                }
+                else
+                {
+                    try
+                    {
+                        var kiddoValue = field.GetValue(kiddo);
+                        var defaultValue = field.GetValue(new DialogueMachine());
+
+                        // If kiddo has a field that has a different value, assume that the user wants to override the parent's value.
+                        if (!EqualityComparer<object>.Default.Equals(kiddoValue, defaultValue))
+                        {
+                            field.SetValue(ndm, kiddoValue);
+                        }
+                        else
+                        {
+                            field.SetValue(ndm, field.GetValue(parent));
+                        }
+                    }
+                    catch
+                    {
+                        // If Kiddo does not have the specific field from DialogueMachine, will likely throw, thus just set the parent's value
+                        field.SetValue(ndm, field.GetValue(parent));
+                    }
+                }
+            }
+        }
+        return ndm;
     }
 
     /// <summary>
@@ -748,7 +1136,7 @@ public class LocalDB
     /// <param name="existingStory"></param>
     /// <param name="script"></param>
     /// <returns>StoryNode with the injected dialogue</returns>
-    private StoryNode InjectALineIn(in StoryNode newStory, in StoryNode existingStory, string script)
+    private StoryNode InjectALineIn(in StoryNode newStory, in StoryNode existingStory, string script, string locale)
     {
         try
         {
@@ -770,14 +1158,14 @@ public class LocalDB
                                     {
                                         if (say.hash == idis.whichHash)
                                         {
-                                            ss.lines.Add(GetSayFromIDIS(idis, script));
+                                            ss.lines.Add(GetSayFromIDIS(idis, script, locale));
                                             goto endofloop;
                                         }
                                     }
                                 }
                                 else if (idis.whichSwitch is not null && a == idis.whichSwitch)
                                 {
-                                    ss.lines.Add(GetSayFromIDIS(idis, script));
+                                    ss.lines.Add(GetSayFromIDIS(idis, script, locale));
                                     goto endofloop;
                                 }
                             }
@@ -786,17 +1174,18 @@ public class LocalDB
                                 a++;
                                 if (idis.whichSwitch is not null && a == idis.whichSwitch)
                                 {
-                                    bs.lines.Add(GetSayFromIDIS(idis, script));
+                                    bs.lines.Add(GetSayFromIDIS(idis, script, locale));
                                     goto endofloop;
                                 }
                             }
                         }
                         Inst.Logger.LogWarning(script + "'s IDIS failed to find a switch to insert the dialogue into!");
                     }
-                    endofloop:;
+                endofloop:;
                 }
             }
-            CombineFields(ref result, newStory);
+            // CombineFields(ref result, newStory);
+            result = NodeZipper(result, newStory);
             return result;
         }
         catch (Exception err)
@@ -813,12 +1202,26 @@ public class LocalDB
     /// <param name="idis"></param>
     /// <param name="script"></param>
     /// <returns></returns>
-    private Say GetSayFromIDIS(InsertDialogueInSwitch idis, string script)
+    private Say GetSayFromIDIS(InsertDialogueInSwitch idis, string script, string locale)
     {
         string what = idis.say.hash;
         idis.say.hash = $"{GetType().FullName}:{IncrementingHash}";
-        customLocalisation[$"{script}:{idis.say.hash}"] = what;
+        localLocalization[locale][$"{script}:{idis.say.hash}"] = what;
+        hashCatalogue[script].Add($"{script}:{idis.say.hash}");
         return idis.say;
+    }
+
+
+    /// <summary>
+    /// Assuming the node and hash already exists, adds the new line extracted from IDIS into the desired locale using the hash.
+    /// </summary>
+    /// <param name="idis"></param>
+    /// <param name="hash"></param>
+    /// <param name="locale"></param>
+    private void SetAnotherLocaleFromIDIS(InsertDialogueInSwitch idis, string hash, string locale)
+    {
+        string what = idis.say.hash;
+        localLocalization[locale][hash] = what;
     }
 
 
@@ -829,7 +1232,7 @@ public class LocalDB
     /// <param name="existingStory"></param>
     /// <param name="script"></param>
     /// <returns></returns>
-    private StoryNode StitchNodesTogether(in StoryNode newStory, in StoryNode existingStory, string script)
+    private StoryNode StitchNodesTogether(in StoryNode newStory, in StoryNode existingStory, string script, string locale)
     {
         try
         {
@@ -842,12 +1245,12 @@ public class LocalDB
                 {
                     if (result.lines[x].ToString() == "RetainPlease")
                     {
-                        MakeLinesRecognisable(start.lines[x], script);
+                        MakeLinesRecognisable(start.lines[x], script, locale);
                         result.lines[x] = start.lines[x];
                     }
                     else if (result.lines[x] is Say or SaySwitch && start.lines[x] is Say or SaySwitch)
                     {
-                        result.lines[x] = CombineTwoSays(result.lines[x], start.lines[x], script);
+                        result.lines[x] = CombineTwoSays(result.lines[x], start.lines[x], script, locale);
                     }
                 }
 
@@ -855,17 +1258,18 @@ public class LocalDB
                 {
                     for (int y = result.lines.Count; y < start.lines.Count; y++)
                     {
-                        MakeLinesRecognisable(start.lines[y], script);
+                        MakeLinesRecognisable(start.lines[y], script, locale);
                         result.lines.Add(start.lines[y]);
                     }
                 }
-                CombineFields(ref result, start);
+                result = NodeZipper(result, start);
+                //CombineFields(ref result, start);
             }
             return result;
         }
         catch (Exception err)
         {
-            Inst.Logger.LogError(err, "Failed to edit a line with key:" + script);
+            Inst.Logger.LogError(err, "Failed to edit a line with key:" + script + " from locale:" + locale);
             return existingStory;
         }
     }
@@ -877,7 +1281,7 @@ public class LocalDB
     /// <param name="newLine"></param>
     /// <param name="script"></param>
     /// <returns></returns>
-    private SaySwitch CombineTwoSays(Instruction existingLine, Instruction newLine, string script)
+    private SaySwitch CombineTwoSays(Instruction existingLine, Instruction newLine, string script, string locale)
     {
         SaySwitch result = new SaySwitch
         {
@@ -894,12 +1298,12 @@ public class LocalDB
 
         if (newLine is Say sayB)
         {
-            MakeLinesRecognisable(sayB, script);
+            MakeLinesRecognisable(sayB, script, locale);
             result.lines.Add(sayB);
         }
         else if (newLine is SaySwitch saySB)
         {
-            MakeLinesRecognisable(saySB, script);
+            MakeLinesRecognisable(saySB, script, locale);
             foreach (Say s in saySB.lines)
             {
                 result.lines.Add(s);
@@ -913,20 +1317,20 @@ public class LocalDB
     /// </summary>
     /// <param name="instruction"></param>
     /// <param name="script"></param>
-    public void MakeLinesRecognisable(Instruction instruction, string script)
+    public void MakeLinesRecognisable(Instruction instruction, string script, string locale)
     {
         if (instruction is Say say)
         {
             string what = say.hash;
             say.hash = $"{GetType().FullName}:{IncrementingHash}";
-            //say.who = TryDeckLookup(say.who);
-            customLocalisation[$"{script}:{say.hash}"] = what;
+            localLocalization[locale][$"{script}:{say.hash}"] = what;
+            hashCatalogue[script].Add($"{script}:{say.hash}");
         }
         else if (instruction is SaySwitch saySwitch)
         {
             for (int a = 0; a < saySwitch.lines.Count; a++)
             {
-                MakeLinesRecognisable(saySwitch.lines[a], script);
+                MakeLinesRecognisable(saySwitch.lines[a], script, locale);
             }
         }
         else if (instruction is TitleCard title)
@@ -935,8 +1339,425 @@ public class LocalDB
             title.hash = $"{GetType().FullName}:{IncrementingHash}";
             if (title.empty is not true)
             {
-                customLocalisation[$"{script}:{title.hash}"] = what;
+                localLocalization[locale][$"{script}:{title.hash}"] = what;
+                hashCatalogue[script].Add($"{script}:{title.hash}");
             }
         }
+    }
+
+    /// <summary>
+    /// Something that adds dialogue to existing hashes. Unlike MakeLinesRecognisable, must be processed into individual says and filtered out empty titles beforehand!
+    /// </summary>
+    /// <param name="instruction"></param>
+    /// <param name="hash"></param>
+    /// <param name="locale"></param>
+    public void SetLinesRecognize(Instruction instruction, string hash, string locale)
+    {
+        if (instruction is Say say)
+        {
+            string what = say.hash;
+            localLocalization[locale][hash] = what;
+        }
+        else if (instruction is TitleCard title)
+        {
+            string what = title.hash;
+            localLocalization[locale][hash] = what;
+        }
+    }
+
+    /// <summary>
+    /// Zips two DialogueMachines together, with child overriding parent where applicable. List/Hashset fields are appended unless specified in the child DialogueMachine's replaceFields.
+    /// </summary>
+    /// <param name="parent">Parent DialogueMachine</param>
+    /// <param name="child">Child DialogueMachine</param>
+    /// <param name="excludeFields">Fields to skip</param>
+    /// <returns>New DialogueMachine with copied fields</returns>
+    public static DialogueMachine NodeZipper(in DialogueMachine parent, in DialogueMachine child, bool appendLists = true, params string[] excludeFields)
+    {
+        DialogueMachine? result = NodeZipper((StoryNode)parent, (StoryNode)child, appendLists, child.dontAppendListFields, excludeFields) as DialogueMachine;
+
+        if (result is not null)
+        {
+            DialogueMachine kiddo = NodeCopier(child, excludeFields);
+            result.dialogue = kiddo.dialogue ?? parent.dialogue;
+            result.edit = kiddo.edit ?? parent.edit;
+            result.hasArtifactTypes = kiddo.hasArtifactTypes ?? parent.hasArtifactTypes;
+            result.doesNotHaveArtifactTypes = kiddo.doesNotHaveArtifactTypes ?? parent.doesNotHaveArtifactTypes;
+            result.dontAppendListFields = kiddo.dontAppendListFields ?? parent.dontAppendListFields;
+            if (appendLists)
+            {
+                if (!excludeFields.Contains("dialogue")) result.dialogue = [.. parent.dialogue ?? [], .. child.dialogue ?? []];
+                if (!excludeFields.Contains("edit")) result.edit = [.. parent.edit ?? [], .. child.edit ?? []];
+                if (!excludeFields.Contains("hasArtifactTypes")) result.hasArtifactTypes = [.. parent.hasArtifactTypes ?? [], .. child.hasArtifactTypes ?? []];
+                if (!excludeFields.Contains("doesNotHaveArtifactTypes")) result.doesNotHaveArtifactTypes = [.. parent.doesNotHaveArtifactTypes ?? [], .. child.doesNotHaveArtifactTypes ?? []];
+            }
+        }
+        return result ?? new();
+    }
+
+    /// <summary>
+    /// Zips two StoryNodes together, with child overriding parent where applicable. List/Hashset fields are appended unless specified in dontAppendFields.
+    /// </summary>
+    /// <param name="parent">Parent StoryNode</param>
+    /// <param name="child">Child StoryNode</param>
+    /// <param name="dontAppendFields">List/Hashsets to override rather than append</param>
+    /// <param name="excludeFields">Fields to skip</param>
+    /// <returns>New StoryNode with copied fields</returns>
+    public static StoryNode NodeZipper(in StoryNode parent, in StoryNode child, bool appendLists = true, List<string>? dontAppendFields = null, params string[] excludeFields)
+    {
+        StoryNode result = new();
+        StoryNode original = new();
+        StoryNode kiddo = NodeCopier(child, excludeFields);
+
+        result.allPresent = kiddo.allPresent ?? parent.allPresent;  //
+        result.anyDrones = kiddo.anyDrones ?? parent.anyDrones;  //
+        result.anyDronesFriendly = kiddo.anyDronesFriendly ?? parent.anyDronesFriendly;  //
+        result.anyDronesHostile = kiddo.anyDronesHostile ?? parent.anyDronesHostile;  //
+        result.bg = kiddo.bg ?? parent.bg;
+        result.bgSetup = kiddo.bgSetup ?? parent.bgSetup;  //
+        result.canSpawnOnMap = kiddo.canSpawnOnMap ?? parent.canSpawnOnMap;
+        result.choiceFunc = kiddo.choiceFunc ?? parent.choiceFunc;
+        result.choiceText = kiddo.choiceText ?? parent.choiceText;
+        result.demo = kiddo.demo ?? parent.demo;
+        result.doesNotHaveArtifacts = kiddo.doesNotHaveArtifacts ?? parent.doesNotHaveArtifacts;  //
+        result.dontCountForProgression = original.dontCountForProgression == kiddo.dontCountForProgression ? parent.dontCountForProgression : kiddo.dontCountForProgression;
+        result.enemyDoesNotHavePart = kiddo.enemyDoesNotHavePart ?? parent.enemyDoesNotHavePart;
+        result.enemyHasArmoredPart = kiddo.enemyHasArmoredPart ?? parent.enemyHasArmoredPart;
+        result.enemyHasBrittlePart = kiddo.enemyHasBrittlePart ?? parent.enemyHasBrittlePart;
+        result.enemyHasPart = kiddo.enemyHasPart ?? parent.enemyHasPart;
+        result.enemyHasWeakPart = kiddo.enemyHasWeakPart ?? parent.enemyHasWeakPart;
+        result.enemyIntent = kiddo.enemyIntent ?? parent.enemyIntent;
+        result.enemyShotJustHit = kiddo.enemyShotJustHit ?? parent.enemyShotJustHit;
+        result.enemyShotJustMissed = kiddo.enemyShotJustMissed ?? parent.enemyShotJustMissed;
+        result.excludedScenes = kiddo.excludedScenes ?? parent.excludedScenes;  //
+        result.goingToOverheat = kiddo.goingToOverheat ?? parent.goingToOverheat;
+        result.handEmpty = kiddo.handEmpty ?? parent.handEmpty;
+        result.handFullOfTrash = kiddo.handFullOfTrash ?? parent.handFullOfTrash;
+        result.handFullOfUnplayableCards = kiddo.handFullOfUnplayableCards ?? parent.handFullOfUnplayableCards;
+        result.hasArtifacts = kiddo.hasArtifacts ?? parent.hasArtifacts;  //
+        result.introDelay = kiddo.introDelay ?? parent.introDelay;
+        result.justOverheated = kiddo.justOverheated ?? parent.justOverheated;
+        result.lastDeathZone = kiddo.lastDeathZone ?? parent.lastDeathZone;
+        result.lastNamedDroneDestroyed = kiddo.lastNamedDroneDestroyed ?? parent.lastNamedDroneDestroyed;
+        result.lastNamedDroneSpawned = kiddo.lastNamedDroneSpawned ?? parent.lastNamedDroneSpawned;
+        result.lastTurnEnemyStatuses = kiddo.lastTurnEnemyStatuses ?? parent.lastTurnEnemyStatuses;  //
+        result.lastTurnPlayerStatuses = kiddo.lastTurnPlayerStatuses ?? parent.lastTurnPlayerStatuses;  //
+        result.lines = original.lines == kiddo.lines ? parent.lines : kiddo.lines;  //
+        result.lookup = kiddo.lookup ?? parent.lookup;  //
+        result.maxCostOfCardJustPlayed = kiddo.maxCostOfCardJustPlayed ?? parent.maxCostOfCardJustPlayed;
+        result.maxDamageBlockedByEnemyArmorThisTurn = kiddo.maxDamageBlockedByEnemyArmorThisTurn ?? parent.maxDamageBlockedByEnemyArmorThisTurn;
+        result.maxDamageDealtToEnemyThisAction = kiddo.maxDamageDealtToEnemyThisAction ?? parent.maxDamageDealtToEnemyThisAction;
+        result.maxDamageDealtToPlayerThisTurn = kiddo.maxDamageDealtToPlayerThisTurn ?? parent.maxDamageDealtToPlayerThisTurn;
+        result.maxHull = kiddo.maxHull ?? parent.maxHull;
+        result.maxHullPercent = kiddo.maxHullPercent ?? parent.maxHullPercent;
+        result.maxTurnsThisCombat = kiddo.maxTurnsThisCombat ?? parent.maxTurnsThisCombat;
+        result.minCardsPlayedThisTurn = kiddo.minCardsPlayedThisTurn ?? parent.minCardsPlayedThisTurn;
+        result.minCombatsThisRun = kiddo.minCombatsThisRun ?? parent.minCombatsThisRun;
+        result.minCostOfCardJustPlayed = kiddo.minCostOfCardJustPlayed ?? parent.minCostOfCardJustPlayed;
+        result.minDamageBlockedByEnemyArmorThisTurn = kiddo.minDamageBlockedByEnemyArmorThisTurn ?? parent.minDamageBlockedByEnemyArmorThisTurn;
+        result.minDamageBlockedByPlayerArmorThisTurn = kiddo.minDamageBlockedByPlayerArmorThisTurn ?? parent.minDamageBlockedByPlayerArmorThisTurn;
+        result.minDamageDealtToEnemyThisAction = kiddo.minDamageDealtToEnemyThisAction ?? parent.minDamageDealtToEnemyThisAction;
+        result.minDamageDealtToEnemyThisTurn = kiddo.minDamageDealtToEnemyThisTurn ?? parent.minDamageDealtToEnemyThisTurn;
+        result.minDamageDealtToPlayerThisTurn = kiddo.minDamageDealtToPlayerThisTurn ?? parent.minDamageDealtToPlayerThisTurn;
+        result.minEnergy = kiddo.minEnergy ?? parent.minEnergy;
+        result.minHull = kiddo.minHull ?? parent.minHull;
+        result.minHullPercent = kiddo.minHullPercent ?? parent.minHullPercent;
+        result.minMovesThisTurn = kiddo.minMovesThisTurn ?? parent.minMovesThisTurn;
+        result.minRuns = kiddo.minRuns ?? parent.minRuns;
+        result.minTimesYouFlippedACardThisTurn = kiddo.minTimesYouFlippedACardThisTurn ?? parent.minTimesYouFlippedACardThisTurn;
+        result.minTurnsThisCombat = kiddo.minTurnsThisCombat ?? parent.minTurnsThisCombat;
+        result.minWinCount = kiddo.minWinCount ?? parent.minWinCount;
+        result.never = kiddo.never ?? parent.never;
+        result.nonePresent = kiddo.nonePresent ?? parent.nonePresent;  //
+        result.once = original.once == kiddo.once ? parent.once : kiddo.once;
+        result.oncePerCombat = original.oncePerCombat == kiddo.oncePerCombat ? parent.oncePerCombat : kiddo.oncePerCombat;
+        result.oncePerCombatTags = kiddo.oncePerCombatTags ?? parent.oncePerCombatTags;  //
+        result.oncePerRun = original.oncePerRun == kiddo.oncePerRun ? parent.oncePerRun : kiddo.oncePerRun;
+        result.oncePerRunTags = kiddo.oncePerRunTags ?? parent.oncePerRunTags;  //
+        result.pax = kiddo.pax ?? parent.pax;
+        result.playerJustPiercedEnemyArmor = kiddo.playerJustPiercedEnemyArmor ?? parent.playerJustPiercedEnemyArmor;
+        result.playerJustShotAMidrowObject = kiddo.playerJustShotAMidrowObject ?? parent.playerJustShotAMidrowObject;
+        result.playerJustShotASoccerBall = kiddo.playerJustShotASoccerBall ?? parent.playerJustShotASoccerBall;
+        result.playerJustShuffledDiscardIntoDrawPile = kiddo.playerJustShuffledDiscardIntoDrawPile ?? parent.playerJustShuffledDiscardIntoDrawPile;
+        result.playerShotJustHit = kiddo.playerShotJustHit ?? parent.playerShotJustHit;
+        result.playerShotJustMissed = kiddo.playerShotJustMissed ?? parent.playerShotJustMissed;
+        result.playerShotWasFromPayback = kiddo.playerShotWasFromPayback ?? parent.playerShotWasFromPayback;
+        result.playerShotWasFromStrafe = kiddo.playerShotWasFromStrafe ?? parent.playerShotWasFromStrafe;
+        result.priority = original.priority == kiddo.priority ? parent.priority : kiddo.priority;
+        result.requireCharsLocked = kiddo.requireCharsLocked ?? parent.requireCharsLocked;  //
+        result.requireCharsUnlocked = kiddo.requireCharsUnlocked ?? parent.requireCharsUnlocked;  //
+        result.requiredScenes = kiddo.requiredScenes ?? parent.requiredScenes;  //
+        result.shipsDontOverlapAtAll = kiddo.shipsDontOverlapAtAll ?? parent.shipsDontOverlapAtAll;
+        result.specialFight = kiddo.specialFight ?? parent.specialFight;
+        result.spikeName = kiddo.spikeName ?? parent.spikeName;
+        result.turnStart = kiddo.turnStart ?? parent.turnStart;
+        result.type = original.type == kiddo.type ? parent.type : kiddo.type;
+        result.wasGoingToOverheatButStopped = kiddo.wasGoingToOverheatButStopped ?? parent.wasGoingToOverheatButStopped;
+        result.whoDidThat = kiddo.whoDidThat ?? parent.whoDidThat;
+        result.zones = kiddo.zones ?? parent.zones;  //
+
+        if (appendLists)
+        {
+            dontAppendFields ??= [];
+            if (!(dontAppendFields.Contains("allPresent") || excludeFields.Contains("allPresent"))) result.allPresent = [.. parent.allPresent ?? [], .. kiddo.allPresent ?? []];
+            if (!(dontAppendFields.Contains("anyDrones") || excludeFields.Contains("anyDrones"))) result.anyDrones = [.. parent.anyDrones ?? [], .. kiddo.anyDrones ?? []];
+            if (!(dontAppendFields.Contains("anyDronesFriendly") || excludeFields.Contains("anyDronesFriendly"))) result.anyDronesFriendly = [.. parent.anyDronesFriendly ?? [], .. kiddo.anyDronesFriendly ?? []];
+            if (!(dontAppendFields.Contains("anyDronesHostile") || excludeFields.Contains("anyDronesHostile"))) result.anyDronesHostile = [.. parent.anyDronesHostile ?? [], .. kiddo.anyDronesHostile ?? []];
+            if (!(dontAppendFields.Contains("bgSetup") || excludeFields.Contains("bgSetup"))) result.bgSetup = [.. parent.bgSetup ?? [], .. kiddo.bgSetup ?? []];
+            if (!(dontAppendFields.Contains("doesNotHaveArtifacts") || excludeFields.Contains("doesNotHaveArtifacts"))) result.doesNotHaveArtifacts = [.. parent.doesNotHaveArtifacts ?? [], .. kiddo.doesNotHaveArtifacts ?? []];
+            if (!(dontAppendFields.Contains("excludedScenes") || excludeFields.Contains("excludedScenes"))) result.excludedScenes = [.. parent.excludedScenes ?? [], .. kiddo.excludedScenes ?? []];
+            if (!(dontAppendFields.Contains("hasArtifacts") || excludeFields.Contains("hasArtifacts"))) result.hasArtifacts = [.. parent.hasArtifacts ?? [], .. kiddo.hasArtifacts ?? []];
+            if (!(dontAppendFields.Contains("lastTurnEnemyStatuses") || excludeFields.Contains("lastTurnEnemyStatuses"))) result.lastTurnEnemyStatuses = [.. parent.lastTurnEnemyStatuses ?? [], .. kiddo.lastTurnEnemyStatuses ?? []];
+            if (!(dontAppendFields.Contains("lastTurnPlayerStatuses") || excludeFields.Contains("lastTurnPlayerStatuses"))) result.lastTurnPlayerStatuses = [.. parent.lastTurnPlayerStatuses ?? [], .. kiddo.lastTurnPlayerStatuses ?? []];
+            if (!(dontAppendFields.Contains("lines") || excludeFields.Contains("lines"))) result.lines = [.. parent.lines ?? [], .. kiddo.lines ?? []];
+            if (!(dontAppendFields.Contains("lookup") || excludeFields.Contains("lookup"))) result.lookup = [.. parent.lookup ?? [], .. kiddo.lookup ?? []];
+            if (!(dontAppendFields.Contains("nonePresent") || excludeFields.Contains("nonePresent"))) result.nonePresent = [.. parent.nonePresent ?? [], .. kiddo.nonePresent ?? []];
+            if (!(dontAppendFields.Contains("oncePerCombatTags") || excludeFields.Contains("oncePerCombatTags"))) result.oncePerCombatTags = [.. parent.oncePerCombatTags ?? [], .. kiddo.oncePerCombatTags ?? []];
+            if (!(dontAppendFields.Contains("oncePerRunTags") || excludeFields.Contains("oncePerRunTags"))) result.oncePerRunTags = [.. parent.oncePerRunTags ?? [], .. kiddo.oncePerRunTags ?? []];
+            if (!(dontAppendFields.Contains("requireCharsLocked") || excludeFields.Contains("requireCharsLocked"))) result.requireCharsLocked = [.. parent.requireCharsLocked ?? [], .. kiddo.requireCharsLocked ?? []];
+            if (!(dontAppendFields.Contains("requireCharsUnlocked") || excludeFields.Contains("requireCharsUnlocked"))) result.requireCharsUnlocked = [.. parent.requireCharsUnlocked ?? [], .. kiddo.requireCharsUnlocked ?? []];
+            if (!(dontAppendFields.Contains("requiredScenes") || excludeFields.Contains("requiredScenes"))) result.requiredScenes = [.. parent.requiredScenes ?? [], .. kiddo.requiredScenes ?? []];
+            if (!(dontAppendFields.Contains("zones") || excludeFields.Contains("zones"))) result.zones = [.. parent.zones ?? [], .. kiddo.zones ?? []];
+        }
+
+        return result;
+    }
+
+    /// <summary>
+    /// Copies a DialogueMachine as a new copy
+    /// </summary>
+    /// <param name="origin">DialogueMachine to copy</param>
+    /// <returns>New DialogueMachine with copied fields</returns>
+    public static DialogueMachine NodeCopier(in DialogueMachine origin)
+    {
+        DialogueMachine? result = NodeCopier((StoryNode)origin) as DialogueMachine;
+        if (result is not null)
+        {
+            result.edit = origin.edit;
+            result.dialogue = origin.dialogue;
+            result.hasArtifactTypes = origin.hasArtifactTypes;
+            result.doesNotHaveArtifactTypes = origin.doesNotHaveArtifactTypes;
+            result.dontAppendListFields = origin.dontAppendListFields;
+        }
+        return result ?? new();
+    }
+
+    /// <summary>
+    /// Copies a DialogueMachine as a new copy, excluding specified fields
+    /// </summary>
+    /// <param name="origin">DialogueMachine to copy</param>
+    /// <param name="excludeFields">Fields to skip</param>
+    /// <returns>New DialogueMachine with copied fields</returns>
+    public static DialogueMachine NodeCopier(in DialogueMachine origin, params string[] excludeFields)
+    {
+        DialogueMachine? result = NodeCopier((StoryNode)origin, excludeFields) as DialogueMachine;
+        if (result is not null)
+        {
+            result.edit = excludeFields.Contains("edit") ? default : origin.edit;
+            result.dialogue = excludeFields.Contains("dialogue") ? default : origin.dialogue;
+            result.hasArtifactTypes = excludeFields.Contains("hasArtifactTypes") ? default : origin.hasArtifactTypes;
+            result.doesNotHaveArtifactTypes = excludeFields.Contains("doesNotHaveArtifactTypes") ? default : origin.doesNotHaveArtifactTypes;
+            result.dontAppendListFields = excludeFields.Contains("replaceFields") ? default : origin.dontAppendListFields;
+        }
+        return result ?? new();
+    }
+
+    /// <summary>
+    /// Copies a StoryNode as a new copy
+    /// </summary>
+    /// <param name="origin">StoryNode to copy</param>
+    /// <returns>New StoryNode with copied fields</returns>
+    public static StoryNode NodeCopier(in StoryNode origin)
+    {
+        StoryNode result = new()
+        {
+            allPresent = origin.allPresent,
+            anyDrones = origin.anyDrones,
+            anyDronesFriendly = origin.anyDronesFriendly,
+            anyDronesHostile = origin.anyDronesHostile,
+            bg = origin.bg,
+            bgSetup = origin.bgSetup,
+            canSpawnOnMap = origin.canSpawnOnMap,
+            choiceFunc = origin.choiceFunc,
+            choiceText = origin.choiceText,
+            demo = origin.demo,
+            doesNotHaveArtifacts = origin.doesNotHaveArtifacts,
+            dontCountForProgression = origin.dontCountForProgression,
+            enemyDoesNotHavePart = origin.enemyDoesNotHavePart,
+            enemyHasArmoredPart = origin.enemyHasArmoredPart,
+            enemyHasBrittlePart = origin.enemyHasBrittlePart,
+            enemyHasPart = origin.enemyHasPart,
+            enemyHasWeakPart = origin.enemyHasWeakPart,
+            enemyIntent = origin.enemyIntent,
+            enemyShotJustHit = origin.enemyShotJustHit,
+            enemyShotJustMissed = origin.enemyShotJustMissed,
+            excludedScenes = origin.excludedScenes,
+            goingToOverheat = origin.goingToOverheat,
+            handEmpty = origin.handEmpty,
+            handFullOfTrash = origin.handFullOfTrash,
+            handFullOfUnplayableCards = origin.handFullOfUnplayableCards,
+            hasArtifacts = origin.hasArtifacts,
+            introDelay = origin.introDelay,
+            justOverheated = origin.justOverheated,
+            lastDeathZone = origin.lastDeathZone,
+            lastNamedDroneDestroyed = origin.lastNamedDroneDestroyed,
+            lastNamedDroneSpawned = origin.lastNamedDroneSpawned,
+            lastTurnEnemyStatuses = origin.lastTurnEnemyStatuses,
+            lastTurnPlayerStatuses = origin.lastTurnPlayerStatuses,
+            lines = origin.lines,
+            lookup = origin.lookup,
+            maxCostOfCardJustPlayed = origin.maxCostOfCardJustPlayed,
+            maxDamageBlockedByEnemyArmorThisTurn = origin.maxDamageBlockedByEnemyArmorThisTurn,
+            maxDamageDealtToEnemyThisAction = origin.maxDamageDealtToEnemyThisAction,
+            maxDamageDealtToPlayerThisTurn = origin.maxDamageDealtToPlayerThisTurn,
+            maxHull = origin.maxHull,
+            maxHullPercent = origin.maxHullPercent,
+            maxTurnsThisCombat = origin.maxTurnsThisCombat,
+            minCardsPlayedThisTurn = origin.minCardsPlayedThisTurn,
+            minCombatsThisRun = origin.minCombatsThisRun,
+            minCostOfCardJustPlayed = origin.minCostOfCardJustPlayed,
+            minDamageBlockedByEnemyArmorThisTurn = origin.minDamageBlockedByEnemyArmorThisTurn,
+            minDamageBlockedByPlayerArmorThisTurn = origin.minDamageBlockedByPlayerArmorThisTurn,
+            minDamageDealtToEnemyThisAction = origin.minDamageDealtToEnemyThisAction,
+            minDamageDealtToEnemyThisTurn = origin.minDamageDealtToEnemyThisTurn,
+            minDamageDealtToPlayerThisTurn = origin.minDamageDealtToPlayerThisTurn,
+            minEnergy = origin.minEnergy,
+            minHull = origin.minHull,
+            minHullPercent = origin.minHullPercent,
+            minMovesThisTurn = origin.minMovesThisTurn,
+            minRuns = origin.minRuns,
+            minTimesYouFlippedACardThisTurn = origin.minTimesYouFlippedACardThisTurn,
+            minTurnsThisCombat = origin.minTurnsThisCombat,
+            minWinCount = origin.minWinCount,
+            never = origin.never,
+            nonePresent = origin.nonePresent,
+            once = origin.once,
+            oncePerCombat = origin.oncePerCombat,
+            oncePerCombatTags = origin.oncePerCombatTags,
+            oncePerRun = origin.oncePerRun,
+            oncePerRunTags = origin.oncePerRunTags,
+            pax = origin.pax,
+            playerJustPiercedEnemyArmor = origin.playerJustPiercedEnemyArmor,
+            playerJustShotAMidrowObject = origin.playerJustShotAMidrowObject,
+            playerJustShotASoccerBall = origin.playerJustShotASoccerBall,
+            playerJustShuffledDiscardIntoDrawPile = origin.playerJustShuffledDiscardIntoDrawPile,
+            playerShotJustHit = origin.playerShotJustHit,
+            playerShotJustMissed = origin.playerShotJustMissed,
+            playerShotWasFromPayback = origin.playerShotWasFromPayback,
+            playerShotWasFromStrafe = origin.playerShotWasFromStrafe,
+            priority = origin.priority,
+            requireCharsLocked = origin.requireCharsLocked,
+            requireCharsUnlocked = origin.requireCharsUnlocked,
+            requiredScenes = origin.requiredScenes,
+            shipsDontOverlapAtAll = origin.shipsDontOverlapAtAll,
+            specialFight = origin.specialFight,
+            spikeName = origin.spikeName,
+            turnStart = origin.turnStart,
+            type = origin.type,
+            wasGoingToOverheatButStopped = origin.wasGoingToOverheatButStopped,
+            whoDidThat = origin.whoDidThat,
+            zones = origin.zones
+        };
+        return result;
+    }
+
+    /// <summary>
+    /// Copies a StoryNode as a new copy, excluding specified fields
+    /// </summary>
+    /// <param name="origin">StoryNode to copy</param>
+    /// <param name="excludeFields">Fields to skip</param>
+    /// <returns>New StoryNode with copied fields</returns>
+    public static StoryNode NodeCopier(in StoryNode origin, params string[] excludeFields)
+    {
+        StoryNode result = new()
+        {
+            allPresent = excludeFields.Contains("allPresent") ? default : origin.allPresent,
+            anyDrones = excludeFields.Contains("anyDrones") ? default : origin.anyDrones,
+            anyDronesFriendly = excludeFields.Contains("anyDronesFriendly") ? default : origin.anyDronesFriendly,
+            anyDronesHostile = excludeFields.Contains("anyDronesHostile") ? default : origin.anyDronesHostile,
+            bg = excludeFields.Contains("bg") ? default : origin.bg,
+            bgSetup = excludeFields.Contains("bgSetup") ? default : origin.bgSetup,
+            canSpawnOnMap = excludeFields.Contains("canSpawnOnMap") ? default : origin.canSpawnOnMap,
+            choiceFunc = excludeFields.Contains("choiceFunc") ? default : origin.choiceFunc,
+            choiceText = excludeFields.Contains("choiceText") ? default : origin.choiceText,
+            demo = excludeFields.Contains("demo") ? default : origin.demo,
+            doesNotHaveArtifacts = excludeFields.Contains("doesNotHaveArtifacts") ? default : origin.doesNotHaveArtifacts,
+            dontCountForProgression = excludeFields.Contains("dontCountForProgression") ? default : origin.dontCountForProgression,
+            enemyDoesNotHavePart = excludeFields.Contains("enemyDoesNotHavePart") ? default : origin.enemyDoesNotHavePart,
+            enemyHasArmoredPart = excludeFields.Contains("enemyHasArmoredPart") ? default : origin.enemyHasArmoredPart,
+            enemyHasBrittlePart = excludeFields.Contains("enemyHasBrittlePart") ? default : origin.enemyHasBrittlePart,
+            enemyHasPart = excludeFields.Contains("enemyHasPart") ? default : origin.enemyHasPart,
+            enemyHasWeakPart = excludeFields.Contains("enemyHasWeakPart") ? default : origin.enemyHasWeakPart,
+            enemyIntent = excludeFields.Contains("enemyIntent") ? default : origin.enemyIntent,
+            enemyShotJustHit = excludeFields.Contains("enemyShotJustHit") ? default : origin.enemyShotJustHit,
+            enemyShotJustMissed = excludeFields.Contains("enemyShotJustMissed") ? default : origin.enemyShotJustMissed,
+            excludedScenes = excludeFields.Contains("excludedScenes") ? [] : origin.excludedScenes,
+            goingToOverheat = excludeFields.Contains("goingToOverheat") ? default : origin.goingToOverheat,
+            handEmpty = excludeFields.Contains("handEmpty") ? default : origin.handEmpty,
+            handFullOfTrash = excludeFields.Contains("handFullOfTrash") ? default : origin.handFullOfTrash,
+            handFullOfUnplayableCards = excludeFields.Contains("handFullOfUnplayableCards") ? default : origin.handFullOfUnplayableCards,
+            hasArtifacts = excludeFields.Contains("hasArtifacts") ? default : origin.hasArtifacts,
+            introDelay = excludeFields.Contains("introDelay") ? default : origin.introDelay,
+            justOverheated = excludeFields.Contains("justOverheated") ? default : origin.justOverheated,
+            lastDeathZone = excludeFields.Contains("lastDeathZone") ? default : origin.lastDeathZone,
+            lastNamedDroneDestroyed = excludeFields.Contains("lastNamedDroneDestroyed") ? default : origin.lastNamedDroneDestroyed,
+            lastNamedDroneSpawned = excludeFields.Contains("lastNamedDroneSpawned") ? default : origin.lastNamedDroneSpawned,
+            lastTurnEnemyStatuses = excludeFields.Contains("lastTurnEnemyStatuses") ? default : origin.lastTurnEnemyStatuses,
+            lastTurnPlayerStatuses = excludeFields.Contains("lastTurnPlayerStatuses") ? default : origin.lastTurnPlayerStatuses,
+            lines = excludeFields.Contains("lines") ? [] : origin.lines,
+            lookup = excludeFields.Contains("lookup") ? default : origin.lookup,
+            maxCostOfCardJustPlayed = excludeFields.Contains("maxCostOfCardJustPlayed") ? default : origin.maxCostOfCardJustPlayed,
+            maxDamageBlockedByEnemyArmorThisTurn = excludeFields.Contains("maxDamageBlockedByEnemyArmorThisTurn") ? default : origin.maxDamageBlockedByEnemyArmorThisTurn,
+            maxDamageDealtToEnemyThisAction = excludeFields.Contains("maxDamageDealtToEnemyThisAction") ? default : origin.maxDamageDealtToEnemyThisAction,
+            maxDamageDealtToPlayerThisTurn = excludeFields.Contains("maxDamageDealtToPlayerThisTurn") ? default : origin.maxDamageDealtToPlayerThisTurn,
+            maxHull = excludeFields.Contains("maxHull") ? default : origin.maxHull,
+            maxHullPercent = excludeFields.Contains("maxHullPercent") ? default : origin.maxHullPercent,
+            maxTurnsThisCombat = excludeFields.Contains("maxTurnsThisCombat") ? default : origin.maxTurnsThisCombat,
+            minCardsPlayedThisTurn = excludeFields.Contains("minCardsPlayedThisTurn") ? default : origin.minCardsPlayedThisTurn,
+            minCombatsThisRun = excludeFields.Contains("minCombatsThisRun") ? default : origin.minCombatsThisRun,
+            minCostOfCardJustPlayed = excludeFields.Contains("minCostOfCardJustPlayed") ? default : origin.minCostOfCardJustPlayed,
+            minDamageBlockedByEnemyArmorThisTurn = excludeFields.Contains("minDamageBlockedByEnemyArmorThisTurn") ? default : origin.minDamageBlockedByEnemyArmorThisTurn,
+            minDamageBlockedByPlayerArmorThisTurn = excludeFields.Contains("minDamageBlockedByPlayerArmorThisTurn") ? default : origin.minDamageBlockedByPlayerArmorThisTurn,
+            minDamageDealtToEnemyThisAction = excludeFields.Contains("minDamageDealtToEnemyThisAction") ? default : origin.minDamageDealtToEnemyThisAction,
+            minDamageDealtToEnemyThisTurn = excludeFields.Contains("minDamageDealtToEnemyThisTurn") ? default : origin.minDamageDealtToEnemyThisTurn,
+            minDamageDealtToPlayerThisTurn = excludeFields.Contains("minDamageDealtToPlayerThisTurn") ? default : origin.minDamageDealtToPlayerThisTurn,
+            minEnergy = excludeFields.Contains("minEnergy") ? default : origin.minEnergy,
+            minHull = excludeFields.Contains("minHull") ? default : origin.minHull,
+            minHullPercent = excludeFields.Contains("minHullPercent") ? default : origin.minHullPercent,
+            minMovesThisTurn = excludeFields.Contains("minMovesThisTurn") ? default : origin.minMovesThisTurn,
+            minRuns = excludeFields.Contains("minRuns") ? default : origin.minRuns,
+            minTimesYouFlippedACardThisTurn = excludeFields.Contains("minTimesYouFlippedACardThisTurn") ? default : origin.minTimesYouFlippedACardThisTurn,
+            minTurnsThisCombat = excludeFields.Contains("minTurnsThisCombat") ? default : origin.minTurnsThisCombat,
+            minWinCount = excludeFields.Contains("minWinCount") ? default : origin.minWinCount,
+            never = excludeFields.Contains("never") ? default : origin.never,
+            nonePresent = excludeFields.Contains("nonePresent") ? default : origin.nonePresent,
+            once = excludeFields.Contains("once") ? default : origin.once,
+            oncePerCombat = excludeFields.Contains("oncePerCombat") ? default : origin.oncePerCombat,
+            oncePerCombatTags = excludeFields.Contains("oncePerCombatTags") ? default : origin.oncePerCombatTags,
+            oncePerRun = excludeFields.Contains("oncePerRun") ? default : origin.oncePerRun,
+            oncePerRunTags = excludeFields.Contains("oncePerRunTags") ? default : origin.oncePerRunTags,
+            pax = excludeFields.Contains("pax") ? default : origin.pax,
+            playerJustPiercedEnemyArmor = excludeFields.Contains("playerJustPiercedEnemyArmor") ? default : origin.playerJustPiercedEnemyArmor,
+            playerJustShotAMidrowObject = excludeFields.Contains("playerJustShotAMidrowObject") ? default : origin.playerJustShotAMidrowObject,
+            playerJustShotASoccerBall = excludeFields.Contains("playerJustShotASoccerBall") ? default : origin.playerJustShotASoccerBall,
+            playerJustShuffledDiscardIntoDrawPile = excludeFields.Contains("playerJustShuffledDiscardIntoDrawPile") ? default : origin.playerJustShuffledDiscardIntoDrawPile,
+            playerShotJustHit = excludeFields.Contains("playerShotJustHit") ? default : origin.playerShotJustHit,
+            playerShotJustMissed = excludeFields.Contains("playerShotJustMissed") ? default : origin.playerShotJustMissed,
+            playerShotWasFromPayback = excludeFields.Contains("playerShotWasFromPayback") ? default : origin.playerShotWasFromPayback,
+            playerShotWasFromStrafe = excludeFields.Contains("playerShotWasFromStrafe") ? default : origin.playerShotWasFromStrafe,
+            priority = excludeFields.Contains("priority") ? default : origin.priority,
+            requireCharsLocked = excludeFields.Contains("requireCharsLocked") ? default : origin.requireCharsLocked,
+            requireCharsUnlocked = excludeFields.Contains("requireCharsUnlocked") ? default : origin.requireCharsUnlocked,
+            requiredScenes = excludeFields.Contains("requiredScenes") ? [] : origin.requiredScenes,
+            shipsDontOverlapAtAll = excludeFields.Contains("shipsDontOverlapAtAll") ? default : origin.shipsDontOverlapAtAll,
+            specialFight = excludeFields.Contains("specialFight") ? default : origin.specialFight,
+            spikeName = excludeFields.Contains("spikeName") ? default : origin.spikeName,
+            turnStart = excludeFields.Contains("turnStart") ? default : origin.turnStart,
+            type = excludeFields.Contains("type") ? default : origin.type,
+            wasGoingToOverheatButStopped = excludeFields.Contains("wasGoingToOverheatButStopped") ? default : origin.wasGoingToOverheatButStopped,
+            whoDidThat = excludeFields.Contains("whoDidThat") ? default : origin.whoDidThat,
+            zones = excludeFields.Contains("zones") ? default : origin.zones
+        };
+        return result;
     }
 }

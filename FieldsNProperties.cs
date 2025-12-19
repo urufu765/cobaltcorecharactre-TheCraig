@@ -39,7 +39,7 @@ internal partial class ModEntry : SimpleMod
     internal ILocaleBoundNonNullLocalizationProvider<IReadOnlyList<string>> Localizations { get; }
     internal IMoreDifficultiesApi? MoreDifficultiesApi { get; private set; } = null!;
     internal IDuoArtifactsApi? DuoArtifactsApi { get; private set; } = null!;
-    internal IDynaApi? DynaApi {get;private set;} = null!;
+    internal IDynaApi? DynaApi { get; private set; } = null!;
 
     internal ReactiveFormulae reactiveFormulae;
     internal DemolitionSetupProfessional demoSetupPro;
@@ -193,12 +193,13 @@ internal partial class ModEntry : SimpleMod
     #endregion
 
     private static List<Type> IlleanaDialogueTypes = [
-        typeof(NewCombatDialogue),
-        typeof(NewArtifactDialogue),
-        typeof(NewEventDialogue),
+        typeof(NewNewCombatDialogue),
+        typeof(NewNewArtifactDialogue),
+        typeof(NewNewEventDialogue),
         typeof(NewCardDialogue),
         typeof(NewStoryDialogue),
         typeof(NewMemoryDialogue),
+        typeof(KO_CombatDialogue),
     ];
     private static IEnumerable<Type> IlleanaArtifactTypes =
         IlleanaCommonArtifacts
@@ -313,35 +314,35 @@ internal partial class ModEntry : SimpleMod
 
     #region Artifacts
     public Spr SprStolenOn { get; private set; }
-    public Spr SprStolenChill {get; private set;}
-    public Spr SprStolenHype {get; private set;}
-    public Spr SprStolenSad {get; private set;}
-    public Spr SprStolenGroovy {get; private set;}
-    public Spr SprSportsOn {get; private set;}
-    public Spr SprSportsChill {get; private set;}
-    public Spr SprSportsHype {get; private set;}
-    public Spr SprSportsSad {get; private set;}
-    public Spr SprSportsGroovy {get; private set;}
-    public Spr SprDigitalOn {get; private set;}
-    public Spr SprDigitalChill {get; private set;}
-    public Spr SprDigitalHype {get; private set;}
-    public Spr SprDigitalSad {get; private set;}
-    public Spr SprDigitalGroovy {get; private set;}
-    public Spr SprBoostrE {get; private set;}
-    public Spr SprBoostrB {get; private set;}
-    public Spr SprBoostrO {get; private set;}
-    public Spr SprExLubeO {get; private set;}
-    public Spr SprExLubeX {get; private set;}
-    public Spr SprEFLavailable {get; private set;}
-    public Spr SprEFLdepleted {get; private set;}
-    public Spr SprThurstDepleted {get; private set;}
+    public Spr SprStolenChill { get; private set; }
+    public Spr SprStolenHype { get; private set; }
+    public Spr SprStolenSad { get; private set; }
+    public Spr SprStolenGroovy { get; private set; }
+    public Spr SprSportsOn { get; private set; }
+    public Spr SprSportsChill { get; private set; }
+    public Spr SprSportsHype { get; private set; }
+    public Spr SprSportsSad { get; private set; }
+    public Spr SprSportsGroovy { get; private set; }
+    public Spr SprDigitalOn { get; private set; }
+    public Spr SprDigitalChill { get; private set; }
+    public Spr SprDigitalHype { get; private set; }
+    public Spr SprDigitalSad { get; private set; }
+    public Spr SprDigitalGroovy { get; private set; }
+    public Spr SprBoostrE { get; private set; }
+    public Spr SprBoostrB { get; private set; }
+    public Spr SprBoostrO { get; private set; }
+    public Spr SprExLubeO { get; private set; }
+    public Spr SprExLubeX { get; private set; }
+    public Spr SprEFLavailable { get; private set; }
+    public Spr SprEFLdepleted { get; private set; }
+    public Spr SprThurstDepleted { get; private set; }
     public Spr SprAirlockShoe { get; private set; }
     public Spr SprHullHarvestDepleted { get; private set; }
-    public Spr SprCompetitionDepleted {get; private set;}
+    public Spr SprCompetitionDepleted { get; private set; }
     public Spr SprCompetitionShoeDepleted { get; private set; }
     public Spr SprCompetitionShoe { get; private set; }
     public Spr SprCompetitionIlleana { get; private set; }
-    public Spr SprCompetitionShoeana {get; private set; }
+    public Spr SprCompetitionShoeana { get; private set; }
     public Spr SprCompetitionEddie { get; private set; }
     public Spr SprDemolitionSetupDepleted { get; private set; }
     public Spr SprLooseStickDepleted { get; private set; }

@@ -15,7 +15,7 @@ A corrosion engineer who works with corrosion to help keep the ship at tip top c
   * **dev.*: More other mod content like artifact swap thing, and more idk
   * **dev.*: Give Illeana a solo deck + solo starter, fixed EXE to allow Illeana to actually work properly (offers one of Build a Cure or Find A Solution)
   * **dev.*: Extra slip new sprite, new sprites for cards.
-  * **dev.*: DialogueMachine 0.19: More instructions, Multi feature
+  * **dev.9**: DialogueMachine 0.19: More instructions, Multi feature, and a fix for loading other languages
   * **dev.8**: Rebalance/redo some old cards, Extra slip buff (no new sprite yet), fixed corrode issue
     * Scrap Patchkit - Gave B Tarnish to solidify upgrade B as the tarnish upgrade
       * B: T.Shield 2->0, Tarnish 0->1
