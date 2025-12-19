@@ -1,16 +1,14 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using Microsoft.Extensions.Logging;
 using Nanoray.PluginManager;
 using Nickel;
-using OneOf.Types;
 
 namespace Illeana.External;
 
 /**
-ver.0.19
+ver.0.19c
 
 To get DialogueMachine and the custom dialogue stuff working:
 - edit the namespace of this file to at least match your project namespace
@@ -80,6 +78,9 @@ public enum EMod  // Enumerator for specifying the edit mode
 }
 
 
+/// <summary>
+/// Just a thing that branches into a dialogue object or an edit object.
+/// </summary>
 public class AbstractThing
 {
     public string? who;
@@ -91,11 +92,22 @@ public class AbstractThing
     public string? choiceFunc;
 }
 
-
+/// <summary>
+/// An object purposed to help locate the existing SwitchSay which you are gonna add a dialogue into.
+/// </summary>
 public class EditThing : AbstractThing
 {
+    /// <summary>
+    /// Which switch to enter new dialogue into? Starts from 1 (not 0!)
+    /// </summary>
     public int? switchNumber;
+    /// <summary>
+    /// Search for switch from start to end, or end to start, or by hash (which is autoset by the appropriate constructor)
+    /// </summary>
     public EMod searchConfig;
+    /// <summary>
+    /// The hash to match in the switch the hash's dialogue belongs to
+    /// </summary>
     public string? hashSearch;
     /// <summary>
     /// An edit dialogue with emotions and all, counting from the start or end to find the Nth switch to add the desired dialogue to.
@@ -190,6 +202,9 @@ public class EditThing : AbstractThing
     }
 }
 
+/// <summary>
+/// A dialogue object that streamlines adding new dialogue, which on load is converted into a Say or something like that such that it's basically identical as to how existing dialogue objects work.
+/// </summary>
 public class DialogueThing : AbstractThing
 {
     public string? title;
@@ -321,31 +336,36 @@ public class QMulti : Instruction  // Quick disconnect
     }
 
     /// <summary>
-    /// Quick multi node separator that overrides commonly changed filters
+    /// Quick multi node separator that only changes the AllPresent list, for dialogue sets that cover multiple character interactions but changes nothing else.
     /// </summary>
-    /// <param name="allPresent">Who needs to be present</param>
-    /// <param name="nonePresent">Who shouldn't be present</param>
-    /// <param name="oncePerCombatTags">Once per combat tag</param>
-    /// <param name="oncePerRunTags">Once per run tag</param>
+    /// <param name="allPresents">AllPresent. Who needs to be present. This isn't a spelling error, this is to remove the ambiguity between this constructor and the many parameter constructor if for some reason you want to specify the parameter name.</param>
+    /// <param name="overrides">Delegate for any other filters that is not present in the parameters</param>
+    public QMulti(HashSet<string>? allPresents, Action<DialogueMachine>? overrides = null)
+    {
+        filterOverrides = new()
+        {
+            allPresent = allPresents
+        };
+        overrides?.Invoke(filterOverrides);
+    }
+    /// <summary>
+    /// Quick multi node separator that overrides commonly changed filters. Parameters left default or null inherits the parent node's instead.
+    /// </summary>
     /// <param name="hasArtifactTypes">Artifacts needed (Type)</param>
     /// <param name="hasArtifacts">Artifacts needed (string)</param>
     /// <param name="doesNotHaveArtifactTypes">Artifacts blacklist (Type)</param>
     /// <param name="doesNotHaveArtifacts">Artifacts blacklist (string)</param>
+    /// <param name="allPresent">Who needs to be present</param>
+    /// <param name="oncePerCombatTags">Once per combat tag</param>
+    /// <param name="oncePerRunTags">Once per run tag</param>
     /// <param name="lastTurnEnemyStatuses">Statuses enemy had</param>
     /// <param name="lastTurnPlayerStatuses">Statuses player had</param>
-    /// <param name="anyDrones">Drones on the battle field</param>
-    /// <param name="anyDronesFriendly">Friendly drones on the battle field</param>
-    /// <param name="anyDronesHostile">Hostile drones on the battle field</param>
-    /// <param name="lastNamedDroneDestroyed">Name of drone destroyed</param>
-    /// <param name="lastNamedDroneSpawned">Name of drone spawned</param>
-    /// <param name="spikeName">Spike's name :)</param>
-    /// <param name="overrides">Delegate for any other filters that is not supported by the other parameters</param>
-    public QMulti(HashSet<string>? allPresent = null, HashSet<string>? nonePresent = null, HashSet<string>? oncePerCombatTags = null, HashSet<string>? oncePerRunTags = null, List<Type>? hasArtifactTypes = null, HashSet<string>? hasArtifacts = null, List<Type>? doesNotHaveArtifactTypes = null, HashSet<string>? doesNotHaveArtifacts = null, HashSet<Status>?lastTurnEnemyStatuses = null, HashSet<Status>? lastTurnPlayerStatuses = null, HashSet<string>? anyDrones = null, HashSet<string>? anyDronesFriendly = null, HashSet<string>? anyDronesHostile = null, string? lastNamedDroneDestroyed = null, string? lastNamedDroneSpawned = null, string? spikeName = null, Action<DialogueMachine>? overrides = null)
+    /// <param name="overrides">Delegate for any other filters that is not present in the parameters</param>
+    public QMulti(List<Type>? hasArtifactTypes = null, HashSet<string>? hasArtifacts = null, List<Type>? doesNotHaveArtifactTypes = null, HashSet<string>? doesNotHaveArtifacts = null, HashSet<string>? allPresent = null, HashSet<string>? oncePerCombatTags = null, HashSet<string>? oncePerRunTags = null, HashSet<Status>? lastTurnEnemyStatuses = null, HashSet<Status>? lastTurnPlayerStatuses = null, Action<DialogueMachine>? overrides = null)
     {
         filterOverrides = new()
         {
             allPresent = allPresent,
-            nonePresent = nonePresent,
             oncePerCombatTags = oncePerCombatTags,
             oncePerRunTags = oncePerRunTags,
             hasArtifactTypes = hasArtifactTypes,
@@ -353,13 +373,7 @@ public class QMulti : Instruction  // Quick disconnect
             doesNotHaveArtifactTypes = doesNotHaveArtifactTypes,
             doesNotHaveArtifacts = doesNotHaveArtifacts,
             lastTurnEnemyStatuses = lastTurnEnemyStatuses,
-            lastTurnPlayerStatuses = lastTurnPlayerStatuses,
-            anyDrones = anyDrones,
-            anyDronesFriendly = anyDronesFriendly,
-            anyDronesHostile = anyDronesHostile,
-            lastNamedDroneDestroyed = lastNamedDroneDestroyed,
-            lastNamedDroneSpawned = lastNamedDroneSpawned,
-            spikeName = spikeName
+            lastTurnPlayerStatuses = lastTurnPlayerStatuses
         };
         overrides?.Invoke(filterOverrides);
     }
@@ -375,6 +389,9 @@ public class QMulti : Instruction  // Quick disconnect
     }
 }
 
+/// <summary>
+/// The thing that basically takes your dialogue, passes them through a few conversions, stitches trees together, and puts out a StoryNode object which functions just the way the game expects it to.
+/// </summary>
 public class DialogueMachine : StoryNode
 {
     // public List<(string whoOrCommand, string? loopTag, string? what)> dialogue = null!;
@@ -383,17 +400,11 @@ public class DialogueMachine : StoryNode
     /// Edits existing dialogue by finding the switch you want to insert your dialogue into. Best used for vanilla dialogue. WILL IGNORE 'dialogue' DICTIONARY IF 'edit' IS USED
     /// </summary>
     public List<EditThing>? edit;
+
     /// <summary>
     /// Where all your dialogue *should* go. It can also support titles, mod dialogue edits, and custom instructions!
     /// </summary>
     public List<DialogueThing>? dialogue;
-
-    /// <summary>
-    /// DO NOT USE (was used only for testing purposes)
-    /// Quicker writing of multiple nodes that share some or all the same filters. The node tag of the children takes the parent tag and adds "_multi_X" where X is the index in this list. WILL IGNORE 'edit' AND 'dialogue'.
-    /// </summary>
-    [Obsolete]
-    public List<QuickMultiMachine>? multi;
 
     /// <summary>
     /// Add the type of the artifact rather than trying to use the string key. Gets converted to hasArtifacts later.
@@ -675,13 +686,19 @@ public class LocalDB
     private static SimpleMod Inst => ModEntry.Instance;
 
     /// <summary>
+    /// The default locale that will be also loaded for missing nodes of current locale
+    /// </summary>
+    public string DefaultLocale {get; private set;}
+
+    /// <summary>
     /// Should be instantiated *after* all the dialogues have been registered OR at Events.OnModLoadPhaseFinished, AfterDbInit.
     /// </summary>
-    /// <param name="package"></param>
-    public LocalDB(IModHelper helper, IPluginPackage<IModManifest> package)
+    /// <param name="defaultLocale">The default language the dialogue will fall back to when encountering a missing string on the other language.</param>
+    public LocalDB(IModHelper helper, IPluginPackage<IModManifest> package, string defaultLocale = "en")
     {
         localLocalization = new();
         hashCatalogue = new();
+        DefaultLocale = defaultLocale;
         foreach (string key in LocalStoryLocale.Keys)
         {
             localLocalization.Add(key, new());
@@ -701,6 +718,7 @@ public class LocalDB
             }
             PasteToDB(toUseStory, DB.story, key);
         }
+        // TODO: I'll re-implement .json support in the future
         // if (LocalStoryLocale.ContainsKey(DB.currentLocale.locale))  // For other coded translated dialogues
         // {
         // }
@@ -718,22 +736,112 @@ public class LocalDB
     /// <summary>
     /// This one must be used in Events.OnLoadStringsForLocale.
     /// </summary>
-    /// <returns></returns>
+    /// <returns>The localised strings for the appropriate locale</returns>
     public Dictionary<string, string> GetLocalizationResults(string locale)
     {
-        if (localLocalization.ContainsKey(locale))
+        Dictionary<string, string> localisationToPresent = [];
+        List<string> missingThings = [];
+        List<string> extraThings = [];
+        bool missingDefault = false;
+        bool debugMode = false;
+        if (!localLocalization.ContainsKey(DefaultLocale))
         {
-            return localLocalization[locale];
+            missingDefault = true;
+            Inst.Logger.LogWarning("Missing default locale language! Change the default (set in the LocalDB constructor's parameter) or check if you misplaced the dialogues somewhere.");
         }
-        return [];
+
+        // Apply localised dialogue if present, default if not.
+        // Regular mode just uses the default as base then 
+        #if DEBUG
+        debugMode = true;
+
+        if (locale == DefaultLocale && !missingDefault)
+        {
+            localisationToPresent = localLocalization[locale];
+        }
+        // Debug mode does not use the default locale as backup to make sure you find those missing strings.
+        else if (localLocalization.TryGetValue(locale, out Dictionary<string, string>? newLocalisation))
+        {
+            if (!missingDefault)
+            {
+                // Go through the default locale to check which node keys are present in the new locale, and which are missing
+                foreach (string origLocaleKey in localLocalization[DefaultLocale].Keys)
+                {
+                    if (newLocalisation.TryGetValue(origLocaleKey, out string? origValue))
+                    {
+                        localisationToPresent[origLocaleKey] = origValue;
+                    }
+                    else
+                    {
+                        missingThings.Add(origLocaleKey);
+                    }
+                }
+                // Go though the new locale to check which node keys are added on as extras, and aren't found in default.
+                foreach (KeyValuePair<string, string> newLocale in newLocalisation)
+                {
+                    if (!localLocalization[DefaultLocale].ContainsKey(newLocale.Key))
+                    {
+                        extraThings.Add(newLocale.Key);
+                        localisationToPresent[newLocale.Key] = newLocale.Value;
+                    }
+                }
+            }
+            else
+            {
+                localisationToPresent = newLocalisation;
+            }
+        }
+        else  // If the desired locale is straight up non-existent, just load the default. There's no point in missingString errors if you are fully aware there isn't even a present string lol
+        {
+            Inst.Logger.LogWarning("No {locale} found! Loading the default locale {DefaultLocale} if present.", locale, DefaultLocale);
+            if (!missingDefault)
+            {
+                localisationToPresent = localLocalization[DefaultLocale];
+            }
+        }
+
+        if (!missingDefault && missingThings.Count > 0)
+        {
+            Inst.Logger.LogWarning("Missing following dialogue nodes from {locale} when comparing to {DefaultLocale}!!!", locale, DefaultLocale);
+            Inst.Logger.LogWarning("[{}]", string.Join(", ", missingThings.Select(k => string.Join(":", k.Split(":").Where((_, index) => index != 1)))));
+            // The localisation key is made up of NODE_KEY:CLASS_FULLNAME:AUTOINDEX. The middle bit isn't necessary information to the modder, so the string is trimmed accordingly.
+        }
+
+        if (!missingDefault && extraThings.Count > 0)
+        {
+            Inst.Logger.LogWarning("Found extra dialogue nodes not found in {locale} when comparing to {DefaultLocale}!!!", locale, DefaultLocale);
+            Inst.Logger.LogWarning("[{}]", string.Join(", ", extraThings.Select(k => string.Join(":", k.Split(":").Where((_, index) => index != 1)))));
+        }
+        #endif
+
+        if (!debugMode)
+        {
+            if (!missingDefault)
+            {
+                localisationToPresent = localLocalization[DefaultLocale];  // Default for background
+                if (localLocalization.TryGetValue(locale, out Dictionary<string, string>? newLocaleDict))
+                {
+                    foreach (KeyValuePair<string, string> localisedPair in newLocaleDict)
+                    {
+                        // Then just replace the localised stuff if present
+                        localisationToPresent[localisedPair.Key] = localisedPair.Value;
+                    }
+                }
+            }
+            else if (localLocalization.TryGetValue(locale, out Dictionary<string, string>? value))  // No default dialogue found
+            {
+                localisationToPresent = value;
+            }
+        }
+        return localisationToPresent;
     }
 
     /// <summary>
     /// A modded version that adds separate dictionaries for each mod key so they could be included/excluded on load
     /// </summary>
-    /// <param name="locale"></param>
-    /// <param name="modKey"></param>
-    /// <param name="storyStuff"></param>
+    /// <param name="locale">The language the dialogue is written in. 'en' - American, 'es' - Español con vosotros, 'fr' - French, etc.</param>
+    /// <param name="modKey">The uniqueName of the mod</param>
+    /// <param name="storyStuff">A dictionary containing pairs of node key and DialogueMachine</param>
     public static void DumpStoryToLocalLocale(string locale, string modKey, Dictionary<string, DialogueMachine> storyStuff)
     {
         // Just to trigger the modded part on load lol
@@ -768,7 +876,7 @@ public class LocalDB
     /// <summary>
     /// Adds a list of DialogueMachines to the appropriate locale, creating a new if locale doesn't exist.
     /// </summary>
-    /// <param name="locale">the locale the storynodes will go in</param>
+    /// <param name="locale">the locale the storynodes will go in. 'en' - Freedom English, 'es' - Lingua de España, 'fr' - French, etc.</param>
     /// <param name="storyStuff">Storynodes along with their keys to add to locale dictionary</param>
     public static void DumpStoryToLocalLocale(string locale, Dictionary<string, DialogueMachine> storyStuff)
     {
@@ -787,6 +895,10 @@ public class LocalDB
         }
     }
 
+    /// <summary>
+    /// Checks the existence of things, and warns the MODDER appropriately. On release builds the warnings will not show up.
+    /// </summary>
+    /// <param name="sn"></param>
     private static void ExistenceChecker(KeyValuePair<string, StoryNode> sn)
     {
 #if DEBUG
@@ -928,28 +1040,15 @@ public class LocalDB
                     PasteToDB(multiStory, DB.story, locale);
                     continue;
                 }
-                // if (dm.multi is not null)
-                // {
-                //     Story multiStory = new();
-                //     for (int n = 0; n < dm.multi.Count; n++)
-                //     {
-                //         DialogueMachine? dmm = MultiMultiplier(dm, dm.multi[n]);
-                //         if (dmm is not null)
-                //         {
-                //             multiStory.all.Add(sn.Key + "_Multi_" + n, dmm);
-                //         }
-                //     }
-                //     PasteToDB(multiStory, DB.story, locale);
-                //     continue;
-                // }
                 dm.Convert(Inst);
                 editMode = dm.edit is not null;
             }
 
             // If dialogue node already exists in the LOCAL catalogue, meaning a different locale with the same keys may be loading in.
+            // Basically, this is to load all the other strings for other languages the mod might add.
             if (hashCatalogue.ContainsKey(sn.Key))
             {
-                if (editMode)
+                if (editMode)  // If editing dialogues
                 {
                     int i = 0;
                     foreach (Instruction instruction in sn.Value.lines)
@@ -964,7 +1063,7 @@ public class LocalDB
                         }
                     }
                 }
-                else
+                else  // If just adding dialogue. Should work fine even if it only guesses how the dialogue will be thrown in, based on the dialogue order
                 {
                     int j = 0;
                     foreach (Instruction instruction in sn.Value.lines)
@@ -997,12 +1096,14 @@ public class LocalDB
                 }
                 continue;
             }
-            else
+            else  // Create a new entry in the catalogue to basically tell the method to only load the localisations if it encounters the same dialogue key from another locale.
             {
                 hashCatalogue[sn.Key] = [];
             }
 
             // Adding nodes that don't exist in the catalogue yet
+
+            // Add dialogue to an existing switch
             if (editMode)
             {
                 to.all[sn.Key] = InjectALineIn(sn.Value, to.all[sn.Key], sn.Key, locale);
@@ -1028,113 +1129,11 @@ public class LocalDB
 
 
     /// <summary>
-    /// Overrides the original field if source is different, and appends list fields (unless specified)
-    /// </summary>
-    /// <param name="target"></param>
-    /// <param name="source"></param>
-    private static void CombineFields(ref StoryNode target, StoryNode source)
-    {
-        if (target is null || source is null) return;
-        StoryNode defaultSource = new();
-        List<Type> additionList = [typeof(List<string>), typeof(HashSet<string>), typeof(HashSet<Status>)];
-        foreach (var field in typeof(StoryNode).GetFields(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance))
-        {
-            if (field.Name == "lines") continue;
-
-            var sourceValue = field.GetValue(source);
-            var defaultValue = field.GetValue(defaultSource);
-
-            if (sourceValue is not null && !EqualityComparer<object>.Default.Equals(defaultValue, sourceValue))
-            {
-                if (!additionList.Contains(field.FieldType) || (source is DialogueMachine dm && dm.dontAppendListFields is not null && dm.dontAppendListFields.Contains(field.Name)))
-                {
-                    field.SetValue(target, sourceValue);
-                }
-                else
-                {
-                    var targetValue = field.GetValue(target);
-                    if (sourceValue is List<string> l2)
-                    {
-                        List<string> l1 = (targetValue as List<string>) ?? [];
-                        field.SetValue(target, l1.Concat(l2).ToList());
-                    }
-                    else if (sourceValue is HashSet<string> h2)
-                    {
-                        HashSet<string> h1 = (targetValue as HashSet<string>) ?? [];
-                        field.SetValue(target, h1.Concat(h2).ToHashSet());
-                    }
-                    else if (sourceValue is HashSet<Status> h4)
-                    {
-                        HashSet<Status> h3 = (targetValue as HashSet<Status>) ?? [];
-                        field.SetValue(target, h3.Concat(h4).ToHashSet());
-                    }
-                }
-            }
-        }
-    }
-
-
-    /// <summary>
-    /// Exports a new DialogueMachine that uses the parent DialogueMachine as the base, and the kiddo QuickMultiMachine's values as overrides if present. 'dialogue' is always from kiddo.
-    /// </summary>
-    /// <param name="parent">Parent DialogueMachine</param>
-    /// <param name="kiddo">The separated dialogue (with potentially overriding fields)</param>
-    /// <returns>The merged cloned DialogueMachine with kiddo dialogue</returns>
-    private static DialogueMachine? MultiMultiplier(in DialogueMachine parent, in QuickMultiMachine kiddo)
-    {
-        if (parent is null || kiddo is null) return null;
-
-        DialogueMachine ndm = new();
-        List<string> exclusionList = ["lines", "edit", "multi", "replaceFields"];
-
-        foreach (System.Reflection.FieldInfo field in typeof(DialogueMachine).GetFields(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance))
-        {
-            if (exclusionList.Contains(field.Name)) continue;
-
-            if (field.Name == "dialogue")  // 'dialogue' field is always kiddo.
-            {
-                field.SetValue(ndm, kiddo.dialogue);
-            }
-            else
-            {
-                if (kiddo.QuickMultiMode)  // Just set the parent's field values, no need to check the kiddo's fields
-                {
-                    field.SetValue(ndm, field.GetValue(parent));
-                }
-                else
-                {
-                    try
-                    {
-                        var kiddoValue = field.GetValue(kiddo);
-                        var defaultValue = field.GetValue(new DialogueMachine());
-
-                        // If kiddo has a field that has a different value, assume that the user wants to override the parent's value.
-                        if (!EqualityComparer<object>.Default.Equals(kiddoValue, defaultValue))
-                        {
-                            field.SetValue(ndm, kiddoValue);
-                        }
-                        else
-                        {
-                            field.SetValue(ndm, field.GetValue(parent));
-                        }
-                    }
-                    catch
-                    {
-                        // If Kiddo does not have the specific field from DialogueMachine, will likely throw, thus just set the parent's value
-                        field.SetValue(ndm, field.GetValue(parent));
-                    }
-                }
-            }
-        }
-        return ndm;
-    }
-
-    /// <summary>
     /// Safely inject a dialogue in an existing dialogue switch
     /// </summary>
-    /// <param name="newStory"></param>
-    /// <param name="existingStory"></param>
-    /// <param name="script"></param>
+    /// <param name="newStory">The freshly cut node to take dialogues from</param>
+    /// <param name="existingStory">The existing node to reference</param>
+    /// <param name="script">The node key</param>
     /// <returns>StoryNode with the injected dialogue</returns>
     private StoryNode InjectALineIn(in StoryNode newStory, in StoryNode existingStory, string script, string locale)
     {
@@ -1149,9 +1148,11 @@ public class LocalDB
                     {
                         for (int a = 0, b = 0, c = result.lines.Count - 1; b < result.lines.Count && c >= 0; b++, c--)
                         {
+                            // Checking from the front (for both counting and searching hash)
                             if (!idis.fromEnd && result.lines[b] is SaySwitch ss)
                             {
                                 a++;
+                                // Finding switch by matching a hash in every dialogue in the switch
                                 if (idis.whichHash is not null)
                                 {
                                     foreach (Say say in ss.lines)
@@ -1163,12 +1164,14 @@ public class LocalDB
                                         }
                                     }
                                 }
+                                // Finding switch by counting
                                 else if (idis.whichSwitch is not null && a == idis.whichSwitch)
                                 {
                                     ss.lines.Add(GetSayFromIDIS(idis, script, locale));
                                     goto endofloop;
                                 }
                             }
+                            // Checking from the end (only for counting)
                             else if (idis.fromEnd && result.lines[c] is SaySwitch bs)
                             {
                                 a++;
@@ -1396,7 +1399,8 @@ public class LocalDB
     }
 
     /// <summary>
-    /// Zips two StoryNodes together, with child overriding parent where applicable. List/Hashset fields are appended unless specified in dontAppendFields.
+    /// Zips two StoryNodes together, with child overriding parent where applicable. List/Hashset fields are appended unless specified in dontAppendFields. 
+    /// Pain, and misery.
     /// </summary>
     /// <param name="parent">Parent StoryNode</param>
     /// <param name="child">Child StoryNode</param>
@@ -1528,7 +1532,7 @@ public class LocalDB
     /// </summary>
     /// <param name="origin">DialogueMachine to copy</param>
     /// <returns>New DialogueMachine with copied fields</returns>
-    public static DialogueMachine NodeCopier(in DialogueMachine origin)
+    public static DialogueMachine NodeCopier(DialogueMachine origin)
     {
         DialogueMachine? result = NodeCopier((StoryNode)origin) as DialogueMachine;
         if (result is not null)
@@ -1548,9 +1552,9 @@ public class LocalDB
     /// <param name="origin">DialogueMachine to copy</param>
     /// <param name="excludeFields">Fields to skip</param>
     /// <returns>New DialogueMachine with copied fields</returns>
-    public static DialogueMachine NodeCopier(in DialogueMachine origin, params string[] excludeFields)
-    {
-        DialogueMachine? result = NodeCopier((StoryNode)origin, excludeFields) as DialogueMachine;
+    public static DialogueMachine NodeCopier(DialogueMachine origin, params string[] excludeFields)
+    {  // ERROR TYPECAST HERE
+        DialogueMachine? result = (DialogueMachine)NodeCopier((StoryNode)origin, excludeFields);  // It typecasts from DialogueMachine to StoryNode just fine, verified using debugging, setting the breakpoint on this line (before I changed it to an explicit cast, it was NodeCopier() as DialogueMachine... but that always set result = null) and on StoryNode overload NodeCopier's return line.
         if (result is not null)
         {
             result.edit = excludeFields.Contains("edit") ? default : origin.edit;
@@ -1567,7 +1571,7 @@ public class LocalDB
     /// </summary>
     /// <param name="origin">StoryNode to copy</param>
     /// <returns>New StoryNode with copied fields</returns>
-    public static StoryNode NodeCopier(in StoryNode origin)
+    public static StoryNode NodeCopier(StoryNode origin)
     {
         StoryNode result = new()
         {

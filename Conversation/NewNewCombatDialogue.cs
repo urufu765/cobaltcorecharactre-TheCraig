@@ -208,31 +208,31 @@ internal class NewNewCombatDialogue : IRegisterable
                     new(AmDizzy, "frown", "Time loop?"),
                     new(AmIlleana, "solemn", "Despite everything."),
 
-                    new(new QMulti(a => a.allPresent = [AmIlleana, AmPeri])),
+                    new(new QMulti([AmIlleana, AmPeri])),
                     new(AmPeri, "mad", "Is that it?"),
                     new(AmIlleana, "mad", "I hope not."),
 
-                    new(new QMulti(a => a.allPresent = [AmIlleana, AmRiggs])),
+                    new(new QMulti([AmIlleana, AmRiggs])),
                     new(AmIlleana, "squint", "Next time, I'm taking the wheel."),
                     new(AmRiggs, "No."),
 
-                    new(new QMulti(a => a.allPresent = [AmIlleana, AmDrake])),
+                    new(new QMulti([AmIlleana, AmDrake])),
                     new(AmDrake, "This is all your fault."),
                     new(AmIlleana, "tired", "..."),
 
-                    new(new QMulti(a => a.allPresent = [AmIlleana, AmIsaac])),
+                    new(new QMulti([AmIlleana, AmIsaac])),
                     new(AmIsaac, "Dang."),
                     new(AmIlleana, "explain", "Oh well."),
 
-                    new(new QMulti(a => a.allPresent = [AmIlleana, AmBooks])),
+                    new(new QMulti([AmIlleana, AmBooks])),
                     new(AmBooks, "Failure!"),
                     new(AmIlleana, "sad", "Noooooooooowuh!"),
 
-                    new(new QMulti(a => a.allPresent = [AmIlleana, AmMax])),
+                    new(new QMulti([AmIlleana, AmMax])),
                     new(AmMax, "mad", "We've lost!"),
                     new(AmIlleana, "squint", "Not yet we haven't."),
 
-                    new(new QMulti(a => a.allPresent = [AmIlleana, AmCat])),
+                    new(new QMulti([AmIlleana, AmCat])),
                     new(AmCat, "grumpy", "Reset incoming."),
                     new(AmIlleana, "panic", "Not yet!"),
                 ]
@@ -246,7 +246,7 @@ internal class NewNewCombatDialogue : IRegisterable
                     new(new QMulti()),
                     new(AmIlleana, "curious", "That it?"),
 
-                    new(new QMulti(a => a.allPresent = [AmIlleana, AmDrake])),
+                    new(new QMulti([AmIlleana, AmDrake])),
                     new(AmIlleana, "squint", "The one time my hands are free, there's nothing to do."),
                     new(AmDrake, "sly", "You don't have hands.")
 
@@ -426,7 +426,7 @@ internal class NewNewCombatDialogue : IRegisterable
                     new(new QMulti()),
                     new(AmIlleana, "panic",  "We're losing hull faster than I can patch them!"),
 
-                    new(new QMulti(a => a.lastTurnPlayerStatuses = [Status.corrode])),
+                    new(new QMulti(lastTurnPlayerStatuses: [Status.corrode])),
                     new(AmIlleana, "panic", "Uhhh... maybe I shouldn't have experimented this much.")
                 ]
             }},
@@ -677,11 +677,11 @@ internal class NewNewCombatDialogue : IRegisterable
                     new(AmIsaac, "panic", "That's not good..."),
                     new(AmIlleana, "sly", "Oh relax, just don't get hit."),
 
-                    new(new QMulti(a => a.allPresent = [ AmPeri, AmIlleana ])),
+                    new(new QMulti([ AmPeri, AmIlleana ])),
                     new(AmPeri, "mad", "What do you think you're doing?!"),
                     new(AmIlleana, "silly", "My best!"),
 
-                    new(new QMulti(a => a.allPresent = [AmPeri])),
+                    new(new QMulti([AmPeri])),
                     new(AmPeri, "mad", "We can't afford to get hit now."),
                     new([
                         new(AmIlleana, "intense", "I'll throw the useless things out the airlock!"),
@@ -689,13 +689,13 @@ internal class NewNewCombatDialogue : IRegisterable
                         new(AmIlleana, "Nah, I bet I can patch it right back up.")
                     ]),
 
-                    new(new QMulti(a => a.allPresent = [AmDrake])),
+                    new(new QMulti([AmDrake])),
                     new(AmDrake, "panic", "The heat isn't doing anything."),
 
-                    new(new QMulti(a => a.allPresent = [AmDizzy])),
+                    new(new QMulti([AmDizzy])),
                     new(AmDizzy, "squint", "The ship is falling apart."),
 
-                    new(new QMulti(a => a.allPresent = [AmCat])),
+                    new(new QMulti([AmCat])),
                     new(AmCat, "squint", "We need to get away NOW.")
                 ]
             }},
@@ -711,7 +711,7 @@ internal class NewNewCombatDialogue : IRegisterable
                     new(new QMulti()),
                     new(AmIlleana, "Their hull is weakened, blast 'em!"),
 
-                    new(new QMulti(a => a.allPresent = [AmPeri])),
+                    new(new QMulti([AmPeri])),
                     new(AmPeri, "My turn!"),
                 ]
             }},
@@ -736,25 +736,25 @@ internal class NewNewCombatDialogue : IRegisterable
                     new(new QMulti()),
                     new(AmPeri, "mad", "Hey, give us back our crew!"),
 
-                    new(new QMulti(a => a.allPresent = [AmRiggs])),
+                    new(new QMulti([AmRiggs])),
                     new(AmRiggs, "nervous", "Where did the space snake go?"),
 
-                    new(new QMulti(a => a.allPresent = [AmDizzy])),
+                    new(new QMulti([AmDizzy])),
                     new(AmDizzy, "intense", "Illeana!"),
 
-                    new(new QMulti(a => a.allPresent = [AmCat])),
+                    new(new QMulti([AmCat])),
                     new(AmCat, "That's not normal."),
 
-                    new(new QMulti(a => a.allPresent = [AmIsaac])),
+                    new(new QMulti([AmIsaac])),
                     new(AmIsaac, "Ummm..."),
 
-                    new(new QMulti(a => a.allPresent = [AmDrake])),
+                    new(new QMulti([AmDrake])),
                     new(AmDrake, "Hey, I was kidding about turning you into wine. Illeana?"),
 
-                    new(new QMulti(a => a.allPresent = [AmMax])),
+                    new(new QMulti([AmMax])),
                     new(AmMax, "Woah."),
 
-                    new(new QMulti(a => a.allPresent = [AmBooks])),
+                    new(new QMulti([AmBooks])),
                     new(AmBooks, "Snake lady?")
                 ]
             }},

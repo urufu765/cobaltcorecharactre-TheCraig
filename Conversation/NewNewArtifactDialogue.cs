@@ -312,7 +312,7 @@ internal class NewNewArtifactDialogue : IRegisterable
                     new(new QMulti()),
                     new(AmIlleana, "silly", "Now this, is my kind of ship!"),
 
-                    new(new QMulti(a => a.allPresent = [AmIlleana, AmRiggs])),
+                    new(new QMulti(allPresent: [AmIlleana, AmRiggs])),
                     new(AmIlleana, "Move over, I want to try piloting this one."),
                     new(AmRiggs, "squint", "Go right ahead. I'll be hurling up into a bucket if you need me."),
 
@@ -437,6 +437,7 @@ internal class NewNewArtifactDialogue : IRegisterable
                     new(AmIlleana, "sly", "See? Believe.")
                 ]
             }},
+            // Note, the following appends the existing node's lists with the artifact.
             {"ArtifactShieldPrepIsGone_Multi_0", new(){
                 doesNotHaveArtifactTypes = [typeof(WarpPrototype)]
             }},
@@ -453,7 +454,8 @@ internal class NewNewArtifactDialogue : IRegisterable
         });
 
         LocalDB.DumpStoryToLocalLocale("en", "Shockah.DuoArtifacts", new Dictionary<string, DialogueMachine>(){
-            {"ArtifactReusableScrapWithShieldBurst_Illeana", new(){
+            // NOTE: The following is a demonstration of using the quick multi along with the last two using the parameters or the delegate to achieve the same effect of each other. This is for demonstration purposes as typically you should separate the last two into its separate node due to how many filters they override!
+            {"ArtifactReusableScrap_Illeana", new(){
                 type = NodeType.combat,
                 oncePerRun = true,
                 oncePerRunTags = [ "ReusableScrapButWeAlsoHaveShieldBurst" ],
@@ -471,25 +473,26 @@ internal class NewNewArtifactDialogue : IRegisterable
                     new(new QMulti()),
                     new(AmDizzy, "squint", "Did you take that from my desk?"),
                     new(AmIlleana, "silly", "Noooooo?"),
-                ]
-            }},
-            {"ArtifactReusableScrap_Illeana", new(){
-                type = NodeType.combat,
-                oncePerRun = true,
-                oncePerRunTags = [ "ReusableScrapButIlleanaWasFirst" ],
-                allPresent = [ AmIlleana, AmDizzy],
-                hasArtifacts = [ "ReusableScrap".F()],
-                doesNotHaveArtifacts = ["ShieldBurst"],
-                dialogue = [
-                    new(new QMulti()),
+
+                    new(new QMulti(oncePerRunTags: ["ReusableScrapButIlleanaWasFirst"], hasArtifactTypes: [typeof(ReusableScrap)], doesNotHaveArtifacts: ["ShieldBurst"])),
                     new(AmIlleana, "Hey Dizzy, look what I've got!"),
                     new(AmDizzy, "squint", "Why does that look so familiar?"),
 
-                    new(new QMulti()),
+                    new(new QMulti(a => {a.oncePerRunTags = ["ReusableScrapButIlleanaWasFirst"]; a.hasArtifactTypes = [typeof(ReusableScrap)]; a.doesNotHaveArtifacts = ["ShieldBurst"];})),
                     new(AmDizzy, "Hey, that's something I might've come up with!"),
                     new(AmIlleana, "explain", "And that's why you need me here.")
                 ]
             }},
+            // {"ArtifactReusableScrap_Illeana", new(){
+            //     type = NodeType.combat,
+            //     oncePerRun = true,
+            //     oncePerRunTags = [ "ReusableScrapButIlleanaWasFirst" ],
+            //     allPresent = [ AmIlleana, AmDizzy],
+            //     hasArtifacts = [ "ReusableScrap".F()],
+            //     doesNotHaveArtifacts = ["ShieldBurst"],
+            //     dialogue = [
+            //     ]
+            // }},
             {"ArtifactThurstThursters_Illeana", new(){
                 type = NodeType.combat,
                 oncePerRun = true,
