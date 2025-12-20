@@ -15,6 +15,7 @@ A corrosion engineer who works with corrosion to help keep the ship at tip top c
   * **dev.*: More other mod content like artifact swap thing, and more idk
   * **dev.*: Give Illeana a solo deck + solo starter, fixed EXE to allow Illeana to actually work properly (offers one of Build a Cure or Find A Solution)
   * **dev.*: Extra slip new sprite, new sprites for cards.
+  * **dev.11**: Fixed DialogueMachine -> 0.20: deep copies, HasArtifactTypes and its opposite is now HashSet instead of List.
   * **dev.10**: Cleaned up DialogueMachine -> 0.19c: shortened QMulti parameter options, added another overloading QMulti constructor for just AllPresent, added default localisation option that fills in the missing dialogue stuff. (not working properly at the moment)
   * **dev.9**: DialogueMachine 0.19: More instructions, Multi feature, and a fix for loading other languages
   * **dev.8**: Rebalance/redo some old cards, Extra slip buff (no new sprite yet), fixed corrode issue

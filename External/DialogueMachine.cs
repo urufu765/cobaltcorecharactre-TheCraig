@@ -200,6 +200,24 @@ public class EditThing : AbstractThing
         this.choiceFunc = choiceFunc;
         this.hashSearch = hashToFind;
     }
+
+    /// <summary>
+    /// Create a deep clone of a thing
+    /// </summary>
+    /// <param name="editor"></param>
+    public EditThing(EditThing editor)
+    {
+        this.who = editor.who;
+        this.loopTag = editor.loopTag;
+        this.what = editor.what;
+        this.flipped = editor.flipped;
+        this.ifCrew = editor.ifCrew;
+        this.delay = editor.delay;
+        this.choiceFunc = editor.choiceFunc;
+        this.switchNumber = editor.switchNumber;
+        this.searchConfig = editor.searchConfig;
+        this.hashSearch = editor.hashSearch;
+    }
 }
 
 /// <summary>
@@ -308,6 +326,29 @@ public class DialogueThing : AbstractThing
         this.instruction = instruction;
         this.title = title;
     }
+
+    /// <summary>
+    /// Constructs a new object based on the thing
+    /// </summary>
+    /// <param name="dialogue">The dialogue thing to copy</param>
+    public DialogueThing(DialogueThing dialogue, bool fromSwitch = false)
+    {
+        this.mode = dialogue.mode;
+        this.who = dialogue.who;
+        this.loopTag = dialogue.loopTag;
+        this.what = dialogue.what;
+        this.flipped = dialogue.flipped;
+        this.ifCrew = dialogue.ifCrew;
+        this.delay = dialogue.delay;
+        this.choiceFunc = dialogue.choiceFunc;
+        this.title = dialogue.title;
+        this.instruction = dialogue.instruction is not null ? Mutil.DeepCopy(dialogue.instruction) : default;
+
+        if (!fromSwitch)
+        {
+            this.saySwitch = dialogue.saySwitch?.Select(agh => new DialogueThing(agh, true)).ToList();
+        }
+    }
 }
 
 /// <summary>
@@ -361,7 +402,7 @@ public class QMulti : Instruction  // Quick disconnect
     /// <param name="lastTurnEnemyStatuses">Statuses enemy had</param>
     /// <param name="lastTurnPlayerStatuses">Statuses player had</param>
     /// <param name="overrides">Delegate for any other filters that is not present in the parameters</param>
-    public QMulti(List<Type>? hasArtifactTypes = null, HashSet<string>? hasArtifacts = null, List<Type>? doesNotHaveArtifactTypes = null, HashSet<string>? doesNotHaveArtifacts = null, HashSet<string>? allPresent = null, HashSet<string>? oncePerCombatTags = null, HashSet<string>? oncePerRunTags = null, HashSet<Status>? lastTurnEnemyStatuses = null, HashSet<Status>? lastTurnPlayerStatuses = null, Action<DialogueMachine>? overrides = null)
+    public QMulti(HashSet<Type>? hasArtifactTypes = null, HashSet<string>? hasArtifacts = null, HashSet<Type>? doesNotHaveArtifactTypes = null, HashSet<string>? doesNotHaveArtifacts = null, HashSet<string>? allPresent = null, HashSet<string>? oncePerCombatTags = null, HashSet<string>? oncePerRunTags = null, HashSet<Status>? lastTurnEnemyStatuses = null, HashSet<Status>? lastTurnPlayerStatuses = null, Action<DialogueMachine>? overrides = null)
     {
         filterOverrides = new()
         {
@@ -409,11 +450,11 @@ public class DialogueMachine : StoryNode
     /// <summary>
     /// Add the type of the artifact rather than trying to use the string key. Gets converted to hasArtifacts later.
     /// </summary>
-    public List<Type>? hasArtifactTypes;
+    public HashSet<Type>? hasArtifactTypes;
     /// <summary>
     /// Add the type of the artifact rather than trying to use the string key. Gets converted to doesNotHaveArtifacts later.
     /// </summary>
-    public List<Type>? doesNotHaveArtifactTypes;
+    public HashSet<Type>? doesNotHaveArtifactTypes;
     /// <summary>
     /// Though any fields you declare will replace existing fields if you're modifying the original, lists and hashsets will be appended by default. Add the name of the list/hashset field if you want to completely replace them.
     /// </summary>
@@ -688,7 +729,7 @@ public class LocalDB
     /// <summary>
     /// The default locale that will be also loaded for missing nodes of current locale
     /// </summary>
-    public string DefaultLocale {get; private set;}
+    public string DefaultLocale { get; private set; }
 
     /// <summary>
     /// Should be instantiated *after* all the dialogues have been registered OR at Events.OnModLoadPhaseFinished, AfterDbInit.
@@ -752,7 +793,7 @@ public class LocalDB
 
         // Apply localised dialogue if present, default if not.
         // Regular mode just uses the default as base then 
-        #if DEBUG
+#if DEBUG
         debugMode = true;
 
         if (locale == DefaultLocale && !missingDefault)
@@ -812,7 +853,7 @@ public class LocalDB
             Inst.Logger.LogWarning("Found extra dialogue nodes not found in {locale} when comparing to {DefaultLocale}!!!", locale, DefaultLocale);
             Inst.Logger.LogWarning("[{}]", string.Join(", ", extraThings.Select(k => string.Join(":", k.Split(":").Where((_, index) => index != 1)))));
         }
-        #endif
+#endif
 
         if (!debugMode)
         {
@@ -1036,7 +1077,6 @@ public class LocalDB
                     {
                         multiStory.all.Add(sn.Key + "_Multi_" + i, ldm[i]);
                     }
-
                     PasteToDB(multiStory, DB.story, locale);
                     continue;
                 }
@@ -1377,22 +1417,23 @@ public class LocalDB
     /// <returns>New DialogueMachine with copied fields</returns>
     public static DialogueMachine NodeZipper(in DialogueMachine parent, in DialogueMachine child, bool appendLists = true, params string[] excludeFields)
     {
-        DialogueMachine? result = NodeZipper((StoryNode)parent, (StoryNode)child, appendLists, child.dontAppendListFields, excludeFields) as DialogueMachine;
+        DialogueMachine? result = NodeZipper(parent, child, appendLists, child.dontAppendListFields, excludeFields) as DialogueMachine;
+        DialogueMachine man = NodeCopier(parent, excludeFields);
 
         if (result is not null)
         {
             DialogueMachine kiddo = NodeCopier(child, excludeFields);
-            result.dialogue = kiddo.dialogue ?? parent.dialogue;
-            result.edit = kiddo.edit ?? parent.edit;
-            result.hasArtifactTypes = kiddo.hasArtifactTypes ?? parent.hasArtifactTypes;
-            result.doesNotHaveArtifactTypes = kiddo.doesNotHaveArtifactTypes ?? parent.doesNotHaveArtifactTypes;
-            result.dontAppendListFields = kiddo.dontAppendListFields ?? parent.dontAppendListFields;
+            result.dialogue = kiddo.dialogue ?? man.dialogue;
+            result.edit = kiddo.edit ?? man.edit;
+            result.hasArtifactTypes = kiddo.hasArtifactTypes ?? man.hasArtifactTypes;
+            result.doesNotHaveArtifactTypes = kiddo.doesNotHaveArtifactTypes ?? man.doesNotHaveArtifactTypes;
+            result.dontAppendListFields = kiddo.dontAppendListFields ?? man.dontAppendListFields;
             if (appendLists)
             {
-                if (!excludeFields.Contains("dialogue")) result.dialogue = [.. parent.dialogue ?? [], .. child.dialogue ?? []];
-                if (!excludeFields.Contains("edit")) result.edit = [.. parent.edit ?? [], .. child.edit ?? []];
-                if (!excludeFields.Contains("hasArtifactTypes")) result.hasArtifactTypes = [.. parent.hasArtifactTypes ?? [], .. child.hasArtifactTypes ?? []];
-                if (!excludeFields.Contains("doesNotHaveArtifactTypes")) result.doesNotHaveArtifactTypes = [.. parent.doesNotHaveArtifactTypes ?? [], .. child.doesNotHaveArtifactTypes ?? []];
+                if (!excludeFields.Contains("dialogue")) result.dialogue = [.. man.dialogue ?? [], .. child.dialogue ?? []];
+                if (!excludeFields.Contains("edit")) result.edit = [.. man.edit ?? [], .. child.edit ?? []];
+                if (!excludeFields.Contains("hasArtifactTypes")) result.hasArtifactTypes = [.. man.hasArtifactTypes ?? [], .. child.hasArtifactTypes ?? []];
+                if (!excludeFields.Contains("doesNotHaveArtifactTypes")) result.doesNotHaveArtifactTypes = [.. man.doesNotHaveArtifactTypes ?? [], .. child.doesNotHaveArtifactTypes ?? []];
             }
         }
         return result ?? new();
@@ -1409,119 +1450,120 @@ public class LocalDB
     /// <returns>New StoryNode with copied fields</returns>
     public static StoryNode NodeZipper(in StoryNode parent, in StoryNode child, bool appendLists = true, List<string>? dontAppendFields = null, params string[] excludeFields)
     {
-        StoryNode result = new();
+        StoryNode result = new DialogueMachine();
         StoryNode original = new();
         StoryNode kiddo = NodeCopier(child, excludeFields);
+        StoryNode man = NodeCopier(parent, excludeFields);
 
-        result.allPresent = kiddo.allPresent ?? parent.allPresent;  //
-        result.anyDrones = kiddo.anyDrones ?? parent.anyDrones;  //
-        result.anyDronesFriendly = kiddo.anyDronesFriendly ?? parent.anyDronesFriendly;  //
-        result.anyDronesHostile = kiddo.anyDronesHostile ?? parent.anyDronesHostile;  //
-        result.bg = kiddo.bg ?? parent.bg;
-        result.bgSetup = kiddo.bgSetup ?? parent.bgSetup;  //
-        result.canSpawnOnMap = kiddo.canSpawnOnMap ?? parent.canSpawnOnMap;
-        result.choiceFunc = kiddo.choiceFunc ?? parent.choiceFunc;
-        result.choiceText = kiddo.choiceText ?? parent.choiceText;
-        result.demo = kiddo.demo ?? parent.demo;
-        result.doesNotHaveArtifacts = kiddo.doesNotHaveArtifacts ?? parent.doesNotHaveArtifacts;  //
-        result.dontCountForProgression = original.dontCountForProgression == kiddo.dontCountForProgression ? parent.dontCountForProgression : kiddo.dontCountForProgression;
-        result.enemyDoesNotHavePart = kiddo.enemyDoesNotHavePart ?? parent.enemyDoesNotHavePart;
-        result.enemyHasArmoredPart = kiddo.enemyHasArmoredPart ?? parent.enemyHasArmoredPart;
-        result.enemyHasBrittlePart = kiddo.enemyHasBrittlePart ?? parent.enemyHasBrittlePart;
-        result.enemyHasPart = kiddo.enemyHasPart ?? parent.enemyHasPart;
-        result.enemyHasWeakPart = kiddo.enemyHasWeakPart ?? parent.enemyHasWeakPart;
-        result.enemyIntent = kiddo.enemyIntent ?? parent.enemyIntent;
-        result.enemyShotJustHit = kiddo.enemyShotJustHit ?? parent.enemyShotJustHit;
-        result.enemyShotJustMissed = kiddo.enemyShotJustMissed ?? parent.enemyShotJustMissed;
-        result.excludedScenes = kiddo.excludedScenes ?? parent.excludedScenes;  //
-        result.goingToOverheat = kiddo.goingToOverheat ?? parent.goingToOverheat;
-        result.handEmpty = kiddo.handEmpty ?? parent.handEmpty;
-        result.handFullOfTrash = kiddo.handFullOfTrash ?? parent.handFullOfTrash;
-        result.handFullOfUnplayableCards = kiddo.handFullOfUnplayableCards ?? parent.handFullOfUnplayableCards;
-        result.hasArtifacts = kiddo.hasArtifacts ?? parent.hasArtifacts;  //
-        result.introDelay = kiddo.introDelay ?? parent.introDelay;
-        result.justOverheated = kiddo.justOverheated ?? parent.justOverheated;
-        result.lastDeathZone = kiddo.lastDeathZone ?? parent.lastDeathZone;
-        result.lastNamedDroneDestroyed = kiddo.lastNamedDroneDestroyed ?? parent.lastNamedDroneDestroyed;
-        result.lastNamedDroneSpawned = kiddo.lastNamedDroneSpawned ?? parent.lastNamedDroneSpawned;
-        result.lastTurnEnemyStatuses = kiddo.lastTurnEnemyStatuses ?? parent.lastTurnEnemyStatuses;  //
-        result.lastTurnPlayerStatuses = kiddo.lastTurnPlayerStatuses ?? parent.lastTurnPlayerStatuses;  //
-        result.lines = original.lines == kiddo.lines ? parent.lines : kiddo.lines;  //
-        result.lookup = kiddo.lookup ?? parent.lookup;  //
-        result.maxCostOfCardJustPlayed = kiddo.maxCostOfCardJustPlayed ?? parent.maxCostOfCardJustPlayed;
-        result.maxDamageBlockedByEnemyArmorThisTurn = kiddo.maxDamageBlockedByEnemyArmorThisTurn ?? parent.maxDamageBlockedByEnemyArmorThisTurn;
-        result.maxDamageDealtToEnemyThisAction = kiddo.maxDamageDealtToEnemyThisAction ?? parent.maxDamageDealtToEnemyThisAction;
-        result.maxDamageDealtToPlayerThisTurn = kiddo.maxDamageDealtToPlayerThisTurn ?? parent.maxDamageDealtToPlayerThisTurn;
-        result.maxHull = kiddo.maxHull ?? parent.maxHull;
-        result.maxHullPercent = kiddo.maxHullPercent ?? parent.maxHullPercent;
-        result.maxTurnsThisCombat = kiddo.maxTurnsThisCombat ?? parent.maxTurnsThisCombat;
-        result.minCardsPlayedThisTurn = kiddo.minCardsPlayedThisTurn ?? parent.minCardsPlayedThisTurn;
-        result.minCombatsThisRun = kiddo.minCombatsThisRun ?? parent.minCombatsThisRun;
-        result.minCostOfCardJustPlayed = kiddo.minCostOfCardJustPlayed ?? parent.minCostOfCardJustPlayed;
-        result.minDamageBlockedByEnemyArmorThisTurn = kiddo.minDamageBlockedByEnemyArmorThisTurn ?? parent.minDamageBlockedByEnemyArmorThisTurn;
-        result.minDamageBlockedByPlayerArmorThisTurn = kiddo.minDamageBlockedByPlayerArmorThisTurn ?? parent.minDamageBlockedByPlayerArmorThisTurn;
-        result.minDamageDealtToEnemyThisAction = kiddo.minDamageDealtToEnemyThisAction ?? parent.minDamageDealtToEnemyThisAction;
-        result.minDamageDealtToEnemyThisTurn = kiddo.minDamageDealtToEnemyThisTurn ?? parent.minDamageDealtToEnemyThisTurn;
-        result.minDamageDealtToPlayerThisTurn = kiddo.minDamageDealtToPlayerThisTurn ?? parent.minDamageDealtToPlayerThisTurn;
-        result.minEnergy = kiddo.minEnergy ?? parent.minEnergy;
-        result.minHull = kiddo.minHull ?? parent.minHull;
-        result.minHullPercent = kiddo.minHullPercent ?? parent.minHullPercent;
-        result.minMovesThisTurn = kiddo.minMovesThisTurn ?? parent.minMovesThisTurn;
-        result.minRuns = kiddo.minRuns ?? parent.minRuns;
-        result.minTimesYouFlippedACardThisTurn = kiddo.minTimesYouFlippedACardThisTurn ?? parent.minTimesYouFlippedACardThisTurn;
-        result.minTurnsThisCombat = kiddo.minTurnsThisCombat ?? parent.minTurnsThisCombat;
-        result.minWinCount = kiddo.minWinCount ?? parent.minWinCount;
-        result.never = kiddo.never ?? parent.never;
-        result.nonePresent = kiddo.nonePresent ?? parent.nonePresent;  //
-        result.once = original.once == kiddo.once ? parent.once : kiddo.once;
-        result.oncePerCombat = original.oncePerCombat == kiddo.oncePerCombat ? parent.oncePerCombat : kiddo.oncePerCombat;
-        result.oncePerCombatTags = kiddo.oncePerCombatTags ?? parent.oncePerCombatTags;  //
-        result.oncePerRun = original.oncePerRun == kiddo.oncePerRun ? parent.oncePerRun : kiddo.oncePerRun;
-        result.oncePerRunTags = kiddo.oncePerRunTags ?? parent.oncePerRunTags;  //
-        result.pax = kiddo.pax ?? parent.pax;
-        result.playerJustPiercedEnemyArmor = kiddo.playerJustPiercedEnemyArmor ?? parent.playerJustPiercedEnemyArmor;
-        result.playerJustShotAMidrowObject = kiddo.playerJustShotAMidrowObject ?? parent.playerJustShotAMidrowObject;
-        result.playerJustShotASoccerBall = kiddo.playerJustShotASoccerBall ?? parent.playerJustShotASoccerBall;
-        result.playerJustShuffledDiscardIntoDrawPile = kiddo.playerJustShuffledDiscardIntoDrawPile ?? parent.playerJustShuffledDiscardIntoDrawPile;
-        result.playerShotJustHit = kiddo.playerShotJustHit ?? parent.playerShotJustHit;
-        result.playerShotJustMissed = kiddo.playerShotJustMissed ?? parent.playerShotJustMissed;
-        result.playerShotWasFromPayback = kiddo.playerShotWasFromPayback ?? parent.playerShotWasFromPayback;
-        result.playerShotWasFromStrafe = kiddo.playerShotWasFromStrafe ?? parent.playerShotWasFromStrafe;
-        result.priority = original.priority == kiddo.priority ? parent.priority : kiddo.priority;
-        result.requireCharsLocked = kiddo.requireCharsLocked ?? parent.requireCharsLocked;  //
-        result.requireCharsUnlocked = kiddo.requireCharsUnlocked ?? parent.requireCharsUnlocked;  //
-        result.requiredScenes = kiddo.requiredScenes ?? parent.requiredScenes;  //
-        result.shipsDontOverlapAtAll = kiddo.shipsDontOverlapAtAll ?? parent.shipsDontOverlapAtAll;
-        result.specialFight = kiddo.specialFight ?? parent.specialFight;
-        result.spikeName = kiddo.spikeName ?? parent.spikeName;
-        result.turnStart = kiddo.turnStart ?? parent.turnStart;
-        result.type = original.type == kiddo.type ? parent.type : kiddo.type;
-        result.wasGoingToOverheatButStopped = kiddo.wasGoingToOverheatButStopped ?? parent.wasGoingToOverheatButStopped;
-        result.whoDidThat = kiddo.whoDidThat ?? parent.whoDidThat;
-        result.zones = kiddo.zones ?? parent.zones;  //
+        result.allPresent = kiddo.allPresent ?? man.allPresent;  //
+        result.anyDrones = kiddo.anyDrones ?? man.anyDrones;  //
+        result.anyDronesFriendly = kiddo.anyDronesFriendly ?? man.anyDronesFriendly;  //
+        result.anyDronesHostile = kiddo.anyDronesHostile ?? man.anyDronesHostile;  //
+        result.bg = kiddo.bg ?? man.bg;
+        result.bgSetup = kiddo.bgSetup ?? man.bgSetup;  //
+        result.canSpawnOnMap = kiddo.canSpawnOnMap ?? man.canSpawnOnMap;
+        result.choiceFunc = kiddo.choiceFunc ?? man.choiceFunc;
+        result.choiceText = kiddo.choiceText ?? man.choiceText;
+        result.demo = kiddo.demo ?? man.demo;
+        result.doesNotHaveArtifacts = kiddo.doesNotHaveArtifacts ?? man.doesNotHaveArtifacts;  //
+        result.dontCountForProgression = original.dontCountForProgression == kiddo.dontCountForProgression ? man.dontCountForProgression : kiddo.dontCountForProgression;
+        result.enemyDoesNotHavePart = kiddo.enemyDoesNotHavePart ?? man.enemyDoesNotHavePart;
+        result.enemyHasArmoredPart = kiddo.enemyHasArmoredPart ?? man.enemyHasArmoredPart;
+        result.enemyHasBrittlePart = kiddo.enemyHasBrittlePart ?? man.enemyHasBrittlePart;
+        result.enemyHasPart = kiddo.enemyHasPart ?? man.enemyHasPart;
+        result.enemyHasWeakPart = kiddo.enemyHasWeakPart ?? man.enemyHasWeakPart;
+        result.enemyIntent = kiddo.enemyIntent ?? man.enemyIntent;
+        result.enemyShotJustHit = kiddo.enemyShotJustHit ?? man.enemyShotJustHit;
+        result.enemyShotJustMissed = kiddo.enemyShotJustMissed ?? man.enemyShotJustMissed;
+        result.excludedScenes = kiddo.excludedScenes ?? man.excludedScenes;  //
+        result.goingToOverheat = kiddo.goingToOverheat ?? man.goingToOverheat;
+        result.handEmpty = kiddo.handEmpty ?? man.handEmpty;
+        result.handFullOfTrash = kiddo.handFullOfTrash ?? man.handFullOfTrash;
+        result.handFullOfUnplayableCards = kiddo.handFullOfUnplayableCards ?? man.handFullOfUnplayableCards;
+        result.hasArtifacts = kiddo.hasArtifacts ?? man.hasArtifacts;  //
+        result.introDelay = kiddo.introDelay ?? man.introDelay;
+        result.justOverheated = kiddo.justOverheated ?? man.justOverheated;
+        result.lastDeathZone = kiddo.lastDeathZone ?? man.lastDeathZone;
+        result.lastNamedDroneDestroyed = kiddo.lastNamedDroneDestroyed ?? man.lastNamedDroneDestroyed;
+        result.lastNamedDroneSpawned = kiddo.lastNamedDroneSpawned ?? man.lastNamedDroneSpawned;
+        result.lastTurnEnemyStatuses = kiddo.lastTurnEnemyStatuses ?? man.lastTurnEnemyStatuses;  //
+        result.lastTurnPlayerStatuses = kiddo.lastTurnPlayerStatuses ?? man.lastTurnPlayerStatuses;  //
+        result.lines = original.lines == kiddo.lines ? man.lines : kiddo.lines;  //
+        result.lookup = kiddo.lookup ?? man.lookup;  //
+        result.maxCostOfCardJustPlayed = kiddo.maxCostOfCardJustPlayed ?? man.maxCostOfCardJustPlayed;
+        result.maxDamageBlockedByEnemyArmorThisTurn = kiddo.maxDamageBlockedByEnemyArmorThisTurn ?? man.maxDamageBlockedByEnemyArmorThisTurn;
+        result.maxDamageDealtToEnemyThisAction = kiddo.maxDamageDealtToEnemyThisAction ?? man.maxDamageDealtToEnemyThisAction;
+        result.maxDamageDealtToPlayerThisTurn = kiddo.maxDamageDealtToPlayerThisTurn ?? man.maxDamageDealtToPlayerThisTurn;
+        result.maxHull = kiddo.maxHull ?? man.maxHull;
+        result.maxHullPercent = kiddo.maxHullPercent ?? man.maxHullPercent;
+        result.maxTurnsThisCombat = kiddo.maxTurnsThisCombat ?? man.maxTurnsThisCombat;
+        result.minCardsPlayedThisTurn = kiddo.minCardsPlayedThisTurn ?? man.minCardsPlayedThisTurn;
+        result.minCombatsThisRun = kiddo.minCombatsThisRun ?? man.minCombatsThisRun;
+        result.minCostOfCardJustPlayed = kiddo.minCostOfCardJustPlayed ?? man.minCostOfCardJustPlayed;
+        result.minDamageBlockedByEnemyArmorThisTurn = kiddo.minDamageBlockedByEnemyArmorThisTurn ?? man.minDamageBlockedByEnemyArmorThisTurn;
+        result.minDamageBlockedByPlayerArmorThisTurn = kiddo.minDamageBlockedByPlayerArmorThisTurn ?? man.minDamageBlockedByPlayerArmorThisTurn;
+        result.minDamageDealtToEnemyThisAction = kiddo.minDamageDealtToEnemyThisAction ?? man.minDamageDealtToEnemyThisAction;
+        result.minDamageDealtToEnemyThisTurn = kiddo.minDamageDealtToEnemyThisTurn ?? man.minDamageDealtToEnemyThisTurn;
+        result.minDamageDealtToPlayerThisTurn = kiddo.minDamageDealtToPlayerThisTurn ?? man.minDamageDealtToPlayerThisTurn;
+        result.minEnergy = kiddo.minEnergy ?? man.minEnergy;
+        result.minHull = kiddo.minHull ?? man.minHull;
+        result.minHullPercent = kiddo.minHullPercent ?? man.minHullPercent;
+        result.minMovesThisTurn = kiddo.minMovesThisTurn ?? man.minMovesThisTurn;
+        result.minRuns = kiddo.minRuns ?? man.minRuns;
+        result.minTimesYouFlippedACardThisTurn = kiddo.minTimesYouFlippedACardThisTurn ?? man.minTimesYouFlippedACardThisTurn;
+        result.minTurnsThisCombat = kiddo.minTurnsThisCombat ?? man.minTurnsThisCombat;
+        result.minWinCount = kiddo.minWinCount ?? man.minWinCount;
+        result.never = kiddo.never ?? man.never;
+        result.nonePresent = kiddo.nonePresent ?? man.nonePresent;  //
+        result.once = original.once == kiddo.once ? man.once : kiddo.once;
+        result.oncePerCombat = original.oncePerCombat == kiddo.oncePerCombat ? man.oncePerCombat : kiddo.oncePerCombat;
+        result.oncePerCombatTags = kiddo.oncePerCombatTags ?? man.oncePerCombatTags;  //
+        result.oncePerRun = original.oncePerRun == kiddo.oncePerRun ? man.oncePerRun : kiddo.oncePerRun;
+        result.oncePerRunTags = kiddo.oncePerRunTags ?? man.oncePerRunTags;  //
+        result.pax = kiddo.pax ?? man.pax;
+        result.playerJustPiercedEnemyArmor = kiddo.playerJustPiercedEnemyArmor ?? man.playerJustPiercedEnemyArmor;
+        result.playerJustShotAMidrowObject = kiddo.playerJustShotAMidrowObject ?? man.playerJustShotAMidrowObject;
+        result.playerJustShotASoccerBall = kiddo.playerJustShotASoccerBall ?? man.playerJustShotASoccerBall;
+        result.playerJustShuffledDiscardIntoDrawPile = kiddo.playerJustShuffledDiscardIntoDrawPile ?? man.playerJustShuffledDiscardIntoDrawPile;
+        result.playerShotJustHit = kiddo.playerShotJustHit ?? man.playerShotJustHit;
+        result.playerShotJustMissed = kiddo.playerShotJustMissed ?? man.playerShotJustMissed;
+        result.playerShotWasFromPayback = kiddo.playerShotWasFromPayback ?? man.playerShotWasFromPayback;
+        result.playerShotWasFromStrafe = kiddo.playerShotWasFromStrafe ?? man.playerShotWasFromStrafe;
+        result.priority = original.priority == kiddo.priority ? man.priority : kiddo.priority;
+        result.requireCharsLocked = kiddo.requireCharsLocked ?? man.requireCharsLocked;  //
+        result.requireCharsUnlocked = kiddo.requireCharsUnlocked ?? man.requireCharsUnlocked;  //
+        result.requiredScenes = kiddo.requiredScenes ?? man.requiredScenes;  //
+        result.shipsDontOverlapAtAll = kiddo.shipsDontOverlapAtAll ?? man.shipsDontOverlapAtAll;
+        result.specialFight = kiddo.specialFight ?? man.specialFight;
+        result.spikeName = kiddo.spikeName ?? man.spikeName;
+        result.turnStart = kiddo.turnStart ?? man.turnStart;
+        result.type = original.type == kiddo.type ? man.type : kiddo.type;
+        result.wasGoingToOverheatButStopped = kiddo.wasGoingToOverheatButStopped ?? man.wasGoingToOverheatButStopped;
+        result.whoDidThat = kiddo.whoDidThat ?? man.whoDidThat;
+        result.zones = kiddo.zones ?? man.zones;  //
 
         if (appendLists)
         {
             dontAppendFields ??= [];
-            if (!(dontAppendFields.Contains("allPresent") || excludeFields.Contains("allPresent"))) result.allPresent = [.. parent.allPresent ?? [], .. kiddo.allPresent ?? []];
-            if (!(dontAppendFields.Contains("anyDrones") || excludeFields.Contains("anyDrones"))) result.anyDrones = [.. parent.anyDrones ?? [], .. kiddo.anyDrones ?? []];
-            if (!(dontAppendFields.Contains("anyDronesFriendly") || excludeFields.Contains("anyDronesFriendly"))) result.anyDronesFriendly = [.. parent.anyDronesFriendly ?? [], .. kiddo.anyDronesFriendly ?? []];
-            if (!(dontAppendFields.Contains("anyDronesHostile") || excludeFields.Contains("anyDronesHostile"))) result.anyDronesHostile = [.. parent.anyDronesHostile ?? [], .. kiddo.anyDronesHostile ?? []];
-            if (!(dontAppendFields.Contains("bgSetup") || excludeFields.Contains("bgSetup"))) result.bgSetup = [.. parent.bgSetup ?? [], .. kiddo.bgSetup ?? []];
-            if (!(dontAppendFields.Contains("doesNotHaveArtifacts") || excludeFields.Contains("doesNotHaveArtifacts"))) result.doesNotHaveArtifacts = [.. parent.doesNotHaveArtifacts ?? [], .. kiddo.doesNotHaveArtifacts ?? []];
-            if (!(dontAppendFields.Contains("excludedScenes") || excludeFields.Contains("excludedScenes"))) result.excludedScenes = [.. parent.excludedScenes ?? [], .. kiddo.excludedScenes ?? []];
-            if (!(dontAppendFields.Contains("hasArtifacts") || excludeFields.Contains("hasArtifacts"))) result.hasArtifacts = [.. parent.hasArtifacts ?? [], .. kiddo.hasArtifacts ?? []];
-            if (!(dontAppendFields.Contains("lastTurnEnemyStatuses") || excludeFields.Contains("lastTurnEnemyStatuses"))) result.lastTurnEnemyStatuses = [.. parent.lastTurnEnemyStatuses ?? [], .. kiddo.lastTurnEnemyStatuses ?? []];
-            if (!(dontAppendFields.Contains("lastTurnPlayerStatuses") || excludeFields.Contains("lastTurnPlayerStatuses"))) result.lastTurnPlayerStatuses = [.. parent.lastTurnPlayerStatuses ?? [], .. kiddo.lastTurnPlayerStatuses ?? []];
-            if (!(dontAppendFields.Contains("lines") || excludeFields.Contains("lines"))) result.lines = [.. parent.lines ?? [], .. kiddo.lines ?? []];
-            if (!(dontAppendFields.Contains("lookup") || excludeFields.Contains("lookup"))) result.lookup = [.. parent.lookup ?? [], .. kiddo.lookup ?? []];
-            if (!(dontAppendFields.Contains("nonePresent") || excludeFields.Contains("nonePresent"))) result.nonePresent = [.. parent.nonePresent ?? [], .. kiddo.nonePresent ?? []];
-            if (!(dontAppendFields.Contains("oncePerCombatTags") || excludeFields.Contains("oncePerCombatTags"))) result.oncePerCombatTags = [.. parent.oncePerCombatTags ?? [], .. kiddo.oncePerCombatTags ?? []];
-            if (!(dontAppendFields.Contains("oncePerRunTags") || excludeFields.Contains("oncePerRunTags"))) result.oncePerRunTags = [.. parent.oncePerRunTags ?? [], .. kiddo.oncePerRunTags ?? []];
-            if (!(dontAppendFields.Contains("requireCharsLocked") || excludeFields.Contains("requireCharsLocked"))) result.requireCharsLocked = [.. parent.requireCharsLocked ?? [], .. kiddo.requireCharsLocked ?? []];
-            if (!(dontAppendFields.Contains("requireCharsUnlocked") || excludeFields.Contains("requireCharsUnlocked"))) result.requireCharsUnlocked = [.. parent.requireCharsUnlocked ?? [], .. kiddo.requireCharsUnlocked ?? []];
-            if (!(dontAppendFields.Contains("requiredScenes") || excludeFields.Contains("requiredScenes"))) result.requiredScenes = [.. parent.requiredScenes ?? [], .. kiddo.requiredScenes ?? []];
-            if (!(dontAppendFields.Contains("zones") || excludeFields.Contains("zones"))) result.zones = [.. parent.zones ?? [], .. kiddo.zones ?? []];
+            if (!(dontAppendFields.Contains("allPresent") || excludeFields.Contains("allPresent"))) result.allPresent = [.. man.allPresent ?? [], .. kiddo.allPresent ?? []];
+            if (!(dontAppendFields.Contains("anyDrones") || excludeFields.Contains("anyDrones"))) result.anyDrones = [.. man.anyDrones ?? [], .. kiddo.anyDrones ?? []];
+            if (!(dontAppendFields.Contains("anyDronesFriendly") || excludeFields.Contains("anyDronesFriendly"))) result.anyDronesFriendly = [.. man.anyDronesFriendly ?? [], .. kiddo.anyDronesFriendly ?? []];
+            if (!(dontAppendFields.Contains("anyDronesHostile") || excludeFields.Contains("anyDronesHostile"))) result.anyDronesHostile = [.. man.anyDronesHostile ?? [], .. kiddo.anyDronesHostile ?? []];
+            if (!(dontAppendFields.Contains("bgSetup") || excludeFields.Contains("bgSetup"))) result.bgSetup = [.. man.bgSetup ?? [], .. kiddo.bgSetup ?? []];
+            if (!(dontAppendFields.Contains("doesNotHaveArtifacts") || excludeFields.Contains("doesNotHaveArtifacts"))) result.doesNotHaveArtifacts = [.. man.doesNotHaveArtifacts ?? [], .. kiddo.doesNotHaveArtifacts ?? []];
+            if (!(dontAppendFields.Contains("excludedScenes") || excludeFields.Contains("excludedScenes"))) result.excludedScenes = [.. man.excludedScenes ?? [], .. kiddo.excludedScenes ?? []];
+            if (!(dontAppendFields.Contains("hasArtifacts") || excludeFields.Contains("hasArtifacts"))) result.hasArtifacts = [.. man.hasArtifacts ?? [], .. kiddo.hasArtifacts ?? []];
+            if (!(dontAppendFields.Contains("lastTurnEnemyStatuses") || excludeFields.Contains("lastTurnEnemyStatuses"))) result.lastTurnEnemyStatuses = [.. man.lastTurnEnemyStatuses ?? [], .. kiddo.lastTurnEnemyStatuses ?? []];
+            if (!(dontAppendFields.Contains("lastTurnPlayerStatuses") || excludeFields.Contains("lastTurnPlayerStatuses"))) result.lastTurnPlayerStatuses = [.. man.lastTurnPlayerStatuses ?? [], .. kiddo.lastTurnPlayerStatuses ?? []];
+            if (!(dontAppendFields.Contains("lines") || excludeFields.Contains("lines"))) result.lines = [.. man.lines ?? [], .. kiddo.lines ?? []];
+            if (!(dontAppendFields.Contains("lookup") || excludeFields.Contains("lookup"))) result.lookup = [.. man.lookup ?? [], .. kiddo.lookup ?? []];
+            if (!(dontAppendFields.Contains("nonePresent") || excludeFields.Contains("nonePresent"))) result.nonePresent = [.. man.nonePresent ?? [], .. kiddo.nonePresent ?? []];
+            if (!(dontAppendFields.Contains("oncePerCombatTags") || excludeFields.Contains("oncePerCombatTags"))) result.oncePerCombatTags = [.. man.oncePerCombatTags ?? [], .. kiddo.oncePerCombatTags ?? []];
+            if (!(dontAppendFields.Contains("oncePerRunTags") || excludeFields.Contains("oncePerRunTags"))) result.oncePerRunTags = [.. man.oncePerRunTags ?? [], .. kiddo.oncePerRunTags ?? []];
+            if (!(dontAppendFields.Contains("requireCharsLocked") || excludeFields.Contains("requireCharsLocked"))) result.requireCharsLocked = [.. man.requireCharsLocked ?? [], .. kiddo.requireCharsLocked ?? []];
+            if (!(dontAppendFields.Contains("requireCharsUnlocked") || excludeFields.Contains("requireCharsUnlocked"))) result.requireCharsUnlocked = [.. man.requireCharsUnlocked ?? [], .. kiddo.requireCharsUnlocked ?? []];
+            if (!(dontAppendFields.Contains("requiredScenes") || excludeFields.Contains("requiredScenes"))) result.requiredScenes = [.. man.requiredScenes ?? [], .. kiddo.requiredScenes ?? []];
+            if (!(dontAppendFields.Contains("zones") || excludeFields.Contains("zones"))) result.zones = [.. man.zones ?? [], .. kiddo.zones ?? []];
         }
 
         return result;
@@ -1532,16 +1574,16 @@ public class LocalDB
     /// </summary>
     /// <param name="origin">DialogueMachine to copy</param>
     /// <returns>New DialogueMachine with copied fields</returns>
-    public static DialogueMachine NodeCopier(DialogueMachine origin)
+    public static DialogueMachine NodeCopier(in DialogueMachine origin)
     {
         DialogueMachine? result = NodeCopier((StoryNode)origin) as DialogueMachine;
         if (result is not null)
         {
-            result.edit = origin.edit;
-            result.dialogue = origin.dialogue;
-            result.hasArtifactTypes = origin.hasArtifactTypes;
-            result.doesNotHaveArtifactTypes = origin.doesNotHaveArtifactTypes;
-            result.dontAppendListFields = origin.dontAppendListFields;
+            result.edit = origin.edit?.Select(e => new EditThing(e)).ToList();
+            result.dialogue = origin.dialogue?.Select(d => new DialogueThing(d)).ToList();
+            result.hasArtifactTypes = origin.hasArtifactTypes?.ToHashSet();
+            result.doesNotHaveArtifactTypes = origin.doesNotHaveArtifactTypes?.ToHashSet();
+            result.dontAppendListFields = origin.dontAppendListFields?.ToList();
         }
         return result ?? new();
     }
@@ -1552,16 +1594,16 @@ public class LocalDB
     /// <param name="origin">DialogueMachine to copy</param>
     /// <param name="excludeFields">Fields to skip</param>
     /// <returns>New DialogueMachine with copied fields</returns>
-    public static DialogueMachine NodeCopier(DialogueMachine origin, params string[] excludeFields)
+    public static DialogueMachine NodeCopier(in DialogueMachine origin, params string[] excludeFields)
     {  // ERROR TYPECAST HERE
-        DialogueMachine? result = (DialogueMachine)NodeCopier((StoryNode)origin, excludeFields);  // It typecasts from DialogueMachine to StoryNode just fine, verified using debugging, setting the breakpoint on this line (before I changed it to an explicit cast, it was NodeCopier() as DialogueMachine... but that always set result = null) and on StoryNode overload NodeCopier's return line.
+        DialogueMachine? result = NodeCopier((StoryNode)origin, excludeFields) as DialogueMachine;  // It typecasts from DialogueMachine to StoryNode just fine, verified using debugging, setting the breakpoint on this line (before I changed it to an explicit cast, it was NodeCopier() as DialogueMachine... but that always set result = null) and on StoryNode overload NodeCopier's return line.
         if (result is not null)
         {
-            result.edit = excludeFields.Contains("edit") ? default : origin.edit;
-            result.dialogue = excludeFields.Contains("dialogue") ? default : origin.dialogue;
-            result.hasArtifactTypes = excludeFields.Contains("hasArtifactTypes") ? default : origin.hasArtifactTypes;
-            result.doesNotHaveArtifactTypes = excludeFields.Contains("doesNotHaveArtifactTypes") ? default : origin.doesNotHaveArtifactTypes;
-            result.dontAppendListFields = excludeFields.Contains("replaceFields") ? default : origin.dontAppendListFields;
+            result.edit = excludeFields.Contains("edit") ? default : origin.edit?.Select(e => new EditThing(e)).ToList();
+            result.dialogue = excludeFields.Contains("dialogue") ? default : origin.dialogue?.Select(d => new DialogueThing(d)).ToList();
+            result.hasArtifactTypes = excludeFields.Contains("hasArtifactTypes") ? default : origin.hasArtifactTypes?.ToHashSet();
+            result.doesNotHaveArtifactTypes = excludeFields.Contains("doesNotHaveArtifactTypes") ? default : origin.doesNotHaveArtifactTypes?.ToHashSet();
+            result.dontAppendListFields = excludeFields.Contains("replaceFields") ? default : origin.dontAppendListFields?.ToList();
         }
         return result ?? new();
     }
@@ -1571,21 +1613,21 @@ public class LocalDB
     /// </summary>
     /// <param name="origin">StoryNode to copy</param>
     /// <returns>New StoryNode with copied fields</returns>
-    public static StoryNode NodeCopier(StoryNode origin)
+    public static StoryNode NodeCopier(in StoryNode origin)
     {
-        StoryNode result = new()
+        StoryNode result = new DialogueMachine()
         {
-            allPresent = origin.allPresent,
-            anyDrones = origin.anyDrones,
-            anyDronesFriendly = origin.anyDronesFriendly,
-            anyDronesHostile = origin.anyDronesHostile,
+            allPresent = origin.allPresent?.ToHashSet(),
+            anyDrones = origin.anyDrones?.ToHashSet(),
+            anyDronesFriendly = origin.anyDronesFriendly?.ToHashSet(),
+            anyDronesHostile = origin.anyDronesHostile?.ToHashSet(),
             bg = origin.bg,
-            bgSetup = origin.bgSetup,
+            bgSetup = origin.bgSetup?.ToList(),
             canSpawnOnMap = origin.canSpawnOnMap,
             choiceFunc = origin.choiceFunc,
             choiceText = origin.choiceText,
             demo = origin.demo,
-            doesNotHaveArtifacts = origin.doesNotHaveArtifacts,
+            doesNotHaveArtifacts = origin.doesNotHaveArtifacts?.ToHashSet(),
             dontCountForProgression = origin.dontCountForProgression,
             enemyDoesNotHavePart = origin.enemyDoesNotHavePart,
             enemyHasArmoredPart = origin.enemyHasArmoredPart,
@@ -1595,21 +1637,21 @@ public class LocalDB
             enemyIntent = origin.enemyIntent,
             enemyShotJustHit = origin.enemyShotJustHit,
             enemyShotJustMissed = origin.enemyShotJustMissed,
-            excludedScenes = origin.excludedScenes,
+            excludedScenes = origin.excludedScenes.ToHashSet(),
             goingToOverheat = origin.goingToOverheat,
             handEmpty = origin.handEmpty,
             handFullOfTrash = origin.handFullOfTrash,
             handFullOfUnplayableCards = origin.handFullOfUnplayableCards,
-            hasArtifacts = origin.hasArtifacts,
+            hasArtifacts = origin.hasArtifacts?.ToHashSet(),
             introDelay = origin.introDelay,
             justOverheated = origin.justOverheated,
             lastDeathZone = origin.lastDeathZone,
             lastNamedDroneDestroyed = origin.lastNamedDroneDestroyed,
             lastNamedDroneSpawned = origin.lastNamedDroneSpawned,
-            lastTurnEnemyStatuses = origin.lastTurnEnemyStatuses,
-            lastTurnPlayerStatuses = origin.lastTurnPlayerStatuses,
-            lines = origin.lines,
-            lookup = origin.lookup,
+            lastTurnEnemyStatuses = origin.lastTurnEnemyStatuses?.ToHashSet(),
+            lastTurnPlayerStatuses = origin.lastTurnPlayerStatuses?.ToHashSet(),
+            lines = Mutil.DeepCopy(origin.lines),
+            lookup = origin.lookup?.ToHashSet(),
             maxCostOfCardJustPlayed = origin.maxCostOfCardJustPlayed,
             maxDamageBlockedByEnemyArmorThisTurn = origin.maxDamageBlockedByEnemyArmorThisTurn,
             maxDamageDealtToEnemyThisAction = origin.maxDamageDealtToEnemyThisAction,
@@ -1634,12 +1676,12 @@ public class LocalDB
             minTurnsThisCombat = origin.minTurnsThisCombat,
             minWinCount = origin.minWinCount,
             never = origin.never,
-            nonePresent = origin.nonePresent,
+            nonePresent = origin.nonePresent?.ToHashSet(),
             once = origin.once,
             oncePerCombat = origin.oncePerCombat,
-            oncePerCombatTags = origin.oncePerCombatTags,
+            oncePerCombatTags = origin.oncePerCombatTags?.ToHashSet(),
             oncePerRun = origin.oncePerRun,
-            oncePerRunTags = origin.oncePerRunTags,
+            oncePerRunTags = origin.oncePerRunTags?.ToHashSet(),
             pax = origin.pax,
             playerJustPiercedEnemyArmor = origin.playerJustPiercedEnemyArmor,
             playerJustShotAMidrowObject = origin.playerJustShotAMidrowObject,
@@ -1650,9 +1692,9 @@ public class LocalDB
             playerShotWasFromPayback = origin.playerShotWasFromPayback,
             playerShotWasFromStrafe = origin.playerShotWasFromStrafe,
             priority = origin.priority,
-            requireCharsLocked = origin.requireCharsLocked,
-            requireCharsUnlocked = origin.requireCharsUnlocked,
-            requiredScenes = origin.requiredScenes,
+            requireCharsLocked = origin.requireCharsLocked?.ToHashSet(),
+            requireCharsUnlocked = origin.requireCharsUnlocked?.ToHashSet(),
+            requiredScenes = origin.requiredScenes.ToHashSet(),
             shipsDontOverlapAtAll = origin.shipsDontOverlapAtAll,
             specialFight = origin.specialFight,
             spikeName = origin.spikeName,
@@ -1660,7 +1702,7 @@ public class LocalDB
             type = origin.type,
             wasGoingToOverheatButStopped = origin.wasGoingToOverheatButStopped,
             whoDidThat = origin.whoDidThat,
-            zones = origin.zones
+            zones = origin.zones?.ToHashSet()
         };
         return result;
     }
@@ -1673,20 +1715,20 @@ public class LocalDB
     /// <returns>New StoryNode with copied fields</returns>
     public static StoryNode NodeCopier(in StoryNode origin, params string[] excludeFields)
     {
-        StoryNode result = new()
+        StoryNode result = new DialogueMachine()
         {
-            allPresent = excludeFields.Contains("allPresent") ? default : origin.allPresent,
-            anyDrones = excludeFields.Contains("anyDrones") ? default : origin.anyDrones,
-            anyDronesFriendly = excludeFields.Contains("anyDronesFriendly") ? default : origin.anyDronesFriendly,
-            anyDronesHostile = excludeFields.Contains("anyDronesHostile") ? default : origin.anyDronesHostile,
+            allPresent = excludeFields.Contains("allPresent") ? default : origin.allPresent?.ToHashSet(),
+            anyDrones = excludeFields.Contains("anyDrones") ? default : origin.anyDrones?.ToHashSet(),
+            anyDronesFriendly = excludeFields.Contains("anyDronesFriendly") ? default : origin.anyDronesFriendly?.ToHashSet(),
+            anyDronesHostile = excludeFields.Contains("anyDronesHostile") ? default : origin.anyDronesHostile?.ToHashSet(),
             bg = excludeFields.Contains("bg") ? default : origin.bg,
-            bgSetup = excludeFields.Contains("bgSetup") ? default : origin.bgSetup,
+            bgSetup = excludeFields.Contains("bgSetup") ? default : origin.bgSetup?.ToList(),
             canSpawnOnMap = excludeFields.Contains("canSpawnOnMap") ? default : origin.canSpawnOnMap,
             choiceFunc = excludeFields.Contains("choiceFunc") ? default : origin.choiceFunc,
             choiceText = excludeFields.Contains("choiceText") ? default : origin.choiceText,
             demo = excludeFields.Contains("demo") ? default : origin.demo,
-            doesNotHaveArtifacts = excludeFields.Contains("doesNotHaveArtifacts") ? default : origin.doesNotHaveArtifacts,
-            dontCountForProgression = excludeFields.Contains("dontCountForProgression") ? default : origin.dontCountForProgression,
+            doesNotHaveArtifacts = excludeFields.Contains("doesNotHaveArtifacts") ? default : origin.doesNotHaveArtifacts?.ToHashSet(),
+            dontCountForProgression = !excludeFields.Contains("dontCountForProgression") && origin.dontCountForProgression,
             enemyDoesNotHavePart = excludeFields.Contains("enemyDoesNotHavePart") ? default : origin.enemyDoesNotHavePart,
             enemyHasArmoredPart = excludeFields.Contains("enemyHasArmoredPart") ? default : origin.enemyHasArmoredPart,
             enemyHasBrittlePart = excludeFields.Contains("enemyHasBrittlePart") ? default : origin.enemyHasBrittlePart,
@@ -1695,21 +1737,21 @@ public class LocalDB
             enemyIntent = excludeFields.Contains("enemyIntent") ? default : origin.enemyIntent,
             enemyShotJustHit = excludeFields.Contains("enemyShotJustHit") ? default : origin.enemyShotJustHit,
             enemyShotJustMissed = excludeFields.Contains("enemyShotJustMissed") ? default : origin.enemyShotJustMissed,
-            excludedScenes = excludeFields.Contains("excludedScenes") ? [] : origin.excludedScenes,
+            excludedScenes = excludeFields.Contains("excludedScenes") ? [] : origin.excludedScenes.ToHashSet(),
             goingToOverheat = excludeFields.Contains("goingToOverheat") ? default : origin.goingToOverheat,
             handEmpty = excludeFields.Contains("handEmpty") ? default : origin.handEmpty,
             handFullOfTrash = excludeFields.Contains("handFullOfTrash") ? default : origin.handFullOfTrash,
             handFullOfUnplayableCards = excludeFields.Contains("handFullOfUnplayableCards") ? default : origin.handFullOfUnplayableCards,
-            hasArtifacts = excludeFields.Contains("hasArtifacts") ? default : origin.hasArtifacts,
+            hasArtifacts = excludeFields.Contains("hasArtifacts") ? default : origin.hasArtifacts?.ToHashSet(),
             introDelay = excludeFields.Contains("introDelay") ? default : origin.introDelay,
             justOverheated = excludeFields.Contains("justOverheated") ? default : origin.justOverheated,
             lastDeathZone = excludeFields.Contains("lastDeathZone") ? default : origin.lastDeathZone,
             lastNamedDroneDestroyed = excludeFields.Contains("lastNamedDroneDestroyed") ? default : origin.lastNamedDroneDestroyed,
             lastNamedDroneSpawned = excludeFields.Contains("lastNamedDroneSpawned") ? default : origin.lastNamedDroneSpawned,
-            lastTurnEnemyStatuses = excludeFields.Contains("lastTurnEnemyStatuses") ? default : origin.lastTurnEnemyStatuses,
-            lastTurnPlayerStatuses = excludeFields.Contains("lastTurnPlayerStatuses") ? default : origin.lastTurnPlayerStatuses,
-            lines = excludeFields.Contains("lines") ? [] : origin.lines,
-            lookup = excludeFields.Contains("lookup") ? default : origin.lookup,
+            lastTurnEnemyStatuses = excludeFields.Contains("lastTurnEnemyStatuses") ? default : origin.lastTurnEnemyStatuses?.ToHashSet(),
+            lastTurnPlayerStatuses = excludeFields.Contains("lastTurnPlayerStatuses") ? default : origin.lastTurnPlayerStatuses?.ToHashSet(),
+            lines = excludeFields.Contains("lines") ? [] : Mutil.DeepCopy(origin.lines),
+            lookup = excludeFields.Contains("lookup") ? default : origin.lookup?.ToHashSet(),
             maxCostOfCardJustPlayed = excludeFields.Contains("maxCostOfCardJustPlayed") ? default : origin.maxCostOfCardJustPlayed,
             maxDamageBlockedByEnemyArmorThisTurn = excludeFields.Contains("maxDamageBlockedByEnemyArmorThisTurn") ? default : origin.maxDamageBlockedByEnemyArmorThisTurn,
             maxDamageDealtToEnemyThisAction = excludeFields.Contains("maxDamageDealtToEnemyThisAction") ? default : origin.maxDamageDealtToEnemyThisAction,
@@ -1734,12 +1776,12 @@ public class LocalDB
             minTurnsThisCombat = excludeFields.Contains("minTurnsThisCombat") ? default : origin.minTurnsThisCombat,
             minWinCount = excludeFields.Contains("minWinCount") ? default : origin.minWinCount,
             never = excludeFields.Contains("never") ? default : origin.never,
-            nonePresent = excludeFields.Contains("nonePresent") ? default : origin.nonePresent,
-            once = excludeFields.Contains("once") ? default : origin.once,
-            oncePerCombat = excludeFields.Contains("oncePerCombat") ? default : origin.oncePerCombat,
-            oncePerCombatTags = excludeFields.Contains("oncePerCombatTags") ? default : origin.oncePerCombatTags,
-            oncePerRun = excludeFields.Contains("oncePerRun") ? default : origin.oncePerRun,
-            oncePerRunTags = excludeFields.Contains("oncePerRunTags") ? default : origin.oncePerRunTags,
+            nonePresent = excludeFields.Contains("nonePresent") ? default : origin.nonePresent?.ToHashSet(),
+            once = !excludeFields.Contains("once") && origin.once,
+            oncePerCombat = !excludeFields.Contains("oncePerCombat") && origin.oncePerCombat,
+            oncePerCombatTags = excludeFields.Contains("oncePerCombatTags") ? default : origin.oncePerCombatTags?.ToHashSet(),
+            oncePerRun = !excludeFields.Contains("oncePerRun") && origin.oncePerRun,
+            oncePerRunTags = excludeFields.Contains("oncePerRunTags") ? default : origin.oncePerRunTags?.ToHashSet(),
             pax = excludeFields.Contains("pax") ? default : origin.pax,
             playerJustPiercedEnemyArmor = excludeFields.Contains("playerJustPiercedEnemyArmor") ? default : origin.playerJustPiercedEnemyArmor,
             playerJustShotAMidrowObject = excludeFields.Contains("playerJustShotAMidrowObject") ? default : origin.playerJustShotAMidrowObject,
@@ -1749,10 +1791,10 @@ public class LocalDB
             playerShotJustMissed = excludeFields.Contains("playerShotJustMissed") ? default : origin.playerShotJustMissed,
             playerShotWasFromPayback = excludeFields.Contains("playerShotWasFromPayback") ? default : origin.playerShotWasFromPayback,
             playerShotWasFromStrafe = excludeFields.Contains("playerShotWasFromStrafe") ? default : origin.playerShotWasFromStrafe,
-            priority = excludeFields.Contains("priority") ? default : origin.priority,
-            requireCharsLocked = excludeFields.Contains("requireCharsLocked") ? default : origin.requireCharsLocked,
-            requireCharsUnlocked = excludeFields.Contains("requireCharsUnlocked") ? default : origin.requireCharsUnlocked,
-            requiredScenes = excludeFields.Contains("requiredScenes") ? [] : origin.requiredScenes,
+            priority = !excludeFields.Contains("priority") && origin.priority,
+            requireCharsLocked = excludeFields.Contains("requireCharsLocked") ? default : origin.requireCharsLocked?.ToHashSet(),
+            requireCharsUnlocked = excludeFields.Contains("requireCharsUnlocked") ? default : origin.requireCharsUnlocked?.ToHashSet(),
+            requiredScenes = excludeFields.Contains("requiredScenes") ? [] : origin.requiredScenes.ToHashSet(),
             shipsDontOverlapAtAll = excludeFields.Contains("shipsDontOverlapAtAll") ? default : origin.shipsDontOverlapAtAll,
             specialFight = excludeFields.Contains("specialFight") ? default : origin.specialFight,
             spikeName = excludeFields.Contains("spikeName") ? default : origin.spikeName,
@@ -1760,7 +1802,7 @@ public class LocalDB
             type = excludeFields.Contains("type") ? default : origin.type,
             wasGoingToOverheatButStopped = excludeFields.Contains("wasGoingToOverheatButStopped") ? default : origin.wasGoingToOverheatButStopped,
             whoDidThat = excludeFields.Contains("whoDidThat") ? default : origin.whoDidThat,
-            zones = excludeFields.Contains("zones") ? default : origin.zones
+            zones = excludeFields.Contains("zones") ? default : origin.zones?.ToHashSet()
         };
         return result;
     }
