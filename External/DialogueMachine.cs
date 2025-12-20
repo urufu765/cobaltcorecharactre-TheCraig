@@ -8,7 +8,7 @@ using Nickel;
 namespace Illeana.External;
 
 /**
-ver.0.19c
+ver.0.20c
 
 To get DialogueMachine and the custom dialogue stuff working:
 - edit the namespace of this file to at least match your project namespace
@@ -33,8 +33,10 @@ To get DialogueMachine and the custom dialogue stuff working:
 */
 
 
-
-public enum DMod  // Enumerator for setting the mode of dialogue.
+/// <summary>
+/// Enumerator for setting the mode of dialogue.
+/// </summary>
+public enum DMod
 {
     /// <summary>
     /// Normal dialogue mode
@@ -59,9 +61,9 @@ public enum DMod  // Enumerator for setting the mode of dialogue.
 }
 
 /// <summary>
-/// 
+/// Enumerator for specifying the edit mode
 /// </summary>
-public enum EMod  // Enumerator for specifying the edit mode
+public enum EMod
 {
     /// <summary>
     /// Edit/add to the Nth switchsay starting from the start. First switchsay is 1, second is 2...
@@ -611,52 +613,6 @@ public class DialogueMachine : StoryNode
         // Game artifacts
         if (DB.artifacts.ContainsKey(name)) return true;
         return false;
-    }
-}
-
-
-/// <summary>
-/// A thing to allow fast multi-storyNode writing. Though similar to DialogueMachine storyNode, it does NOT do edits since this gets chopped into multiple DialogueMachine storyNodes.
-/// </summary>
-public class QuickMultiMachine : StoryNode
-{
-    /// <summary>
-    /// Sets the flag to ignore all the other filters set here and just clone the parent DialogueMachine's filters. Always set to true if using the constructor with the dialogue parameter.
-    /// </summary>
-    public bool QuickMultiMode;
-    /// <summary>
-    /// Where all your dialogue *should* go. It can also support titles, mod dialogue edits, and custom instructions!
-    /// </summary>
-    public List<DialogueThing>? dialogue;
-
-    /// <summary>
-    /// Add the type of the artifact rather than trying to use the string key. Gets converted to hasArtifacts later.
-    /// </summary>
-    public List<Type>? hasArtifactTypes;
-    /// <summary>
-    /// Add the type of the artifact rather than trying to use the string key. Gets converted to doesNotHaveArtifacts later.
-    /// </summary>
-    public List<Type>? doesNotHaveArtifactTypes;
-
-    /// <summary>
-    /// For multi's that has filters that will override the parent DialogueMachine's filters.
-    /// </summary>
-    public QuickMultiMachine() { }
-
-    /// <summary>
-    /// For multi's that want to inherit all of the filters set by the parent DialogueMachine.
-    /// </summary>
-    /// <param name="dialogue"></param>
-    public QuickMultiMachine(List<DialogueThing> dialogue)
-    {
-        QuickMultiMode = true;
-        this.dialogue = dialogue;
-    }
-
-    public QuickMultiMachine(List<DialogueThing> dialogue, HashSet<string>? allPresent = null)
-    {
-        this.dialogue = dialogue;
-        this.allPresent = allPresent;
     }
 }
 

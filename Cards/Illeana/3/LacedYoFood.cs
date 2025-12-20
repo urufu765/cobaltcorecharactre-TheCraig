@@ -63,8 +63,14 @@ public class LacedYoFood : Card, IRegisterable
                 },
                 new AStatus
                 {
-                    status = Status.lockdown,
+                    status = ModEntry.Instance.KokoroApi.V2.OxidationStatus.Status,
                     statusAmount = 2,
+                    targetPlayer = false
+                },
+                new AStatus
+                {
+                    status = Status.lockdown,
+                    statusAmount = 1,
                     targetPlayer = false
                 }
             ],

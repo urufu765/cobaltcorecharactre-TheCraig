@@ -137,7 +137,7 @@ internal class NewNewCombatDialogue : IRegisterable
                 shipsDontOverlapAtAll = true,
                 nonePresent = [ "crab", "scrap" ],
                 oncePerRun = true,
-                oncePerRunTags = [ "NoOverlapBetweenShips" ],
+                oncePerCombatTags = [ "NoOverlapBetweenShips" ],
                 dialogue = [
                     new(AmIlleana, "silly", "Gone. Goodbye!")
                 ]

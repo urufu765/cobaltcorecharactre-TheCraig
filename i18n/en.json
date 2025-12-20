@@ -55,7 +55,8 @@
             },
             "ByproductProcessor": {
                 "name": "BYPRODUCT PROCESSOR",
-                "desc": "If you end your turn with more than 0 <c=status>CORRODE</c>, reduce <c=status>CORRODE</c> by 1 and gain 1 <c=status>EVADE</c>.\n<c=downside><c=status>CORRODE</c> will still trigger before removal.</c>"
+                "desc": "Negate 1 <c=corrode>corrode damage</c> as <c=action>blockable hurt</c>. If you take hull damage from <c=status>CORRODE</c>, gain 1 <c=status>EVADE</c>.",
+                "descOld": "If you end your turn with more than 0 <c=status>CORRODE</c>, reduce <c=status>CORRODE</c> by 1 and gain 1 <c=status>EVADE</c>.\n<c=downside><c=status>CORRODE</c> will still trigger before removal.</c>"
             },
             "TarnishedSyringe": {
                 "name": "TARNISHED SYRINGE",
@@ -227,6 +228,10 @@
             "WarpPrototype": {
                 "name": "WARP PROTOTYPE",
                 "desc": "Replaces <c=artifact>WARP PREP</c>.\nGain 1 <c=status>PERFECT SHIELD</c> and 4 <c=status>EVADE</c> on the first turn."
+            },
+            "ExternalFuelSource": {
+                "name": "EXTERNAL FUEL SOURCE",
+                "desc": "Spend 1 charge to gain 1 <c=status>EVADE</c> whenever you gain a <c=cardtrait>temporary</c> card.\nAt the start of every turn, gain 1 charge, up to 4."
             }
         },
         "EventOnly": {

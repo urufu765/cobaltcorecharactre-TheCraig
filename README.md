@@ -8,222 +8,233 @@ A corrosion engineer who works with corrosion to help keep the ship at tip top c
 
 #### 1.3: More just means MOAR
 
-* **(1.3.0)**
-  * **dev.*: Memory 3 expansion/redo
-  * **dev.*: More story dialogue!!! + Baked hull dialogue
-  * **dev.*: More duos!! + duo dialogue/start story dialogue
-  * **dev.*: More other mod content like artifact swap thing, and more idk
-  * **dev.*: Give Illeana a solo deck + solo starter, fixed EXE to allow Illeana to actually work properly (offers one of Build a Cure or Find A Solution)
-  * **dev.*: Extra slip new sprite, new sprites for cards.
-  * **dev.11**: Fixed DialogueMachine -> 0.20: deep copies, HasArtifactTypes and its opposite is now HashSet instead of List.
-  * **dev.10**: Cleaned up DialogueMachine -> 0.19c: shortened QMulti parameter options, added another overloading QMulti constructor for just AllPresent, added default localisation option that fills in the missing dialogue stuff. (not working properly at the moment)
-  * **dev.9**: DialogueMachine 0.19: More instructions, Multi feature, and a fix for loading other languages
-  * **dev.8**: Rebalance/redo some old cards, Extra slip buff (no new sprite yet), fixed corrode issue
-    * Scrap Patchkit - Gave B Tarnish to solidify upgrade B as the tarnish upgrade
-      * B: T.Shield 2->0, Tarnish 0->1
-    * Cleanse - replaced B
-      * B: [0 Cost; -2 Corrode, 1 Evade, 1 T.Shield] -> [1 Cost; 1 Evade, (1 cor cost) 3 T.Shield, (1 tar cost) 2 T.Shield]
-    * False Vaccine - Made upgraded B more in line with the rest
-      * B: Cost 3->1, No longer heals enemy, reduces enemy corrode by 1, now infinite
-    * Untested Substance - Made it more unique by removing the tarnish cost and evade gain, replacing it with more temp shield and hermes boots
-    * Autotomy - Made more of an "OH CRAP" card
-      * Base: Cost 2 -> 0, Exhausts
-      * A: Cost 1 -> 0, Exhaust and heavy
-      * B: Cost 2 -> 0, Exhaust and heavy, does 2X random move instead of giving autododge.
-    * Fraudulent Fuel - Gave it a more bootleg feeling while maintaining its power. Instead of just giving a lot of evade and corrosion, it now gives one evade, and two temporary 0 cost cards that give evade. B is spicy.
-    * Deadly Adrenaline - Nerfed A, made the overall card powerful. Cost is now 0 across the board, always does -1 max hull, doesn't hurt, and gives corrode or tarnish.
-    * Part Swap - Made it a bit easier to consider taking, while nerfing B a little bit. Now Heavy across the board.
-      * B: Gave tarnish side equal treatment as corrode.
-    * Disinfect - Made it a fair bit more consistent while adding an incentive for playing more risky.
-    * Restoration - Removed the stupid corrode in the beginning, made it set corrode, and reduce the heal power to compensate. Also nerfed B to all heck cuz Tarnish was too easy to stack.
-    * NEW Cheap Fuel - 0 cost temporary evade giver.
-      * Base: 1 Evade, exhaust fleeting
-      * A: 2 Evade, exhaust fleeting
-      * B: 1 Evade
-  * **dev.7**: Artifact rebalance and replacements + more duos! Also made the display number disappear upon exiting combat.
-  * **dev.6**: Painter's palette
-  * **dev.5**: Baked Hull card sprite, Baked Hull base now heals when completed.
-  * **dev.4**: Illeana's on draw cards do not activate their action if Illeana is missing, slight word clarification for failure card. Tarnish tooltip slight clarification.
-  * **dev.3**: Added condition to prevent some artifacts to not show up if you have very little max hull and gave the SnekTunez placeholder clarification
-  * **dev.2**:
-    * Replaced Acid Backflow with Baked Hull
-    * Amputation now retains and exhausts across the board
-    * Restoration A reduces corrode by 1 at the end
-    * Replaced the B upgrade of Restoration to a tarnish version (less heal, more tarnish), removed single-use
-    * Gone-In-A-Jiffy B no longer exhausts
-  * **dev.1**: Fixed Illeana Drake story
+- **(1.3.0)**
+  - **dev.*: Memory 3 expansion/redo
+  - **dev.*: More story dialogue!!! + Baked hull dialogue
+  - **dev.*: More duos!! + duo dialogue/start story dialogue
+  - **dev.*: More other mod content like artifact swap thing, and more idk
+  - **dev.*: Give Illeana a solo deck + solo starter, fixed EXE to allow Illeana to actually work properly (offers one of Build a Cure or Find A Solution)
+  - **dev.*: Extra slip new sprite, new sprites for cards.
+  - **dev.12**: Balance changes
+    - DialogueMachine 0.20c: A couple documentation additions, removal of unused object.
+    - EFS now boss artifact, mechanic slight change.
+      - Old: Gain 1 EVADE whenever you gain a TEMP card, up to 2 per turn.
+      - New: Spend a charge to gain 1 EVADE whenever you gain a TEMP card. Gain 1 charge at the start of turn, up to 4.
+    - Byproduct Processor mechanic change
+      - Old: If you end turn with CORRODE, remove CORRODE and gain 1 EVADE (but still take 1 damage)
+      - New: Negate 1 CORRODE damage as blockable hurt. If you take hull damage anyways, gain 1 EVADE.
+    - Laced Yo Food buff:
+      - Base and A now do Outgoing 2 Oxidize
+      - Base and A's outgoing Engine Lock reduced to 1
+  - **dev.11**: Fixed DialogueMachine -> 0.20: deep copies, HasArtifactTypes and its opposite is now HashSet instead of List.
+  - **dev.10**: Cleaned up DialogueMachine -> 0.19c: shortened QMulti parameter options, added another overloading QMulti constructor for just AllPresent, added default localisation option that fills in the missing dialogue stuff. (not working properly at the moment)
+  - **dev.9**: DialogueMachine 0.19: More instructions, Multi feature, and a fix for loading other languages
+  - **dev.8**: Rebalance/redo some old cards, Extra slip buff (no new sprite yet), fixed corrode issue
+    - Scrap Patchkit - Gave B Tarnish to solidify upgrade B as the tarnish upgrade
+      - B: T.Shield 2->0, Tarnish 0->1
+    - Cleanse - replaced B
+      - B: [0 Cost; -2 Corrode, 1 Evade, 1 T.Shield] -> [1 Cost; 1 Evade, (1 cor cost) 3 T.Shield, (1 tar cost) 2 T.Shield]
+    - False Vaccine - Made upgraded B more in line with the rest
+      - B: Cost 3->1, No longer heals enemy, reduces enemy corrode by 1, now infinite
+    - Untested Substance - Made it more unique by removing the tarnish cost and evade gain, replacing it with more temp shield and hermes boots
+    - Autotomy - Made more of an "OH CRAP" card
+      - Base: Cost 2 -> 0, Exhausts
+      - A: Cost 1 -> 0, Exhaust and heavy
+      - B: Cost 2 -> 0, Exhaust and heavy, does 2X random move instead of giving autododge.
+    - Fraudulent Fuel - Gave it a more bootleg feeling while maintaining its power. Instead of just giving a lot of evade and corrosion, it now gives one evade, and two temporary 0 cost cards that give evade. B is spicy.
+    - Deadly Adrenaline - Nerfed A, made the overall card powerful. Cost is now 0 across the board, always does -1 max hull, doesn't hurt, and gives corrode or tarnish.
+    - Part Swap - Made it a bit easier to consider taking, while nerfing B a little bit. Now Heavy across the board.
+      - B: Gave tarnish side equal treatment as corrode.
+    - Disinfect - Made it a fair bit more consistent while adding an incentive for playing more risky.
+    - Restoration - Removed the stupid corrode in the beginning, made it set corrode, and reduce the heal power to compensate. Also nerfed B to all heck cuz Tarnish was too easy to stack.
+    - NEW Cheap Fuel - 0 cost temporary evade giver.
+      - Base: 1 Evade, exhaust fleeting
+      - A: 2 Evade, exhaust fleeting
+      - B: 1 Evade
+  - **dev.7**: Artifact rebalance and replacements + more duos! Also made the display number disappear upon exiting combat.
+  - **dev.6**: Painter's palette
+  - **dev.5**: Baked Hull card sprite, Baked Hull base now heals when completed.
+  - **dev.4**: Illeana's on draw cards do not activate their action if Illeana is missing, slight word clarification for failure card. Tarnish tooltip slight clarification.
+  - **dev.3**: Added condition to prevent some artifacts to not show up if you have very little max hull and gave the SnekTunez placeholder clarification
+  - **dev.2**:
+    - Replaced Acid Backflow with Baked Hull
+    - Amputation now retains and exhausts across the board
+    - Restoration A reduces corrode by 1 at the end
+    - Replaced the B upgrade of Restoration to a tarnish version (less heal, more tarnish), removed single-use
+    - Gone-In-A-Jiffy B no longer exhausts
+  - **dev.1**: Fixed Illeana Drake story
 
 #### 1.2: Illeana Story
 
-* **(1.2.6)**: Undid the fix for artifact removal
-* **(1.2.5)**: Fixed a bug where some temp cards being added didn't trigger the External Fuel Source artifact
-* **(1.2.4)**: Fixed a bug introduced in new game update 1.2.4
-* **(1.2.3)**: Fixed an Illeana animation tag not registered by accident
-* **(1.2.2)**: Some artifact balancing, Tarnish blip
-  * Tempo Booster nerf: Boss condition now no longer gives additional ace. Downside gives tarnish or corrode based on alt starter
-  * Forged Certificate buff: Damage quantity requirement 4 -> 3
-* **(1.2.1)**: Fixed first Illeana run win dialogue not showing a sprite
-* **(1.2.0)**: Release!
-  * **dev.7**: Build-A-Cure A is limited to 3 uses.
-  * **dev.6**: Competition slight fix where it used the wrong action queue (shoulda be using overriden)x
-  * **dev.5**: Craig Ophidiophobia replacement sprite (as Cracs), and gave background a little bit more fill
-  * **dev.4**: SFX
-  * **dev.3**: Fix sprites, bg sprites
-  * **dev.2**: Backgrounds worked on (0.75/2 done) (still need to properly animate the glow.. also remove the pen from Craig's mouth in bg)
-  * **dev.1**: Let us break out the story. Todo: stories, a lot of new sprites that aren't Illeana, backgrounds, maybe even a playable ship?
+- **(1.2.6)**: Undid the fix for artifact removal
+- **(1.2.5)**: Fixed a bug where some temp cards being added didn't trigger the External Fuel Source artifact
+- **(1.2.4)**: Fixed a bug introduced in new game update 1.2.4
+- **(1.2.3)**: Fixed an Illeana animation tag not registered by accident
+- **(1.2.2)**: Some artifact balancing, Tarnish blip
+  - Tempo Booster nerf: Boss condition now no longer gives additional ace. Downside gives tarnish or corrode based on alt starter
+  - Forged Certificate buff: Damage quantity requirement 4 -> 3
+- **(1.2.1)**: Fixed first Illeana run win dialogue not showing a sprite
+- **(1.2.0)**: Release!
+  - **dev.7**: Build-A-Cure A is limited to 3 uses.
+  - **dev.6**: Competition slight fix where it used the wrong action queue (shoulda be using overriden)x
+  - **dev.5**: Craig Ophidiophobia replacement sprite (as Cracs), and gave background a little bit more fill
+  - **dev.4**: SFX
+  - **dev.3**: Fix sprites, bg sprites
+  - **dev.2**: Backgrounds worked on (0.75/2 done) (still need to properly animate the glow.. also remove the pen from Craig's mouth in bg)
+  - **dev.1**: Let us break out the story. Todo: stories, a lot of new sprites that aren't Illeana, backgrounds, maybe even a playable ship?
 
 #### 1.1: Illeana Duo Machine!
 
-* **(1.1.5)**: Added mod options (along with Ophidiophobia mode :D)
-* **(1.1.4)**: Fixed a dialogue being said by the wrong person, and added dialogue for Weth stuff
-* **(1.1.3)**: Optimized for release (not built: Changed IncludedMOdProjectPaths to ModFiles, updated ModBuildConfig)
-  * **1.1.3a**: csproj fix so assets are properly copied
-* **(1.1.2)**: Made the harmless warnings shut up and moved dialogue validators after mod existence checks, internal changes
-* **(1.1.1)**: Autotomy B cardart tint was wrong
-* **(1.1.0)**: Switch over to DialogueMachine + New dialogue! + Duos + Tarnish!
-  * **dev.a0**: Switch to DialogueMachine
-  * **dev.a1**: Old dialogue cleanup + dialogue fixes
-  * **dev.b0**: Added PerfectShield card for artifact
-  * **dev.b1**: Duo descriptions and API
-  * **dev.b2**: Reusable Scrap, Thrust Thursters, Airlock, Extra Slip, Perfected Protection implemented
-  * **dev.b3**: Super Injection, Lubricated Heatpump, Unprotected Storage, Hull Harvester implemented and tarnish tooltip changed to match upcoming rework. Byproduct Processor no longer needs energy
-  * **dev.c0**: Caustic Armor buff with the upcoming Tarnish rework, and implemented Competition
-  * **dev.c1**: Duo sprites!
-  * **dev.c2**: Finished all duo sprites and fixed Airlock description
-  * **dev.c3**: Mini art and panic(+blinkrapid, shocked) eyes art fix
-  * **dev.d0**: New tarnish implementation
-  * **dev.e0**: Card rework 3 (optimised for NEW Tarnish) & Tarnish cost implemented
-    * Autotomy: Corrode clear + Evade -> Corrode clear + Autododge & Blockable Hurt
-    * Build-A-Cure: Cost 1 -> 0, A gives 1 non-exhaust Cure instead of 2 exhaust Cure
-    * Find-A-Solution: Overhauled to give Tarnish more and give Solution instead of Cure.
-    * Part Swap: Ace and PS is given in different conditions and corrode cost adjusted
-    * Acidic Package: Removed.
-    * NEW Acid Backflow: Replaces Acidic Package by being reusable
-    * Immunity Shot: 1 Corrode -> 1 Tarnish
-    * Makeshift Hull: Removed.
-    * NEW Improvised Timing: Cost = max hull
-    * NEW Solution: like Cure, but Takes Tarnish, gives Heal
-  * **dev.e1**: Tarnish only converts corrode when being added. New corrode with existing tarnish does nothing.
-  * **dev.e2**: Dracula Duo Complete!
-  * **ext.f0**: Fixed duo not being excluded if duo mod not present and Reusable Scrap being annoying
-  * **ext.f1**: Card edits
-    * Untested Substance: Now requires 1 tarnish to play, reworked B to only give exhaust
-    * Build-A-Cure: Removed the "Exhaustible" part, and B gives two Cure B's
-    * Find-A-Solution: Removed the "Exhaustible" part
-    * Solution: B loses retain, base and A now exhaust
-    * Cure: A loses recycle, base and B now exhaust
-  * **ext.f2**: Forgot to remove the code that removes corrode when hitting tarnished
-  * **ext.f3**: Set X begun
-  * **ext.f4**: Set X Continu and FINISH! (disabled in next version as it will be ported over to Nickel)
-  * **ext.f5**: ImmunityShot no longer gives tarnish, Gone-Jiffy buffed and dialogue machine fixed! + more dialogue and dialogue fixes
-  * **ext.f6**: Fixed Exposure counting Tempshield for some reason + Lightened Load only gives 1 dodge per tarnish + fixed missing period
-  * **RELEASE**: More dialogue! (a bit more)
-  * *ext.b0*: Full body sprites + finish the screams + Craig sprites
-  * *ext.c0*: Memory
+- **(1.1.5)**: Added mod options (along with Ophidiophobia mode :D)
+- **(1.1.4)**: Fixed a dialogue being said by the wrong person, and added dialogue for Weth stuff
+- **(1.1.3)**: Optimized for release (not built: Changed IncludedMOdProjectPaths to ModFiles, updated ModBuildConfig)
+  - **1.1.3a**: csproj fix so assets are properly copied
+- **(1.1.2)**: Made the harmless warnings shut up and moved dialogue validators after mod existence checks, internal changes
+- **(1.1.1)**: Autotomy B cardart tint was wrong
+- **(1.1.0)**: Switch over to DialogueMachine + New dialogue! + Duos + Tarnish!
+  - **dev.a0**: Switch to DialogueMachine
+  - **dev.a1**: Old dialogue cleanup + dialogue fixes
+  - **dev.b0**: Added PerfectShield card for artifact
+  - **dev.b1**: Duo descriptions and API
+  - **dev.b2**: Reusable Scrap, Thrust Thursters, Airlock, Extra Slip, Perfected Protection implemented
+  - **dev.b3**: Super Injection, Lubricated Heatpump, Unprotected Storage, Hull Harvester implemented and tarnish tooltip changed to match upcoming rework. Byproduct Processor no longer needs energy
+  - **dev.c0**: Caustic Armor buff with the upcoming Tarnish rework, and implemented Competition
+  - **dev.c1**: Duo sprites!
+  - **dev.c2**: Finished all duo sprites and fixed Airlock description
+  - **dev.c3**: Mini art and panic(+blinkrapid, shocked) eyes art fix
+  - **dev.d0**: New tarnish implementation
+  - **dev.e0**: Card rework 3 (optimised for NEW Tarnish) & Tarnish cost implemented
+    - Autotomy: Corrode clear + Evade -> Corrode clear + Autododge & Blockable Hurt
+    - Build-A-Cure: Cost 1 -> 0, A gives 1 non-exhaust Cure instead of 2 exhaust Cure
+    - Find-A-Solution: Overhauled to give Tarnish more and give Solution instead of Cure.
+    - Part Swap: Ace and PS is given in different conditions and corrode cost adjusted
+    - Acidic Package: Removed.
+    - NEW Acid Backflow: Replaces Acidic Package by being reusable
+    - Immunity Shot: 1 Corrode -> 1 Tarnish
+    - Makeshift Hull: Removed.
+    - NEW Improvised Timing: Cost = max hull
+    - NEW Solution: like Cure, but Takes Tarnish, gives Heal
+  - **dev.e1**: Tarnish only converts corrode when being added. New corrode with existing tarnish does nothing.
+  - **dev.e2**: Dracula Duo Complete!
+  - **ext.f0**: Fixed duo not being excluded if duo mod not present and Reusable Scrap being annoying
+  - **ext.f1**: Card edits
+    - Untested Substance: Now requires 1 tarnish to play, reworked B to only give exhaust
+    - Build-A-Cure: Removed the "Exhaustible" part, and B gives two Cure B's
+    - Find-A-Solution: Removed the "Exhaustible" part
+    - Solution: B loses retain, base and A now exhaust
+    - Cure: A loses recycle, base and B now exhaust
+  - **ext.f2**: Forgot to remove the code that removes corrode when hitting tarnished
+  - **ext.f3**: Set X begun
+  - **ext.f4**: Set X Continu and FINISH! (disabled in next version as it will be ported over to Nickel)
+  - **ext.f5**: ImmunityShot no longer gives tarnish, Gone-Jiffy buffed and dialogue machine fixed! + more dialogue and dialogue fixes
+  - **ext.f6**: Fixed Exposure counting Tempshield for some reason + Lightened Load only gives 1 dodge per tarnish + fixed missing period
+  - **RELEASE**: More dialogue! (a bit more)
+  - *ext.b0*: Full body sprites + finish the screams + Craig sprites
+  - *ext.c0*: Memory
 
 #### 1.0: First Public Release!!!
 
-* **(1.0.6)**: Fixed issue where some dialogues didn't select Illeana, EXE now implemented to starter deck and also exhausts.
-* **(1.0.5)**: Balance patch: Immunity shot SETS perfect shield, instead of adding.
-* **(1.0.4)**: Balance patch: Gone-In-A-Jiffy balance change, EFS only grants up to 2 evade per turn, Scrap Patchkit balance
-* **(1.0.3)**: Fixed FailureB not giving player corrode
-* **(1.0.2)**: Fixed Forged Certificate requiring one more than described
-* **(1.0.1)**: Fixed Restoration giving the wrong amount of heal
-* **(1.0.0)**: Build-A-Cure A no longer offers Failure A
+- **(1.0.6)**: Fixed issue where some dialogues didn't select Illeana, EXE now implemented to starter deck and also exhausts.
+- **(1.0.5)**: Balance patch: Immunity shot SETS perfect shield, instead of adding.
+- **(1.0.4)**: Balance patch: Gone-In-A-Jiffy balance change, EFS only grants up to 2 evade per turn, Scrap Patchkit balance
+- **(1.0.3)**: Fixed FailureB not giving player corrode
+- **(1.0.2)**: Fixed Forged Certificate requiring one more than described
+- **(1.0.1)**: Fixed Restoration giving the wrong amount of heal
+- **(1.0.0)**: Build-A-Cure A no longer offers Failure A
 
 ### ALPHA
 
 #### a.3: Don't Talk With Your Mouth Full
 
-* **(0.3.23)**: Applied constructive criticism to final ALPHA phase
-* **(0.3.22)**: New portraits to finish the sprites! + Dialogue sprite adjustments
-* **(0.3.21)**: Portrait fix! Replaced all the current ones and changed all the de-implemented dialogue
-* **(0.3.20)**: Custom sprites for the new Slitherman variants + tooltip clarification
-* **(0.3.19)**: New variants of the Slitherman + Snektunez A and B overhaul (A does double, B does not end turn)
-* **(0.3.18)**: Many more dialogue 5: Many many many more shouts, finished vanilla shouts
-* **(0.3.17)**: Many more dialogue 4: Many many more shouts & events + Even more delayed Personal Stereo
-* **(0.3.16)**: Many more dialogue 3: Many more shouts + dialogue restructuring + External Fuel Source description clarification + Delayed add card queue for Personal Stereo
-* **(0.3.15)**: Changed Gone-In-A-Jiffy and clarified Amputation and made shine more visible, removed unnecessary combat dialogue
-* **(0.3.14)**: Many more dialogue 2: Finished artifact and more combat
-* **(0.3.13)**: Many more dialogue: Shopkeeper & Dracula & More & Fixed artifact dialogue not playing properly
-* **(0.3.12)**: Fixed a combat dialogue not dialoguing correctly
-* **(0.3.11)**: Fixed description not working.
-* **(0.3.10)**: Implemented fix for modded dialogues, just apply them much later + artiact and card dialogue
-* **(0.3.9)**: Added Warp Prototype
-* **(0.3.8)**: TheFailure and TheAccident now exhausts on play. BuildACure now gives temporary cures instead of reusable ones. Removed The from Failure, Accident, and Cure, and Failure now just gives you 1 corrode on draw.
-* **(0.3.7)**: More dialogue (EnemyPack edition)
-* **(0.3.6)**: Added a cat EXE card for Illeana and a secret card that has a rare chance to spawn
-* **(0.3.5)**: Fixed StoryDialogue not being converted to new system of animations && Removed unused variable in PartSwap
-* **(0.3.4)**: Simplified animation registering + Memory dialogue planned out (but not implemented)
-* **(0.3.3)**: Take/deal damage dialogue + Weaponised Patchkit balance + Deck Colour Change
-* **(0.3.2)**: Added alt art for Experimental Lubricant, and made it switch on use
-* **(0.3.1)**: Renamed Illeana's Personal Stereo to Stolen Slitherman
-* **(0.3.0)**: Added more dialogues (corrode replies) + Changelog + More character sprites
+- **(0.3.23)**: Applied constructive criticism to final ALPHA phase
+- **(0.3.22)**: New portraits to finish the sprites! + Dialogue sprite adjustments
+- **(0.3.21)**: Portrait fix! Replaced all the current ones and changed all the de-implemented dialogue
+- **(0.3.20)**: Custom sprites for the new Slitherman variants + tooltip clarification
+- **(0.3.19)**: New variants of the Slitherman + Snektunez A and B overhaul (A does double, B does not end turn)
+- **(0.3.18)**: Many more dialogue 5: Many many many more shouts, finished vanilla shouts
+- **(0.3.17)**: Many more dialogue 4: Many many more shouts & events + Even more delayed Personal Stereo
+- **(0.3.16)**: Many more dialogue 3: Many more shouts + dialogue restructuring + External Fuel Source description clarification + Delayed add card queue for Personal Stereo
+- **(0.3.15)**: Changed Gone-In-A-Jiffy and clarified Amputation and made shine more visible, removed unnecessary combat dialogue
+- **(0.3.14)**: Many more dialogue 2: Finished artifact and more combat
+- **(0.3.13)**: Many more dialogue: Shopkeeper & Dracula & More & Fixed artifact dialogue not playing properly
+- **(0.3.12)**: Fixed a combat dialogue not dialoguing correctly
+- **(0.3.11)**: Fixed description not working.
+- **(0.3.10)**: Implemented fix for modded dialogues, just apply them much later + artiact and card dialogue
+- **(0.3.9)**: Added Warp Prototype
+- **(0.3.8)**: TheFailure and TheAccident now exhausts on play. BuildACure now gives temporary cures instead of reusable ones. Removed The from Failure, Accident, and Cure, and Failure now just gives you 1 corrode on draw.
+- **(0.3.7)**: More dialogue (EnemyPack edition)
+- **(0.3.6)**: Added a cat EXE card for Illeana and a secret card that has a rare chance to spawn
+- **(0.3.5)**: Fixed StoryDialogue not being converted to new system of animations && Removed unused variable in PartSwap
+- **(0.3.4)**: Simplified animation registering + Memory dialogue planned out (but not implemented)
+- **(0.3.3)**: Take/deal damage dialogue + Weaponised Patchkit balance + Deck Colour Change
+- **(0.3.2)**: Added alt art for Experimental Lubricant, and made it switch on use
+- **(0.3.1)**: Renamed Illeana's Personal Stereo to Stolen Slitherman
+- **(0.3.0)**: Added more dialogues (corrode replies) + Changelog + More character sprites
 
 #### a.2: Card Rework 2
 
-* **(0.2.6)**: Card Art Updates B: The Alternatives + Partswap giving wrong temp shield fix
-* **(0.2.5)**: Card Art Updates A: The Tintening
-* **(0.2.4)**: The Accident/The Failure readability fix
-* **(0.2.3)**: Bad descriptor fixed + little mistakes
-* **(0.2.2)**: Fixed name for Restoration
-* **(0.2.1)**: Forgot to fix False Vaccine's upgrade B cost
-* **(0.2.0)**: Card balance changes
-  * Overhauls
-    * Deadly Amputation: Now hurts to give Ace rather than corrodes to evade
-    * Part Swap: Now costs corrode to get PShield and ace rather than hurting to remove corrode
-    * Weaponised Patchkit: Now does weaken/brittle shots but gives a corrode instead of armoring and shooting corrode
-  * Balance Changes
-    * Acidic Package: (Now exhausts as intended)
-    * Exposure: Upgrade A cost -1
-    * Untested Substance: No longer gives Ace
-    * Autotomy: Swapped A and B
-    * GoneJiffy: B now exhausts
-    * Amputation: Swapped A and B
-    * Great Healing: Name changed to Great Restoration, corrode give lowered and placed as first action
-    * Distracted: Rare -> Uncommon
-    * Makeshift Hull: Uncommon -> Rare, Base and A now apply the same effects and exhausts, and B now hurts to give max hull
-    * Laced Yo Food: Reduced corrode give from 2 to 1 for Base and A
+- **(0.2.6)**: Card Art Updates B: The Alternatives + Partswap giving wrong temp shield fix
+- **(0.2.5)**: Card Art Updates A: The Tintening
+- **(0.2.4)**: The Accident/The Failure readability fix
+- **(0.2.3)**: Bad descriptor fixed + little mistakes
+- **(0.2.2)**: Fixed name for Restoration
+- **(0.2.1)**: Forgot to fix False Vaccine's upgrade B cost
+- **(0.2.0)**: Card balance changes
+  - Overhauls
+    - Deadly Amputation: Now hurts to give Ace rather than corrodes to evade
+    - Part Swap: Now costs corrode to get PShield and ace rather than hurting to remove corrode
+    - Weaponised Patchkit: Now does weaken/brittle shots but gives a corrode instead of armoring and shooting corrode
+  - Balance Changes
+    - Acidic Package: (Now exhausts as intended)
+    - Exposure: Upgrade A cost -1
+    - Untested Substance: No longer gives Ace
+    - Autotomy: Swapped A and B
+    - GoneJiffy: B now exhausts
+    - Amputation: Swapped A and B
+    - Great Healing: Name changed to Great Restoration, corrode give lowered and placed as first action
+    - Distracted: Rare -> Uncommon
+    - Makeshift Hull: Uncommon -> Rare, Base and A now apply the same effects and exhausts, and B now hurts to give max hull
+    - Laced Yo Food: Reduced corrode give from 2 to 1 for Base and A
 
 #### a.1: First Alpha Release
 
-* **(0.1.7)**: Gave better descriptions
-* **(0.1.6)**: Added artifact Toxic Sports, but left it unimplemented
-* **(0.1.5)**: Forgot to capitalise name
-* **(0.1.4)**: Gave Illeana's name Colour and fixed mini sprite cheek corner
-* **(0.1.3)**: Added alt starter + Lightened Load artifact
-* **(0.1.2)**: Changed the project name from Craig to Illeana (Finally!)
-* **(0.1.1)**: Fixed Causticarmor tooltip and artifact pulse
-* **(0.1.0)**: First alpha release!
+- **(0.1.7)**: Gave better descriptions
+- **(0.1.6)**: Added artifact Toxic Sports, but left it unimplemented
+- **(0.1.5)**: Forgot to capitalise name
+- **(0.1.4)**: Gave Illeana's name Colour and fixed mini sprite cheek corner
+- **(0.1.3)**: Added alt starter + Lightened Load artifact
+- **(0.1.2)**: Changed the project name from Craig to Illeana (Finally!)
+- **(0.1.1)**: Fixed Causticarmor tooltip and artifact pulse
+- **(0.1.0)**: First alpha release!
 
 ### Pre-release
 
-* **(0.0.28)**: Byproduct Processor * Caustic Armor buff
-* **(0.0.27)**: More tooltip fixes + Tempoboost fix
-* **(0.0.26)**: New artifat + Fixed artifact glossary + Changed Experimental Lubricant
-* **(0.0.25)**: Dialogue test
-* **(0.0.24)**: Sprite reworks
-* **(0.0.23)**: Adjusted artifact art, simplified artifact registration
-* **(0.0.22)**: Changed Scrapkit upgrade B to retain
-* **(0.0.21)**: Fixed TheAccident giving tarnish to the wrong target
-* **(0.0.20)**: Fixed TheAccident's description
-* **(0.0.19)**: Cards Overhaul + removed private sets on artifacts
-* **(0.0.18b)**: Forgot to remove something...
-* **(0.0.18)**: Fixed SnekTunez state not being saved
-* **(0.0.17)**: Text fixes
-* **(0.0.16)**: Added simple artifacts
-* **(0.0.15)**: Tarnish implemented correctly
-* **(0.0.14)**: Tarnish implemented
-* **(0.0.13)**: Added the rest of the cards
-* **(0.0.12)**: New sprites!
-* **(0.0.11)**: More Cards added
-* **(0.0.10)**: Implemented Corrode cost
-* **(0.0.9)**: FindACure/BuildACure now adds the right number of cards
-* **(0.0.8)**: FindACure/BuildACure now add cards as intended
-* **(0.0.7)**: Forgot upgrade paths?
-* **(0.0.6)**: Changed names of the project
-* **(0.0.5)**: Fixed mismatched sprite names
-* **(0.0.4)**: Animation frames needed to be renamed
-* **(0.0.3)**: Weird compile errors ironed out
-* **(0.0.2)**: Nipped the leftovers from Demomod
-* **(0.0.1)**: BAM! (Began Assured Mutilation)!
+- **(0.0.28)**: Byproduct Processor * Caustic Armor buff
+- **(0.0.27)**: More tooltip fixes + Tempoboost fix
+- **(0.0.26)**: New artifat + Fixed artifact glossary + Changed Experimental Lubricant
+- **(0.0.25)**: Dialogue test
+- **(0.0.24)**: Sprite reworks
+- **(0.0.23)**: Adjusted artifact art, simplified artifact registration
+- **(0.0.22)**: Changed Scrapkit upgrade B to retain
+- **(0.0.21)**: Fixed TheAccident giving tarnish to the wrong target
+- **(0.0.20)**: Fixed TheAccident's description
+- **(0.0.19)**: Cards Overhaul + removed private sets on artifacts
+- **(0.0.18b)**: Forgot to remove something...
+- **(0.0.18)**: Fixed SnekTunez state not being saved
+- **(0.0.17)**: Text fixes
+- **(0.0.16)**: Added simple artifacts
+- **(0.0.15)**: Tarnish implemented correctly
+- **(0.0.14)**: Tarnish implemented
+- **(0.0.13)**: Added the rest of the cards
+- **(0.0.12)**: New sprites!
+- **(0.0.11)**: More Cards added
+- **(0.0.10)**: Implemented Corrode cost
+- **(0.0.9)**: FindACure/BuildACure now adds the right number of cards
+- **(0.0.8)**: FindACure/BuildACure now add cards as intended
+- **(0.0.7)**: Forgot upgrade paths?
+- **(0.0.6)**: Changed names of the project
+- **(0.0.5)**: Fixed mismatched sprite names
+- **(0.0.4)**: Animation frames needed to be renamed
+- **(0.0.3)**: Weird compile errors ironed out
+- **(0.0.2)**: Nipped the leftovers from Demomod
+- **(0.0.1)**: BAM! (Began Assured Mutilation)!
