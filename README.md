@@ -15,6 +15,7 @@ A corrosion engineer who works with corrosion to help keep the ship at tip top c
   - **dev.*: More other mod content like artifact swap thing, and more idk
   - **dev.*: Give Illeana a solo deck + solo starter, fixed EXE to allow Illeana to actually work properly (offers one of Build a Cure or Find A Solution)
   - **dev.*: Extra slip new sprite, new sprites for cards.
+  - **dev.13**: Working on mem3 and fixed issue with rusting colossus corrode interaction
   - **dev.12**: Balance changes
     - DialogueMachine 0.20c: A couple documentation additions, removal of unused object.
     - EFS now boss artifact, mechanic slight change.

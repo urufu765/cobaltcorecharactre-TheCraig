@@ -51,8 +51,8 @@ public static class ShouldWeCorrode
                 statusAmount = 1,
                 targetPlayer = true
             });
+            s.ship.Set(Status.corrode, __state.origCorrode);
         }
-        s.ship.Set(Status.corrode, __state.origCorrode);
     }
 
     /// <summary>
