@@ -273,6 +273,17 @@ internal partial class ModEntry : SimpleMod
                 ]
             },
             Description = AnyLocalizations.Bind(["character", "Illeana", "desc"]).Localize,
+            SoloStarters = new StarterDeck
+            {
+                cards = [
+                    new CannonColorless(),
+                    new CannonColorless(),
+                    new CannonColorless(),
+                    new Cleanse{upgrade = Upgrade.B},
+                    new Exposure(),
+                    new Exposure(),
+                ]
+            },
             ExeCardType = typeof(IlleanaExe)
         });
 

@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using daisyowl.text;
+using Illeana.Actions;
+using Illeana.External;
 using Nanoray.PluginManager;
 using Nickel;
 
@@ -18,12 +21,13 @@ public class IlleanaExe : Card, IRegisterable
             CardType = MethodBase.GetCurrentMethod()!.DeclaringType!,
             Meta = new CardMeta
             {
-                rarity = Rarity.common,
+                rarity = Rarity.uncommon,
                 upgradesTo = [Upgrade.A, Upgrade.B]
             },
-            Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "Common", "IlleanaEXE", "name"]).Localize,
+            Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "Uncommon", "IlleanaEXE", "name"]).Localize,
             Art = ModEntry.RegisterSprite(package, "assets/Card/Illeana/0/EXE.png").Sprite
         });
+        ModEntry.Instance.KokoroApi.V2.CardRendering.RegisterHook(new Hook());
     }
 
 
@@ -37,6 +41,21 @@ public class IlleanaExe : Card, IRegisterable
             [
                 new ACardOffering
                 {
+                    amount = 5,
+                    limitDeck = roll == 0? ModEntry.Instance.DecrepitCraigDeck.Deck : ModEntry.Instance.IlleanaDeck.Deck,
+                    makeAllCardsTemporary = true,
+                    overrideUpgradeChances = false,
+                    canSkip = false,
+                    inCombat = true,
+                    discount = -1,
+                    dialogueSelector = ".summonIlleana"
+                },
+                new ASelectAPotentialFix()
+            ],
+            _ => 
+            [
+                new ACardOffering
+                {
                     amount = 3,
                     limitDeck = roll == 0? ModEntry.Instance.DecrepitCraigDeck.Deck : ModEntry.Instance.IlleanaDeck.Deck,
                     makeAllCardsTemporary = true,
@@ -45,21 +64,8 @@ public class IlleanaExe : Card, IRegisterable
                     inCombat = true,
                     discount = -1,
                     dialogueSelector = ".summonIlleana"
-                }
-            ],
-            _ => 
-            [
-                new ACardOffering
-                {
-                    amount = 2,
-                    limitDeck = roll == 0? ModEntry.Instance.DecrepitCraigDeck.Deck : ModEntry.Instance.IlleanaDeck.Deck,
-                    makeAllCardsTemporary = true,
-                    overrideUpgradeChances = false,
-                    canSkip = false,
-                    inCombat = true,
-                    discount = -1,
-                    dialogueSelector = ".summonIlleana"
-                }
+                },
+                new ASelectAPotentialFix()
             ],
         };
     }
@@ -73,23 +79,41 @@ public class IlleanaExe : Card, IRegisterable
             {
                 cost = 1,
                 exhaust = true,
-                description = ColorlessLoc.GetDesc(state, 3, ModEntry.Instance.IlleanaDeck.Deck),
+                description = ModEntry.Instance.Localizations.Localize(["card", "Uncommon", "IlleanaEXE", "desc"], new{
+                    num = 5
+                }),
                 artTint = "45e260"
             },
             Upgrade.A => new CardData
             {
                 cost = 0,
                 exhaust = true,
-                description = ColorlessLoc.GetDesc(state, 2, ModEntry.Instance.IlleanaDeck.Deck),
+                description = ModEntry.Instance.Localizations.Localize(["card", "Uncommon", "IlleanaEXE", "desc"], new{
+                    num = 3
+                }),
                 artTint = "45e260"
             },
             _ => new CardData
             {
                 cost = 1,
                 exhaust = true,
-                description = ColorlessLoc.GetDesc(state, 2, ModEntry.Instance.IlleanaDeck.Deck),
+                description = ModEntry.Instance.Localizations.Localize(["card", "Uncommon", "IlleanaEXE", "desc"], new{
+                    num = 3
+                }),
                 artTint = "45e260"
             }
         };
     }
+    private sealed class Hook : IKokoroApi.IV2.ICardRenderingApi.IHook
+    {
+        public Font? ReplaceTextCardFont(IKokoroApi.IV2.ICardRenderingApi.IHook.IReplaceTextCardFontArgs args)
+        {
+            if (args.Card is IlleanaExe)
+            {
+                return ModEntry.Instance.KokoroApi.V2.Assets.PinchCompactFont;
+            }
+            return null;
+        }
+    }
+
 }

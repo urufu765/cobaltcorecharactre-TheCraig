@@ -298,9 +298,6 @@
             },
             "IncompatibleFuel": {
                 "name": "Fraudulent Fuel"
-            },
-            "IlleanaEXE": {
-                "name": "Illeana.EXE"
             }
         },
         "Uncommon": {
@@ -341,6 +338,10 @@
                 "desc": "On <c=keyword>3rd</c> use, <c=heal>heal 1</c> and gain <c=hull>1 max hull</c>. <c=downside>Further use <c=heal>heals only</c>.</c> <c={{color}}>[{{uses}}/{{limit}}]</c>",
                 "descA": "On <c=keyword>5th</c> use and onward, gain <c=hull>1 max hull</c>.\n<c={{color}}>[{{uses}}/{{limit}}]</c>",
                 "descBA": "On <c=keyword>10th</c> use, <c=hull>double your max hull</c> and <c=downside>destroy this card</c>.\n<c={{color}}>[{{uses}}/{{limit}}]</c>"
+            },
+            "IlleanaEXE": {
+                "name": "Illeana.EXE",
+                "desc": "Add 1 of {{num}} <c=cardtrait>discount, temp</c> <c=45e260>Illeana</c> cards, and a <c=card>Experimentation</c> to your hand."
             }
         },
         "Rare": {

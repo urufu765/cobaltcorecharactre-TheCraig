@@ -13,9 +13,11 @@ A corrosion engineer who works with corrosion to help keep the ship at tip top c
   - **dev.*: More story dialogue!!! + Baked hull dialogue
   - **dev.*: More duos!! + duo dialogue/start story dialogue
   - **dev.*: More other mod content like artifact swap thing, and more idk
-  - **dev.*: Give Illeana a solo deck + solo starter, fixed EXE to allow Illeana to actually work properly (offers one of Build a Cure or Find A Solution)
   - **dev.*: Extra slip new sprite, new sprites for cards.
+  - **dev.*: Experimentation: A switching card that lets you choose between Build a Cure and Find a Solution
+  - **dev.15**: Give Illeana a solo deck + solo starter, fixed EXE to allow Illeana to actually work properly (offers one of Build a Cure or Find A Solution) and moved it to Uncommon
   - **dev.14**:
+    - Made tarnish tooltip colour a bit brighter
     - Deadly Adrenaline: Limited to 3/3/2 uses
     - Immunity Shot A: Now same as base but limited to 2 uses, B gives 3X costs 2 and heavy
     - New Peri duo + sprites
