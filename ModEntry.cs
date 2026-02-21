@@ -35,6 +35,7 @@ internal partial class ModEntry : SimpleMod
         MoreDifficultiesApi = helper.ModRegistry.GetApi<IMoreDifficultiesApi>("TheJazMaster.MoreDifficulties");
         DuoArtifactsApi = helper.ModRegistry.GetApi<IDuoArtifactsApi>("Shockah.DuoArtifacts");
         DynaApi = helper.ModRegistry.GetApi<IDynaApi>("Shockah.Dyna");
+        exists_WethMod = helper.ModRegistry.LoadedMods.ContainsKey("urufudoggo.weth");
         settings = helper.Storage.LoadJson<Settings>(SettingsFile);
 
 
@@ -390,6 +391,9 @@ internal partial class ModEntry : SimpleMod
         SprSwaySwheelDepleted = RegisterSprite(package, "assets/Artifact/SwaySwheelDepleted.png").Sprite;
         SprTakeABreakActive = RegisterSprite(package, "assets/Artifact/TakeABreakActive.png").Sprite;
         SprTakeABreakDepleted = RegisterSprite(package, "assets/Artifact/TakeABreakDepleted.png").Sprite;
+        SprChemSurpriseNone = RegisterSprite(package, "assets/Artifact/ChemicalSurpriseNone.png").Sprite;
+        SprChemSurpriseCor = RegisterSprite(package, "assets/Artifact/ChemicalSurpriseCorrode.png").Sprite;
+        SprChemSurpriseTar = RegisterSprite(package, "assets/Artifact/ChemicalSurpriseTarnish.png").Sprite;
 
         /*
          * All the IRegisterable types placed into the static lists at the start of the class are initialized here.

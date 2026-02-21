@@ -130,7 +130,7 @@
             "ExtraSlip": {
                 "name": "EXTRA-SLIP",
                 "descOld": "While you're <c=corrode>corroded</c>, playing your <c=keyword>left/rightmost card in hand</c> moves you left/right 1.",
-                "desc": "While you're <c=corrode>corroded</c>, playing your <c=keyword>left/rightmost card in hand</c> moves you left/right 1.\nWhile you're <c=keys>tarnished</c>, your first <c=keyword>leftmost card each combat</c> gives 1 <c=status>AUTODODGE LEFT</c>, and your first <c=keyword>rightmost card each turn<c/> gives 1 <c=status>AUTODODGE RIGHT</c>."
+                "desc": "While you're <c=corrode>corroded</c>, playing your <c=keyword>left/rightmost card in hand</c> moves you left/right 1.\nWhile you're <c=a43fff>tarnished</c>, your first <c=keyword>leftmost card each combat</c> gives 1 <c=status>AUTODODGE LEFT</c>, and your first <c=keyword>rightmost card each turn<c/> gives 1 <c=status>AUTODODGE RIGHT</c>."
             },
             "UnprotectedStorage": {
                 "name": "UNPROTECTED SHARD STORAGE",
@@ -197,8 +197,13 @@
             },
             "SpecialSalt": {
                 "name": "ELECTRIFYING SALT",
-                "desc": "Hitting a <c=keys>tarnished</c> ship with <c=action>Chain Lightning</c> increases the <c=status>TARNISH</c> by 1.",
-                "descAlt": "Hitting a <c=keys>tarnished</c> ship with <c=action>Chain Lightning</c> increases the <c=status>TARNISH</c> by the chain amount."
+                "desc": "Hitting a <c=a43fff>tarnished</c> ship with <c=action>Chain Lightning</c> increases the <c=status>TARNISH</c> by 1.",
+                "descAlt": "Hitting a <c=a43fff>tarnished</c> ship with <c=action>Chain Lightning</c> increases the <c=status>TARNISH</c> by the chain amount."
+            },
+            "ChemicalSurprise": {
+                "name": "CHEMICAL SURPRISE",
+                "desc": "While you're <c=corrode>corroded</c>, every 3rd attack applies 3 <c=status>OXIDATION</c>.\nWhile <c=a43fff>tarnished</c>, every 3rd attack applies 1 <c=status>TARNISH</c>.",
+                "descAlt": "On every 3rd attack, apply 3 <c=status>OXIDATION</c> if you're <c=corrode>corroded</c> and/or 1 <c=status>TARNISH</c> if you're <c=a43fff>tarnished</c>."
             }
         },
         "Boss": {

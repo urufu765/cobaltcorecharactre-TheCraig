@@ -15,7 +15,7 @@ namespace Illeana.Artifacts;
 /// <summary>
 /// Refund-your-no-movement-due-to-movement-restrictions-inator-2000
 /// </summary>
-[ArtifactMeta(pools = new[] { ArtifactPool.Common }), DuoArtifactMeta(duoDeck = Deck.peri)]
+[ArtifactMeta(pools = new[] { ArtifactPool.Unreleased }), DuoArtifactMeta(duoDeck = Deck.peri)]
 public class LooseStick : Artifact
 {
     /// <summary>

@@ -30,6 +30,7 @@ internal partial class ModEntry : SimpleMod
     internal Settings settings;
     private IWritableFileInfo SettingsFile => Helper.Storage.GetMainStorageFile("json");
     public bool modDialogueInited;
+    internal static bool exists_WethMod = false;
 
     internal IStatusEntry TarnishStatus { get; private set; } = null!;
     internal IStatusEntry SnekTunezStatus { get; private set; } = null!;
@@ -122,6 +123,7 @@ internal partial class ModEntry : SimpleMod
         typeof(ReusableScrap),      // (REPLACED) Dizzy duo
         typeof(SuperInjection),     // (REPLACED) Isaac duo
         typeof(AirlockSnek),        // (REPLACED) Peri duo
+        typeof(LooseStick),         // (REPLACED) Peri V2
         // typeof(TarnishedSyringe),   // (UNIMPLEMENTED) Old Illeana common
         // typeof(ConstantInnovation), // (UNIMPLEMENTED) Old Illeana boss
         // typeof(Limbless),           // (UNUSED) Old Illeana boss
@@ -135,8 +137,7 @@ internal partial class ModEntry : SimpleMod
     ];
     private static List<Type> IlleanaDuoArtifacts = [
         typeof(ResourceOverflowCatcher),// Dizzy V2
-        typeof(LooseStick),             // (Slated for replacement) Peri V2
-        // typeof(MadeFromAcid),           // Peri V3
+        typeof(ChemicalSurprise),       // Peri V3
         typeof(ThrustThursters),        // Riggs
         typeof(ExtraSlip),              // Max
         typeof(PerfectedProtection),    // CAT
@@ -350,6 +351,9 @@ internal partial class ModEntry : SimpleMod
     public Spr SprSwaySwheelDepleted { get; private set; }
     public Spr SprTakeABreakActive { get; private set; }
     public Spr SprTakeABreakDepleted { get; private set; }
+    public Spr SprChemSurpriseNone {get;private set;}
+    public Spr SprChemSurpriseCor {get;private set;}
+    public Spr SprChemSurpriseTar {get;private set;}
     #endregion
 
     #region Story Sprites

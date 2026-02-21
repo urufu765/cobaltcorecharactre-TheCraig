@@ -9,11 +9,11 @@ namespace Illeana.Cards;
 /// <summary>
 /// Get your vaccine here!
 /// </summary>
-public class ImmunityShot : Card, IRegisterable
+public class ImmunityShot : Card, IRegisterable, IHasCustomCardTraits
 {
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
-        helper.Content.Cards.RegisterCard(new CardConfiguration
+        ICardEntry ice = helper.Content.Cards.RegisterCard(new CardConfiguration
         {
             CardType = MethodBase.GetCurrentMethod()!.DeclaringType!,
             Meta = new CardMeta
@@ -25,6 +25,7 @@ public class ImmunityShot : Card, IRegisterable
             Name = ModEntry.Instance.AnyLocalizations.Bind(["card", "Rare", "ImmunityShot", "name"]).Localize,
             Art = ModEntry.RegisterSprite(package, "assets/Card/Illeana/3/ImmunityShot.png").Sprite
         });
+        ModEntry.Instance.KokoroApi.V2.Limited.SetBaseLimitedUses(ice.UniqueName, Upgrade.A, 2);
     }
 
 
@@ -48,28 +49,28 @@ public class ImmunityShot : Card, IRegisterable
                     xHint = new int?(3)
                 }
             ],
-            Upgrade.A => 
-            [
-                new AVariableHint
-                {
-                    status = Status.corrode
-                },
-                new AStatus
-                {
-                    status = Status.perfectShield,
-                    statusAmount = x * 2,
-                    mode = AStatusMode.Set,
-                    targetPlayer = true,
-                    xHint = new int?(2)
-                },
-                new AStatus
-                {
-                    status = Status.evade,
-                    statusAmount = x,
-                    targetPlayer = true,
-                    xHint = new int?(1)
-                }
-            ],
+            // Upgrade.A => 
+            // [
+            //     new AVariableHint
+            //     {
+            //         status = Status.corrode
+            //     },
+            //     new AStatus
+            //     {
+            //         status = Status.perfectShield,
+            //         statusAmount = x * 2,
+            //         mode = AStatusMode.Set,
+            //         targetPlayer = true,
+            //         xHint = new int?(2)
+            //     },
+            //     new AStatus
+            //     {
+            //         status = Status.evade,
+            //         statusAmount = x,
+            //         targetPlayer = true,
+            //         xHint = new int?(1)
+            //     }
+            // ],
             _ => 
             [
                 new AVariableHint
@@ -93,10 +94,9 @@ public class ImmunityShot : Card, IRegisterable
     {
         return upgrade switch
         {
-            Upgrade.B => new CardData
+            Upgrade.A => new CardData
             {
-                cost = 3,
-                exhaust = true,
+                cost = 2,
                 artTint = "f5e030"
             },
             _ => new CardData
@@ -105,6 +105,16 @@ public class ImmunityShot : Card, IRegisterable
                 exhaust = true,
                 artTint = "f5e030"
             },
+        };
+    }
+
+    public IReadOnlySet<ICardTraitEntry> GetInnateTraits(State state)
+    {
+        return upgrade switch
+        {
+            Upgrade.B => new HashSet<ICardTraitEntry> { ModEntry.Instance.KokoroApi.V2.Heavy.Trait },
+            Upgrade.A => [ModEntry.Instance.KokoroApi.V2.Limited.Trait],
+            _ => []
         };
     }
 }

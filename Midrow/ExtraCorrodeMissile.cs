@@ -41,7 +41,7 @@ public class BigCorrode : Missile
             {
                 worldX = x,
                 outgoingDamage = missileData[MissileType.corrode].baseDamage,
-                targetPlayer = targetPlayer,
+                // targetPlayer = targetPlayer,
                 status = Status.corrode,
                 statusAmount = 2
             }
