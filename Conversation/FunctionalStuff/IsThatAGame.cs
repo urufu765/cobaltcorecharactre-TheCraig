@@ -83,7 +83,7 @@ public class LisardPuzzle : Route, IScriptTarget, OnMouseDown, OnInputPhase
         double age = g.state.map.age;
         int speed = g.settings.reduceMotion? 0 : 48;
         Vec offset = new(age * -speed, 0.0);
-        Vector2 _ = new();
+        //Vector2 _ = new();
         if (bg is not null)
         {
             bg.Render(g, age, offset);

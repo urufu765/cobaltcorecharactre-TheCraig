@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using Nickel;
 
 namespace Illeana.Conversation;
 
@@ -49,9 +50,10 @@ public class BGIlleanaBootSequence : BG
     private List<double> debugText = [];
     private double animTimer = 0.0;
     private double animInterval = 1.0;
+    private bool showBG = false;
     public override void Render(G g, double t, Vec offset)
     {
-        baseBg.Render(g, t, offset);
+        if (showBG) baseBg.Render(g, t, offset);
         if (animText.Count > 0 && displayText.Count > 0)
         {
             animTimer += g.dt;
@@ -91,6 +93,16 @@ public class BGIlleanaBootSequence : BG
         base.OnAction(s, action);
         switch (action)
         {
+            case "showBG":
+                showBG = true;
+                break;
+            case "hideBG":
+                showBG = false;
+                break;
+            case "startupSound":
+                ISoundInstance isi = ModEntry.Instance.BGBootSequence_0_Wondows.CreateInstance();
+                isi.Volume = 0.8f;
+                break;
             case "clear":
                 displayText = [];
                 blinkText = [];

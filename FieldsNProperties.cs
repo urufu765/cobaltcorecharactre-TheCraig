@@ -378,6 +378,7 @@ internal partial class ModEntry : SimpleMod
     public IModSoundEntry BGShip_1_Ding { get; private set; }
     public IModSoundEntry BGShip_2_Beep { get; private set; }
     public IModSoundEntry BGShambles_0_Tinnitus { get; private set; }
+    public IModSoundEntry BGBootSequence_0_Wondows { get; private set;}
     #endregion
 
     public LocalDB localDB { get; set; } = null!;

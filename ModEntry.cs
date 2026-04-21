@@ -173,6 +173,7 @@ internal partial class ModEntry : SimpleMod
         BGShip_1_Ding = helper.Content.Audio.RegisterSound("BGShip1Ding", package.PackageRoot.GetRelativeFile("assets/SoundFX/ding.ogg"));
         BGShip_2_Beep = helper.Content.Audio.RegisterSound("BGShip2Beep", package.PackageRoot.GetRelativeFile("assets/SoundFX/beep.ogg"));
         BGShambles_0_Tinnitus = helper.Content.Audio.RegisterSound("BGShambles0Tinnitus", package.PackageRoot.GetRelativeFile("assets/SoundFX/tinnitus.ogg"));
+        BGBootSequence_0_Wondows = helper.Content.Audio.RegisterSound("BGBootSequence_0_Wondows", package.PackageRoot.GetRelativeFile("assets/SoundFX/vistable.ogg"));
 
         /*
          * Statuses are used to achieve many mechanics.

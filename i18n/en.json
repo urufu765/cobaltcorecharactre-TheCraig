@@ -443,6 +443,10 @@
         "AllowAllArtifacts": {
             "name": "Enable Unreleased Illeana Artifacts",
             "desc": "Allows unreleased Illeana artifacts to appear in the artifact draw pool."
+        },
+        "BalancedMode": {
+            "name": "Super Duper Anti-Sandbag",
+            "desc": "Makes all healing cards have limited uses."
         }
     },
     "other": {

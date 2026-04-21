@@ -15,6 +15,7 @@ A corrosion engineer who works with corrosion to help keep the ship at tip top c
   - **dev.*: Extra slip new sprite, new sprites for cards.
   - **dev.*: Experimentation: A switching card that lets you choose between Build a Cure and Find a Solution
   - **dev.*: "Balanced" mode where all heals are now finite
+  - **RELEASE**: Mem 3 polishing
   - **dev.16**: Memory 3 expansion/redo
   - **dev.15**: Give Illeana a solo deck + solo starter, fixed EXE to allow Illeana to actually work properly (offers one of Build a Cure or Find A Solution) and moved it to Uncommon
   - **dev.14**:

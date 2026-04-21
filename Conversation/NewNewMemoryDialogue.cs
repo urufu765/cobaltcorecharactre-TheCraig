@@ -208,7 +208,7 @@ internal class NewNewMemoryDialogue : IRegisterable
                     new(new Wait{secs = 2}),
                     new(title: null),
                     new(new Wait{secs = 1}),
-                    new(new BGAction{action = "textme"}),
+                    new(new BGAction{action = "hideBG"}),
                     // Do an intro like the Cobalt Core intro, except where CAT was, there's LISARD. And as they are in the middle, a bunch of text gets generated saying shit like error, system failure, main body recovery process, file corrupted, etc. Then, jump into the game
                     new(new BGAction{action = ">>>Systems rebooting...0%"}),  // Change to actual percentage
                     new(new Wait{secs = 3}),
@@ -255,12 +255,17 @@ internal class NewNewMemoryDialogue : IRegisterable
                     new(new BGAction{action = ">>>Load success!"}),
                     new(new Wait{secs = 2}),
                     new(new BGAction{action = ">>>Finalizing changes"}),
-                    new(new BGAction{action = ">+>...."}),
+                    new(new BGAction{action = ">+>............"}),
                     new(new BGAction{action = "animationInterval$1.0"}),
-                    new(new Wait{secs = 4}),
+                    new(new Wait{secs = 2}),
+                    new(new BGAction{action = "showBG"}),
+                    new(new BGAction{action = "animationInterval$0.5"}),
+                    new(new Wait{secs = 3}),
                     new(new BGAction{action = ">+>"}),  // Windows logon noise
-                    new(new BGAction{action = ">>>Welcome PASS2ORD! <c=textFaint>Press any key to continue...</c>"}),
-                    new(new Wait{secs = 1.5}),
+                    new(new BGAction{action = "startupSound"}),
+                    new(new Wait{secs = 0.5}),
+                    new(new BGAction{action = ">>>Welcome ViciousCheetah8135! <c=textFaint>Please wait...</c>"}),
+                    new(new Wait{secs = 2}),
 
                     // Move everything below this to if player won.
                     new(new SetBG{bg = "BGShipShambles"}),
