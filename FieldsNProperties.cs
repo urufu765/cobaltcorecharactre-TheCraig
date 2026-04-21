@@ -199,7 +199,7 @@ internal partial class ModEntry : SimpleMod
         typeof(NewNewEventDialogue),
         typeof(NewCardDialogue),
         typeof(NewStoryDialogue),
-        typeof(NewMemoryDialogue),
+        typeof(NewNewMemoryDialogue),
         typeof(KO_CombatDialogue),
     ];
     private static IEnumerable<Type> IlleanaArtifactTypes =

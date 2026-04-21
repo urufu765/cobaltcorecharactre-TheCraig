@@ -1,15 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<RootNamespace>Illeana</RootNamespace>
-		<Version>1.3.0-dev.15</Version>
+		<Version>1.3.0-dev.16</Version>
 
 		<TargetFramework>net8.0</TargetFramework>
-		<LangVersion>12.0</LangVersion>
+		<LangVersion>latest</LangVersion>
 		<ImplicitUsings>disable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<WarningsAsErrors>Nullable</WarningsAsErrors>
-		<ModLoaderPath>A:\SteamLibrary\steamapps\common\Cobalt Core\Nickel</ModLoaderPath>
-		<GameExePath>A:\SteamLibrary\steamapps\common\Cobalt Core\CobaltCore.exe</GameExePath>
+		<!-- <ModLoaderPath>A:\SteamLibrary\steamapps\common\Cobalt Core\Nickel</ModLoaderPath>
+		<GameExePath>A:\SteamLibrary\steamapps\common\Cobalt Core\CobaltCore.exe</GameExePath> -->
+		<ModLoaderPath>E:\0modding\Nickel</ModLoaderPath>
+		<GameExePath>C:\Program Files (x86)\Steam\steamapps\common\Cobalt Core\CobaltCore.exe</GameExePath>
 		<ModZipPath>$(MSBuildProjectDirectory)\.release\$(MSBuildProjectName)-$(Version).zip</ModZipPath>
 		<GameDllPath>$(MSBuildProjectDirectory)\..\..\..\Decompiled\CobaltCore.dll</GameDllPath>
 	</PropertyGroup>

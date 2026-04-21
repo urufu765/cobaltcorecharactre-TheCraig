@@ -9,12 +9,13 @@ A corrosion engineer who works with corrosion to help keep the ship at tip top c
 #### 1.3: More just means MOAR
 
 - **(1.3.0)**
-  - **dev.*: Memory 3 expansion/redo
   - **dev.*: More story dialogue!!! + Baked hull dialogue
   - **dev.*: More duos!! + duo dialogue/start story dialogue
   - **dev.*: More other mod content like artifact swap thing, and more idk
   - **dev.*: Extra slip new sprite, new sprites for cards.
   - **dev.*: Experimentation: A switching card that lets you choose between Build a Cure and Find a Solution
+  - **dev.*: "Balanced" mode where all heals are now finite
+  - **dev.16**: Memory 3 expansion/redo
   - **dev.15**: Give Illeana a solo deck + solo starter, fixed EXE to allow Illeana to actually work properly (offers one of Build a Cure or Find A Solution) and moved it to Uncommon
   - **dev.14**:
     - Made tarnish tooltip colour a bit brighter
