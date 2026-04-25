@@ -30,4 +30,16 @@ public class ASelectAPotentialFix : CardAction
             canSkip = false
         };
     }
+
+    public override List<Tooltip> GetTooltips(State s)
+    {
+        return [
+            new TTCard{
+                card = new BuildCure()
+            },
+            new TTCard{
+                card = new FindCure()
+            },
+        ];
+    }
 }

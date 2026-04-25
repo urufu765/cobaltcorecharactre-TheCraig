@@ -15,13 +15,14 @@ A corrosion engineer who works with corrosion to help keep the ship at tip top c
   - **dev.*: Extra slip new sprite, new sprites for cards.
   - **dev.*: Experimentation: A switching card that lets you choose between Build a Cure and Find a Solution
   - **dev.*: "Balanced" mode where all heals are now finite
-  - **RELEASE**: Mem 3 polishing
+  - **rel**: Fixed EXE's tooltip and description, invisible duos for mods that aren't enabled, and Immunity Shot B (lowers cost, single-use)
+  - **DISCORD**: Mem 3 polishing
   - **dev.16**: Memory 3 expansion/redo
   - **dev.15**: Give Illeana a solo deck + solo starter, fixed EXE to allow Illeana to actually work properly (offers one of Build a Cure or Find A Solution) and moved it to Uncommon
   - **dev.14**:
     - Made tarnish tooltip colour a bit brighter
     - Deadly Adrenaline: Limited to 3/3/2 uses
-    - Immunity Shot A: Now same as base but limited to 2 uses, B gives 3X costs 2 and heavy
+    - Immunity Shot A: Now same as base but limited to 2 uses, B gives 3X costs 2 and heavy, and gives X corrode.
     - New Peri duo + sprites
     - Sprite for Dave duo
     - New sprite for some tarnished cards to fix the colours

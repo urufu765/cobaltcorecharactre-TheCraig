@@ -94,6 +94,12 @@ public class ImmunityShot : Card, IRegisterable, IHasCustomCardTraits
     {
         return upgrade switch
         {
+            Upgrade.B => new CardData
+            {
+                cost = 1,
+                artTint = "f5e030",
+                singleUse = true
+            },
             Upgrade.A => new CardData
             {
                 cost = 2,

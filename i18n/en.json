@@ -341,7 +341,7 @@
             },
             "IlleanaEXE": {
                 "name": "Illeana.EXE",
-                "desc": "Add 1 of {{num}} <c=cardtrait>discount, temp</c> <c=45e260>Illeana</c> cards, and a <c=card>Experimentation</c> to your hand."
+                "desc": "Add 1 of {{num}} <c=cardtrait>discount, temp</c> <c=45e260>Illeana</c> cards, and an <c=card>experiment</c> to your hand."
             }
         },
         "Rare": {

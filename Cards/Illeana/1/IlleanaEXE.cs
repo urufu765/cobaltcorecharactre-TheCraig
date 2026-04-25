@@ -65,7 +65,7 @@ public class IlleanaExe : Card, IRegisterable
                     discount = -1,
                     dialogueSelector = ".summonIlleana"
                 },
-                new ASelectAPotentialFix()
+                new ASelectAPotentialFix(),
             ],
         };
     }
@@ -104,6 +104,7 @@ public class IlleanaExe : Card, IRegisterable
             }
         };
     }
+
     private sealed class Hook : IKokoroApi.IV2.ICardRenderingApi.IHook
     {
         public Font? ReplaceTextCardFont(IKokoroApi.IV2.ICardRenderingApi.IHook.IReplaceTextCardFontArgs args)

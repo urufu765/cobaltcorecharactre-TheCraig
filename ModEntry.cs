@@ -359,6 +359,23 @@ internal partial class ModEntry : SimpleMod
                 }
                 else
                 {
+                    DuoArtifactMeta? dam = ta.GetCustomAttribute<DuoArtifactMeta>();
+                    if (dam is null) continue;
+                    if (dam.duoModDeck is not null)
+                    {
+                        try
+                        {
+                            if (!helper.ModRegistry.ResolvedMods.ContainsKey(dam.duoModDeck.Split("::")[0]))
+                            {
+                                continue;
+                            }
+                        }
+                        catch (Exception err)
+                        {
+                            Logger.LogError(err, "FUCK couldn't find the god of {DuoModDeck}", dam.duoModDeck);
+                            continue;
+                        }
+                    } 
                     deck = DuoArtifactsApi.DuoArtifactVanillaDeck;
                 }
             }
