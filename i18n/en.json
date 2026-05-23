@@ -447,6 +447,10 @@
         "BalancedMode": {
             "name": "Super Duper Anti-Sandbag",
             "desc": "Makes all healing cards have limited uses."
+        },
+        "LetMeSandbag": {
+            "name": "Disable Anti-Sandbagging Measure",
+            "desc": "Disables the max 5 uses on every healing card to allow you to heal to full without worrying about running out."
         }
     },
     "other": {

@@ -469,6 +469,16 @@ internal partial class ModEntry : SimpleMod
                     {
                         Description = Localizations.Localize(["settings", "AntiSnakeMode", "desc"])
                     }
+                ]),
+                api.MakeCheckbox(
+                    () => Localizations.Localize(["settings", "LetMeSandbag", "name"]),
+                    () => settings.ProfileBased.Current.LetMeSandbag,
+                    (_, _, value) => settings.ProfileBased.Current.LetMeSandbag = value
+                ).SetTooltips(() => [
+                    new GlossaryTooltip("illeanasettings.letmesandbag")
+                    {
+                        Description = Localizations.Localize(["settings", "LetMeSandbag", "desc"])
+                    }
                 ])
             ]).SubscribeToOnMenuClose(_ =>
             {

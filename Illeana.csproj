@@ -1,15 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<RootNamespace>Illeana</RootNamespace>
-		<Version>1.3.0-rel</Version>
+		<Version>1.3.1</Version>
 
 		<TargetFramework>net8.0</TargetFramework>
 		<LangVersion>latest</LangVersion>
 		<ImplicitUsings>disable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<WarningsAsErrors>Nullable</WarningsAsErrors>
-		<ModLoaderPath>O:\SteamLibrary\steamapps\common\Cobalt Core\Nickel</ModLoaderPath>
-		<GameExePath>O:\SteamLibrary\steamapps\common\Cobalt Core\CobaltCore.exe</GameExePath>
+		<ModLoaderPath>E:\SteamLibrary\steamapps\common\Cobalt Core\Nickel</ModLoaderPath>
+		<GameExePath>E:\SteamLibrary\steamapps\common\Cobalt Core\CobaltCore.exe</GameExePath>
 		<!-- <ModLoaderPath>A:\SteamLibrary\steamapps\common\Cobalt Core\Nickel</ModLoaderPath>
 		<GameExePath>A:\SteamLibrary\steamapps\common\Cobalt Core\CobaltCore.exe</GameExePath> -->
 		<!-- <ModLoaderPath>E:\0modding\Nickel</ModLoaderPath>

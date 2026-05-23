@@ -45,4 +45,6 @@ class ProfileSettings
 {
     [JsonProperty]
     public bool AntiSnakeMode = false;
+    [JsonProperty]
+    public bool LetMeSandbag = false;
 }

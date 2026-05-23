@@ -8,6 +8,8 @@ A corrosion engineer who works with corrosion to help keep the ship at tip top c
 
 #### 1.3: More just means MOAR
 
+- **(1.3.1)**: Set limited 5 to every healing card to prevent sandbagging and added an option to disable it
+
 - **(1.3.0)**
   - **dev.*: More story dialogue!!! + Baked hull dialogue
   - **dev.*: More duos!! + duo dialogue/start story dialogue

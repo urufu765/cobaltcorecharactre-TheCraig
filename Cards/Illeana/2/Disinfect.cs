@@ -8,13 +8,13 @@ namespace Illeana.Cards;
 /// <summary>
 /// Clear corrode, turn it into powah
 /// </summary>
-public class Disinfect : Card, IRegisterable
+public class Disinfect : Card, IRegisterable, IHasCustomCardTraits
 {
     private static Spr altSprite;
 
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
-        helper.Content.Cards.RegisterCard(new CardConfiguration
+        ICardEntry ice = helper.Content.Cards.RegisterCard(new CardConfiguration
         {
             CardType = MethodBase.GetCurrentMethod()!.DeclaringType!,
             Meta = new CardMeta
@@ -27,6 +27,10 @@ public class Disinfect : Card, IRegisterable
             Art = ModEntry.RegisterSprite(package, "assets/Card/Illeana/2/Disinfect.png").Sprite
         });
         altSprite = ModEntry.RegisterSprite(package, "assets/Card/Illeana/2/DisinfectAlt.png").Sprite;
+
+        ModEntry.Instance.KokoroApi.V2.Limited.SetBaseLimitedUses(ice.UniqueName, Upgrade.None, 5);
+        ModEntry.Instance.KokoroApi.V2.Limited.SetBaseLimitedUses(ice.UniqueName, Upgrade.A, 5);
+        ModEntry.Instance.KokoroApi.V2.Limited.SetBaseLimitedUses(ice.UniqueName, Upgrade.B, 5);
     }
 
 
@@ -150,5 +154,11 @@ public class Disinfect : Card, IRegisterable
                 art = altSprite
             }
         };
+    }
+
+    public IReadOnlySet<ICardTraitEntry> GetInnateTraits(State state)
+    {
+        if (ModEntry.Instance.settings.ProfileBased.Current.LetMeSandbag) return new HashSet<ICardTraitEntry>();
+        return new HashSet<ICardTraitEntry> { ModEntry.Instance.KokoroApi.V2.Limited.Trait };
     }
 }

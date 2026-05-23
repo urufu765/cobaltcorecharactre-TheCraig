@@ -8,12 +8,12 @@ namespace Illeana.Cards;
 /// <summary>
 /// Here, have a Patchkit.
 /// </summary>
-public class ScrapPatchkit : Card, IRegisterable
+public class ScrapPatchkit : Card, IRegisterable, IHasCustomCardTraits
 {
     private static Spr altSprite;
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
-        helper.Content.Cards.RegisterCard(new CardConfiguration
+        ICardEntry ice = helper.Content.Cards.RegisterCard(new CardConfiguration
         {
             CardType = MethodBase.GetCurrentMethod()!.DeclaringType!,
             Meta = new CardMeta
@@ -26,6 +26,10 @@ public class ScrapPatchkit : Card, IRegisterable
             Art = ModEntry.RegisterSprite(package, "assets/Card/Illeana/1/ScrapPatchkit.png").Sprite
         });
         altSprite = ModEntry.RegisterSprite(package, "assets/Card/Illeana/1/ScrapPatchkitAlt.png").Sprite;
+
+        ModEntry.Instance.KokoroApi.V2.Limited.SetBaseLimitedUses(ice.UniqueName, Upgrade.None, 5);
+        ModEntry.Instance.KokoroApi.V2.Limited.SetBaseLimitedUses(ice.UniqueName, Upgrade.A, 5);
+        ModEntry.Instance.KokoroApi.V2.Limited.SetBaseLimitedUses(ice.UniqueName, Upgrade.B, 5);
     }
 
 
@@ -92,5 +96,11 @@ public class ScrapPatchkit : Card, IRegisterable
                 retain = true
             }
         };
+    }
+
+    public IReadOnlySet<ICardTraitEntry> GetInnateTraits(State state)
+    {
+        if (ModEntry.Instance.settings.ProfileBased.Current.LetMeSandbag) return new HashSet<ICardTraitEntry>();
+        return new HashSet<ICardTraitEntry> { ModEntry.Instance.KokoroApi.V2.Limited.Trait };
     }
 }

@@ -14,7 +14,7 @@ public class GoneJiffy : Card, IRegisterable
 
     public static void Register(IPluginPackage<IModManifest> package, IModHelper helper)
     {
-        helper.Content.Cards.RegisterCard(new CardConfiguration
+        ICardEntry ice = helper.Content.Cards.RegisterCard(new CardConfiguration
         {
             CardType = MethodBase.GetCurrentMethod()!.DeclaringType!,
             Meta = new CardMeta
@@ -27,6 +27,10 @@ public class GoneJiffy : Card, IRegisterable
             Art = ModEntry.RegisterSprite(package, "assets/Card/Illeana/2/GoneInAJiffy.png").Sprite
         });
         shoeSprite = ModEntry.RegisterSprite(package, "assets/Card/Illeana/2/GoneInAJiffyShoe.png").Sprite;
+
+
+        ModEntry.Instance.KokoroApi.V2.Limited.SetBaseLimitedUses(ice.UniqueName, Upgrade.None, 5);
+        ModEntry.Instance.KokoroApi.V2.Limited.SetBaseLimitedUses(ice.UniqueName, Upgrade.A, 5);
     }
 
 
@@ -106,5 +110,12 @@ public class GoneJiffy : Card, IRegisterable
                 art = ModEntry.Instance.shoeanaMode ? shoeSprite : null
             }
         };
+    }
+
+    public IReadOnlySet<ICardTraitEntry> GetInnateTraits(State state)
+    {
+        if (upgrade is Upgrade.B) return new HashSet<ICardTraitEntry>();
+        if (ModEntry.Instance.settings.ProfileBased.Current.LetMeSandbag) return new HashSet<ICardTraitEntry>();
+        return new HashSet<ICardTraitEntry> { ModEntry.Instance.KokoroApi.V2.Limited.Trait };
     }
 }
